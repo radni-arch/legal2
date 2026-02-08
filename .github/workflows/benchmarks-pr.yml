@@ -1,0 +1,183 @@
+name: Benchmark Regression Check (PR)
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+    paths:
+      - 'app/**'
+      - 'tests/**'
+      - 'config/**'
+      - 'database/**'
+      - '.github/workflows/benchmarks-pr.yml'
+
+concurrency:
+  group: benchmarks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quick-benchmarks:
+    name: Quick Benchmark Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: laravel_test
+          POSTGRES_USER: claude
+          POSTGRES_PASSWORD: claude
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for baseline comparison
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, pdo, pdo_pgsql, bcmath, intl
+          coverage: none
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Setup test database
+        env:
+          DB_CONNECTION: pgsql
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_DATABASE: laravel_test
+          DB_USERNAME: claude
+          DB_PASSWORD: claude
+        run: |
+          php artisan migrate --force --env=testing
+
+      - name: Get baseline commit (target branch HEAD)
+        id: baseline
+        run: |
+          # Get the target branch HEAD
+          BASELINE=$(git rev-parse origin/${{ github.base_ref }})
+          echo "commit=$BASELINE" >> $GITHUB_OUTPUT
+          echo "Baseline commit: $BASELINE"
+
+      - name: Run quick benchmarks
+        env:
+          APP_ENV: testing
+          DB_CONNECTION: pgsql
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_DATABASE: laravel_test
+          DB_USERNAME: claude
+          DB_PASSWORD: claude
+          CACHE_STORE: array
+          NEO4J_ENABLED: false
+          NEO4J_SYNC_ENABLED: false
+        run: |
+          # Run subset of critical benchmarks (quick ones)
+          php artisan benchmark:run CitationAccuracyBenchmark
+          php artisan benchmark:run FalsePositiveRateBenchmark
+          php artisan benchmark:run FalseNegativeRateBenchmark
+          php artisan benchmark:run AdmissibilityAccuracyBenchmark
+          php artisan benchmark:run CostEffectivenessBenchmark
+
+      - name: Check for regressions
+        id: regression
+        continue-on-error: true
+        env:
+          APP_ENV: testing
+          DB_CONNECTION: pgsql
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_DATABASE: laravel_test
+          DB_USERNAME: claude
+          DB_PASSWORD: claude
+          CACHE_STORE: array
+          NEO4J_ENABLED: false
+        run: |
+          php artisan benchmark:check-regression \
+            ${{ steps.baseline.outputs.commit }} \
+            --threshold=0.05 \
+            --format=github \
+            --benchmarks=CitationAccuracyBenchmark \
+            --benchmarks=FalsePositiveRateBenchmark \
+            --benchmarks=FalseNegativeRateBenchmark \
+            --benchmarks=AdmissibilityAccuracyBenchmark \
+            --benchmarks=CostEffectivenessBenchmark
+
+      - name: Post PR comment with results
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const resultsFile = 'benchmark-results.md';
+
+            let comment = '';
+            if (fs.existsSync(resultsFile)) {
+              comment = fs.readFileSync(resultsFile, 'utf8');
+            } else {
+              comment = '## Benchmark Regression Check\n\n⚠️ No benchmark results generated.';
+            }
+
+            // Add commit info
+            comment += `\n\n---\n`;
+            comment += `**Baseline:** \`${{ steps.baseline.outputs.commit }}\` (${{ github.base_ref }})\n`;
+            comment += `**Current:** \`${{ github.sha }}\` (${{ github.head_ref }})\n`;
+
+            // Find existing comment
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const botComment = comments.find(comment =>
+              comment.user.type === 'Bot' &&
+              comment.body.includes('Benchmark Regression Check')
+            );
+
+            if (botComment) {
+              // Update existing comment
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: comment
+              });
+            } else {
+              // Create new comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: comment
+              });
+            }
+
+      - name: Fail if regression detected
+        if: steps.regression.outcome == 'failure'
+        run: |
+          echo "❌ Benchmark regression detected!"
+          echo "Performance degraded by more than 5% in one or more benchmarks."
+          echo "Please review the benchmark results and optimize if necessary."
+          exit 1

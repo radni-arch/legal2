@@ -1,0 +1,85 @@
+{
+  "test_id": "risk_medium_005",
+  "category": "medium-risk",
+  "expected_risk_level": "medium",
+  "expected_score_range": [51, 66],
+  "description": "Evidence gaps on both sides with uncertain outcome",
+
+  "input": {
+    "problem_statement": "Client charged with vandalism (spray-painting graffiti). Security camera captured someone of similar build but face not visible. No fingerprints or other forensic evidence. Prosecution relies on anonymous tip that named client.",
+    "legal_arguments": [
+      {
+        "title": "Insufficient identification",
+        "argument": "Video doesn't show face, no forensic evidence links client to crime",
+        "strength_score": 60,
+        "legal_basis": ["Burden of proof", "Reasonable doubt"],
+        "potential_counterarguments": [
+          "Anonymous tip named client",
+          "Similar build and clothing",
+          "Client lives near location",
+          "Client has prior graffiti conviction (2021)"
+        ]
+      },
+      {
+        "title": "Anonymous tip unreliable",
+        "argument": "Uncorroborated anonymous tip insufficient for conviction",
+        "strength_score": 64,
+        "legal_basis": ["Hearsay limitations", "Need corroboration"],
+        "potential_counterarguments": [
+          "Tip led to investigation",
+          "Video somewhat corroborates",
+          "Prior conviction suggests pattern"
+        ]
+      }
+    ],
+    "strongest_precedents": [],
+    "strategic_recommendations": {
+      "procedural_steps": [
+        "Challenge anonymous tip admissibility",
+        "Emphasize lack of forensic evidence",
+        "Request source of tip"
+      ]
+    }
+  },
+
+  "expected_output": {
+    "overall_risk_score": {
+      "score": 58,
+      "level": "medium"
+    },
+    "argument_risks": [
+      {
+        "argument_index": 0,
+        "risk_level": "medium",
+        "impact_if_fails": "medium",
+        "weaknesses": [
+          "Prior graffiti conviction undermines",
+          "Proximity to location suggestive"
+        ],
+        "evidence_gaps": [
+          "No alibi provided",
+          "No alternative suspect identified"
+        ]
+      },
+      {
+        "argument_index": 1,
+        "risk_level": "low",
+        "impact_if_fails": "low",
+        "weaknesses": [
+          "Video provides some corroboration"
+        ]
+      }
+    ],
+    "adverse_precedents": [],
+    "procedural_risks": [
+      {
+        "risk_type": "Prior conviction admissibility",
+        "severity": "medium",
+        "probability": "high",
+        "description": "2021 graffiti conviction likely admissible to show pattern/MO"
+      }
+    ]
+  },
+
+  "validation_notes": "Should score 51-66 (medium risk) due to weak prosecution evidence (no clear ID, anonymous tip) but prior conviction problematic, evidence gaps on both sides, outcome uncertain - could go either way."
+}

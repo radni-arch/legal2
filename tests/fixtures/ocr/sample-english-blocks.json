@@ -1,0 +1,22 @@
+[
+    {"BlockType": "PAGE", "Page": 1, "Confidence": 0},
+    {"BlockType": "TABLE", "Page": 1, "Confidence": 96.0},
+    {"BlockType": "TABLE", "Page": 1, "Confidence": 94.5},
+    {"BlockType": "LINE", "Page": 1, "Confidence": 97.2, "Text": "Invoice Number: INV-2024-001"},
+    {"BlockType": "LINE", "Page": 1, "Confidence": 96.8, "Text": "Date: January 15, 2024"},
+    {"BlockType": "LINE", "Page": 1, "Confidence": 95.5, "Text": "Total Amount: $1,234.56"},
+    {"BlockType": "WORD", "Page": 1, "Confidence": 97.2, "Text": "Invoice"},
+    {"BlockType": "WORD", "Page": 1, "Confidence": 98.1, "Text": "Number:"},
+    {"BlockType": "WORD", "Page": 1, "Confidence": 96.5, "Text": "INV-2024-001"},
+    {"BlockType": "WORD", "Page": 1, "Confidence": 96.8, "Text": "Date:"},
+    {"BlockType": "WORD", "Page": 1, "Confidence": 97.5, "Text": "January"},
+    {"BlockType": "WORD", "Page": 1, "Confidence": 98.0, "Text": "15,"},
+    {"BlockType": "WORD", "Page": 1, "Confidence": 97.8, "Text": "2024"},
+    {"BlockType": "WORD", "Page": 1, "Confidence": 95.5, "Text": "Total"},
+    {"BlockType": "WORD", "Page": 1, "Confidence": 96.2, "Text": "Amount:"},
+    {"BlockType": "WORD", "Page": 1, "Confidence": 94.8, "Text": "$1,234.56"},
+    {"BlockType": "KEY_VALUE_SET", "Page": 1, "Confidence": 95.0},
+    {"BlockType": "CELL", "Page": 1, "Confidence": 96.3, "Text": "Item"},
+    {"BlockType": "CELL", "Page": 1, "Confidence": 95.8, "Text": "Quantity"},
+    {"BlockType": "CELL", "Page": 1, "Confidence": 96.1, "Text": "Price"}
+]

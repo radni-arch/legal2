@@ -1,0 +1,44 @@
+{
+  "test_id": "precedent_low_004",
+  "category": "low-applicability",
+  "expected_score_range": [18, 42],
+  "description": "Civil case precedent applied to criminal law context",
+
+  "input": {
+    "problem_statement": "Client claims evidence should be excluded because it was obtained through violation of privacy rights. Question: What precedents support privacy rights?",
+    "researched_decisions": [
+      {
+        "ecli": "HR:VSRH:2020:Rev-456",
+        "court": "Vrhovni sud Republike Hrvatske",
+        "case_number": "Rev-456/2020",
+        "decision_date": "2020-07-15",
+        "title": "Povreda privatnosti - građansko pravo",
+        "summary": "Vrhovni sud u građanskoj parnici utvrdio povredu privatnosti i dosudio naknadu štete. Međutim, ovo je građanska parnica (Rev - revizija u građanskim stvarima), ne kazneno pravo. Proceduralni standardi i pravne posljedice se razlikuju. Primjena građanskih presuda u kaznenom pravu je ograničena."
+      }
+    ],
+    "researched_laws": [
+      {
+        "law_number": "Zakon o obveznim odnosima",
+        "title": "Naknada štete zbog povrede privatnosti",
+        "content": "Građanskopravna regulativa, ne kazneno procesno pravo.",
+        "similarity": 0.38
+      }
+    ]
+  },
+
+  "expected_output": {
+    "applicability_score": 30,
+    "binding_authority": "informative",
+    "key_factors": [
+      "građanska parnica",
+      "različito pravno područje",
+      "različiti proceduralni standardi",
+      "ograničena primjena u kaznenom pravu",
+      "niska relevantnost"
+    ],
+    "favorable": true,
+    "reasoning": "Iako je Vrhovni sud, presuda je iz građanskog prava. Kazneno procesno pravo ima drugačije standarde i posljedice. Različit burden of proof. Presuda može informirati opći koncept privatnosti ali nije direktno primjenjiva u kaznenom postupku."
+  },
+
+  "validation_notes": "Should score 18-42 due to different legal area (civil vs criminal), different procedural standards, limited cross-applicability despite same court level."
+}

@@ -1,0 +1,50 @@
+{
+  "test_id": "precedent_high_004",
+  "category": "high-applicability",
+  "expected_score_range": [80, 90],
+  "description": "Supreme Court ruling on right to counsel violation during interrogation",
+
+  "input": {
+    "problem_statement": "Client requested lawyer during police interrogation but request was denied. Police continued questioning for 2 hours and obtained confession. Question: Should confession be excluded?",
+    "researched_decisions": [
+      {
+        "ecli": "HR:VSRH:2020:I-Kž-982",
+        "court": "Vrhovni sud Republike Hrvatske",
+        "case_number": "I Kž-982/2020",
+        "decision_date": "2020-12-05",
+        "title": "Povreda prava na branitelja tijekom ispitivanja",
+        "summary": "Vrhovni sud utvrdio povredu prava na branitelja (ZKP Članak 64). Nastavak ispitivanja nakon izričitog zahtjeva za odvjetnikom predstavlja težu povredu postupka koja utječe na zakonitost dokaza. Priznanje dobiveno pod tim okolnostima ne smije se upotrijebiti u kaznenom postupku."
+      }
+    ],
+    "researched_laws": [
+      {
+        "law_number": "ZKP Članak 64 stavak 3",
+        "title": "Pravo na branitelja",
+        "content": "Osumnjičenik ima pravo na branitelja u svim fazama postupka. Nakon zahtjeva za branitelja, ispitivanje mora biti odgođeno dok branitelj ne bude prisutan. Povrede ovog prava dovode do isključenja dokaza.",
+        "similarity": 0.94
+      },
+      {
+        "law_number": "Ustav RH Članak 29 stavak 3",
+        "title": "Pravo na pravnu pomoć",
+        "content": "Osumnjičeniku se mora omogućiti pravna pomoć od trenutka uhićenja ili lišenja slobode. Pravo na branitelja je temeljno ustavno pravo.",
+        "similarity": 0.87
+      }
+    ]
+  },
+
+  "expected_output": {
+    "applicability_score": 85,
+    "binding_authority": "binding",
+    "key_factors": [
+      "uskraćeno pravo na branitelja",
+      "nastavak ispitivanja nakon zahtjeva",
+      "priznanje bez nazočnosti branitelja",
+      "teža povreda postupka",
+      "isključenje dokaza"
+    ],
+    "favorable": true,
+    "reasoning": "Vrhovno sudska presuda jasno utvrđuje obavezu prekida ispitivanja nakon zahtjeva za branitelja. Identična situacija (zahtjev odbijen, ispitivanje nastavljeno). Binding authority s jasnim pravilom isključenja."
+  },
+
+  "validation_notes": "Should score 83-88 due to Supreme Court binding authority, identical procedural violation (denial of counsel during interrogation), and clear precedent for evidence exclusion."
+}

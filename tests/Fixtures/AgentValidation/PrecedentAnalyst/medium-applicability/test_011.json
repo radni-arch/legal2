@@ -1,0 +1,43 @@
+{
+  "test_id": "precedent_medium_001",
+  "category": "medium-applicability",
+  "expected_score_range": [60, 75],
+  "description": "County court drug possession ruling with partial factual similarity",
+
+  "input": {
+    "problem_statement": "Client charged with cocaine possession (5g) after traffic stop and vehicle search. Question: Was the search legal?",
+    "researched_decisions": [
+      {
+        "ecli": "HR:ŽSOS:2019:K-456",
+        "court": "Županijski sud u Osijeku",
+        "case_number": "K-456/2019",
+        "decision_date": "2019-07-15",
+        "title": "Pretres vozila nakon odbijanja alkotesta",
+        "summary": "Županijski sud utvrdio da je pretres vozila bio zakonit jer je okrivljenik odbio alkotest, što je stvorilo osnovanu sumnju. Međutim, slučaj se razlikuje jer je riječ o heroin (10g), ne kokain. Sud prihvatio dokaze jer je postojala osnovana sumnja."
+      }
+    ],
+    "researched_laws": [
+      {
+        "law_number": "ZKP Članak 227",
+        "title": "Pretres vozila",
+        "content": "Pretres vozila dopušten je ako postoji osnovana sumnja.",
+        "similarity": 0.78
+      }
+    ]
+  },
+
+  "expected_output": {
+    "applicability_score": 68,
+    "binding_authority": "persuasive",
+    "key_factors": [
+      "različita droga",
+      "različite okolnosti zaustavljanja",
+      "persuasive authority",
+      "djelomična sličnost"
+    ],
+    "favorable": false,
+    "reasoning": "Županijski sud (persuasive, ne binding). Različite činjenice (alkotest vs rutinska kontrola, heroin vs kokain). Starija presuda (2019). Nepovoljan ishod ali razlikovne okolnosti."
+  },
+
+  "validation_notes": "Should score 60-75 due to lower court (persuasive authority), partial factual similarity (drug case but different circumstances), older precedent, and need to distinguish facts."
+}

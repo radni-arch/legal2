@@ -1,0 +1,10 @@
+*
+!public/
+!.gitignore
+!legal-artillery/
+!legal-artillery/case-documents/
+!legal-artillery/case-documents/*
+!legal-artillery/case-documents/*/*
+!legal-artillery/scenarios/
+!legal-artillery/scenarios/*
+!legal-artillery/scenarios/*/*

@@ -1,0 +1,11 @@
+{
+  "ecli": "HR:VSRH:2024:TEST001",
+  "broj_odluke": "REV-123/2024",
+  "sud": "Vrhovni sud Republike Hrvatske",
+  "datum_odluke": "2024-01-15",
+  "datum_objave": "2024-01-20",
+  "pravomocnost": "Pravomoćna",
+  "upisnik": "Kazneni",
+  "vrsta_odluke": "Presuda",
+  "src": "https://odluke.sudovi.hr/Document/View?id=test-001"
+}

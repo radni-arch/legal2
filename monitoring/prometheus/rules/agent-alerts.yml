@@ -1,0 +1,193 @@
+# Prometheus Alerting Rules for AI Agents
+# Sprint 1.7: Observability Setup
+#
+# These rules monitor agent health, performance, and failures
+# Alerts are sent to Alertmanager which can route to Slack, PagerDuty, email, etc.
+
+groups:
+  - name: agent_alerts
+    interval: 30s
+    rules:
+      # CRITICAL: 5+ consecutive failures
+      - alert: AgentConsecutiveFailures
+        expr: consecutive_agent_failures >= 5
+        for: 1m
+        labels:
+          severity: critical
+          component: agents
+          team: backend
+        annotations:
+          summary: "Agent {{ $labels.agent_name }} has 5+ consecutive failures"
+          description: |
+            Agent: {{ $labels.agent_name }}
+            Operation: {{ $labels.operation }}
+            Consecutive failures: {{ $value }}
+            This indicates a systemic issue requiring immediate attention.
+          runbook_url: "https://docs.example.com/runbooks/agent-consecutive-failures"
+
+      # CRITICAL: Agent success rate below 80%
+      - alert: AgentLowSuccessRate
+        expr: |
+          (
+            sum(rate(agent_executions_total{status="success"}[5m])) by (agent_name)
+            /
+            sum(rate(agent_executions_total[5m])) by (agent_name)
+          ) < 0.8
+        for: 5m
+        labels:
+          severity: critical
+          component: agents
+          team: backend
+        annotations:
+          summary: "Agent {{ $labels.agent_name }} success rate below 80%"
+          description: |
+            Agent: {{ $labels.agent_name }}
+            Current success rate: {{ $value | humanizePercentage }}
+            This agent is failing more than 20% of executions.
+          runbook_url: "https://docs.example.com/runbooks/agent-low-success-rate"
+
+      # WARNING: Agent high execution duration
+      - alert: AgentHighExecutionDuration
+        expr: |
+          histogram_quantile(0.95,
+            sum(rate(agent_execution_duration_ms_bucket[5m])) by (le, agent_name)
+          ) > 300000
+        for: 10m
+        labels:
+          severity: warning
+          component: agents
+          team: backend
+        annotations:
+          summary: "Agent {{ $labels.agent_name }} has high execution duration"
+          description: |
+            Agent: {{ $labels.agent_name }}
+            P95 duration: {{ $value | humanizeDuration }}
+            Agent executions are taking longer than expected (>5 minutes).
+          runbook_url: "https://docs.example.com/runbooks/agent-high-duration"
+
+      # WARNING: High agent token usage
+      - alert: AgentHighTokenUsage
+        expr: |
+          sum(rate(agent_tokens_used_total[1h])) > 100000
+        for: 5m
+        labels:
+          severity: warning
+          component: agents
+          team: backend
+          cost: high
+        annotations:
+          summary: "Agent token usage is abnormally high"
+          description: |
+            Current rate: {{ $value | humanize }} tokens/hour
+            This may indicate runaway agents or inefficient prompting.
+            Check agent logs for anomalies.
+          runbook_url: "https://docs.example.com/runbooks/agent-high-token-usage"
+
+      # CRITICAL: Agent execution errors spike
+      - alert: AgentErrorSpike
+        expr: |
+          (
+            sum(rate(agent_executions_total{status="failure"}[5m])) by (agent_name)
+            /
+            sum(rate(agent_executions_total{status="failure"}[1h] offset 1h)) by (agent_name)
+          ) > 5
+        for: 2m
+        labels:
+          severity: critical
+          component: agents
+          team: backend
+        annotations:
+          summary: "Agent {{ $labels.agent_name }} error rate spiked 5x"
+          description: |
+            Agent: {{ $labels.agent_name }}
+            Current vs 1h ago: {{ $value }}x increase
+            Sudden increase in failures detected.
+          runbook_url: "https://docs.example.com/runbooks/agent-error-spike"
+
+      # WARNING: No agent executions
+      - alert: AgentNoExecutions
+        expr: |
+          sum(rate(agent_executions_total[15m])) by (agent_name) == 0
+        for: 30m
+        labels:
+          severity: warning
+          component: agents
+          team: backend
+        annotations:
+          summary: "Agent {{ $labels.agent_name }} has no executions in 30 minutes"
+          description: |
+            Agent: {{ $labels.agent_name }}
+            No executions detected in the last 30 minutes.
+            This may indicate a scheduling issue or disabled agent.
+          runbook_url: "https://docs.example.com/runbooks/agent-no-executions"
+
+      # WARNING: High agent cost
+      - alert: AgentHighCost
+        expr: |
+          sum(increase(agent_cost_usd_total[24h])) > 100
+        for: 5m
+        labels:
+          severity: warning
+          component: agents
+          team: backend
+          cost: high
+        annotations:
+          summary: "Agent cost exceeded $100 in last 24 hours"
+          description: |
+            Total cost (24h): ${{ $value | humanize }}
+            Daily cost threshold exceeded. Review agent usage and efficiency.
+          runbook_url: "https://docs.example.com/runbooks/agent-high-cost"
+
+      # INFO: Agent execution duration increasing
+      - alert: AgentDurationIncreasing
+        expr: |
+          deriv(
+            avg_over_time(agent_execution_duration_ms[1h])
+          [30m:]) > 1000
+        for: 15m
+        labels:
+          severity: info
+          component: agents
+          team: backend
+        annotations:
+          summary: "Agent {{ $labels.agent_name }} execution duration increasing"
+          description: |
+            Agent: {{ $labels.agent_name }}
+            Operation: {{ $labels.operation }}
+            Duration is steadily increasing. May indicate degradation.
+          runbook_url: "https://docs.example.com/runbooks/agent-duration-increasing"
+
+      # CRITICAL: Agent panic/crash
+      - alert: AgentPanicDetected
+        expr: |
+          increase(agent_executions_total{error_class=~".*Panic.*|.*Fatal.*|.*OutOfMemory.*"}[5m]) > 0
+        for: 1m
+        labels:
+          severity: critical
+          component: agents
+          team: backend
+        annotations:
+          summary: "Agent {{ $labels.agent_name }} panic/crash detected"
+          description: |
+            Agent: {{ $labels.agent_name }}
+            Error: {{ $labels.error_class }}
+            Critical failure detected. Immediate investigation required.
+          runbook_url: "https://docs.example.com/runbooks/agent-panic"
+
+      # WARNING: Agent circuit breaker opened
+      - alert: AgentCircuitBreakerOpen
+        expr: |
+          circuit_breaker_state{component="agent"} == 1
+        for: 2m
+        labels:
+          severity: warning
+          component: agents
+          team: backend
+        annotations:
+          summary: "Circuit breaker opened for {{ $labels.agent_name }}"
+          description: |
+            Agent: {{ $labels.agent_name }}
+            Service: {{ $labels.service }}
+            Circuit breaker is open, preventing further requests.
+            Check downstream service health.
+          runbook_url: "https://docs.example.com/runbooks/circuit-breaker-open"

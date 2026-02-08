@@ -1,0 +1,72 @@
+{
+  "sudOznaka": "Ts zg",
+  "vrstaPodneskaId": 3,
+  "vrstaPostupkaId": 2,
+  "ulogaPodnositeljaId": 1,
+  "stranke": [
+    {
+      "tip": "PRAVNA_OSOBA",
+      "naziv": "Tehnologija d.o.o.",
+      "oib": "33344455566",
+      "ulogaId": 1,
+      "adresa": {
+        "drzavaOznaka": "HR",
+        "postanskiBroj": "10000",
+        "ulicaIKucniBroj": "Radnicka cesta 80, Zagreb"
+      }
+    }
+  ],
+  "protustranke": [
+    {
+      "tip": "PRAVNA_OSOBA",
+      "naziv": "Konkurent d.d.",
+      "oib": "77788899900",
+      "ulogaId": 4,
+      "adresa": {
+        "drzavaOznaka": "HR",
+        "postanskiBroj": "10000",
+        "ulicaIKucniBroj": "Heinzelova 10, Zagreb"
+      }
+    }
+  ],
+  "sadrzaj": {
+    "naziv": "tuzba_radni_spor.pdf",
+    "sadrzaj": "JVBERi0xLjQKJeLjz9MKMSAwIG9iago8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFI+PgplbmRvYmoK",
+    "brojStranica": 8,
+    "ignorirajUpozorenja": false
+  },
+  "pristojba": {
+    "vrsta": "SUDSKA",
+    "iznos": 200.00,
+    "valuta": "EUR"
+  },
+  "pristojbaDodatniPodaci": {
+    "vrijednostPredmetaSpora": 50000.00,
+    "valutaPredmetaSpora": "EUR",
+    "brojRadnika": 5,
+    "osnovaOslobodjenjaId": null,
+    "postotakOslobodjenja": 0,
+    "razlogNeplacanjaId": null
+  },
+  "prilozi": [
+    {
+      "opis": "Ugovor o radu",
+      "primjedba": "Ugovor na neodredjeno vrijeme",
+      "sadrzaj": {
+        "naziv": "ugovor_o_radu.pdf",
+        "sadrzaj": "JVBERi0xLjQK",
+        "brojStranica": 4,
+        "ignorirajUpozorenja": false
+      }
+    },
+    {
+      "opis": "Platne liste",
+      "sadrzaj": {
+        "naziv": "platne_liste.pdf",
+        "sadrzaj": "JVBERi0xLjQK",
+        "brojStranica": 12,
+        "ignorirajUpozorenja": true
+      }
+    }
+  ]
+}

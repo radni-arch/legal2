@@ -1,0 +1,2 @@
+This is a test text file for validating file type rejection in Textract Manager.
+It should be rejected because only PDF files are supported.

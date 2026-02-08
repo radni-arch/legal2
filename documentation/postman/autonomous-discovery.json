@@ -1,0 +1,626 @@
+{
+	"info": {
+		"_postman_id": "autonomous-discovery-collection-2025",
+		"name": "Autonomous Decision Discovery API",
+		"description": "Complete API collection for testing autonomous decision discovery workflows.\n\n**Authentication:** All requests require X-MCP-Token header.\n\n**Base URL:** Update the {{base_url}} variable to match your environment.\n\n**Setup:**\n1. Import this collection into Postman\n2. Set environment variables:\n   - base_url: https://your-domain.com\n   - mcp_token: your-api-token\n3. Run the test suite\n\n**Collection Structure:**\n- Authentication Tests\n- Decision Search API\n- Decision Retrieval API\n- Discovery Management API\n- Graph Integration API\n- Sample Workflows\n\n**Version:** 1.0\n**Last Updated:** 2025-01-29",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{mcp_token}}",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "X-MCP-Token",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://your-domain.com",
+			"type": "string"
+		},
+		{
+			"key": "mcp_token",
+			"value": "your-api-token-here",
+			"type": "string"
+		},
+		{
+			"key": "decision_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "run_id",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "1. Authentication",
+			"item": [
+				{
+					"name": "Test API Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 401\", function () {",
+									"    pm.expect([200, 401]).to.include(pm.response.code);",
+									"});",
+									"",
+									"if (pm.response.code === 401) {",
+									"    pm.test(\"Invalid token message\", function () {",
+									"        pm.expect(pm.response.json()).to.have.property('message');",
+									"    });",
+									"}",
+									"",
+									"if (pm.response.code === 200) {",
+									"    pm.test(\"Token is valid\", function () {",
+									"        pm.expect(pm.response.json()).to.have.property('success', true);",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"query\": \"test\",\n    \"limit\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/mcp/decision.search",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"mcp",
+								"decision.search"
+							]
+						},
+						"description": "Test if your API token is valid by making a simple search request."
+					},
+					"response": []
+				}
+			],
+			"description": "Authentication and token validation tests."
+		},
+		{
+			"name": "2. Decision Search",
+			"item": [
+				{
+					"name": "Search by Query",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has success property\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('success', true);",
+									"});",
+									"",
+									"pm.test(\"Response has data array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('data');",
+									"    pm.expect(jsonData.data).to.have.property('decisions');",
+									"    pm.expect(jsonData.data.decisions).to.be.an('array');",
+									"});",
+									"",
+									"// Save first decision ID for next request",
+									"var jsonData = pm.response.json();",
+									"if (jsonData.data.decisions.length > 0) {",
+									"    pm.collectionVariables.set('decision_id', jsonData.data.decisions[0].id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"query\": \"nezakonit otkaz\",\n    \"limit\": 20,\n    \"offset\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/mcp/decision.search",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"mcp",
+								"decision.search"
+							]
+						},
+						"description": "Search court decisions by keyword query."
+					},
+					"response": []
+				},
+				{
+					"name": "Search with Filters",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Results match court filter\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.data.decisions.length > 0) {",
+									"        jsonData.data.decisions.forEach(function(decision) {",
+									"            pm.expect(decision.court).to.include('Vrhovni');",
+									"        });",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"query\": \"ugovorna odgovornost\",\n    \"limit\": 10,\n    \"filters\": {\n        \"court\": \"Vrhovni sud\",\n        \"dateFrom\": \"2024-01-01\",\n        \"dateTo\": \"2025-01-29\",\n        \"type\": \"Presuda\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/mcp/decision.search",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"mcp",
+								"decision.search"
+							]
+						},
+						"description": "Search with court, date, and type filters."
+					},
+					"response": []
+				},
+				{
+					"name": "Search by Topic",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"query\": \"potrošačka zaštita\",\n    \"limit\": 15\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/mcp/decision.search",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"mcp",
+								"decision.search"
+							]
+						},
+						"description": "Search for consumer protection decisions."
+					},
+					"response": []
+				},
+				{
+					"name": "Pagination Example",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"query\": \"vlasničkopravni spor\",\n    \"limit\": 20,\n    \"offset\": 20\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/mcp/decision.search",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"mcp",
+								"decision.search"
+							]
+						},
+						"description": "Get page 2 of results (offset = 20, limit = 20)."
+					},
+					"response": []
+				}
+			],
+			"description": "Court decision search endpoints with various query options."
+		},
+		{
+			"name": "3. Decision Details",
+			"item": [
+				{
+					"name": "Get Decision by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has decision data\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('success', true);",
+									"    pm.expect(jsonData.data).to.have.property('id');",
+									"    pm.expect(jsonData.data).to.have.property('title');",
+									"    pm.expect(jsonData.data).to.have.property('court');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{decision_id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/mcp/decision.get",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"mcp",
+								"decision.get"
+							]
+						},
+						"description": "Retrieve full details of a specific decision by ID."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Decision with Citations",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{decision_id}}\",\n    \"includeCitations\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/mcp/decision.get",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"mcp",
+								"decision.get"
+							]
+						},
+						"description": "Get decision with citation network information."
+					},
+					"response": []
+				}
+			],
+			"description": "Retrieve detailed information about specific court decisions."
+		},
+		{
+			"name": "4. Sample Workflows",
+			"item": [
+				{
+					"name": "Workflow 1: Research Topic",
+					"item": [
+						{
+							"name": "Step 1: Search Decisions",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"query\": \"kaznena djela prijevare\",\n    \"limit\": 10,\n    \"filters\": {\n        \"court\": \"Vrhovni sud\",\n        \"dateFrom\": \"2023-01-01\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/mcp/decision.search",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"mcp",
+										"decision.search"
+									]
+								},
+								"description": "Search for fraud-related criminal decisions from Supreme Court."
+							},
+							"response": []
+						},
+						{
+							"name": "Step 2: Get Top Decision",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"{{decision_id}}\",\n    \"includeCitations\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/mcp/decision.get",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"mcp",
+										"decision.get"
+									]
+								},
+								"description": "Retrieve full details of the top-ranked decision."
+							},
+							"response": []
+						}
+					],
+					"description": "Complete workflow: Research a legal topic from search to detailed analysis."
+				},
+				{
+					"name": "Workflow 2: Monitor New Decisions",
+					"item": [
+						{
+							"name": "Get Recent Decisions",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"query\": \"\",\n    \"limit\": 20,\n    \"filters\": {\n        \"dateFrom\": \"2025-01-20\",\n        \"dateTo\": \"2025-01-29\"\n    },\n    \"sortBy\": \"date\",\n    \"sortOrder\": \"desc\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/mcp/decision.search",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"mcp",
+										"decision.search"
+									]
+								},
+								"description": "Get all decisions from the last week, sorted by date."
+							},
+							"response": []
+						}
+					],
+					"description": "Monitor recently published court decisions."
+				},
+				{
+					"name": "Workflow 3: Court-Specific Research",
+					"item": [
+						{
+							"name": "Search Vrhovni Sud Decisions",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"query\": \"\",\n    \"limit\": 50,\n    \"filters\": {\n        \"court\": \"Vrhovni sud\",\n        \"type\": \"Presuda\",\n        \"dateFrom\": \"2024-01-01\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/mcp/decision.search",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"mcp",
+										"decision.search"
+									]
+								},
+								"description": "Get all Supreme Court judgments from 2024."
+							},
+							"response": []
+						}
+					],
+					"description": "Research decisions from a specific court."
+				}
+			],
+			"description": "Real-world workflow examples for common legal research tasks."
+		},
+		{
+			"name": "5. Law Search API",
+			"item": [
+				{
+					"name": "Search Croatian Laws",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"query\": \"zakon o radu\",\n    \"limit\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/mcp/law.search",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"mcp",
+								"law.search"
+							]
+						},
+						"description": "Search Croatian legal codes and statutes."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Specific Article",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"lawId\": \"zakon-o-radu\",\n    \"article\": \"119\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/mcp/law.get_article",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"mcp",
+								"law.get_article"
+							]
+						},
+						"description": "Retrieve a specific article from a law."
+					},
+					"response": []
+				}
+			],
+			"description": "Search and retrieve Croatian laws and statutes."
+		},
+		{
+			"name": "6. Test Data",
+			"item": [
+				{
+					"name": "Sample Topics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/test/sample-topics",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"test",
+								"sample-topics"
+							]
+						},
+						"description": "Get sample legal topics for testing (endpoint may not exist in production)."
+					},
+					"response": []
+				}
+			],
+			"description": "Test data and sample requests for training purposes."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Global pre-request script",
+					"console.log('Request to: ' + pm.request.url);",
+					"console.log('Using token: ' + pm.collectionVariables.get('mcp_token').substring(0, 10) + '...');"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Global test script",
+					"pm.test(\"Response time is less than 5000ms\", function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+					"});",
+					"",
+					"pm.test(\"Content-Type is application/json\", function () {",
+					"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+					"});"
+				]
+			}
+		}
+	]
+}

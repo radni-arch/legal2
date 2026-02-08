@@ -1,0 +1,5 @@
+PHP Warning:  require(/home/user/ai-legal-war-machine/vendor/autoload.php): Failed to open stream: No such file or directory in /home/user/ai-legal-war-machine/artisan on line 10
+PHP Fatal error:  Uncaught Error: Failed opening required '/home/user/ai-legal-war-machine/vendor/autoload.php' (include_path='.:/usr/share/php') in /home/user/ai-legal-war-machine/artisan:10
+Stack trace:
+#0 {main}
+  thrown in /home/user/ai-legal-war-machine/artisan on line 10

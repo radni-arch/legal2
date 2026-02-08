@@ -1,0 +1,50 @@
+{
+  "test_id": "precedent_high_003",
+  "category": "high-applicability",
+  "expected_score_range": [82, 92],
+  "description": "Supreme Court ruling on evidence exclusion for illegal detention exceeding legal timeframe",
+
+  "input": {
+    "problem_statement": "Client detained for 28 hours before being brought before judge (legal limit is 24 hours). During extended detention, client gave confession. Question: Should confession be excluded?",
+    "researched_decisions": [
+      {
+        "ecli": "HR:VSRH:2021:I-Kž-456",
+        "court": "Vrhovni sud Republike Hrvatske",
+        "case_number": "I Kž-456/2021",
+        "decision_date": "2021-09-10",
+        "title": "Nezakonito produljenje pritvora preko zakonskog roka",
+        "summary": "Vrhovni sud utvrdio da zadržavanje osumnjičenog dulje od 24 sata bez dovođenja pred suca predstavlja povredu ZKP-a i Ustava RH. Priznanje dobiveno tijekom nezakonitog pritvora ne može se koristiti kao dokaz jer je plod nedopuštenog postupanja. Sud je isključio priznanje iz dokaznog postupka."
+      }
+    ],
+    "researched_laws": [
+      {
+        "law_number": "ZKP Članak 211 stavak 1",
+        "title": "Rok dovođenja pred suca",
+        "content": "Osoba uhićena ili zadržana mora biti dovedena pred nadležnog suca najkasnije 24 sata od uhićenja. Svako produljenje ovog roka predstavlja povredu zakonskog postupka.",
+        "similarity": 0.93
+      },
+      {
+        "law_number": "Ustav RH Članak 24",
+        "title": "Pravo na osobnu slobodu",
+        "content": "Svatko ima pravo na osobnu slobodu. Nitko ne smije biti lišen slobode osim u slučajevima i na način određen zakonom. Osoba uhićena ili lišena slobode mora biti dovedena pred suca bez odgode.",
+        "similarity": 0.89
+      }
+    ]
+  },
+
+  "expected_output": {
+    "applicability_score": 87,
+    "binding_authority": "binding",
+    "key_factors": [
+      "prekoračenje 24-satnog roka",
+      "nezakoniti pritvor",
+      "priznanje tijekom nezakonitog pritvora",
+      "povreda ustavnog prava na osobnu slobodu",
+      "isključenje dokaza"
+    ],
+    "favorable": true,
+    "reasoning": "Vrhovni sud jasno utvrdio da 4 sata prekoračenja zakonskog roka čini pritvor nezakonitim. Priznanje dobiveno u takvim okolnostima mora biti isključeno. Binding precedent s identičnom situacijom prekoračenja roka."
+  },
+
+  "validation_notes": "Should score 85-90 due to Supreme Court binding authority, factual similarity (both cases exceed 24h limit), favorable outcome, and clear legal reasoning about evidence exclusion."
+}

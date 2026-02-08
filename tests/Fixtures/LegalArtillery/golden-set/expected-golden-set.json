@@ -1,0 +1,48 @@
+{
+  "documents": [
+    {
+      "name": "dorh_production_redacted",
+      "path": "tests/Fixtures/LegalArtillery/golden-set/dorh-production-redacted.txt",
+      "profile": "dorh_production",
+      "required_sections": [
+        "heading",
+        "case_reference",
+        "identification",
+        "connection_criminal_misdemeanor",
+        "legal_arguments",
+        "disclosure_demand",
+        "consequences_warning",
+        "signature"
+      ],
+      "citation_expectations": {
+        "statutes": 3,
+        "nn": 1,
+        "cases": 2,
+        "dates": 2,
+        "courts": 1
+      }
+    },
+    {
+      "name": "kazneni_sud_motion_redacted",
+      "path": "tests/Fixtures/LegalArtillery/golden-set/kazneni-motion-redacted.txt",
+      "profile": "kazneni_sud_motion",
+      "required_sections": [
+        "heading",
+        "case_reference",
+        "identification",
+        "motion_context",
+        "evidence_connection",
+        "legal_arguments",
+        "specific_requests",
+        "signature"
+      ],
+      "citation_expectations": {
+        "statutes": 3,
+        "nn": 1,
+        "cases": 2,
+        "dates": 2,
+        "courts": 1
+      }
+    }
+  ]
+}

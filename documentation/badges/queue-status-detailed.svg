@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="60" role="img" aria-label="TDD Queue Progress">
+  <title>TDD Queue: 8% complete, 53/592 done, 539 remaining, last green: never</title>
+
+  <!-- Background -->
+  <rect width="280" height="60" rx="4" fill="#2d2d2d"/>
+
+  <!-- Progress bar background -->
+  <rect x="10" y="35" width="260" height="8" rx="4" fill="#444"/>
+
+  <!-- Progress bar fill -->
+  <rect x="10" y="35" width="20" height="8" rx="4" fill="#e05d44"/>
+
+  <!-- Title -->
+  <text x="10" y="20" fill="#fff" font-family="Verdana,sans-serif" font-size="12" font-weight="bold">TDD Queue Progress</text>
+
+  <!-- Percentage -->
+  <text x="270" y="20" fill="#e05d44" font-family="Verdana,sans-serif" font-size="12" font-weight="bold" text-anchor="end">8%</text>
+
+  <!-- Stats line -->
+  <text x="10" y="55" fill="#aaa" font-family="Verdana,sans-serif" font-size="9">
+    <tspan fill="#4c1">✓ 53</tspan>
+    <tspan fill="#dfb317"> ⟳ 0</tspan>
+    <tspan fill="#888"> ○ 539</tspan>
+    <tspan fill="#666"> | Last: never</tspan>
+  </text>
+</svg>

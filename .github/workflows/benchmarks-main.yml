@@ -1,0 +1,167 @@
+name: Full Benchmark Suite (Main)
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  schedule:
+    # Run weekly on Sundays at 00:00 UTC
+    - cron: '0 0 * * 0'
+  workflow_dispatch:  # Allow manual trigger
+
+concurrency:
+  group: benchmarks-main-${{ github.ref }}
+  cancel-in-progress: false  # Don't cancel baseline runs
+
+jobs:
+  full-benchmarks:
+    name: Full Benchmark Suite
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: laravel_test
+          POSTGRES_USER: claude
+          POSTGRES_PASSWORD: claude
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for comparisons
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, pdo, pdo_pgsql, bcmath, intl
+          coverage: none
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Setup test database
+        env:
+          DB_CONNECTION: pgsql
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_DATABASE: laravel_test
+          DB_USERNAME: claude
+          DB_PASSWORD: claude
+        run: |
+          php artisan migrate --force --env=testing
+
+      - name: Run full benchmark suite
+        env:
+          APP_ENV: testing
+          DB_CONNECTION: pgsql
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_DATABASE: laravel_test
+          DB_USERNAME: claude
+          DB_PASSWORD: claude
+          CACHE_STORE: array
+          NEO4J_ENABLED: false
+          NEO4J_SYNC_ENABLED: false
+        run: |
+          echo "Running all 15 benchmarks..."
+          php artisan benchmark:run all
+
+      - name: Generate benchmark report
+        env:
+          APP_ENV: testing
+          DB_CONNECTION: pgsql
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_DATABASE: laravel_test
+          DB_USERNAME: claude
+          DB_PASSWORD: claude
+        run: |
+          php artisan benchmark:report --format=json --limit=1 > benchmark-report.json
+          php artisan benchmark:report --format=table --limit=10
+
+      - name: Upload benchmark results
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-results-${{ github.sha }}
+          path: |
+            benchmark-report.json
+          retention-days: 90
+
+      - name: Check for regressions (if not first run)
+        id: regression
+        continue-on-error: true
+        env:
+          APP_ENV: testing
+          DB_CONNECTION: pgsql
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_DATABASE: laravel_test
+          DB_USERNAME: claude
+          DB_PASSWORD: claude
+        run: |
+          # Get previous commit on this branch
+          PREVIOUS_COMMIT=$(git rev-parse HEAD~1)
+
+          # Check for regressions
+          php artisan benchmark:check-regression \
+            $PREVIOUS_COMMIT \
+            --threshold=0.05 \
+            --format=github
+
+      - name: Create issue if regression detected
+        if: steps.regression.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const resultsFile = 'benchmark-results.md';
+
+            let body = '## ⚠️ Benchmark Regression Detected\n\n';
+            body += `Commit: \`${{ github.sha }}\`\n`;
+            body += `Branch: \`${{ github.ref_name }}\`\n\n`;
+
+            if (fs.existsSync(resultsFile)) {
+              body += fs.readFileSync(resultsFile, 'utf8');
+            }
+
+            body += '\n\n---\n';
+            body += 'This issue was automatically created by the benchmark regression workflow.';
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Benchmark regression in ${context.payload.head_commit.id.substring(0, 7)}`,
+              body: body,
+              labels: ['performance', 'regression', 'automated']
+            });
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Benchmark Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Full benchmark suite completed" >> $GITHUB_STEP_SUMMARY
+          echo "📊 Results uploaded as artifacts" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Branch:** \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY

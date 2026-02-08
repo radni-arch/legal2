@@ -1,0 +1,325 @@
+name: Autoloop Shadow Mode
+
+# Nightly autoloop run in shadow mode (no commits/push)
+# Produces diagnostic artifacts without mutating repository state
+
+on:
+  schedule:
+    # Run nightly at 2:00 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    # Allow manual triggering for testing
+    inputs:
+      max_iterations:
+        description: 'Maximum iterations per component'
+        required: false
+        default: '3'
+      max_components:
+        description: 'Maximum components to process'
+        required: false
+        default: '5'
+
+env:
+  # Shadow mode - explicitly disable any mutations
+  AUTOLOOP_SHADOW_MODE: 'true'
+  AUTOLOOP_NO_COMMIT: 'true'
+  AUTOLOOP_NO_PUSH: 'true'
+
+jobs:
+  shadow-autoloop:
+    name: Shadow Autoloop Run
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: laravel_test
+          POSTGRES_USER: claude
+          POSTGRES_PASSWORD: claude
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, pdo_pgsql, bcmath, soap, intl, gd, exif, iconv
+          coverage: none
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Install NPM dependencies
+        run: npm ci
+
+      - name: Copy environment file
+        run: cp .env.testing .env
+
+      - name: Generate application key
+        run: php artisan key:generate --env=testing
+
+      - name: Clear config cache
+        run: php artisan config:clear
+
+      - name: Run migrations
+        run: php artisan migrate:fresh --env=testing --force
+        env:
+          DB_CONNECTION: pgsql
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_DATABASE: laravel_test
+          DB_USERNAME: claude
+          DB_PASSWORD: claude
+
+      - name: Ensure test directories exist
+        run: |
+          mkdir -p test-results/logs
+          mkdir -p test-results/metrics
+          mkdir -p test-results/failures
+          mkdir -p test-results/support-bundles
+          mkdir -p test-logs
+
+      - name: Run shadow autoloop
+        id: autoloop
+        continue-on-error: true
+        run: |
+          echo "=== Shadow Autoloop Run ==="
+          echo "Started: $(date -Iseconds)"
+          echo ""
+
+          # Configuration
+          MAX_ITERATIONS="${{ github.event.inputs.max_iterations || '3' }}"
+          MAX_COMPONENTS="${{ github.event.inputs.max_components || '5' }}"
+
+          echo "Max iterations per component: $MAX_ITERATIONS"
+          echo "Max components to process: $MAX_COMPONENTS"
+          echo ""
+
+          # Get top N todo components from queue
+          COMPONENTS=$(jq -r --argjson max "$MAX_COMPONENTS" '
+            .components | to_entries |
+            map(select(.value.status == "todo")) |
+            sort_by(.value.priority // 999) |
+            .[:$max] |
+            .[].key
+          ' test-results/tdd-test-queue.json 2>/dev/null || echo "")
+
+          if [ -z "$COMPONENTS" ]; then
+            echo "No todo components found in queue"
+            exit 0
+          fi
+
+          echo "Components to process:"
+          echo "$COMPONENTS" | head -n "$MAX_COMPONENTS"
+          echo ""
+
+          # Track results
+          PASSED=0
+          FAILED=0
+          ERRORS=0
+
+          # Process each component
+          for COMPONENT in $COMPONENTS; do
+            echo ""
+            echo "=========================================="
+            echo "Processing: $COMPONENT"
+            echo "=========================================="
+
+            # Extract test path from queue
+            TEST_PATH=$(jq -r --arg c "$COMPONENT" '.components[$c].tests // empty' test-results/tdd-test-queue.json)
+
+            if [ -z "$TEST_PATH" ]; then
+              echo "No test path found for $COMPONENT, using component name"
+              TEST_PATH="$COMPONENT"
+            fi
+
+            # Run focused test (shadow mode - no retries to save time)
+            ./scripts/run-focused-tests.sh "$TEST_PATH" --no-retry || true
+
+            # Check result
+            EXIT_CODE=$?
+            if [ $EXIT_CODE -eq 0 ]; then
+              ((PASSED++))
+              echo "✓ $COMPONENT passed"
+            else
+              ((FAILED++))
+              echo "✗ $COMPONENT failed"
+            fi
+          done
+
+          echo ""
+          echo "=== Shadow Autoloop Summary ==="
+          echo "Passed: $PASSED"
+          echo "Failed: $FAILED"
+          echo "Completed: $(date -Iseconds)"
+
+          # Create summary file
+          cat > test-results/shadow-run-summary.json << EOF
+          {
+            "timestamp": "$(date -Iseconds)",
+            "mode": "shadow",
+            "max_iterations": $MAX_ITERATIONS,
+            "max_components": $MAX_COMPONENTS,
+            "results": {
+              "passed": $PASSED,
+              "failed": $FAILED
+            },
+            "github_run_id": "${{ github.run_id }}",
+            "github_run_number": "${{ github.run_number }}"
+          }
+          EOF
+
+          # Exit with failure if any tests failed (for visibility)
+          if [ $FAILED -gt 0 ]; then
+            exit 1
+          fi
+        env:
+          DB_CONNECTION: pgsql
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_DATABASE: laravel_test
+          DB_USERNAME: claude
+          DB_PASSWORD: claude
+
+      - name: Generate support bundle
+        if: always()
+        run: |
+          echo "Generating support bundle for CI run..."
+          ./scripts/make-support-bundle.sh "CI shadow run #${{ github.run_number }}" || true
+
+      - name: Collect queue snapshot
+        if: always()
+        run: |
+          # Create a snapshot of queue state
+          cp test-results/tdd-test-queue.json test-results/queue-snapshot-${{ github.run_number }}.json || true
+
+          # Generate queue summary
+          jq -r '
+            .components | to_entries |
+            group_by(.value.status) |
+            map({status: .[0].value.status, count: length}) |
+            .[] | "\(.status): \(.count)"
+          ' test-results/tdd-test-queue.json > test-results/queue-status-summary.txt 2>/dev/null || true
+
+      - name: Generate queue progress badge
+        if: always()
+        run: |
+          ./scripts/generate-queue-badge.sh || true
+
+      - name: Upload queue badge
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: queue-badge-${{ github.run_number }}
+          path: |
+            documentation/badges/queue-status.svg
+            documentation/badges/queue-status-detailed.svg
+          retention-days: 30
+          if-no-files-found: ignore
+
+      - name: Upload iteration logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: iteration-logs-${{ github.run_number }}
+          path: |
+            test-results/logs/
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - name: Upload metrics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: metrics-${{ github.run_number }}
+          path: |
+            test-results/metrics/
+            test-results/shadow-run-summary.json
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - name: Upload queue snapshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: queue-snapshot-${{ github.run_number }}
+          path: |
+            test-results/queue-snapshot-*.json
+            test-results/queue-status-summary.txt
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - name: Upload failure briefs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: failure-briefs-${{ github.run_number }}
+          path: |
+            test-results/failures/
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - name: Upload support bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: support-bundle-${{ github.run_number }}
+          path: |
+            test-results/support-bundles/*.zip
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - name: Upload test logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-logs-${{ github.run_number }}
+          path: |
+            test-logs/
+          retention-days: 7
+          if-no-files-found: ignore
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Shadow Autoloop Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ -f test-results/shadow-run-summary.json ]; then
+            echo "### Run Summary" >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`json" >> $GITHUB_STEP_SUMMARY
+            cat test-results/shadow-run-summary.json >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Queue Status" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          cat test-results/queue-status-summary.txt 2>/dev/null || echo "No queue data"
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Artifacts" >> $GITHUB_STEP_SUMMARY
+          echo "- queue-badge-${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
+          echo "- iteration-logs-${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
+          echo "- metrics-${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
+          echo "- queue-snapshot-${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
+          echo "- failure-briefs-${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
+          echo "- support-bundle-${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
+          echo "- test-logs-${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY

@@ -1,0 +1,91 @@
+groups:
+  - name: ai_legal_warning_alerts
+    interval: 5m
+    rules:
+      - alert: BenchmarkScoreDropped
+        expr: delta(benchmark_score[24h]) < -0.05
+        for: 10m
+        labels:
+          severity: warning
+          component: benchmarks
+        annotations:
+          summary: "Benchmark score dropped >5%: {{ $labels.benchmark_name }}"
+          description: "Benchmark {{ $labels.benchmark_name }} dropped from {{ $value }} to {{ $value | humanize }}. Investigate recent code changes."
+          runbook_url: "https://docs.ai-legal.internal/runbooks/benchmark-regression"
+
+      - alert: AgentLatencyHigh
+        expr: histogram_quantile(0.95, rate(agent_duration_seconds_bucket[5m])) > 30
+        for: 10m
+        labels:
+          severity: warning
+          component: agents
+        annotations:
+          summary: "Agent p95 latency >30s: {{ $labels.agent_type }}"
+          description: "95th percentile latency for {{ $labels.agent_type }} is {{ $value }}s. Users may experience slow responses."
+          runbook_url: "https://docs.ai-legal.internal/runbooks/agent-latency-high"
+
+      - alert: LearningOpportunitiesStale
+        expr: (time() - learning_opportunity_last_reviewed_timestamp) > (7 * 24 * 3600)
+        for: 1h
+        labels:
+          severity: warning
+          component: active_learning
+        annotations:
+          summary: "Learning opportunities not reviewed in 7+ days"
+          description: "{{ $value }} learning opportunities flagged but not reviewed. Active learning pipeline may be stalled."
+          runbook_url: "https://docs.ai-legal.internal/runbooks/learning-opportunities-stale"
+
+      - alert: Neo4jQuerySlow
+        expr: histogram_quantile(0.95, rate(neo4j_query_duration_seconds_bucket[5m])) > 5
+        for: 10m
+        labels:
+          severity: warning
+          component: neo4j
+        annotations:
+          summary: "Neo4j p95 query time >5s"
+          description: "Graph queries are taking {{ $value }}s at p95. Consider adding indexes or optimizing queries."
+          runbook_url: "https://docs.ai-legal.internal/runbooks/neo4j-query-slow"
+
+      - alert: QueueDepthElevated
+        expr: queue_depth{queue_name!~"textract"} > 50
+        for: 15m
+        labels:
+          severity: warning
+          component: queue
+        annotations:
+          summary: "Queue depth elevated: {{ $labels.queue_name }}"
+          description: "Queue {{ $labels.queue_name }} has {{ $value }} jobs pending for >15 minutes."
+          runbook_url: "https://docs.ai-legal.internal/runbooks/queue-depth-elevated"
+
+      - alert: OpenAICostHigh
+        expr: increase(openai_cost_dollars[24h]) > 50
+        for: 1h
+        labels:
+          severity: warning
+          component: cost
+        annotations:
+          summary: "OpenAI cost >$50 in 24h"
+          description: "OpenAI costs reached ${{ $value }} in last 24 hours. Review usage patterns."
+          runbook_url: "https://docs.ai-legal.internal/runbooks/openai-cost-high"
+
+      - alert: GraphEmbeddingCoverageLow
+        expr: graph_embedding_coverage_percentage < 70
+        for: 1h
+        labels:
+          severity: warning
+          component: graph
+        annotations:
+          summary: "Graph embedding coverage <70%"
+          description: "Only {{ $value }}% of decisions have graph embeddings. Run: php artisan graph:generate-embeddings"
+          runbook_url: "https://docs.ai-legal.internal/runbooks/graph-embedding-coverage-low"
+
+      - alert: MemoryUsageHigh
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) > 0.85
+        for: 10m
+        labels:
+          severity: warning
+          component: system
+        annotations:
+          summary: "Memory usage >85%"
+          description: "System memory usage at {{ $value | humanizePercentage }}. Monitor for potential OOM."
+          runbook_url: "https://docs.ai-legal.internal/runbooks/memory-usage-high"

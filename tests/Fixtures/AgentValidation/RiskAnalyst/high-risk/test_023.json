@@ -1,0 +1,63 @@
+{
+  "test_id": "risk_high_003",
+  "category": "high-risk",
+  "expected_risk_level": "high",
+  "expected_score_range": [82, 96],
+  "description": "Critical procedural defect - statute of limitations expired",
+
+  "input": {
+    "problem_statement": "Client charged with fraud from 2018. Charge filed in 2024. Statute of limitations for fraud is 5 years. Prosecution argues tolling due to client being abroad, but records unclear.",
+    "legal_arguments": [
+      {
+        "title": "Statute of limitations expired",
+        "argument": "Offense occurred in 2018, more than 5 years ago",
+        "strength_score": 75,
+        "legal_basis": ["KZ Članak 114 - 5 year SOL for fraud"],
+        "potential_counterarguments": [
+          "Prosecution claims tolling",
+          "Client allegedly abroad 2019-2021",
+          "Unclear documentation of travel"
+        ]
+      }
+    ],
+    "strongest_precedents": [],
+    "strategic_recommendations": {
+      "procedural_steps": [
+        "File SOL motion to dismiss",
+        "Obtain travel records",
+        "Challenge tolling calculation"
+      ]
+    }
+  },
+
+  "expected_output": {
+    "overall_risk_score": {
+      "score": 89,
+      "level": "high"
+    },
+    "argument_risks": [
+      {
+        "argument_index": 0,
+        "risk_level": "high",
+        "impact_if_fails": "critical",
+        "weaknesses": [
+          "Tolling rules may apply if client was abroad",
+          "Travel documentation unclear",
+          "Burden of proof on defense to show no tolling"
+        ]
+      }
+    ],
+    "adverse_precedents": [],
+    "procedural_risks": [
+      {
+        "risk_type": "Statute of limitations - tolling issue",
+        "severity": "critical",
+        "probability": "high",
+        "description": "If court accepts tolling argument, SOL defense collapses completely",
+        "mitigation": "Obtain definitive travel records proving client was in Croatia"
+      }
+    ]
+  },
+
+  "validation_notes": "Should score 82-96 (high risk) due to critical nature of SOL defense (if it fails, case proceeds), uncertainty about tolling application, unclear travel records, high stakes (dismissal vs full trial)."
+}

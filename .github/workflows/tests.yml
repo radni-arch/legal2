@@ -1,0 +1,91 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, develop, 'claude/**' ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: laravel_test
+          POSTGRES_USER: claude
+          POSTGRES_PASSWORD: claude
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, pdo_pgsql, bcmath, soap, intl, gd, exif, iconv
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress --no-suggest
+
+      - name: Copy environment file
+        run: cp .env.testing .env
+
+      - name: Generate application key
+        run: php artisan key:generate --env=testing
+
+      - name: Clear config cache
+        run: php artisan config:clear
+
+      - name: Run migrations
+        run: php artisan migrate:fresh --env=testing --force
+        env:
+          DB_CONNECTION: pgsql
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_DATABASE: laravel_test
+          DB_USERNAME: claude
+          DB_PASSWORD: claude
+
+      - name: Run focused Legal Artillery tests
+        run: |
+          ./scripts/run-focused-tests.sh tests/Unit/Services/LegalArtillery/QualityGateTest.php --no-retry
+          ./scripts/run-focused-tests.sh tests/Feature/LegalArtilleryGoldenSetTest.php --no-retry
+        env:
+          DB_CONNECTION: pgsql
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_DATABASE: laravel_test
+          DB_USERNAME: claude
+          DB_PASSWORD: claude
+
+      - name: Run Unit Tests
+        run: php artisan test --testsuite=Unit --parallel
+        env:
+          DB_CONNECTION: pgsql
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_DATABASE: laravel_test
+          DB_USERNAME: claude
+          DB_PASSWORD: claude
+
+      - name: Run Feature Tests
+        run: php artisan test --testsuite=Feature --parallel
+        env:
+          DB_CONNECTION: pgsql
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_DATABASE: laravel_test
+          DB_USERNAME: claude
+          DB_PASSWORD: claude

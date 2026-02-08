@@ -1,0 +1,3318 @@
+openapi: 3.0.3
+info:
+  title: Croatian Legal AI War Machine API
+  description: |
+    Comprehensive API for Croatian legal system analysis, prosecutorial misconduct detection,
+    and AI-powered legal research. This system provides advanced capabilities for:
+
+    - Legal document search and retrieval (laws, court decisions, cases)
+    - OpenAI API proxy with Croatian legal context
+    - Prosecutorial misconduct detection and legal action generation
+    - Multi-agent collaboration for complex legal problems
+    - Predictive analytics for case outcomes
+    - Graph-based citation analysis
+    - MCP (Model Context Protocol) tools integration
+
+    ## Authentication
+
+    Most endpoints require API token authentication via the `Authorization: Bearer <token>` header.
+    Some endpoints use `X-MCP-Token` header for MCP-specific authentication.
+
+    ## Rate Limiting
+
+    - Standard endpoints: 60 requests per minute
+    - MCP endpoints: Tool-specific limits
+    - Info endpoints: 60 requests per minute
+
+    ## Croatian Legal Context
+
+    This API is specifically designed for the Croatian legal system and includes:
+    - Croatian law codes (KZ, ZKP, ZSZD, Ustav RH)
+    - Croatian court hierarchy (Općinski sud, Županijski sud, Vrhovni sud)
+    - Croatian legal procedures (žalba, zaštita zakonitosti, ustavna tužba)
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: support@legal-ai.example.com
+  license:
+    name: Proprietary
+    url: https://legal-ai.example.com/license
+
+servers:
+  - url: https://api.legal-ai.example.com/api
+    description: Production server
+  - url: https://staging-api.legal-ai.example.com/api
+    description: Staging server
+  - url: http://localhost:8000/api
+    description: Local development server
+
+tags:
+  - name: OpenAI Proxy
+    description: OpenAI API proxy endpoints with Croatian legal context
+  - name: Content Ingestion
+    description: Legal document ingestion and indexing
+  - name: File Uploads
+    description: File upload endpoints with chunked upload support
+  - name: MCP Tools
+    description: Model Context Protocol (MCP) tools for legal research
+  - name: MCP-OpenAI Bridge
+    description: MCP tools exposed as OpenAI function calling endpoints
+  - name: Agent
+    description: Autonomous research agent endpoints
+  - name: Odluke Agent
+    description: Court decision discovery agent
+  - name: Search
+    description: Unified legal document search across all corpora
+  - name: Reasoning
+    description: Legal reasoning engine for conflict resolution and logic
+  - name: Analytics
+    description: Predictive analytics for case outcomes and impact
+  - name: Strategy
+    description: Legal strategy building and argument generation
+  - name: Misconduct
+    description: Prosecutorial misconduct detection and legal actions
+  - name: Topics
+    description: Topic-based abuse analysis (drug charges, home searches, etc.)
+  - name: Collaboration
+    description: Multi-agent collaboration for complex legal problems
+  - name: Monitoring
+    description: Agent monitoring, health checks, and performance metrics
+  - name: Graph
+    description: Neo4j graph visualization and citation network analysis
+  - name: Honeypot
+    description: Security honeypot endpoints for detecting attackers
+
+security:
+  - BearerAuth: []
+  - McpToken: []
+
+paths:
+  # OpenAI Proxy Endpoints
+  /openai/responses:
+    post:
+      tags: [OpenAI Proxy]
+      summary: Generate text responses via OpenAI
+      description: Proxy endpoint for OpenAI completions API
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenAIRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAIResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+
+  /openai/chat:
+    post:
+      tags: [OpenAI Proxy]
+      summary: Chat completions
+      description: OpenAI chat completions API with function calling support
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatCompletionRequest'
+      responses:
+        '200':
+          description: Chat completion response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatCompletionResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /openai/embeddings:
+    post:
+      tags: [OpenAI Proxy]
+      summary: Generate embeddings
+      description: Create vector embeddings for text using OpenAI
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmbeddingRequest'
+      responses:
+        '200':
+          description: Embedding vectors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmbeddingResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /openai/image:
+    post:
+      tags: [OpenAI Proxy]
+      summary: Generate images
+      description: DALL-E image generation
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  description: Image generation prompt
+                n:
+                  type: integer
+                  default: 1
+                size:
+                  type: string
+                  enum: ['256x256', '512x512', '1024x1024']
+                  default: '1024x1024'
+      responses:
+        '200':
+          description: Generated image URLs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        url:
+                          type: string
+
+  /openai/tts:
+    post:
+      tags: [OpenAI Proxy]
+      summary: Text to speech
+      description: Convert text to speech using OpenAI TTS
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [input]
+              properties:
+                input:
+                  type: string
+                model:
+                  type: string
+                  default: tts-1
+                voice:
+                  type: string
+                  enum: [alloy, echo, fable, onyx, nova, shimmer]
+      responses:
+        '200':
+          description: Audio file
+          content:
+            audio/mpeg:
+              schema:
+                type: string
+                format: binary
+
+  /openai/transcribe:
+    post:
+      tags: [OpenAI Proxy]
+      summary: Transcribe audio
+      description: Speech to text using Whisper
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file]
+              properties:
+                file:
+                  type: string
+                  format: binary
+                model:
+                  type: string
+                  default: whisper-1
+                language:
+                  type: string
+                  description: ISO-639-1 language code
+      responses:
+        '200':
+          description: Transcription text
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  text:
+                    type: string
+
+  /openai/files:
+    post:
+      tags: [OpenAI Proxy]
+      summary: Upload file to OpenAI
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file, purpose]
+              properties:
+                file:
+                  type: string
+                  format: binary
+                purpose:
+                  type: string
+                  enum: [fine-tune, assistants]
+      responses:
+        '200':
+          description: File uploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileObject'
+    get:
+      tags: [OpenAI Proxy]
+      summary: List uploaded files
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: List of files
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FileObject'
+
+  /openai/files/{fileId}:
+    delete:
+      tags: [OpenAI Proxy]
+      summary: Delete file
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: fileId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: File deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  deleted:
+                    type: boolean
+
+  /openai/assistants:
+    post:
+      tags: [OpenAI Proxy]
+      summary: Create assistant
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssistantCreate'
+      responses:
+        '200':
+          description: Assistant created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assistant'
+    get:
+      tags: [OpenAI Proxy]
+      summary: List assistants
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: List of assistants
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Assistant'
+
+  /openai/assistants/{assistantId}:
+    get:
+      tags: [OpenAI Proxy]
+      summary: Retrieve assistant
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/AssistantId'
+      responses:
+        '200':
+          description: Assistant details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assistant'
+    delete:
+      tags: [OpenAI Proxy]
+      summary: Delete assistant
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/AssistantId'
+      responses:
+        '200':
+          description: Assistant deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  deleted:
+                    type: boolean
+
+  /openai/vector-stores:
+    post:
+      tags: [OpenAI Proxy]
+      summary: Create vector store
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: Vector store created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStore'
+    get:
+      tags: [OpenAI Proxy]
+      summary: List vector stores
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: List of vector stores
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VectorStore'
+
+  /openai/vector-stores/{storeId}:
+    get:
+      tags: [OpenAI Proxy]
+      summary: Retrieve vector store
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VectorStoreId'
+      responses:
+        '200':
+          description: Vector store details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStore'
+    delete:
+      tags: [OpenAI Proxy]
+      summary: Delete vector store
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VectorStoreId'
+      responses:
+        '200':
+          description: Vector store deleted
+
+  /openai/vector-stores/{storeId}/files:
+    post:
+      tags: [OpenAI Proxy]
+      summary: Add file to vector store
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VectorStoreId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [file_id]
+              properties:
+                file_id:
+                  type: string
+      responses:
+        '200':
+          description: File added to vector store
+    get:
+      tags: [OpenAI Proxy]
+      summary: List vector store files
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VectorStoreId'
+      responses:
+        '200':
+          description: List of files in vector store
+
+  /openai/vector-stores/{storeId}/files/{fileId}:
+    delete:
+      tags: [OpenAI Proxy]
+      summary: Remove file from vector store
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VectorStoreId'
+        - name: fileId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: File removed from vector store
+
+  # Content Ingestion Endpoints
+  /ingest/text:
+    post:
+      tags: [Content Ingestion]
+      summary: Ingest text content
+      description: Index text content for search and retrieval
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngestTextRequest'
+      responses:
+        '200':
+          description: Content ingested successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /ingest/file:
+    post:
+      tags: [Content Ingestion]
+      summary: Ingest file
+      description: Upload and index a file (PDF, DOCX, TXT)
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file]
+              properties:
+                file:
+                  type: string
+                  format: binary
+                metadata:
+                  type: string
+                  description: JSON metadata
+      responses:
+        '200':
+          description: File ingested successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestResponse'
+
+  /ingest/search:
+    post:
+      tags: [Content Ingestion]
+      summary: Search ingested content
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+
+  /ingest/laws:
+    post:
+      tags: [Content Ingestion]
+      summary: Ingest Croatian laws
+      description: Bulk ingest Croatian legal documents with metadata
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [laws]
+              properties:
+                laws:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/LawDocument'
+      responses:
+        '200':
+          description: Laws ingested successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ingested:
+                    type: integer
+                  failed:
+                    type: integer
+
+  # File Upload Endpoints
+  /uploads:
+    post:
+      tags: [File Uploads]
+      summary: Direct file upload
+      description: Upload a file directly (for files < 10MB)
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file]
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: File uploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadResponse'
+
+  /uploads/start:
+    post:
+      tags: [File Uploads]
+      summary: Start chunked upload
+      description: Initialize a chunked upload for large files
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [filename, total_chunks]
+              properties:
+                filename:
+                  type: string
+                total_chunks:
+                  type: integer
+                file_size:
+                  type: integer
+      responses:
+        '200':
+          description: Upload session started
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  upload_id:
+                    type: string
+                  expires_at:
+                    type: string
+                    format: date-time
+
+  /uploads/{uploadId}/chunk/{index}:
+    post:
+      tags: [File Uploads]
+      summary: Upload file chunk
+      description: Upload a single chunk of a large file
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: uploadId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: index
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Chunk uploaded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  chunk_index:
+                    type: integer
+                  received:
+                    type: boolean
+
+  /uploads/{uploadId}/complete:
+    post:
+      tags: [File Uploads]
+      summary: Complete chunked upload
+      description: Finalize and merge all uploaded chunks
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: uploadId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Upload completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadResponse'
+
+  /uploads/{uploadId}:
+    delete:
+      tags: [File Uploads]
+      summary: Cancel upload
+      description: Cancel and cleanup an in-progress upload
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: uploadId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Upload cancelled
+
+  # MCP Tools Endpoints
+  /mcp/law.search:
+    post:
+      tags: [MCP Tools]
+      summary: Search Croatian laws
+      description: |
+        Search for Croatian legal articles and provisions.
+        Supports semantic search and citation-aware retrieval.
+      security:
+        - McpToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LawSearchRequest'
+      responses:
+        '200':
+          description: Law search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LawSearchResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+
+  /mcp/law.get_article:
+    post:
+      tags: [MCP Tools]
+      summary: Get specific law article
+      description: Retrieve a specific article from a Croatian law
+      security:
+        - McpToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [law_code, article_number]
+              properties:
+                law_code:
+                  type: string
+                  description: Law code (e.g., KZ, ZKP, ZSZD)
+                  example: KZ
+                article_number:
+                  type: string
+                  description: Article number
+                  example: "123"
+      responses:
+        '200':
+          description: Article content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LawArticle'
+
+  /mcp/decision.search:
+    post:
+      tags: [MCP Tools]
+      summary: Search court decisions
+      description: Search Croatian court decisions and precedents
+      security:
+        - McpToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DecisionSearchRequest'
+      responses:
+        '200':
+          description: Decision search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DecisionSearchResponse'
+
+  /mcp/decision.get:
+    post:
+      tags: [MCP Tools]
+      summary: Get specific court decision
+      description: Retrieve a specific court decision by ID
+      security:
+        - McpToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [decision_id]
+              properties:
+                decision_id:
+                  type: string
+      responses:
+        '200':
+          description: Decision details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourtDecision'
+
+  /mcp/case.search:
+    post:
+      tags: [MCP Tools]
+      summary: Search private cases
+      description: Search user's private cases (requires authentication)
+      security:
+        - McpToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseSearchRequest'
+      responses:
+        '200':
+          description: Case search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseSearchResponse'
+
+  # MCP-OpenAI Bridge Endpoints
+  /mcp-openai/info:
+    get:
+      tags: [MCP-OpenAI Bridge]
+      summary: Get bridge info
+      description: Public endpoint with bridge version and capabilities
+      security: []
+      responses:
+        '200':
+          description: Bridge information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  version:
+                    type: string
+                  mcp_version:
+                    type: string
+                  openai_version:
+                    type: string
+
+  /mcp-openai/tools:
+    get:
+      tags: [MCP-OpenAI Bridge]
+      summary: List available MCP tools
+      description: Get list of MCP tools formatted for OpenAI function calling
+      security:
+        - McpToken: []
+      responses:
+        '200':
+          description: List of tools
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OpenAIFunction'
+
+  /mcp-openai/tools/execute:
+    post:
+      tags: [MCP-OpenAI Bridge]
+      summary: Execute MCP tool
+      description: Execute an MCP tool with given arguments
+      security:
+        - McpToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [tool_name, arguments]
+              properties:
+                tool_name:
+                  type: string
+                arguments:
+                  type: object
+      responses:
+        '200':
+          description: Tool execution result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: object
+                  metadata:
+                    type: object
+
+  /mcp-openai/chat/completions:
+    post:
+      tags: [MCP-OpenAI Bridge]
+      summary: Chat completions with MCP tools
+      description: OpenAI-compatible chat completions with automatic MCP tools injection
+      security:
+        - McpToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatCompletionRequest'
+      responses:
+        '200':
+          description: Chat completion with tool calls
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatCompletionResponse'
+
+  /mcp-openai/webhook:
+    post:
+      tags: [MCP-OpenAI Bridge]
+      summary: OpenAI webhook callback
+      description: Webhook endpoint for OpenAI function calling callbacks
+      security:
+        - McpToken: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Webhook processed
+
+  # Agent Endpoints
+  /agent/research/start:
+    post:
+      tags: [Agent]
+      summary: Start research run
+      description: Start autonomous research agent on a legal question
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [query]
+              properties:
+                query:
+                  type: string
+                  description: Legal research question
+                options:
+                  type: object
+                  properties:
+                    max_depth:
+                      type: integer
+                      default: 3
+                    include_precedents:
+                      type: boolean
+                      default: true
+      responses:
+        '200':
+          description: Research started
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  research_id:
+                    type: string
+                  status:
+                    type: string
+                  started_at:
+                    type: string
+                    format: date-time
+
+  /agent/research:
+    get:
+      tags: [Agent]
+      summary: List research runs
+      description: Get list of all research runs
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: List of research runs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResearchRun'
+
+  /agent/research/{id}:
+    get:
+      tags: [Agent]
+      summary: Get research run details
+      description: Get detailed results of a research run
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Research run details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResearchRun'
+    delete:
+      tags: [Agent]
+      summary: Delete research run
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Research run deleted
+
+  /agent/research/{id}/evaluation:
+    get:
+      tags: [Agent]
+      summary: Get research evaluation
+      description: Get quality evaluation of research results
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Research evaluation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  quality_score:
+                    type: number
+                    format: float
+                  completeness:
+                    type: number
+                  accuracy:
+                    type: number
+                  relevance:
+                    type: number
+
+  # Agent Insights Endpoints
+  /insights/{agentName}:
+    get:
+      tags: [Agent]
+      summary: Get agent insights
+      description: |
+        Retrieve stored insights from past agent research runs, enabling memory reuse
+        and knowledge continuity across autonomous agent executions.
+
+        Insights are filtered by agent name and can be further refined by objective,
+        namespace, source, time range, and result limit.
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: agentName
+          in: path
+          required: true
+          description: Name of the agent (lowercase letters, numbers, underscores only)
+          schema:
+            type: string
+            pattern: '^[a-z0-9_]+$'
+            example: autonomous_research_agent
+        - name: objective
+          in: query
+          required: false
+          description: Filter by research objective (partial match, min 3 chars)
+          schema:
+            type: string
+            minLength: 3
+            example: Croatian labor law
+        - name: namespace
+          in: query
+          required: false
+          description: Filter by memory namespace
+          schema:
+            type: string
+            maxLength: 100
+            default: research_insights
+            example: research_insights
+        - name: source
+          in: query
+          required: false
+          description: Filter by source reference
+          schema:
+            type: string
+            maxLength: 100
+            example: autonomous_research
+        - name: limit
+          in: query
+          required: false
+          description: Maximum number of insights to return (1-100)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+            example: 20
+        - name: days
+          in: query
+          required: false
+          description: Only include insights from last N days (0-365)
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 365
+            default: 30
+            example: 60
+      responses:
+        '200':
+          description: Successfully retrieved insights
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  agent_name:
+                    type: string
+                    example: autonomous_research_agent
+                  filters:
+                    type: object
+                    properties:
+                      namespace:
+                        type: string
+                        example: research_insights
+                      limit:
+                        type: integer
+                        example: 10
+                      days:
+                        type: integer
+                        example: 30
+                      objective:
+                        type: string
+                        example: Croatian labor law
+                      source:
+                        type: string
+                        example: autonomous_research
+                  insights:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: ULID of the insight
+                          example: 01HQTEST123456789
+                        content:
+                          type: string
+                          description: The insight content
+                          example: Article 93 of Croatian Labor Law requires 2 weeks notice
+                        objective:
+                          type: string
+                          description: Research objective this insight relates to
+                          example: Research Croatian labor law termination procedures
+                        metadata:
+                          type: object
+                          description: Additional metadata about the insight
+                          example:
+                            run_id: run-123
+                            objective: Research Croatian labor law termination procedures
+                        source:
+                          type: string
+                          description: Source of the insight
+                          example: autonomous_research
+                        source_id:
+                          type: string
+                          description: ID of the source (e.g., run ID)
+                          example: run-123
+                        created_at:
+                          type: string
+                          format: date-time
+                          description: When the insight was created
+                          example: 2025-10-15T10:00:00Z
+                  count:
+                    type: integer
+                    description: Number of insights returned
+                    example: 2
+                  message:
+                    type: string
+                    description: Optional message about the results
+                    example: Successfully retrieved 2 recent insights
+        '400':
+          description: Invalid agent name format
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  code:
+                    type: string
+                    example: VALIDATION_ERROR
+                  message:
+                    type: string
+                    example: Invalid agent name format
+                  data:
+                    type: object
+                    properties:
+                      agent_name:
+                        type: string
+                        example: Agent name must contain only lowercase letters, numbers, and underscores
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: The objective field must be at least 3 characters.
+                  errors:
+                    type: object
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  code:
+                    type: string
+                    example: AGENT_EXECUTION_FAILED
+                  message:
+                    type: string
+                    example: Failed to retrieve insights
+                  data:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+                        example: Database connection failed
+
+  # Odluke Agent Endpoints
+  /odluke-agent/execute:
+    post:
+      tags: [Odluke Agent]
+      summary: Execute Odluke agent
+      description: Run court decision discovery agent with natural language query
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [query]
+              properties:
+                query:
+                  type: string
+                  description: Natural language query for court decisions
+                  example: "Find decisions about drug possession in Zagreb from 2023"
+      responses:
+        '200':
+          description: Agent execution result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CourtDecision'
+
+  /odluke-agent/status:
+    post:
+      tags: [Odluke Agent]
+      summary: Get agent status
+      description: Check status of running agent execution
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [execution_id]
+              properties:
+                execution_id:
+                  type: string
+      responses:
+        '200':
+          description: Agent status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [running, completed, failed]
+                  progress:
+                    type: number
+
+  # Search Endpoints
+  /search:
+    post:
+      tags: [Search]
+      summary: Unified search
+      description: Search across all legal corpora (laws, decisions, cases)
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnifiedSearchRequest'
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnifiedSearchResponse'
+
+  /search/laws:
+    post:
+      tags: [Search]
+      summary: Search laws
+      description: Search Croatian laws only
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Law search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+
+  /search/decisions:
+    post:
+      tags: [Search]
+      summary: Search court decisions
+      description: Search court decisions only
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Decision search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+
+  /search/cases:
+    post:
+      tags: [Search]
+      summary: Search private cases
+      description: Search user's private cases
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Case search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+
+  /search/hybrid:
+    post:
+      tags: [Search]
+      summary: Hybrid search
+      description: Combines vector and keyword search for better results
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/SearchRequest'
+                - type: object
+                  properties:
+                    vector_weight:
+                      type: number
+                      default: 0.7
+                    keyword_weight:
+                      type: number
+                      default: 0.3
+      responses:
+        '200':
+          description: Hybrid search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+
+  /search/with-citations:
+    post:
+      tags: [Search]
+      summary: Search with citation context
+      description: Search that includes citing and cited documents
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/SearchRequest'
+                - type: object
+                  properties:
+                    citation_depth:
+                      type: integer
+                      default: 2
+      responses:
+        '200':
+          description: Search results with citations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CitationSearchResponse'
+
+  # Reasoning Endpoints
+  /reasoning/analyze-conflict:
+    post:
+      tags: [Reasoning]
+      summary: Analyze legal conflict
+      description: Detect conflicts between legal provisions
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [provisions]
+              properties:
+                provisions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      law_code:
+                        type: string
+                      article:
+                        type: string
+                      text:
+                        type: string
+      responses:
+        '200':
+          description: Conflict analysis
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictAnalysis'
+
+  /reasoning/resolve-conflict:
+    post:
+      tags: [Reasoning]
+      summary: Resolve legal conflict
+      description: Apply conflict resolution rules (lex specialis, lex posterior)
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [conflict_id]
+              properties:
+                conflict_id:
+                  type: string
+      responses:
+        '200':
+          description: Conflict resolution
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictResolution'
+
+  /reasoning/authority-score:
+    post:
+      tags: [Reasoning]
+      summary: Calculate authority score
+      description: Calculate authority score for a legal provision using citation graph
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [provision_id]
+              properties:
+                provision_id:
+                  type: string
+                algorithm:
+                  type: string
+                  enum: [pagerank, hits, betweenness]
+                  default: pagerank
+      responses:
+        '200':
+          description: Authority score
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  provision_id:
+                    type: string
+                  score:
+                    type: number
+                  rank:
+                    type: integer
+                  citing_count:
+                    type: integer
+
+  /reasoning/parse-logic:
+    post:
+      tags: [Reasoning]
+      summary: Parse legal logic
+      description: Parse legal text into formal logic expressions
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [text]
+              properties:
+                text:
+                  type: string
+      responses:
+        '200':
+          description: Parsed logic
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  premises:
+                    type: array
+                    items:
+                      type: string
+                  conclusion:
+                    type: string
+                  logical_form:
+                    type: string
+
+  /reasoning/apply-deductive:
+    post:
+      tags: [Reasoning]
+      summary: Apply deductive reasoning
+      description: Apply modus ponens and other deductive rules
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [premises, rule]
+              properties:
+                premises:
+                  type: array
+                  items:
+                    type: string
+                rule:
+                  type: string
+      responses:
+        '200':
+          description: Deductive conclusion
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  conclusion:
+                    type: string
+                  valid:
+                    type: boolean
+                  explanation:
+                    type: string
+
+  # Analytics Endpoints
+  /analytics/predict-outcome/{caseId}:
+    post:
+      tags: [Analytics]
+      summary: Predict case outcome
+      description: ML-based prediction of case outcome
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CaseId'
+      responses:
+        '200':
+          description: Outcome prediction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OutcomePrediction'
+
+  /analytics/estimate-duration/{caseId}:
+    post:
+      tags: [Analytics]
+      summary: Estimate case duration
+      description: Estimate how long case will take based on historical data
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CaseId'
+      responses:
+        '200':
+          description: Duration estimate
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estimated_days:
+                    type: integer
+                  confidence:
+                    type: number
+                  similar_cases:
+                    type: array
+                    items:
+                      type: object
+
+  /analytics/comprehensive/{caseId}:
+    post:
+      tags: [Analytics]
+      summary: Comprehensive analytics
+      description: Full analytics report including outcome, duration, and risks
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CaseId'
+      responses:
+        '200':
+          description: Comprehensive analytics report
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/OutcomePrediction'
+                  - type: object
+                    properties:
+                      duration:
+                        type: object
+                      risks:
+                        type: array
+
+  /analytics/analyze-impact/{decisionId}:
+    post:
+      tags: [Analytics]
+      summary: Analyze decision impact
+      description: Analyze impact and influence of a court decision
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: decisionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Impact analysis
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  citation_count:
+                    type: integer
+                  impact_score:
+                    type: number
+                  key_principles:
+                    type: array
+                    items:
+                      type: string
+
+  /analytics/batch-predict:
+    post:
+      tags: [Analytics]
+      summary: Batch prediction
+      description: Predict outcomes for multiple cases at once
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [case_ids]
+              properties:
+                case_ids:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Batch predictions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OutcomePrediction'
+
+  # Strategy Endpoints
+  /strategy/build/{caseId}:
+    post:
+      tags: [Strategy]
+      summary: Build legal strategy
+      description: Generate comprehensive legal strategy for a case
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CaseId'
+      responses:
+        '200':
+          description: Legal strategy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LegalStrategy'
+
+  /strategy/comprehensive/{caseId}:
+    post:
+      tags: [Strategy]
+      summary: Comprehensive strategy
+      description: Full strategy with arguments, risks, and action plan
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CaseId'
+      responses:
+        '200':
+          description: Comprehensive strategy report
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/LegalStrategy'
+                  - type: object
+                    properties:
+                      detailed_arguments:
+                        type: array
+                      risk_mitigation:
+                        type: object
+                      timeline:
+                        type: array
+
+  /strategy/generate-arguments/{caseId}:
+    post:
+      tags: [Strategy]
+      summary: Generate legal arguments
+      description: Generate IRAC-based legal arguments
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CaseId'
+      responses:
+        '200':
+          description: Legal arguments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  arguments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LegalArgument'
+
+  /strategy/assess-risks/{caseId}:
+    post:
+      tags: [Strategy]
+      summary: Assess risks
+      description: Multi-dimensional risk assessment for case
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CaseId'
+      responses:
+        '200':
+          description: Risk assessment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RiskAssessment'
+
+  /strategy/action-plan/{caseId}:
+    post:
+      tags: [Strategy]
+      summary: Create action plan
+      description: Generate phased action plan for case
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CaseId'
+      responses:
+        '200':
+          description: Action plan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  phases:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        actions:
+                          type: array
+                          items:
+                            type: object
+                        deadline:
+                          type: string
+                          format: date
+
+  # Misconduct Endpoints
+  /misconduct/analyze/{caseId}:
+    post:
+      tags: [Misconduct]
+      summary: Analyze prosecutorial misconduct
+      description: |
+        Detect 6 types of prosecutorial misconduct:
+        - Witness tampering
+        - Evidence suppression
+        - False statements
+        - Improper closing arguments
+        - Selective prosecution
+        - Conflict of interest
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CaseId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                options:
+                  type: object
+                  properties:
+                    include_patterns:
+                      type: boolean
+                      default: true
+                    min_severity:
+                      type: integer
+                      minimum: 0
+                      maximum: 100
+                      default: 50
+      responses:
+        '200':
+          description: Misconduct analysis
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MisconductAnalysis'
+
+  /misconduct/dismissal-motion/{caseId}:
+    post:
+      tags: [Misconduct]
+      summary: Generate dismissal motion
+      description: Generate Croatian dismissal motion (Zahtjev za obustavu postupka)
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CaseId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                min_severity:
+                  type: integer
+                  minimum: 0
+                  maximum: 100
+                  default: 85
+      responses:
+        '200':
+          description: Dismissal motion document
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  document:
+                    type: string
+                    description: Full Croatian dismissal motion text
+                  grounds:
+                    type: array
+                    items:
+                      type: string
+
+  /misconduct/complaint/{caseId}:
+    post:
+      tags: [Misconduct]
+      summary: Generate complaint
+      description: |
+        Generate complaint to:
+        - State Attorney (Državno odvjetništvo)
+        - Judicial Council (Državno sudbeno vijeće)
+        - Police Internal Affairs (Unutarnja kontrola policije)
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CaseId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [complaint_type]
+              properties:
+                complaint_type:
+                  type: string
+                  enum: [state_attorney, judicial_council, police_internal_affairs]
+      responses:
+        '200':
+          description: Complaint document
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  document:
+                    type: string
+                  recipient:
+                    type: string
+                  evidence:
+                    type: array
+
+  /misconduct/appeal/{caseId}:
+    post:
+      tags: [Misconduct]
+      summary: Build appeal
+      description: |
+        Build Croatian appeals:
+        - Žalba (Regular appeal)
+        - Zaštita zakonitosti (Protection of legality)
+        - Ustavna tužba (Constitutional complaint)
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CaseId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [appeal_type]
+              properties:
+                appeal_type:
+                  type: string
+                  enum: [zalba, zastita_zakonitosti, ustavna_tuzba]
+      responses:
+        '200':
+          description: Appeal document
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  document:
+                    type: string
+                  appeal_grounds:
+                    type: array
+                    items:
+                      type: string
+
+  # Topics Endpoints
+  /topics:
+    get:
+      tags: [Topics]
+      summary: List abuse topics
+      description: |
+        List all available prosecutorial abuse topics:
+        - drug_charge_severity
+        - home_search_abuse
+        - bail_denial (planned)
+        - pretrial_detention (planned)
+        - witness_intimidation (planned)
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: List of topics
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    topic_id:
+                      type: string
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    available:
+                      type: boolean
+
+  /topics/{topic}/analyze/{caseId}:
+    post:
+      tags: [Topics]
+      summary: Analyze topic for case
+      description: Analyze specific abuse pattern for a case
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: topic
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [drug_charge_severity, home_search_abuse]
+        - $ref: '#/components/parameters/CaseId'
+      responses:
+        '200':
+          description: Topic analysis
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicAnalysis'
+
+  /topics/{topic}/statistics:
+    get:
+      tags: [Topics]
+      summary: Get topic statistics
+      description: |
+        Get statistics for an abuse pattern.
+        Example questions answered:
+        - "How many dealing charges for <30g cannabis?"
+        - "How many home search warrants for misdemeanors?"
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: topic
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: filters
+          in: query
+          schema:
+            type: object
+            properties:
+              court:
+                type: string
+              date_from:
+                type: string
+                format: date
+              date_to:
+                type: string
+                format: date
+      responses:
+        '200':
+          description: Topic statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicStatistics'
+
+  /topics/{topic}/compare-regions:
+    get:
+      tags: [Topics]
+      summary: Compare regions
+      description: |
+        Compare abuse patterns across regions.
+        Example: "Is Osijek worse than Zadar for drug overcharging?"
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: topic
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: regions
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Regional comparison
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  regions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RegionalStatistics'
+
+  # Collaboration Endpoints
+  /collaboration/solve:
+    post:
+      tags: [Collaboration]
+      summary: Solve with multi-agent team
+      description: |
+        Deploy specialist agents to solve complex legal problem:
+        - Research Specialist: Finds laws and precedents
+        - Precedent Analyst: Analyzes applicability
+        - Strategy Specialist: Develops strategy
+        - Risk Analyst: Identifies risks
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [problem]
+              properties:
+                problem:
+                  type: string
+                  description: Legal problem description
+                case_id:
+                  type: string
+                  description: Optional case ID for context
+      responses:
+        '200':
+          description: Collaboration started
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collaboration_id:
+                    type: string
+                  status:
+                    type: string
+                  agents:
+                    type: array
+                    items:
+                      type: string
+
+  /collaboration/{id}:
+    get:
+      tags: [Collaboration]
+      summary: Get collaboration details
+      description: Get full collaboration results with agent contributions
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Collaboration details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collaboration'
+
+  /collaboration/recent:
+    get:
+      tags: [Collaboration]
+      summary: Get recent collaborations
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Recent collaborations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Collaboration'
+
+  /collaboration/stats:
+    get:
+      tags: [Collaboration]
+      summary: Get collaboration statistics
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Collaboration statistics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_collaborations:
+                    type: integer
+                  successful_rate:
+                    type: number
+                  avg_duration:
+                    type: number
+
+  # Monitoring Endpoints
+  /monitoring/health:
+    get:
+      tags: [Monitoring]
+      summary: System health check
+      description: Get system health with failure rate analysis
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Health status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [healthy, degraded, unhealthy]
+                  agents:
+                    type: object
+                  queues:
+                    type: object
+                  databases:
+                    type: object
+
+  /monitoring/statistics:
+    get:
+      tags: [Monitoring]
+      summary: Get agent statistics
+      description: Statistics for research agent and decision discovery
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Agent statistics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  research_agent:
+                    type: object
+                  decision_discovery:
+                    type: object
+
+  /monitoring/recent-runs:
+    get:
+      tags: [Monitoring]
+      summary: Get recent agent runs
+      description: Recent run history for all agents
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: Recent runs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    agent_type:
+                      type: string
+                    status:
+                      type: string
+                    started_at:
+                      type: string
+                      format: date-time
+                    completed_at:
+                      type: string
+                      format: date-time
+
+  /monitoring/failed-jobs:
+    get:
+      tags: [Monitoring]
+      summary: Get failed jobs
+      description: Failed jobs for debugging
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+      responses:
+        '200':
+          description: Failed jobs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    exception:
+                      type: string
+                    failed_at:
+                      type: string
+                      format: date-time
+
+  # Graph Visualization Endpoints
+  /graph/visualize/{nodeId}:
+    get:
+      tags: [Graph]
+      summary: Visualize node with neighbors
+      description: Get node with citation network for visualization
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: nodeId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: depth
+          in: query
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+            maximum: 3
+      responses:
+        '200':
+          description: Graph data for visualization
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nodes:
+                    type: array
+                    items:
+                      type: object
+                  edges:
+                    type: array
+                    items:
+                      type: object
+
+  /graph/subgraph:
+    post:
+      tags: [Graph]
+      summary: Get filtered subgraph
+      description: Extract subgraph by node type and properties
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                node_types:
+                  type: array
+                  items:
+                    type: string
+                filters:
+                  type: object
+      responses:
+        '200':
+          description: Subgraph data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nodes:
+                    type: array
+                  edges:
+                    type: array
+
+  /graph/stats:
+    get:
+      tags: [Graph]
+      summary: Get graph statistics
+      description: Node and relationship counts, graph topology metrics
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Graph statistics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  node_count:
+                    type: integer
+                  relationship_count:
+                    type: integer
+                  node_types:
+                    type: object
+                  relationship_types:
+                    type: object
+
+  # Honeypot Endpoints
+  /admin/login:
+    post:
+      tags: [Honeypot]
+      summary: Fake admin login (honeypot)
+      description: Honeypot endpoint - logs attacker attempts
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '401':
+          description: Unauthorized (fake response)
+
+  /admin/users:
+    get:
+      tags: [Honeypot]
+      summary: Fake admin users endpoint (honeypot)
+      security: []
+      responses:
+        '403':
+          description: Forbidden (fake response)
+
+  /.env:
+    get:
+      tags: [Honeypot]
+      summary: Fake env file (honeypot)
+      description: Honeypot for attackers looking for .env files
+      security: []
+      responses:
+        '404':
+          description: Not found (fake response)
+
+  /phpinfo:
+    get:
+      tags: [Honeypot]
+      summary: Fake phpinfo (honeypot)
+      security: []
+      responses:
+        '403':
+          description: Forbidden (fake response)
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: API token authentication via Authorization header
+
+    McpToken:
+      type: apiKey
+      in: header
+      name: X-MCP-Token
+      description: MCP-specific authentication token
+
+  parameters:
+    CaseId:
+      name: caseId
+      in: path
+      required: true
+      description: Unique case identifier
+      schema:
+        type: string
+
+    AssistantId:
+      name: assistantId
+      in: path
+      required: true
+      description: OpenAI assistant ID
+      schema:
+        type: string
+
+    VectorStoreId:
+      name: storeId
+      in: path
+      required: true
+      description: Vector store ID
+      schema:
+        type: string
+
+  responses:
+    Unauthorized:
+      description: Unauthorized - Invalid or missing API token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Unauthorized
+
+    TooManyRequests:
+      description: Too many requests - Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Too many requests
+              retry_after:
+                type: integer
+                description: Seconds to wait before retry
+
+  schemas:
+    # OpenAI Schemas
+    OpenAIRequest:
+      type: object
+      required: [prompt]
+      properties:
+        prompt:
+          type: string
+        model:
+          type: string
+          default: gpt-4
+        max_tokens:
+          type: integer
+        temperature:
+          type: number
+          format: float
+
+    OpenAIResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        choices:
+          type: array
+          items:
+            type: object
+            properties:
+              text:
+                type: string
+              index:
+                type: integer
+
+    ChatCompletionRequest:
+      type: object
+      required: [messages]
+      properties:
+        messages:
+          type: array
+          items:
+            type: object
+            properties:
+              role:
+                type: string
+                enum: [system, user, assistant, function]
+              content:
+                type: string
+              name:
+                type: string
+        model:
+          type: string
+          default: gpt-4
+        functions:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAIFunction'
+        temperature:
+          type: number
+        max_tokens:
+          type: integer
+
+    ChatCompletionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        choices:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: object
+                properties:
+                  role:
+                    type: string
+                  content:
+                    type: string
+                  function_call:
+                    type: object
+              finish_reason:
+                type: string
+
+    EmbeddingRequest:
+      type: object
+      required: [input]
+      properties:
+        input:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+        model:
+          type: string
+          default: text-embedding-ada-002
+
+    EmbeddingResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              embedding:
+                type: array
+                items:
+                  type: number
+              index:
+                type: integer
+
+    FileObject:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        bytes:
+          type: integer
+        created_at:
+          type: integer
+        filename:
+          type: string
+        purpose:
+          type: string
+
+    Assistant:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        model:
+          type: string
+        instructions:
+          type: string
+        tools:
+          type: array
+        file_ids:
+          type: array
+          items:
+            type: string
+
+    AssistantCreate:
+      type: object
+      required: [model]
+      properties:
+        model:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        instructions:
+          type: string
+        tools:
+          type: array
+
+    VectorStore:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        created_at:
+          type: integer
+        file_counts:
+          type: object
+
+    OpenAIFunction:
+      type: object
+      required: [name, description, parameters]
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        parameters:
+          type: object
+
+    # Ingestion Schemas
+    IngestTextRequest:
+      type: object
+      required: [text]
+      properties:
+        text:
+          type: string
+        metadata:
+          type: object
+        corpus:
+          type: string
+          enum: [laws, decisions, cases]
+
+    IngestResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        chunks_created:
+          type: integer
+
+    LawDocument:
+      type: object
+      required: [doc_id, title, content]
+      properties:
+        doc_id:
+          type: string
+          description: Document identifier (e.g., nn-2021-12-1234)
+        title:
+          type: string
+        content:
+          type: string
+        law_code:
+          type: string
+          description: Law code (e.g., KZ, ZKP, ZSZD)
+        law_number:
+          type: string
+        metadata:
+          type: object
+
+    # Upload Schemas
+    UploadResponse:
+      type: object
+      properties:
+        file_id:
+          type: string
+        filename:
+          type: string
+        size:
+          type: integer
+        mime_type:
+          type: string
+        url:
+          type: string
+
+    # Search Schemas
+    SearchRequest:
+      type: object
+      required: [query]
+      properties:
+        query:
+          type: string
+        limit:
+          type: integer
+          default: 10
+        filters:
+          type: object
+        include_embeddings:
+          type: boolean
+          default: false
+
+    SearchResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              score:
+                type: number
+              content:
+                type: string
+              metadata:
+                type: object
+        total:
+          type: integer
+        query_time:
+          type: number
+
+    UnifiedSearchRequest:
+      allOf:
+        - $ref: '#/components/schemas/SearchRequest'
+        - type: object
+          properties:
+            corpora:
+              type: array
+              items:
+                type: string
+                enum: [laws, decisions, cases]
+              default: [laws, decisions]
+
+    UnifiedSearchResponse:
+      type: object
+      properties:
+        laws:
+          type: array
+        decisions:
+          type: array
+        cases:
+          type: array
+        total:
+          type: integer
+
+    CitationSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/SearchResponse'
+        - type: object
+          properties:
+            citations:
+              type: object
+              properties:
+                citing:
+                  type: array
+                cited_by:
+                  type: array
+
+    # MCP Tool Schemas
+    LawSearchRequest:
+      type: object
+      required: [query]
+      properties:
+        query:
+          type: string
+        law_codes:
+          type: array
+          items:
+            type: string
+          description: Filter by law codes (KZ, ZKP, etc.)
+        limit:
+          type: integer
+          default: 10
+
+    LawSearchResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/LawArticle'
+        total:
+          type: integer
+
+    LawArticle:
+      type: object
+      properties:
+        doc_id:
+          type: string
+        law_code:
+          type: string
+        article_number:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        metadata:
+          type: object
+
+    DecisionSearchRequest:
+      type: object
+      required: [query]
+      properties:
+        query:
+          type: string
+        court:
+          type: string
+          description: Filter by court name
+        date_from:
+          type: string
+          format: date
+        date_to:
+          type: string
+          format: date
+        limit:
+          type: integer
+          default: 10
+
+    DecisionSearchResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CourtDecision'
+        total:
+          type: integer
+
+    CourtDecision:
+      type: object
+      properties:
+        id:
+          type: string
+        case_number:
+          type: string
+        court:
+          type: string
+        date:
+          type: string
+          format: date
+        summary:
+          type: string
+        full_text:
+          type: string
+        citations:
+          type: array
+          items:
+            type: string
+
+    CaseSearchRequest:
+      type: object
+      required: [query]
+      properties:
+        query:
+          type: string
+        status:
+          type: string
+          enum: [open, closed, appealed]
+        limit:
+          type: integer
+          default: 10
+
+    CaseSearchResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+        total:
+          type: integer
+
+    # Analytics Schemas
+    OutcomePrediction:
+      type: object
+      properties:
+        case_id:
+          type: string
+        predicted_outcome:
+          type: string
+          enum: [acquittal, conviction, dismissal, settlement]
+        confidence:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+        factors:
+          type: array
+          items:
+            type: object
+            properties:
+              factor:
+                type: string
+              impact:
+                type: number
+
+    # Strategy Schemas
+    LegalStrategy:
+      type: object
+      properties:
+        case_id:
+          type: string
+        primary_arguments:
+          type: array
+          items:
+            type: string
+        risks:
+          type: array
+          items:
+            type: string
+        recommended_actions:
+          type: array
+          items:
+            type: string
+
+    LegalArgument:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [statutory, constitutional, precedential]
+        issue:
+          type: string
+          description: IRAC - Issue
+        rule:
+          type: string
+          description: IRAC - Rule
+        application:
+          type: string
+          description: IRAC - Application
+        conclusion:
+          type: string
+          description: IRAC - Conclusion
+        supporting_citations:
+          type: array
+          items:
+            type: string
+
+    RiskAssessment:
+      type: object
+      properties:
+        overall_risk:
+          type: string
+          enum: [low, medium, high, critical]
+        risk_factors:
+          type: array
+          items:
+            type: object
+            properties:
+              category:
+                type: string
+              severity:
+                type: integer
+              description:
+                type: string
+              mitigation:
+                type: string
+
+    # Misconduct Schemas
+    MisconductAnalysis:
+      type: object
+      properties:
+        case_id:
+          type: string
+        misconduct_found:
+          type: boolean
+        types:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum: [witness_tampering, evidence_suppression, false_statements, improper_arguments, selective_prosecution, conflict_of_interest]
+              severity:
+                type: integer
+                minimum: 0
+                maximum: 100
+              description:
+                type: string
+              evidence:
+                type: array
+                items:
+                  type: string
+        overall_severity:
+          type: integer
+        patterns:
+          type: array
+
+    # Topics Schemas
+    TopicAnalysis:
+      type: object
+      properties:
+        topic_id:
+          type: string
+        case_id:
+          type: string
+        abuse_detected:
+          type: boolean
+        severity:
+          type: integer
+        details:
+          type: object
+
+    TopicStatistics:
+      type: object
+      properties:
+        topic_id:
+          type: string
+        total_cases:
+          type: integer
+        abuse_rate:
+          type: number
+        by_court:
+          type: object
+        by_period:
+          type: object
+
+    RegionalStatistics:
+      type: object
+      properties:
+        region:
+          type: string
+        case_count:
+          type: integer
+        abuse_rate:
+          type: number
+        avg_severity:
+          type: number
+
+    # Collaboration Schemas
+    Collaboration:
+      type: object
+      properties:
+        id:
+          type: string
+        problem:
+          type: string
+        status:
+          type: string
+          enum: [pending, in_progress, completed, failed]
+        agents:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              status:
+                type: string
+              contribution:
+                type: string
+        final_solution:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        completed_at:
+          type: string
+          format: date-time
+
+    # Reasoning Schemas
+    ConflictAnalysis:
+      type: object
+      properties:
+        conflicts:
+          type: array
+          items:
+            type: object
+            properties:
+              provision_a:
+                type: string
+              provision_b:
+                type: string
+              conflict_type:
+                type: string
+              description:
+                type: string
+
+    ConflictResolution:
+      type: object
+      properties:
+        conflict_id:
+          type: string
+        resolution_rule:
+          type: string
+          enum: [lex_superior, lex_specialis, lex_posterior]
+        prevailing_provision:
+          type: string
+        explanation:
+          type: string
+
+    # Research Schemas
+    ResearchRun:
+      type: object
+      properties:
+        id:
+          type: string
+        query:
+          type: string
+        status:
+          type: string
+          enum: [pending, running, completed, failed]
+        findings:
+          type: array
+          items:
+            type: object
+        started_at:
+          type: string
+          format: date-time
+        completed_at:
+          type: string
+          format: date-time

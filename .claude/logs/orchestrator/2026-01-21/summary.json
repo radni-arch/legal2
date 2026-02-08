@@ -1,0 +1,25 @@
+{
+  "date": "2026-01-21",
+  "sessions": [
+{
+  "session_id": "1768967517-254-254",
+  "agent_type": "orchestrator",
+  "start_time": "2026-01-21T03:51:57+00:00",
+  "end_time": "2026-01-21T04:00:02+00:00",
+  "duration_minutes": 8,
+  "outcome": "success",
+  "summary": "Session ended normally",
+  "log_file": "/home/user/ai-legal-war-machine/.claude/logs/orchestrator/2026-01-21/orchestrator-1768967517-254-254.log"
+}
+  ]
+,{
+  "session_id": "1768993804-232-232",
+  "agent_type": "orchestrator",
+  "start_time": "2026-01-21T11:10:04+00:00",
+  "end_time": "2026-01-21T11:18:50+00:00",
+  "duration_minutes": 8,
+  "outcome": "success",
+  "summary": "Session ended normally",
+  "log_file": "/home/user/ai-legal-war-machine/.claude/logs/orchestrator/2026-01-21/orchestrator-1768993804-232-232.log"
+}
+]

@@ -1,0 +1,69 @@
+{
+  "test_id": "risk_low_004",
+  "category": "low-risk",
+  "expected_risk_level": "low",
+  "expected_score_range": [22, 46],
+  "description": "Clear proportionality violation with Constitutional Court support",
+
+  "input": {
+    "problem_statement": "Client charged with possessing 1g marijuana. Police conducted 5-hour search of entire home, seized computers and documents. Clear disproportionality. Constitutional Court precedent supports exclusion.",
+    "legal_arguments": [
+      {
+        "title": "Disproportionate search violates constitutional rights",
+        "argument": "5-hour whole-home search for 1g marijuana violates proportionality principle",
+        "strength_score": 86,
+        "legal_basis": [
+          "Ustav RH Članak 34",
+          "ZKP Članak 197",
+          "Constitutional Court 2023 proportionality precedent"
+        ],
+        "potential_counterarguments": [
+          "Police may claim searching for larger quantity",
+          "Weak argument - no probable cause for larger amount"
+        ]
+      }
+    ],
+    "strongest_precedents": [
+      {
+        "court": "Ustavni sud RH",
+        "applicability_score": 91,
+        "binding_authority": "binding",
+        "favorable": true,
+        "case_number": "U-III-2145/2023"
+      }
+    ],
+    "strategic_recommendations": {
+      "procedural_steps": [
+        "File motion to suppress all evidence",
+        "Emphasize small quantity vs extensive search",
+        "Cite Constitutional Court precedent",
+        "If granted, likely dismissal"
+      ]
+    }
+  },
+
+  "expected_output": {
+    "overall_risk_score": {
+      "score": 30,
+      "level": "low"
+    },
+    "argument_risks": [
+      {
+        "argument_index": 0,
+        "risk_level": "low",
+        "impact_if_fails": "high",
+        "weaknesses": [
+          "Prosecution may argue they suspected larger amount"
+        ],
+        "mitigation_suggestions": [
+          "Show no probable cause existed for larger amount",
+          "Emphasize actual find was only 1g"
+        ]
+      }
+    ],
+    "adverse_precedents": [],
+    "procedural_risks": []
+  },
+
+  "validation_notes": "Should score 22-46 (low risk) due to extreme disproportionality (5hr search for 1g), binding Constitutional Court precedent (2023) directly on point (91% match), clear constitutional violation, weak prosecution counter."
+}

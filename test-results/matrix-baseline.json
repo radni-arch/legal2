@@ -1,0 +1,22 @@
+{
+  "generated_at": "2025-12-18T00:49:39+00:00",
+  "versions": {
+    "php": "8.4.15",
+    "node": "22.21.1",
+    "npm": "10.9.4",
+    "composer": "2.8.12",
+    "psql": "16.11"
+  },
+  "expected": {
+    "php_major": "8",
+    "php_minor": "2",
+    "node_major": "18"
+  },
+  "php_extensions": ["curl","gd","mbstring","pdo_pgsql","xml","zip"],
+  "checks": {
+    "vendor_exists": true,
+    "env_exists": true,
+    "chrome_found": true,
+    "chromedriver_found": true
+  }
+}

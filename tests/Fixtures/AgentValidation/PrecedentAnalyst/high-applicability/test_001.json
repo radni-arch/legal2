@@ -1,0 +1,49 @@
+{
+  "test_id": "precedent_high_001",
+  "category": "high-applicability",
+  "expected_score_range": [85, 95],
+  "description": "Supreme Court ruling on proportionality of home search in minor drug offense",
+
+  "input": {
+    "problem_statement": "Client charged with possession of small amount of marijuana (2g) after extensive home search lasting 4 hours. Question: Was the search warrant proportionate to the suspected offense?",
+    "researched_decisions": [
+      {
+        "ecli": "HR:VSRH:2022:1543",
+        "court": "Vrhovni sud Republike Hrvatske",
+        "case_number": "I Kž-789/2022",
+        "decision_date": "2022-11-15",
+        "title": "Proporcionalnost pretresa stana kod lakog kaznenog djela posjedovanja droge",
+        "summary": "Vrhovni sud je ukinuo presudu zbog povrede načela proporcionalnosti. Sud je utvrdio da četverosatni pretres cijelog stana radi pronalaska male količine marihuane predstavlja neproporcionalan zahvat u pravo na privatnost zaštićeno ZKP-om i Ustavom RH. Dokazi prikupljeni prekomjernim pretresom isključeni su iz dokaznog postupka."
+      }
+    ],
+    "researched_laws": [
+      {
+        "law_number": "ZKP Članak 197",
+        "title": "Pretres stana",
+        "content": "Pretres stana može se odrediti samo ako je to nužno za otkrivanje počinitelja ili dokaza kaznenog djela. Pretres mora biti proporcionalan težini kaznenog djela i ne smije predstavljati prekomjeran zahvat u pravo na privatnost.",
+        "similarity": 0.92
+      },
+      {
+        "law_number": "Ustav RH Članak 34",
+        "title": "Nepovredivost stana",
+        "content": "Stan je nepovredi. Zabranjeno je nezakonito ili proizvoljno ulaženje ili pretraživanje stana ili drugih prostorija. Pretres stana može odrediti sud ako je to nužno za kazneni postupak.",
+        "similarity": 0.88
+      }
+    ]
+  },
+
+  "expected_output": {
+    "applicability_score": 92,
+    "binding_authority": "binding",
+    "key_factors": [
+      "načelo proporcionalnosti",
+      "lako kazneno djelo",
+      "prekomjeran pretres",
+      "isključenje dokaza"
+    ],
+    "favorable": true,
+    "reasoning": "Vrhovno sudska presuda s identičnom činjeničnom podlogom (mala količina droge + prekomjeran pretres). Binding authority. Jasna primjena načela proporcionalnosti. Direktno primenljiva na ovaj slučaj."
+  },
+
+  "validation_notes": "Should score 90+ due to Supreme Court binding authority, near-identical facts (minor drug offense + excessive search), recent decision (2022), and favorable outcome with clear proportionality analysis."
+}

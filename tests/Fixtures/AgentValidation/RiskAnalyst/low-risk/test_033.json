@@ -1,0 +1,71 @@
+{
+  "test_id": "risk_low_003",
+  "category": "low-risk",
+  "expected_risk_level": "low",
+  "expected_score_range": [15, 40],
+  "description": "Procedural violation by prosecution with clear legal remedy",
+
+  "input": {
+    "problem_statement": "Client's rights violated - police interrogated for 6 hours without breaks, lawyer denied access for 2 hours after request. Confession obtained. Clear ZKP violations.",
+    "legal_arguments": [
+      {
+        "title": "Confession obtained through rights violations",
+        "argument": "Multiple procedural violations (excessive interrogation, denial of counsel) mandate exclusion",
+        "strength_score": 90,
+        "legal_basis": [
+          "ZKP Članak 64 - right to counsel",
+          "Constitutional Court precedent on interrogation limits",
+          "Supreme Court exclusionary rule"
+        ],
+        "potential_counterarguments": [
+          "Prosecution may claim confession was voluntary despite violations"
+        ]
+      }
+    ],
+    "strongest_precedents": [
+      {
+        "court": "Ustavni sud RH",
+        "applicability_score": 88,
+        "binding_authority": "binding",
+        "favorable": true
+      },
+      {
+        "court": "Vrhovni sud RH",
+        "applicability_score": 85,
+        "binding_authority": "binding",
+        "favorable": true
+      }
+    ],
+    "strategic_recommendations": {
+      "procedural_steps": [
+        "File motion to suppress confession",
+        "Document timeline of rights violations",
+        "Cite binding precedents",
+        "If granted and no other evidence, move to dismiss"
+      ]
+    }
+  },
+
+  "expected_output": {
+    "overall_risk_score": {
+      "score": 22,
+      "level": "low"
+    },
+    "argument_risks": [
+      {
+        "argument_index": 0,
+        "risk_level": "low",
+        "impact_if_fails": "critical",
+        "weaknesses": [],
+        "mitigation_suggestions": [
+          "Document precise timeline",
+          "Obtain interrogation logs"
+        ]
+      }
+    ],
+    "adverse_precedents": [],
+    "procedural_risks": []
+  },
+
+  "validation_notes": "Should score 15-40 (low risk) due to clear multiple rights violations (6hr interrogation + counsel denial), binding Constitutional Court + Supreme Court precedents mandating exclusion, strong legal basis, no viable prosecution defenses."
+}

@@ -1,0 +1,391 @@
+{
+  "dashboard": {
+    "title": "Graph Data Quality",
+    "description": "Sprint 8.4: Monitors Neo4j graph data quality including duplicates, orphans, and consistency scores",
+    "tags": ["neo4j", "data-quality", "graph", "sprint-8-4"],
+    "timezone": "browser",
+    "schemaVersion": 39,
+    "version": 1,
+    "refresh": "5m",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Overall Quality Score",
+        "type": "gauge",
+        "description": "Overall graph data quality score (0-100). Target: >95%",
+        "targets": [
+          {
+            "expr": "graph_quality_score",
+            "refId": "A",
+            "legendFormat": "Quality Score"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 8,
+          "x": 0,
+          "y": 0
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "min": 0,
+            "max": 100,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "value": 0,
+                  "color": "red"
+                },
+                {
+                  "value": 85,
+                  "color": "yellow"
+                },
+                {
+                  "value": 95,
+                  "color": "green"
+                }
+              ]
+            }
+          }
+        },
+        "options": {
+          "showThresholdLabels": true,
+          "showThresholdMarkers": true
+        }
+      },
+      {
+        "id": 2,
+        "title": "Duplicate Node Count",
+        "type": "stat",
+        "description": "Number of duplicate nodes detected in the graph",
+        "targets": [
+          {
+            "expr": "graph_duplicate_nodes_total",
+            "refId": "A",
+            "legendFormat": "Duplicate Nodes"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 8,
+          "x": 8,
+          "y": 0
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "value": 0,
+                  "color": "green"
+                },
+                {
+                  "value": 10,
+                  "color": "yellow"
+                },
+                {
+                  "value": 50,
+                  "color": "red"
+                }
+              ]
+            },
+            "mappings": [
+              {
+                "type": "special",
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "0"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "orientation": "auto"
+        }
+      },
+      {
+        "id": 3,
+        "title": "Orphan Node Count",
+        "type": "stat",
+        "description": "Number of orphan nodes (nodes with no relationships)",
+        "targets": [
+          {
+            "expr": "graph_orphan_nodes_total",
+            "refId": "A",
+            "legendFormat": "Orphan Nodes"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 8,
+          "x": 16,
+          "y": 0
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "value": 0,
+                  "color": "green"
+                },
+                {
+                  "value": 20,
+                  "color": "yellow"
+                },
+                {
+                  "value": 100,
+                  "color": "red"
+                }
+              ]
+            },
+            "mappings": [
+              {
+                "type": "special",
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "0"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "orientation": "auto"
+        }
+      },
+      {
+        "id": 4,
+        "title": "Consistency Score",
+        "type": "gauge",
+        "description": "Data consistency score based on required properties presence",
+        "targets": [
+          {
+            "expr": "graph_consistency_score",
+            "refId": "A",
+            "legendFormat": "Consistency Score"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 8,
+          "x": 0,
+          "y": 8
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "min": 0,
+            "max": 100,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "value": 0,
+                  "color": "red"
+                },
+                {
+                  "value": 80,
+                  "color": "yellow"
+                },
+                {
+                  "value": 95,
+                  "color": "green"
+                }
+              ]
+            }
+          }
+        },
+        "options": {
+          "showThresholdLabels": true,
+          "showThresholdMarkers": true
+        }
+      },
+      {
+        "id": 5,
+        "title": "Duplicate Score Trend",
+        "type": "timeseries",
+        "description": "Duplicate score over time (higher is better)",
+        "targets": [
+          {
+            "expr": "graph_duplicate_score",
+            "refId": "A",
+            "legendFormat": "Duplicate Score %"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 8,
+          "x": 8,
+          "y": 8
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "min": 0,
+            "max": 100,
+            "custom": {
+              "fillOpacity": 10,
+              "lineWidth": 2,
+              "showPoints": "auto"
+            }
+          }
+        }
+      },
+      {
+        "id": 6,
+        "title": "Orphan Score Trend",
+        "type": "timeseries",
+        "description": "Orphan score over time (higher is better)",
+        "targets": [
+          {
+            "expr": "graph_orphan_score",
+            "refId": "A",
+            "legendFormat": "Orphan Score %"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 8,
+          "x": 16,
+          "y": 8
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "min": 0,
+            "max": 100,
+            "custom": {
+              "fillOpacity": 10,
+              "lineWidth": 2,
+              "showPoints": "auto"
+            }
+          }
+        }
+      },
+      {
+        "id": 7,
+        "title": "Duplicate Groups by Type",
+        "type": "table",
+        "description": "Breakdown of duplicate groups by node type",
+        "targets": [
+          {
+            "expr": "graph_duplicate_groups_by_type",
+            "refId": "A",
+            "format": "table"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 16
+        }
+      },
+      {
+        "id": 8,
+        "title": "Orphan Nodes by Type",
+        "type": "table",
+        "description": "Breakdown of orphan nodes by type",
+        "targets": [
+          {
+            "expr": "graph_orphan_nodes_by_type",
+            "refId": "A",
+            "format": "table"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 16
+        }
+      },
+      {
+        "id": 9,
+        "title": "Quality Check Execution Time",
+        "type": "timeseries",
+        "description": "Time taken to run quality checks",
+        "targets": [
+          {
+            "expr": "graph_quality_check_duration_seconds",
+            "refId": "A",
+            "legendFormat": "Check Duration"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 24
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "s",
+            "custom": {
+              "fillOpacity": 10,
+              "lineWidth": 2,
+              "showPoints": "auto"
+            }
+          }
+        }
+      },
+      {
+        "id": 10,
+        "title": "Total Graph Nodes",
+        "type": "stat",
+        "description": "Total number of nodes in Neo4j graph",
+        "targets": [
+          {
+            "expr": "graph_total_nodes",
+            "refId": "A",
+            "legendFormat": "Total Nodes"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 24
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "value": 0,
+                  "color": "blue"
+                }
+              ]
+            }
+          }
+        },
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "orientation": "auto"
+        }
+      }
+    ]
+  }
+}

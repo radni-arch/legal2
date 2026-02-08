@@ -1,0 +1,84 @@
+# Logrotate configuration for AI Legal War Machine
+#
+# Installation:
+#   sudo cp docs/server-config/logrotate/ai-legal-war-machine /etc/logrotate.d/
+#   sudo chmod 644 /etc/logrotate.d/ai-legal-war-machine
+#
+# Test configuration:
+#   sudo logrotate -d /etc/logrotate.d/ai-legal-war-machine
+#
+# Force rotation:
+#   sudo logrotate -f /etc/logrotate.d/ai-legal-war-machine
+
+# Laravel application logs
+/var/www/ai-legal-war-machine/storage/logs/*.log {
+    daily
+    rotate 30
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 0640 www-data www-data
+    sharedscripts
+    postrotate
+        # Signal PHP-FPM to reopen log files if needed
+        if [ -f /var/run/php/php8.2-fpm.pid ]; then
+            kill -USR1 $(cat /var/run/php/php8.2-fpm.pid) 2>/dev/null || true
+        fi
+    endscript
+}
+
+# Laravel worker/queue logs (if using separate log files)
+/var/www/ai-legal-war-machine/storage/logs/worker*.log {
+    daily
+    rotate 30
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 0640 www-data www-data
+}
+
+# Laravel scheduler logs
+/var/www/ai-legal-war-machine/storage/logs/scheduler*.log {
+    daily
+    rotate 14
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 0640 www-data www-data
+}
+
+# Laravel Reverb (WebSocket) logs
+/var/www/ai-legal-war-machine/storage/logs/reverb*.log {
+    daily
+    rotate 14
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 0640 www-data www-data
+}
+
+# Backup script logs
+/var/log/backup-*.log {
+    weekly
+    rotate 8
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 0640 root root
+}
+
+# Neo4j setup logs (if stored centrally)
+/var/log/neo4j-setup*.log {
+    weekly
+    rotate 4
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 0640 root root
+}

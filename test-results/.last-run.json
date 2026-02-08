@@ -1,0 +1,20 @@
+{
+  "suite": "focused",
+  "target": "VectorStoreManagementIntegrationTest",
+  "last_run": "2026-02-08T03:11:44Z",
+  "status": "failed",
+  "exit_code": 255,
+  "log_file": "test-logs/VectorStoreManagementIntegrationTest-results.txt",
+  "stats": {
+    "tests": 0,
+    "failures": 0,
+    "errors": 0
+  },
+  "retry": {
+    "enabled": true,
+    "attempts": 1,
+    "total_retries": 0,
+    "hard_cap": 2,
+    "summary": "Failed (no retry: No retry policy matches)"
+  }
+}

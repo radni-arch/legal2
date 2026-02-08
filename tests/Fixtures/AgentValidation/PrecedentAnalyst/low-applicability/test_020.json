@@ -1,0 +1,44 @@
+{
+  "test_id": "precedent_low_005",
+  "category": "low-applicability",
+  "expected_score_range": [25, 48],
+  "description": "Unfavorable precedent easily distinguished on facts",
+
+  "input": {
+    "problem_statement": "Client's statement to police was not recorded. Prosecution claims oral confession. Question: Should oral confession be excluded?",
+    "researched_decisions": [
+      {
+        "ecli": "HR:ŽSZG:2021:K-789",
+        "court": "Županijski sud u Zagrebu",
+        "case_number": "K-789/2021",
+        "decision_date": "2021-11-10",
+        "title": "Prihvaćanje usmenog iskaza bez snimke",
+        "summary": "Županijski sud prihvatio usmeno priznanje koje nije bilo snimljeno jer su postojala dva policajca svjedoka i okrivljenik je kasnije potvrdio iskaz pred sucem. U našem slučaju, klijent poriče da je dao ikakav iskaz i nema potvrde pred sucem. Ključne razlikovne činjenice."
+      }
+    ],
+    "researched_laws": [
+      {
+        "law_number": "ZKP Članak 234",
+        "title": "Zapisnik o ispitivanju",
+        "content": "Ispitivanje treba biti dokumentirano, ali zakon ne zahtijeva obvezno snimanje.",
+        "similarity": 0.63
+      }
+    ]
+  },
+
+  "expected_output": {
+    "applicability_score": 36,
+    "binding_authority": "persuasive",
+    "key_factors": [
+      "različite činjenice",
+      "dva svjedoka policajca vs naša priča",
+      "potvrda pred sucem vs poricanje",
+      "lako razlikovljivo",
+      "nepovoljan ishod ali različit"
+    ],
+    "favorable": false,
+    "reasoning": "Županijski sud (persuasive). Nepovoljan ishod ali lako razlikovljiv na činjenicama. U presudi postojali 2 svjedoka i kasnija potvrda - u našem slučaju ne postoji. Jasne razlikovne okolnosti omogućuju argument da presuda nije primjenjiva."
+  },
+
+  "validation_notes": "Should score 25-48 due to persuasive authority, unfavorable outcome, but easily distinguishable facts (presence of witnesses + judicial confirmation vs denial without confirmation)."
+}

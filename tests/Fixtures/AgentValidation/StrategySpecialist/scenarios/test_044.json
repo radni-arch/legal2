@@ -1,0 +1,57 @@
+{
+  "test_id": "strategy_weak_002",
+  "description": "Weak position: Strong prosecution evidence with limited defense",
+
+  "input": {
+    "problem_statement": "Client charged with drug trafficking. Police found 500g cocaine in client's apartment during lawful search. Client admits residence but denies knowledge. No viable defense theory.",
+    "strongest_precedents": [],
+    "analyzed_laws": [
+      {
+        "law_number": "Zakon o suzbijanju zlouporabe opojnih droga",
+        "title": "Neovlaštena proizvodnja i promet",
+        "relevance_score": 0.96,
+        "applicability": "directly_applicable"
+      },
+      {
+        "law_number": "KZ Članak 196",
+        "title": "Neovlašteni promet opojnim drogama",
+        "relevance_score": 0.94,
+        "applicability": "directly_applicable"
+      }
+    ]
+  },
+
+  "expected_output": {
+    "arguments_count_range": [2, 3],
+    "primary_strategy_theme": "mitigation and cooperation",
+    "success_probability_range": [0.08, 0.20],
+    "should_include": {
+      "settlement_recommendation": true,
+      "procedural_steps": [
+        "explore cooperation agreement with prosecution",
+        "negotiate plea for reduced charge/sentence",
+        "prepare comprehensive mitigation package",
+        "substance abuse evaluation if applicable",
+        "gather family/community support letters"
+      ],
+      "evidence_needed": [
+        "substance abuse assessment",
+        "employment history",
+        "family support documentation",
+        "rehabilitation willingness",
+        "any information valuable for cooperation"
+      ],
+      "argument_titles": [
+        "Lack of direct evidence client knew about drugs (very weak)",
+        "First-time offense warrants leniency",
+        "Cooperation with authorities merits consideration"
+      ]
+    },
+    "expected_argument_strengths": {
+      "average_range": [20, 38],
+      "strongest_argument_score_min": 32
+    }
+  },
+
+  "validation_notes": "Should generate 2-3 very weak arguments (avg 20-38), strongly recommend plea with cooperation, extremely low success probability 8-20%, focus on sentencing mitigation, practical about difficult position."
+}

@@ -1,0 +1,71 @@
+{
+  "test_id": "strategy_strong_001",
+  "description": "Strong position: Self-defense with multiple binding precedents",
+
+  "input": {
+    "problem_statement": "Client charged with assault after defending against knife attack. Multiple witnesses confirm attacker threatened with knife first.",
+    "strongest_precedents": [
+      {
+        "court": "Vrhovni sud RH",
+        "applicability_score": 88,
+        "binding_authority": "binding",
+        "case_number": "I Kž-673/2021",
+        "favorable": true
+      },
+      {
+        "court": "Vrhovni sud RH",
+        "applicability_score": 85,
+        "binding_authority": "binding",
+        "case_number": "I Kž-892/2020",
+        "favorable": true
+      }
+    ],
+    "analyzed_laws": [
+      {
+        "law_number": "KZ Članak 18",
+        "title": "Nužna obrana",
+        "relevance_score": 0.95,
+        "applicability": "directly_applicable"
+      },
+      {
+        "law_number": "KZ Članak 19",
+        "title": "Prekoračenje nužne obrane",
+        "relevance_score": 0.88,
+        "applicability": "potentially_applicable"
+      }
+    ]
+  },
+
+  "expected_output": {
+    "arguments_count_range": [4, 5],
+    "primary_strategy_theme": "self-defense",
+    "success_probability_range": [0.70, 0.85],
+    "should_include": {
+      "settlement_recommendation": false,
+      "procedural_steps": [
+        "file motion to dismiss based on self-defense",
+        "gather witness statements",
+        "obtain medical records showing threat severity",
+        "prepare expert testimony on proportionality"
+      ],
+      "evidence_needed": [
+        "witness statements",
+        "medical records",
+        "photos of injuries",
+        "weapon photos if available"
+      ],
+      "argument_titles": [
+        "Clear self-defense under KZ Članak 18",
+        "Proportionate response to deadly threat",
+        "Supreme Court precedents support acquittal",
+        "Multiple witness corroboration"
+      ]
+    },
+    "expected_argument_strengths": {
+      "average_range": [75, 90],
+      "strongest_argument_score_min": 85
+    }
+  },
+
+  "validation_notes": "Should generate 4-5 strong arguments (avg 75-90), recommend against settlement due to strong position, success probability 70-85%, emphasize multiple binding precedents and clear self-defense law, aggressive defense strategy."
+}

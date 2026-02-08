@@ -1,0 +1,66 @@
+{
+  "test_id": "risk_medium_004",
+  "category": "medium-risk",
+  "expected_risk_level": "medium",
+  "expected_score_range": [54, 69],
+  "description": "Mixed witness testimony with credibility issues on both sides",
+
+  "input": {
+    "problem_statement": "Client charged with battery. Two witnesses support prosecution (victim and victim's friend). One witness supports defense (bystander). All witnesses have some credibility issues.",
+    "legal_arguments": [
+      {
+        "title": "Self-defense",
+        "argument": "Victim initiated physical confrontation, client defended",
+        "strength_score": 58,
+        "legal_basis": ["KZ Članak 18 - Nužna obrana", "Bystander witness"],
+        "potential_counterarguments": [
+          "Victim and friend both claim client started it",
+          "Client has prior assault charge (dismissed)",
+          "Injuries suggest excessive response"
+        ]
+      }
+    ],
+    "strongest_precedents": [
+      {
+        "court": "Županijski sud",
+        "applicability_score": 65,
+        "binding_authority": "persuasive"
+      }
+    ],
+    "strategic_recommendations": {
+      "procedural_steps": [
+        "Impeach victim's friend (bias)",
+        "Bolster bystander credibility",
+        "Obtain medical records re: proportionality"
+      ]
+    }
+  },
+
+  "expected_output": {
+    "overall_risk_score": {
+      "score": 61,
+      "level": "medium"
+    },
+    "argument_risks": [
+      {
+        "argument_index": 0,
+        "risk_level": "medium",
+        "impact_if_fails": "high",
+        "weaknesses": [
+          "Outnumbered 2-1 on witnesses",
+          "Prior assault charge may prejudice",
+          "Proportionality question"
+        ],
+        "mitigation_suggestions": [
+          "Emphasize friend's bias toward victim",
+          "Challenge proportionality with medical evidence",
+          "Note prior charge was dismissed"
+        ]
+      }
+    ],
+    "adverse_precedents": [],
+    "procedural_risks": []
+  },
+
+  "validation_notes": "Should score 54-69 (medium risk) due to mixed witness accounts (2v1), some credibility issues all around, arguable self-defense, prior charge concern but dismissed, outcome depends on witness credibility assessment."
+}

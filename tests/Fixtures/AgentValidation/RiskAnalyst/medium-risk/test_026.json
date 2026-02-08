@@ -1,0 +1,77 @@
+{
+  "test_id": "risk_medium_001",
+  "category": "medium-risk",
+  "expected_risk_level": "medium",
+  "expected_score_range": [55, 70],
+  "description": "One significant argument weakness with balanced evidence",
+
+  "input": {
+    "problem_statement": "Client charged with theft. Prosecution has circumstantial evidence (client seen near store, item found in car). Defense argues item was planted. No direct evidence of theft act.",
+    "legal_arguments": [
+      {
+        "title": "Evidence planted by ex-partner",
+        "argument": "Ex-partner had access to car and motive to frame client",
+        "strength_score": 55,
+        "legal_basis": ["Client testimony", "Documented custody dispute"],
+        "potential_counterarguments": [
+          "No direct proof of planting",
+          "Speculative theory",
+          "Item found during lawful search"
+        ]
+      },
+      {
+        "title": "Insufficient evidence of theft act",
+        "argument": "Being near store and possessing item doesn't prove theft",
+        "strength_score": 62,
+        "legal_basis": ["Burden of proof on prosecution"],
+        "potential_counterarguments": [
+          "Item had store security tag attached",
+          "No receipt for item",
+          "Witness saw client acting suspiciously"
+        ]
+      }
+    ],
+    "strongest_precedents": [],
+    "strategic_recommendations": {
+      "procedural_steps": [
+        "Subpoena ex-partner",
+        "Challenge sufficiency of evidence",
+        "Request security footage"
+      ]
+    }
+  },
+
+  "expected_output": {
+    "overall_risk_score": {
+      "score": 62,
+      "level": "medium"
+    },
+    "argument_risks": [
+      {
+        "argument_index": 0,
+        "risk_level": "medium",
+        "impact_if_fails": "medium",
+        "weaknesses": [
+          "Speculative without direct proof",
+          "Difficult to prove third-party planting"
+        ],
+        "evidence_gaps": [
+          "Need ex-partner testimony",
+          "Need proof of car access"
+        ]
+      },
+      {
+        "argument_index": 1,
+        "risk_level": "low",
+        "impact_if_fails": "medium",
+        "weaknesses": [
+          "Security tag and no receipt weaken argument"
+        ]
+      }
+    ],
+    "adverse_precedents": [],
+    "procedural_risks": []
+  },
+
+  "validation_notes": "Should score 55-70 (medium risk) due to one weak argument (planting theory speculative), one stronger argument (burden of proof), balanced evidence (circumstantial but some indicators), no critical flaws."
+}

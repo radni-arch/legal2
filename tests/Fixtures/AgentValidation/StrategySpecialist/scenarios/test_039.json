@@ -1,0 +1,71 @@
+{
+  "test_id": "strategy_moderate_001",
+  "description": "Moderate position: Mixed precedents with some legal support",
+
+  "input": {
+    "problem_statement": "Client charged with assault. Claims self-defense but response may have been excessive. Some favorable precedents but also concerning facts.",
+    "strongest_precedents": [
+      {
+        "court": "Vrhovni sud RH",
+        "applicability_score": 72,
+        "binding_authority": "binding",
+        "case_number": "I Kž-673/2021",
+        "favorable": true
+      },
+      {
+        "court": "Županijski sud u Zagrebu",
+        "applicability_score": 65,
+        "binding_authority": "persuasive",
+        "case_number": "K-456/2019",
+        "favorable": false
+      }
+    ],
+    "analyzed_laws": [
+      {
+        "law_number": "KZ Članak 18",
+        "title": "Nužna obrana",
+        "relevance_score": 0.82,
+        "applicability": "potentially_applicable"
+      },
+      {
+        "law_number": "KZ Članak 19",
+        "title": "Prekoračenje nužne obrane",
+        "relevance_score": 0.78,
+        "applicability": "potentially_applicable"
+      }
+    ]
+  },
+
+  "expected_output": {
+    "arguments_count_range": [3, 5],
+    "primary_strategy_theme": "self-defense with proportionality issues",
+    "success_probability_range": [0.45, 0.65],
+    "should_include": {
+      "settlement_recommendation": true,
+      "procedural_steps": [
+        "gather evidence of initial threat",
+        "obtain medical records of both parties",
+        "prepare proportionality argument",
+        "explore plea to lesser charge if proportionality weak",
+        "prepare mitigation case"
+      ],
+      "evidence_needed": [
+        "witness statements on initial threat",
+        "medical records comparing injuries",
+        "character witnesses",
+        "any prior threats from victim"
+      ],
+      "argument_titles": [
+        "Victim initiated confrontation",
+        "Response was fear-based (KZ 19)",
+        "Favorable Supreme Court precedent supports mitigation"
+      ]
+    },
+    "expected_argument_strengths": {
+      "average_range": [55, 70],
+      "strongest_argument_score_min": 65
+    }
+  },
+
+  "validation_notes": "Should generate 3-5 moderate arguments (avg 55-70), recommend settlement exploration due to proportionality concerns, success probability 45-65%, acknowledge mixed precedents, realistic risk assessment."
+}

@@ -1,0 +1,134 @@
+name: Laravel Deploy
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    environment: deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check required secrets
+      run: |
+        errors=0
+        if [ -z "${{ secrets.VPS_HOST }}" ]; then echo "ERROR: VPS_HOST secret is missing"; errors=1; fi
+        if [ -z "${{ secrets.VPS_USER }}" ]; then echo "ERROR: VPS_USER secret is missing"; errors=1; fi
+        if [ -z "${{ secrets.VPS_SSH_KEY }}" ]; then echo "ERROR: VPS_SSH_KEY secret is missing"; errors=1; fi
+        if [ -z "${{ secrets.VPS_PORT }}" ]; then echo "ERROR: VPS_PORT secret is missing"; errors=1; fi
+        if [ $errors -ne 0 ]; then echo "One or more secrets are missing. See above."; exit 1; fi
+        echo "All required secrets present (values not shown)."
+
+    - name: Test SSH connectivity
+      uses: appleboy/ssh-action@v1
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        key: ${{ secrets.VPS_SSH_KEY }}
+        port: ${{ secrets.VPS_PORT }}
+        envs: GITHUB_PAT,GIT_USER_NAME,GIT_USER_EMAIL
+        script: |
+          echo "SSH connection successful."
+          export DRONE_SSH_KEY="-----BEGIN OPENSSH PRIVATE KEY-----\n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\n-----END OPENSSH PRIVATE KEY-----"
+          whoami
+          hostname
+          ls -la /var/www/legal-war-machine/war-machine
+
+    - name: Deploy to VPS via SSH
+      uses: appleboy/ssh-action@v1
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        key: ${{ secrets.VPS_SSH_KEY }}
+        port: ${{ secrets.VPS_PORT }}
+        script: |
+          set -e
+          echo "Deploy to VPS started."
+          export DRONE_SSH_KEY="-----BEGIN OPENSSH PRIVATE KEY-----\n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\n-----END OPENSSH PRIVATE KEY-----"
+          whoami
+          hostname
+          cd /var/www/legal-war-machine/war-machine
+          git config user.name "aglavas"
+          git remote set-url origin https://x-access-token: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@github.com/aglavas/ai-legal-war-machine
+
+          git fetch --all
+          git reset --hard origin/master
+
+          mkdir -p storage/app/public \
+           storage/framework/cache/data \
+           storage/framework/sessions \
+           storage/framework/views \
+           storage/logs \
+           bootstrap/cache
+
+          sudo chown -R deploy:web storage bootstrap/cache
+          sudo find storage bootstrap/cache -type d -exec chmod 2775 {} \;
+          sudo find storage bootstrap/cache -type f -exec chmod 664 {} \;
+
+          php artisan config:clear
+          php artisan optimize:clear
+          php artisan cache:clear
+          php artisan view:clear
+          php artisan migrate --force
+          npm install
+          npm run build
+          php artisan optimize
+          sudo supervisorctl restart all
+          php artisan queue:restart
+
+
+          echo "Checking for migration state mismatch..."
+          php artisan tinker --execute="
+            // Define table-to-migration mapping (all critical tables)
+            \$tableToMigration = [
+              'cases_documents_uploads' => '2025_10_05_000010_create_cases_documents_uploads_table',
+              'cases_documents' => '2025_10_05_000020_create_cases_documents_table',
+              'laws' => '2025_10_05_000100_create_laws_table',
+              'court_decisions' => '2025_10_17_000000_create_court_decisions_table',
+              'court_decision_documents' => '2025_10_17_000020_create_court_decision_documents_table',
+            ];
+
+            \$missingTables = [];
+            \$migrationsToRemove = [];
+            \$migrationsToAdd = [];
+
+            // Get current max batch number
+            \$maxBatch = DB::table('migrations')->max('batch') ?? 0;
+
+            foreach (\$tableToMigration as \$table => \$migration) {
+              \$tableExists = Schema::hasTable(\$table);
+              \$migrationExists = DB::table('migrations')->where('migration', \$migration)->exists();
+
+              if (!\$tableExists && \$migrationExists) {
+                // Table missing but migration record exists - remove stale record
+                \$missingTables[] = \$table;
+                \$migrationsToRemove[] = \$migration;
+              } elseif (\$tableExists && !\$migrationExists) {
+                // Table exists but migration record missing - add record to prevent re-creation
+                \$migrationsToAdd[] = \$migration;
+              }
+            }
+
+            if (!empty(\$migrationsToRemove)) {
+              echo 'Tables missing, removing stale migration records: ' . implode(', ', \$missingTables) . PHP_EOL;
+              foreach (\$migrationsToRemove as \$migration) {
+                \$deleted = DB::table('migrations')->where('migration', \$migration)->delete();
+                echo \"  Removed: \$migration\" . PHP_EOL;
+              }
+            }
+
+            if (!empty(\$migrationsToAdd)) {
+              echo 'Tables exist but missing migration records, adding: ' . implode(', ', \$migrationsToAdd) . PHP_EOL;
+              foreach (\$migrationsToAdd as \$migration) {
+                DB::table('migrations')->insert(['migration' => \$migration, 'batch' => \$maxBatch + 1]);
+                echo \"  Added: \$migration\" . PHP_EOL;
+              }
+            }
+
+            if (empty(\$migrationsToRemove) && empty(\$migrationsToAdd)) {
+              echo 'Migration state is consistent with database tables.' . PHP_EOL;
+            }
+          "

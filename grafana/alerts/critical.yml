@@ -1,0 +1,69 @@
+groups:
+  - name: ai_legal_critical_alerts
+    interval: 1m
+    rules:
+      - alert: QueueDepthCritical
+        expr: queue_depth > 100
+        for: 5m
+        labels:
+          severity: critical
+          component: queue
+        annotations:
+          summary: "Queue depth critical: {{ $labels.queue_name }}"
+          description: "Queue {{ $labels.queue_name }} has {{ $value }} jobs pending for >5 minutes. This may indicate workers are stuck or overwhelmed."
+          runbook_url: "https://docs.ai-legal.internal/runbooks/queue-depth-critical"
+
+      - alert: AgentFailureRateCritical
+        expr: (rate(agent_failure_total[10m]) / (rate(agent_success_total[10m]) + rate(agent_failure_total[10m]))) > 0.2
+        for: 10m
+        labels:
+          severity: critical
+          component: agents
+        annotations:
+          summary: "Agent failure rate >20%: {{ $labels.agent_type }}"
+          description: "Agent {{ $labels.agent_type }} has failure rate of {{ $value | humanizePercentage }} over last 10 minutes."
+          runbook_url: "https://docs.ai-legal.internal/runbooks/agent-failure-rate-critical"
+
+      - alert: OpenAIAPIErrorsCritical
+        expr: rate(openai_api_errors_total[5m]) > 10
+        for: 5m
+        labels:
+          severity: critical
+          component: openai
+        annotations:
+          summary: "OpenAI API errors spiking"
+          description: "{{ $value }} OpenAI API errors per minute in last 5 minutes. Check API quota and connectivity."
+          runbook_url: "https://docs.ai-legal.internal/runbooks/openai-api-errors"
+
+      - alert: DatabaseConnectionPoolExhausted
+        expr: database_connection_pool_active >= database_connection_pool_max
+        for: 2m
+        labels:
+          severity: critical
+          component: database
+        annotations:
+          summary: "Database connection pool exhausted"
+          description: "All {{ $value }} database connections in use. New requests will be blocked."
+          runbook_url: "https://docs.ai-legal.internal/runbooks/db-connection-pool-exhausted"
+
+      - alert: SystemDown
+        expr: up{job="ai-legal-backend"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          component: system
+        annotations:
+          summary: "AI Legal Backend is DOWN"
+          description: "The main application server is not responding to health checks for >1 minute."
+          runbook_url: "https://docs.ai-legal.internal/runbooks/system-down"
+
+      - alert: DiskSpaceCritical
+        expr: (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) < 0.1
+        for: 5m
+        labels:
+          severity: critical
+          component: system
+        annotations:
+          summary: "Disk space critical: < 10% available"
+          description: "Only {{ $value | humanizePercentage }} disk space remaining on root partition."
+          runbook_url: "https://docs.ai-legal.internal/runbooks/disk-space-critical"

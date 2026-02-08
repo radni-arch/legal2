@@ -1,0 +1,55 @@
+{
+  "key": "pp_prz_74_2025",
+  "title": "PP-PRŽ-74/2025",
+  "summary": "Predmet upravnog spora vezan uz osporavanje natječaja i postupka javne nabave u 2025. godini.",
+  "timeline": [
+    {
+      "date": "2025-01-15",
+      "title": "Objava natječaja",
+      "detail": "Naručitelj objavljuje dokumentaciju i kriterije za javnu nabavu."
+    },
+    {
+      "date": "2025-02-02",
+      "title": "Upiti ponuditelja",
+      "detail": "Zaprimljeni su zahtjevi za pojašnjenjem tehničkih specifikacija."
+    },
+    {
+      "date": "2025-02-20",
+      "title": "Otvaranje ponuda",
+      "detail": "Povjerenstvo otvara ponude i sastavlja zapisnik."
+    },
+    {
+      "date": "2025-03-05",
+      "title": "Odluka o odabiru",
+      "detail": "Donosi se odluka o odabiru najpovoljnije ponude."
+    },
+    {
+      "date": "2025-03-18",
+      "title": "Žalba ponuditelja",
+      "detail": "Nezadovoljni ponuditelj podnosi žalbu zbog sumnje u povredu postupka."
+    }
+  ],
+  "facts": [
+    {
+      "label": "Procijenjena vrijednost",
+      "detail": "Procijenjena vrijednost nabave iznosi 1.2 milijuna EUR."
+    },
+    {
+      "label": "Kriterij odabira",
+      "detail": "Kao kriterij odabira koristi se ekonomski najpovoljnija ponuda."
+    },
+    {
+      "label": "Rok isporuke",
+      "detail": "Dokumentacija predviđa rok isporuke od 120 dana."
+    },
+    {
+      "label": "Sporna stavka",
+      "detail": "Žalba navodi nerazmjerno stroge tehničke uvjete za referentne projekte."
+    }
+  ],
+  "documents": [],
+  "metadata": {
+    "jurisdiction": "RH",
+    "case_type": "javna_nabava"
+  }
+}

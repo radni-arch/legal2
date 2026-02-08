@@ -1,0 +1,58 @@
+{
+  "test_id": "strategy_moderate_002",
+  "description": "Moderate position: Partial self-defense claim with evidence gaps",
+
+  "input": {
+    "problem_statement": "Client charged with battery. Claims victim pushed first but only one neutral witness, others biased. Mixed credibility.",
+    "strongest_precedents": [
+      {
+        "court": "Županijski sud u Osijeku",
+        "applicability_score": 68,
+        "binding_authority": "persuasive",
+        "case_number": "K-234/2020",
+        "favorable": true
+      }
+    ],
+    "analyzed_laws": [
+      {
+        "law_number": "KZ Članak 18",
+        "title": "Nužna obrana",
+        "relevance_score": 0.75,
+        "applicability": "potentially_applicable"
+      }
+    ]
+  },
+
+  "expected_output": {
+    "arguments_count_range": [3, 4],
+    "primary_strategy_theme": "credibility battle",
+    "success_probability_range": [0.40, 0.60],
+    "should_include": {
+      "settlement_recommendation": true,
+      "procedural_steps": [
+        "bolster neutral witness credibility",
+        "impeach biased witnesses",
+        "gather character evidence for client",
+        "negotiate reasonable plea",
+        "prepare for trial if settlement fails"
+      ],
+      "evidence_needed": [
+        "neutral witness statement",
+        "bias evidence for victim's witnesses",
+        "client character witnesses",
+        "any prior incidents showing victim aggression"
+      ],
+      "argument_titles": [
+        "Neutral witness supports defense version",
+        "Victim's witnesses have bias",
+        "No serious injury suggests minor altercation"
+      ]
+    },
+    "expected_argument_strengths": {
+      "average_range": [50, 65],
+      "strongest_argument_score_min": 60
+    }
+  },
+
+  "validation_notes": "Should generate 3-4 moderate arguments (avg 50-65), strongly recommend settlement (uncertain outcome), success probability 40-60%, realistic about credibility battle, focus on witness credibility strategies."
+}

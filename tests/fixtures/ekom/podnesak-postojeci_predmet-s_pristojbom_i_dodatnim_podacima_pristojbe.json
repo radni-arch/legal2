@@ -1,0 +1,45 @@
+{
+  "predmetOznaka": "Ovr-123/2024",
+  "vrstaPodneskaId": 20,
+  "stranke": [],
+  "protustranke": [],
+  "sadrzaj": {
+    "naziv": "prigovor_na_rjesenje.pdf",
+    "sadrzaj": "JVBERi0xLjQKJeLjz9MKMSAwIG9iago8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFI+PgplbmRvYmoK",
+    "brojStranica": 4,
+    "ignorirajUpozorenja": false
+  },
+  "pristojba": {
+    "vrsta": "SUDSKA",
+    "iznos": 75.00,
+    "valuta": "EUR"
+  },
+  "pristojbaDodatniPodaci": {
+    "vrijednostPredmetaSpora": 15000.00,
+    "valutaPredmetaSpora": "EUR",
+    "osnovaOslobodjenjaId": 2,
+    "postotakOslobodjenja": 50,
+    "razlogNeplacanjaId": null
+  },
+  "prilozi": [
+    {
+      "opis": "Rjesenje o ovrsi",
+      "sadrzaj": {
+        "naziv": "rjesenje_ovrha.pdf",
+        "sadrzaj": "JVBERi0xLjQK",
+        "brojStranica": 2,
+        "ignorirajUpozorenja": false
+      }
+    },
+    {
+      "opis": "Dokaz o uplati",
+      "primjedba": "Djelomicno placanje pristojbe",
+      "sadrzaj": {
+        "naziv": "uplata.pdf",
+        "sadrzaj": "JVBERi0xLjQK",
+        "brojStranica": 1,
+        "ignorirajUpozorenja": false
+      }
+    }
+  ]
+}

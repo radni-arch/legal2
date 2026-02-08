@@ -1,0 +1,7 @@
+# Metrics data files are tracked for human oversight
+# These provide visibility into test trends and patterns
+# (Remove entries when trust is established)
+
+# Only ignore temporary/backup files
+*.bak
+*.tmp

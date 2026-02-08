@@ -1,0 +1,150 @@
+{
+  "dashboard": {
+    "title": "AI Legal War Machine - Data Pipeline",
+    "description": "Textract jobs, OdlukeSearchAgent extraction, vector stores, Neo4j performance",
+    "tags": ["ai-legal", "pipeline", "data"],
+    "timezone": "browser",
+    "schemaVersion": 38,
+    "version": 1,
+    "refresh": "30s",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Textract Job Status",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "sum by (status) (textract_job_status)",
+            "legendFormat": "{{status}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "jobs",
+            "mappings": [
+              {"value": "queued", "color": "blue"},
+              {"value": "processing", "color": "yellow"},
+              {"value": "failed", "color": "red"},
+              {"value": "completed", "color": "green"}
+            ]
+          }
+        },
+        "gridPos": {"h": 4, "w": 12, "x": 0, "y": 0}
+      },
+      {
+        "id": 2,
+        "title": "OdlukeSearchAgent Extraction Accuracy",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "avg(odluke_extraction_confidence_score)",
+            "legendFormat": "Avg Confidence"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percentunit",
+            "min": 0,
+            "max": 1,
+            "thresholds": {
+              "steps": [
+                {"value": 0, "color": "red"},
+                {"value": 0.6, "color": "yellow"},
+                {"value": 0.9, "color": "green"}
+              ]
+            }
+          }
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0}
+      },
+      {
+        "id": 3,
+        "title": "Vector Store Ingestion Rate",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "rate(vector_store_documents_ingested_total[5m])",
+            "legendFormat": "{{store_type}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "docs/sec"
+          }
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 4}
+      },
+      {
+        "id": 4,
+        "title": "Neo4j Query Performance",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(neo4j_query_duration_seconds_bucket[5m]))",
+            "legendFormat": "p95"
+          },
+          {
+            "expr": "histogram_quantile(0.50, rate(neo4j_query_duration_seconds_bucket[5m]))",
+            "legendFormat": "p50"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "s",
+            "thresholds": {
+              "steps": [
+                {"value": 0, "color": "green"},
+                {"value": 3, "color": "yellow"},
+                {"value": 5, "color": "red"}
+              ]
+            }
+          }
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8}
+      },
+      {
+        "id": 5,
+        "title": "Vector Store Size",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "vector_store_total_documents",
+            "legendFormat": "{{store_type}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "documents"
+          }
+        },
+        "gridPos": {"h": 4, "w": 12, "x": 0, "y": 12}
+      },
+      {
+        "id": 6,
+        "title": "Graph Embedding Coverage",
+        "type": "gauge",
+        "targets": [
+          {
+            "expr": "graph_embedding_coverage_percentage",
+            "legendFormat": "Coverage %"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "min": 0,
+            "max": 100,
+            "thresholds": {
+              "steps": [
+                {"value": 0, "color": "red"},
+                {"value": 70, "color": "yellow"},
+                {"value": 90, "color": "green"}
+              ]
+            }
+          }
+        },
+        "gridPos": {"h": 8, "w": 6, "x": 12, "y": 12}
+      }
+    ]
+  }
+}

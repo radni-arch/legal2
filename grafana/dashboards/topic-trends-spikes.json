@@ -1,0 +1,458 @@
+{
+  "dashboard": {
+    "title": "AI Legal War Machine - Topic Trends & Spikes",
+    "description": "Topic spike detection, trends over time, and growth analytics (Sprint 8.2)",
+    "tags": ["ai-legal", "topics", "analytics", "sprint-8.2"],
+    "timezone": "browser",
+    "schemaVersion": 38,
+    "version": 1,
+    "refresh": "5m",
+    "templating": {
+      "list": [
+        {
+          "name": "topic",
+          "type": "query",
+          "query": "label_values(topic_decision_count, topic_name)",
+          "multi": true,
+          "includeAll": true
+        },
+        {
+          "name": "time_range",
+          "type": "custom",
+          "options": [
+            {"value": "4w", "text": "4 Weeks"},
+            {"value": "12w", "text": "12 Weeks"},
+            {"value": "26w", "text": "26 Weeks"},
+            {"value": "52w", "text": "1 Year"}
+          ],
+          "current": {"value": "12w", "text": "12 Weeks"}
+        }
+      ]
+    },
+    "panels": [
+      {
+        "id": 1,
+        "title": "Topic Spike Alerts (Current Week)",
+        "type": "table",
+        "targets": [
+          {
+            "expr": "topic_spike_events",
+            "format": "table",
+            "instant": true
+          }
+        ],
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "renameByName": {
+                "topic_name": "Topic",
+                "baseline_count": "Baseline",
+                "current_count": "Current",
+                "percent_increase": "Increase %",
+                "severity": "Severity",
+                "detected_at": "Detected"
+              }
+            }
+          }
+        ],
+        "fieldConfig": {
+          "overrides": [
+            {
+              "matcher": {"id": "byName", "options": "Severity"},
+              "properties": [
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-background"
+                  }
+                },
+                {
+                  "id": "mappings",
+                  "value": [
+                    {"value": "minor", "text": "MINOR", "color": "blue"},
+                    {"value": "moderate", "text": "MODERATE", "color": "yellow"},
+                    {"value": "major", "text": "MAJOR", "color": "red"}
+                  ]
+                }
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Increase %"},
+              "properties": [
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-background",
+                    "mode": "gradient"
+                  }
+                },
+                {
+                  "id": "thresholds",
+                  "value": {
+                    "steps": [
+                      {"value": 0, "color": "green"},
+                      {"value": 50, "color": "yellow"},
+                      {"value": 100, "color": "orange"},
+                      {"value": 200, "color": "red"}
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {"h": 8, "w": 24, "x": 0, "y": 0}
+      },
+      {
+        "id": 2,
+        "title": "Topic Trends Heatmap (Topics x Weeks)",
+        "type": "heatmap",
+        "targets": [
+          {
+            "expr": "sum by (topic_name, week_start) (topic_decision_count{topic_name=~\"$topic\"})",
+            "format": "heatmap",
+            "legendFormat": "{{topic_name}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "hideFrom": {
+                "tooltip": false,
+                "viz": false,
+                "legend": false
+              },
+              "scaleDistribution": {
+                "type": "linear"
+              }
+            },
+            "color": {
+              "mode": "scheme",
+              "scheme": "Spectral"
+            }
+          }
+        },
+        "options": {
+          "calculate": false,
+          "calculation": {},
+          "cellGap": 2,
+          "cellRadius": 0,
+          "cellValues": {},
+          "color": {
+            "exponent": 0.5,
+            "fill": "dark-orange",
+            "mode": "scheme",
+            "reverse": false,
+            "scale": "exponential",
+            "scheme": "Spectral",
+            "steps": 128
+          },
+          "exemplars": {
+            "color": "rgba(255,0,255,0.7)"
+          },
+          "filterValues": {
+            "le": 1e-9
+          },
+          "legend": {
+            "show": true
+          },
+          "rowsFrame": {
+            "layout": "auto"
+          },
+          "tooltip": {
+            "show": true,
+            "yHistogram": false
+          },
+          "yAxis": {
+            "axisPlacement": "left",
+            "reverse": false
+          }
+        },
+        "gridPos": {"h": 12, "w": 24, "x": 0, "y": 8}
+      },
+      {
+        "id": 3,
+        "title": "Top 10 Growing Topics (This Week)",
+        "type": "bargauge",
+        "targets": [
+          {
+            "expr": "topk(10, topic_growth_rate)",
+            "legendFormat": "{{topic_name}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "min": 0,
+            "thresholds": {
+              "steps": [
+                {"value": 0, "color": "green"},
+                {"value": 50, "color": "yellow"},
+                {"value": 100, "color": "orange"},
+                {"value": 200, "color": "red"}
+              ]
+            },
+            "custom": {
+              "orientation": "horizontal",
+              "displayMode": "gradient"
+            }
+          }
+        },
+        "options": {
+          "displayMode": "gradient",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "values": false,
+            "calcs": ["lastNotNull"]
+          },
+          "showUnfilled": true
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 20}
+      },
+      {
+        "id": 4,
+        "title": "Spike Severity Distribution",
+        "type": "piechart",
+        "targets": [
+          {
+            "expr": "count by (severity) (topic_spike_events)",
+            "legendFormat": "{{severity}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "hideFrom": {
+                "tooltip": false,
+                "viz": false,
+                "legend": false
+              }
+            },
+            "mappings": [
+              {"value": "minor", "text": "Minor", "color": "blue"},
+              {"value": "moderate", "text": "Moderate", "color": "yellow"},
+              {"value": "major", "text": "Major", "color": "red"}
+            ]
+          }
+        },
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "right",
+            "values": ["value", "percent"]
+          },
+          "pieType": "donut",
+          "tooltip": {
+            "mode": "single"
+          }
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 20}
+      },
+      {
+        "id": 5,
+        "title": "Topic Decision Count (12-Week Trend)",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "sum by (topic_name) (topic_decision_count{topic_name=~\"$topic\"}[12w])",
+            "legendFormat": "{{topic_name}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "decisions",
+            "custom": {
+              "lineWidth": 2,
+              "fillOpacity": 10,
+              "gradientMode": "opacity",
+              "showPoints": "auto",
+              "spanNulls": false
+            }
+          }
+        },
+        "options": {
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          },
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "calcs": ["mean", "max"]
+          }
+        },
+        "gridPos": {"h": 10, "w": 24, "x": 0, "y": 28}
+      },
+      {
+        "id": 6,
+        "title": "Spike Detection Threshold Line",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "topic_decision_baseline * 1.5",
+            "legendFormat": "Spike Threshold (50%)"
+          },
+          {
+            "expr": "sum by (topic_name) (topic_decision_count{topic_name=~\"$topic\"})",
+            "legendFormat": "{{topic_name}} (Current)"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "decisions"
+          },
+          "overrides": [
+            {
+              "matcher": {"id": "byName", "options": "Spike Threshold (50%)"},
+              "properties": [
+                {
+                  "id": "custom.lineStyle",
+                  "value": {
+                    "fill": "dash",
+                    "dash": [10, 5]
+                  }
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "red",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "options": {
+          "tooltip": {
+            "mode": "multi"
+          },
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom"
+          }
+        },
+        "gridPos": {"h": 10, "w": 24, "x": 0, "y": 38}
+      },
+      {
+        "id": 7,
+        "title": "Weekly Analytics Job Status",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "time() - topic_analytics_last_run_timestamp",
+            "legendFormat": "Time Since Last Run"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "s",
+            "thresholds": {
+              "steps": [
+                {"value": 0, "color": "green"},
+                {"value": 604800, "color": "yellow"},
+                {"value": 1209600, "color": "red"}
+              ]
+            }
+          }
+        },
+        "options": {
+          "graphMode": "none",
+          "text": {
+            "valueSize": 32
+          }
+        },
+        "gridPos": {"h": 4, "w": 6, "x": 0, "y": 48}
+      },
+      {
+        "id": 8,
+        "title": "Total Topics Monitored",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "count(topic_decision_count)",
+            "legendFormat": "Total Topics"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "topics"
+          }
+        },
+        "options": {
+          "graphMode": "area",
+          "text": {
+            "valueSize": 32
+          },
+          "colorMode": "value"
+        },
+        "gridPos": {"h": 4, "w": 6, "x": 6, "y": 48}
+      },
+      {
+        "id": 9,
+        "title": "Active Spikes Count",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "count(topic_spike_events{detected_at > $__from})",
+            "legendFormat": "Active Spikes"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "spikes",
+            "thresholds": {
+              "steps": [
+                {"value": 0, "color": "green"},
+                {"value": 3, "color": "yellow"},
+                {"value": 5, "color": "red"}
+              ]
+            }
+          }
+        },
+        "options": {
+          "graphMode": "area",
+          "text": {
+            "valueSize": 32
+          },
+          "colorMode": "background"
+        },
+        "gridPos": {"h": 4, "w": 6, "x": 12, "y": 48}
+      },
+      {
+        "id": 10,
+        "title": "Avg Growth Rate",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "avg(topic_growth_rate)",
+            "legendFormat": "Avg Growth"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "decimals": 2,
+            "thresholds": {
+              "steps": [
+                {"value": 0, "color": "blue"},
+                {"value": 25, "color": "green"},
+                {"value": 50, "color": "yellow"},
+                {"value": 100, "color": "red"}
+              ]
+            }
+          }
+        },
+        "options": {
+          "graphMode": "area",
+          "text": {
+            "valueSize": 32
+          },
+          "colorMode": "value"
+        },
+        "gridPos": {"h": 4, "w": 6, "x": 18, "y": 48}
+      }
+    ]
+  }
+}

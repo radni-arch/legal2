@@ -1,0 +1,71 @@
+{
+  "test_id": "risk_medium_003",
+  "category": "medium-risk",
+  "expected_risk_level": "medium",
+  "expected_score_range": [50, 65],
+  "description": "Timeline concerns but likely manageable with diligent preparation",
+
+  "input": {
+    "problem_statement": "Client charged with assault. Trial scheduled in 6 weeks. Need to locate alibi witnesses who may have moved abroad. Client only recently disclosed alibi.",
+    "legal_arguments": [
+      {
+        "title": "Alibi - client at restaurant",
+        "argument": "Client was at restaurant with friends during alleged assault",
+        "strength_score": 65,
+        "legal_basis": ["Witness testimony", "Possible receipt/CCTV"],
+        "potential_counterarguments": [
+          "Late disclosure of alibi",
+          "Witnesses not yet located",
+          "Time very tight"
+        ]
+      }
+    ],
+    "strongest_precedents": [],
+    "strategic_recommendations": {
+      "procedural_steps": [
+        "Immediately locate witnesses",
+        "Request trial continuance if needed",
+        "Obtain restaurant records"
+      ]
+    }
+  },
+
+  "expected_output": {
+    "overall_risk_score": {
+      "score": 58,
+      "level": "medium"
+    },
+    "argument_risks": [
+      {
+        "argument_index": 0,
+        "risk_level": "medium",
+        "impact_if_fails": "high",
+        "weaknesses": [
+          "Late disclosure may appear suspicious to court"
+        ],
+        "evidence_gaps": [
+          "Witnesses not yet located",
+          "No restaurant records yet obtained"
+        ]
+      }
+    ],
+    "adverse_precedents": [],
+    "procedural_risks": [
+      {
+        "risk_type": "Timeline - witness location",
+        "severity": "medium",
+        "probability": "medium",
+        "description": "6 weeks may be insufficient to locate witnesses abroad",
+        "mitigation": "Request continuance, hire investigator, contact restaurant immediately"
+      },
+      {
+        "risk_type": "Late alibi disclosure",
+        "severity": "low",
+        "probability": "medium",
+        "description": "Court may view late disclosure negatively but not fatal"
+      }
+    ]
+  },
+
+  "validation_notes": "Should score 50-65 (medium risk) due to tight timeline, witnesses not yet located, late disclosure concern, but argument itself has merit if witnesses can be found, manageable with continuance request."
+}

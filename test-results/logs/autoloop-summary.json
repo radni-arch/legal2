@@ -1,0 +1,389 @@
+{
+  "last_updated": "2026-02-08T03:11:44+00:00",
+  "total_iterations": 207,
+  "total_passes": 1,
+  "total_failures": 1,
+  "components": {
+    "unit:TestExample1": {
+      "last_outcome": "pass",
+      "last_exit_code": 0,
+      "last_timestamp": "2025-12-18T20:03:51+00:00"
+    },
+    "unit:TestExample2": {
+      "last_outcome": "fail",
+      "last_exit_code": 1,
+      "last_timestamp": "2025-12-18T20:03:55+00:00"
+    },
+    "focused:CourtCaseDecisionMatchTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-03T03:54:38+00:00"
+    },
+    "focused:MatchingResultTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-03T05:03:23+00:00"
+    },
+    "focused:CaseDecisionMatchingServiceTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-03T04:21:05+00:00"
+    },
+    "focused:CaseDecisionEventsTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-03T04:31:22+00:00"
+    },
+    "focused:MatchCaseToDecisionJobTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-03T14:47:17+00:00"
+    },
+    "focused:ReconcileUnmatchedCasesJobTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-03T14:47:35+00:00"
+    },
+    "focused:MatchCaseDecisionsCommandTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-03T04:46:55+00:00"
+    },
+    "focused:UnmatchedCasesReportCommandTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-03T04:54:47+00:00"
+    },
+    "focused:FetchPpPrzCasesIntegrationTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-03T05:00:09+00:00"
+    },
+    "focused:CourtCaseDecisionMatch": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-03T05:02:18+00:00"
+    },
+    "focused:CaseDecisionMatchingService": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-03T05:02:52+00:00"
+    },
+    "focused:CaseDecisionEvents": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-03T05:03:10+00:00"
+    },
+    "focused:GraphViewerTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 2,
+      "last_timestamp": "2026-01-07T03:46:59+00:00"
+    },
+    "focused:CourtDecisionTagsUnicodeTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 255,
+      "last_timestamp": "2026-01-07T01:05:21+00:00"
+    },
+    "focused:GraphDataIntegrityServiceTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-07T09:34:41+00:00"
+    },
+    "focused:CourtDecisionOutcomeColumnsTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-07T10:02:06+00:00"
+    },
+    "focused:LegalPrincipleGraphSyncServiceTest__it_reuses_existing_principle_node_for_same_pattern": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-07T11:52:31+00:00"
+    },
+    "focused:LegalPrincipleGraphSyncServiceTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-07T11:55:22+00:00"
+    },
+    "focused:GraphSyncExceptionTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-07T12:20:19+00:00"
+    },
+    "focused:GraphConnectionExceptionTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-07T12:21:25+00:00"
+    },
+    "focused:DecisionGraphSyncServiceTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-07T17:56:00+00:00"
+    },
+    "focused:EnhancedGraphSyncJobTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-07T19:22:12+00:00"
+    },
+    "focused:GraphSchemaApplyCommandTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-07T19:22:27+00:00"
+    },
+    "focused:LegalConceptExtractorTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-07T21:55:32+00:00"
+    },
+    "focused:LegalTopicExtractorTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-07T21:48:44+00:00"
+    },
+    "focused:ArticleExtractorTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-07T22:04:20+00:00"
+    },
+    "focused:LegalDefinitionExtractorTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-08T01:15:39+00:00"
+    },
+    "focused:EvidenceExtractorTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-08T01:20:33+00:00"
+    },
+    "focused:DateEventExtractorTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-08T01:22:12+00:00"
+    },
+    "focused:LegalArgumentExtractorTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-08T01:16:06+00:00"
+    },
+    "focused:LegalDefinitionGraphSyncServiceTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-08T01:18:46+00:00"
+    },
+    "focused:LegalArgumentGraphSyncServiceTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-08T01:18:18+00:00"
+    },
+    "focused:DateEventGraphSyncServiceTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-08T01:24:15+00:00"
+    },
+    "focused:BatchCypherBuilderTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-08T03:15:21+00:00"
+    },
+    "focused:BatchOperationsBenchmarkTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-08T10:20:49+00:00"
+    },
+    "focused:ForceGraphControllerTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-08T12:51:08+00:00"
+    },
+    "focused:IllegalSearchDetectorTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 255,
+      "last_timestamp": "2026-01-31T03:14:43+00:00"
+    },
+    "focused:LlmBrainPanelValidationTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-09T01:25:59+00:00"
+    },
+    "focused:LlmBrainPanelErrorSanitizationTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-09T01:45:46+00:00"
+    },
+    "focused:LlmBrainPerformanceTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-09T14:33:23+00:00"
+    },
+    "focused:GraphViewerXssProtectionTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-11T00:09:48+00:00"
+    },
+    "focused:GraphViewerInputValidationTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-11T00:30:02+00:00"
+    },
+    "focused:AgentCypherQuerySafetyTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-11T00:46:38+00:00"
+    },
+    "focused:GraphExceptionHierarchyTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-11T00:54:00+00:00"
+    },
+    "focused:CircuitBreakerIntegrationTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-11T01:00:25+00:00"
+    },
+    "focused:GraphViewerErrorStatesTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-11T01:17:34+00:00"
+    },
+    "focused:GraphDatabaseServiceLoggingTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-11T01:25:05+00:00"
+    },
+    "focused:GraphHealthCheckTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-11T01:31:34+00:00"
+    },
+    "focused:GraphInputSanitizerTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-11T01:38:06+00:00"
+    },
+    "focused:GraphConsistencyCheckCommandTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-11T01:59:43+00:00"
+    },
+    "focused:ContextAnalyzerTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-11T03:13:13+00:00"
+    },
+    "focused:SuppressionMotionGeneratorTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-11T04:32:47+00:00"
+    },
+    "focused:ContradictionRadarServiceTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-12T12:16:38+00:00"
+    },
+    "focused:EpredmetWidgetTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 2,
+      "last_timestamp": "2026-01-29T12:40:08+00:00"
+    },
+    "focused:EkomSyncAllJobTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 255,
+      "last_timestamp": "2026-01-31T00:23:14+00:00"
+    },
+    "focused:LaravelLogViewerTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-31T03:25:12+00:00"
+    },
+    "focused:LogViewerServiceTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-31T02:34:13+00:00"
+    },
+    "focused:OpenAIVectorManagerTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 2,
+      "last_timestamp": "2026-01-31T02:36:38+00:00"
+    },
+    "focused:ProcessTextractJobTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-31T22:27:05+00:00"
+    },
+    "focused:ReconstructPdfV2Test": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-31T22:27:23+00:00"
+    },
+    "focused:RegenerateTextractEmbeddingsTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-31T22:27:40+00:00"
+    },
+    "focused:ReprocessTextractJobTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-31T22:27:57+00:00"
+    },
+    "focused:TextractServiceTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-31T22:28:19+00:00"
+    },
+    "focused:WaitAndFetchStepTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-31T22:28:53+00:00"
+    },
+    "focused:CleanOrphanedTextractNodesTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-31T22:29:09+00:00"
+    },
+    "focused:ExtractTablesFromTextractJobTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-31T22:29:27+00:00"
+    },
+    "focused:FactExtractionServiceTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-31T22:29:49+00:00"
+    },
+    "focused:AgentVectorMemoryTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-31T22:30:09+00:00"
+    },
+    "focused:SyncTextractToGraphTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-31T22:31:06+00:00"
+    },
+    "focused:TextractJobPolicyTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-31T22:31:17+00:00"
+    },
+    "focused:TextractGraphSyncServiceTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-01-31T22:31:31+00:00"
+    },
+    "focused:NotificationPanelTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-02-07T04:05:00+00:00"
+    },
+    "focused:VectorStoreManagementIntegrationTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 255,
+      "last_timestamp": "2026-02-08T03:11:44+00:00"
+    }
+  },
+  "last_run": {
+    "component_id": "focused:VectorStoreManagementIntegrationTest",
+    "outcome": "failed",
+    "exit_code": 255,
+    "timestamp": "2026-02-08T03:11:44+00:00"
+  }
+}

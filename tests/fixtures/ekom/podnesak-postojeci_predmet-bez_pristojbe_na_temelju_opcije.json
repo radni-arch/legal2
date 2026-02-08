@@ -1,0 +1,20 @@
+{
+  "predmetId": 98765,
+  "vrstaPodneskaId": 15,
+  "razlogNeplacanjaId": 1,
+  "stranke": [],
+  "protustranke": [],
+  "sadrzaj": {
+    "naziv": "zalba.pdf",
+    "sadrzaj": "JVBERi0xLjQKJeLjz9MKMSAwIG9iago8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFI+PgplbmRvYmoK",
+    "brojStranica": 6,
+    "ignorirajUpozorenja": false
+  },
+  "pristojba": {
+    "vrsta": "SUDSKA",
+    "iznos": 0,
+    "valuta": "EUR",
+    "razlogNeplacanjaId": 1
+  },
+  "prilozi": []
+}

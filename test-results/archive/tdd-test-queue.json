@@ -1,0 +1,39 @@
+// test-results/tdd-test-queue.json
+{
+    "components": [
+        {
+            "id": "livewire:VectorStoreManager",
+            "sprint": 2,
+            "domain": "search_and_vector_stores",
+            "type": "feature_livewire",
+            "test_class": "VectorStoreManagerTest",
+            "test_path": "tests/Feature/Livewire/VectorStoreManagerTest.php",
+            "status": "todo",
+            "iterations": 0
+        },
+        {
+            "id": "browser:VectorStoreManager",
+            "sprint": 4,
+            "domain": "search_and_vector_stores",
+            "type": "browser_dusk",
+            "test_class": "VectorStoreManagerTest",
+            "test_path": "tests/Browser/VectorStoreManagerTest.php",
+            "status": "todo",
+            "iterations": 0
+        },
+        {
+            "id": "integration:VectorStoreManagement",
+            "sprint": 3,
+            "domain": "search_and_vector_stores",
+            "type": "integration",
+            "test_class": "VectorStoreManagementIntegrationTest",
+            "test_path": "tests/Integration/VectorStoreManagementIntegrationTest.php",
+            "status": "todo",
+            "iterations": 0
+        }
+
+    ],
+    "meta": {
+        "notes": "AI-driven TDD queue; agent should filter components by sprint and then apply red→green→refactor on each test_class."
+    }
+}

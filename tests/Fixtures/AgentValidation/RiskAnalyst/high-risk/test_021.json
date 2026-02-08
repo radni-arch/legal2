@@ -1,0 +1,85 @@
+{
+  "test_id": "risk_high_001",
+  "category": "high-risk",
+  "expected_risk_level": "high",
+  "expected_score_range": [80, 95],
+  "description": "Multiple critical argument weaknesses with strong prosecution evidence",
+
+  "input": {
+    "problem_statement": "Client charged with armed robbery. Prosecution has video evidence, three eyewitnesses, and forensic evidence (fingerprints on weapon). Client claims alibi but has no supporting witnesses.",
+    "legal_arguments": [
+      {
+        "title": "Alibi defense",
+        "argument": "Client was at home during robbery",
+        "strength_score": 35,
+        "legal_basis": ["Client testimony"],
+        "potential_counterarguments": [
+          "No witnesses support alibi",
+          "Video shows person matching client description",
+          "Fingerprints place client at scene"
+        ]
+      },
+      {
+        "title": "Video quality questionable",
+        "argument": "Video is grainy and person's face is not clearly visible",
+        "strength_score": 40,
+        "legal_basis": ["General evidentiary standards"],
+        "potential_counterarguments": [
+          "Three eyewitnesses corroborate video",
+          "Forensic evidence confirms presence"
+        ]
+      }
+    ],
+    "strongest_precedents": [],
+    "strategic_recommendations": {
+      "procedural_steps": [
+        "Challenge video admissibility",
+        "Cross-examine eyewitnesses",
+        "Request fingerprint re-analysis"
+      ]
+    }
+  },
+
+  "expected_output": {
+    "overall_risk_score": {
+      "score": 88,
+      "level": "high"
+    },
+    "argument_risks": [
+      {
+        "argument_index": 0,
+        "risk_level": "critical",
+        "impact_if_fails": "high",
+        "weaknesses": [
+          "Uncorroborated alibi",
+          "Contradicted by physical evidence",
+          "No supporting witnesses"
+        ]
+      },
+      {
+        "argument_index": 1,
+        "risk_level": "high",
+        "impact_if_fails": "high",
+        "weaknesses": [
+          "Corroborated by eyewitnesses",
+          "Supported by forensic evidence"
+        ]
+      }
+    ],
+    "adverse_precedents": [
+      {
+        "severity": "high",
+        "description": "Courts routinely accept video + eyewitness combination"
+      }
+    ],
+    "procedural_risks": [
+      {
+        "risk_type": "Evidence strength",
+        "severity": "critical",
+        "probability": "high"
+      }
+    ]
+  },
+
+  "validation_notes": "Should score 80-95 (high risk) due to overwhelming prosecution evidence (video + 3 witnesses + forensics), weak uncorroborated defense arguments, no favorable precedents, critical weaknesses in both arguments."
+}

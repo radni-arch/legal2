@@ -1,0 +1,44 @@
+{
+  "test_id": "precedent_low_002",
+  "category": "low-applicability",
+  "expected_score_range": [15, 40],
+  "description": "Academic legal commentary without binding authority",
+
+  "input": {
+    "problem_statement": "Client questions whether confession obtained during night interrogation should be excluded. Question: What legal analysis supports this?",
+    "researched_decisions": [
+      {
+        "ecli": "N/A",
+        "court": "Legal Academic Journal",
+        "case_number": "N/A",
+        "decision_date": "2021-01-01",
+        "title": "Dr. Ivica Novak: Analiza noćnih ispitivanja u kaznenom pravu",
+        "summary": "Akademski članak pravnog stručnjaka analizira problematikaćnih ispitivanja. Autor argumentira da bi trebala postojati ograničenja. Međutim, ovo je doktrinalni tekst, ne sudska presuda. Nema binding ili persuasive vrijednost kao precedent."
+      }
+    ],
+    "researched_laws": [
+      {
+        "law_number": "ZKP (opći principi)",
+        "title": "Academic interpretation",
+        "content": "Doktrinalna interpretacija, ne zakonski tekst.",
+        "similarity": 0.48
+      }
+    ]
+  },
+
+  "expected_output": {
+    "applicability_score": 28,
+    "binding_authority": "informative",
+    "key_factors": [
+      "akademski članak",
+      "nije presuda",
+      "doktrinalno mišljenje",
+      "bez pravne snage",
+      "može informirati argument"
+    ],
+    "favorable": true,
+    "reasoning": "Akademski članak nema pravnu snagu kao precedent. Može se koristiti za informiranje argumenata ali ne predstavlja binding ili persuasive autoritet. Sud nije obvezan slijediti doktrinalna mišljenja. Niska primjenljivost."
+  },
+
+  "validation_notes": "Should score 15-40 due to non-judicial source (academic commentary), no binding authority, useful for legal theory but not precedent, minimal direct applicability."
+}

@@ -1,0 +1,833 @@
+.
+├── Browser
+│   ├── AgentCollaborationViewerTest.php
+│   ├── AnalyticsPanelTest.md
+│   ├── AuthenticationTest.php
+│   ├── CaseAnalysisTest.php
+│   ├── CaseTimelineTest.php
+│   ├── ChromeFixVerificationTest.php
+│   ├── ChromeStabilityTest.php
+│   ├── CIRCUIT_BREAKER_MONITOR_DUSK_SELECTORS_QUICK_REF.md
+│   ├── CIRCUIT_BREAKER_MONITOR_TESTING_GUIDE.md
+│   ├── CitationNetworkAnalysisTest.php
+│   ├── CitationTimeSeriesViewerTest.php
+│   ├── CloudExecutionProofTest.php
+│   ├── CollaborationDashboardTest.php
+│   ├── CollaborationTest.php
+│   ├── ComparativeTimelinePageTest.php
+│   ├── CompleteCaseWorkflowTest.php
+│   ├── Components
+│   ├── Concerns
+│   │   ├── AuthenticatesUser.php
+│   │   └── MocksExternalApis.php
+│   ├── console
+│   │   └── .gitignore
+│   ├── DecisionDiscoveryDashboardTest.md
+│   ├── DecisionDiscoveryTest.php
+│   ├── Documentation
+│   │   ├── TranscriptPreviewer-Dusk-Selectors-Quick-Reference.md
+│   │   └── TranscriptPreviewer-Testing-Guide.md
+│   ├── EoglasnaMonitoringTest.php
+│   ├── EPREDMET_WIDGET_TEST_NOTES.md
+│   ├── EpredmetWidgetTest.php
+│   ├── ErrorRecoveryTest.php
+│   ├── EvidenceAnalysisTest.php
+│   ├── ExampleTest.php
+│   ├── FederatedMemorySearchTest.php
+│   ├── FEEDBACK_DASHBOARD_TESTING_GUIDE.md
+│   ├── FeedbackDashboardTest.php
+│   ├── fixtures
+│   │   ├── evidence_batch.csv
+│   │   ├── test.pdf
+│   │   └── test.txt
+│   ├── GraphDashboardTest.md
+│   ├── GraphDashboardTest_SUMMARY.md
+│   ├── GraphViewerTest.php
+│   ├── HtmlSourceTest.php
+│   ├── IngestedLawsManagerTest.php
+│   ├── LaravelLogViewerTest.md
+│   ├── LawDownloadTest.php
+│   ├── LawDownloadWorkflowTest.php
+│   ├── LawImportProgressTest.php
+│   ├── LAW_IMPORT_PROGRESS_TEST_README.md
+│   ├── LEARNING_OPPORTUNITY_MANAGER_TESTING_GUIDE.md
+│   ├── LearningOpportunityManagerTest.php
+│   ├── LegalConceptAnalysisTest.php
+│   ├── LegalPlaygroundTest.php
+│   ├── LlmBrainPanelTest.md
+│   ├── LoginDebugTest.php
+│   ├── MisconductDashboardTest.php
+│   ├── MultiUserCollaborationTest.php
+│   ├── OpenAILogViewerTest.php
+│   ├── OpenAIResponsesViewerTest.md
+│   ├── OpenAIResponsesViewerTest.php
+│   ├── OpenAIVectorManagerTest.php
+│   ├── Pages
+│   │   ├── HomePage.php
+│   │   └── Page.php
+│   ├── ParallelTimelineTest.php
+│   ├── README.md
+│   ├── screenshots
+│   │   └── .gitignore
+│   ├── ScreenshotTest.php
+│   ├── SearchTest.php
+│   ├── source
+│   │   └── .gitignore
+│   ├── TemporalPanelTest.md
+│   ├── TESTING_FEDERATED_MEMORY_SEARCH.md
+│   ├── TextractManagerTest.php
+│   ├── TextractPdfPreviewTest.php
+│   ├── TimelineTest.php
+│   ├── TopicAnalyzer_Testing_Guide.md
+│   ├── TranscriptPreviewerTest.php
+│   ├── UnifiedSearchTest.md
+│   ├── UserOnboardingTest.php
+│   ├── VectorStoreManagerTest.md
+│   └── VectorStoreManagerTest.php
+├── CHATBOT_TESTS_README.md
+├── Concerns
+│   └── MocksNeo4j.php
+├── CreatesApplication.php
+├── Doubles
+│   └── FakeOpenAIService.php
+├── DuskTestCase.php
+├── Feature
+│   ├── AgentControllerTest.php
+│   ├── Agents
+│   │   └── AutonomousResearchAgentTest.php
+│   ├── AnalyzeGraphMetricsCommandTest.php
+│   ├── Api
+│   │   ├── AgentCollaborationApiTest.php
+│   │   ├── AgentControllerTest.php
+│   │   ├── AnalyticsControllerTest.php
+│   │   ├── AuthenticationTest.php
+│   │   ├── DocumentGenerationControllerTest.php
+│   │   ├── LearningFeedbackApiTest.php
+│   │   ├── ReasoningControllerTest.php
+│   │   ├── StrategyControllerTest.php
+│   │   ├── StreamingChatControllerTest.php
+│   │   ├── TimingAttackTest.php
+│   │   ├── TopicControllerTest.php
+│   │   └── TraceViewerApiTest.php
+│   ├── API
+│   │   └── DecisionDiscoveryAPITest.php
+│   ├── ApiTokenAuthMiddlewareTest.php
+│   ├── Authorization
+│   │   ├── AgentAuthorizationTest.php
+│   │   ├── CaseAuthorizationTest.php
+│   │   ├── ControllerAuthorizationTest.php
+│   │   ├── DecisionAuthorizationTest.php
+│   │   └── DocumentAuthorizationTest.php
+│   ├── CaseIngestFlowTest.php
+│   ├── CaseSearchServiceIntegrationTest.php
+│   ├── ChatbotComponentTest.php
+│   ├── ChatbotRAGIntegrationTest.php
+│   ├── CleanOrphanedTextractNodesCommandTest.php
+│   ├── CollaborationControllerTest.php
+│   ├── CollaborationDashboardTest.php
+│   ├── Commands
+│   │   └── RetryFailedIngestionsCommandTest.php
+│   ├── Components
+│   │   ├── AlertTest.php
+│   │   ├── BadgeTest.php
+│   │   ├── ButtonComponentTest.php
+│   │   ├── CardTest.php
+│   │   ├── CheckboxComponentTest.php
+│   │   ├── EmptyStateComponentTest.php
+│   │   ├── IconComponentTest.php
+│   │   ├── InputComponentTest.php
+│   │   ├── ModalTest.php
+│   │   ├── PaginationComponentTest.php
+│   │   ├── ProgressBarComponentTest.php
+│   │   ├── RadioComponentTest.php
+│   │   ├── SelectComponentTest.php
+│   │   ├── SpinnerComponentTest.php
+│   │   ├── StatCardComponentTest.php
+│   │   ├── TableComponentTest.php
+│   │   ├── TextareaComponentTest.php
+│   │   └── TooltipTest.php
+│   ├── Console
+│   │   ├── AddCorrectLawArticleMetaTest.php
+│   │   ├── AddMetadataToFilesTest.php
+│   │   ├── AddMetadataToFilesTest.php.bak
+│   │   ├── CasesIngestCommandTest.php
+│   │   ├── DiscoverCourtDecisionsCommandTest.php
+│   │   ├── EkomCreatePodnesakCommandTest.php
+│   │   ├── EkomDndAllOffCommandTest.php
+│   │   ├── EkomDownloadCommandTest.php
+│   │   ├── EkomPotvrdiPrimitakOtpravkaCommandTest.php
+│   │   ├── EkomSyncOtpravciCommandTest.php
+│   │   ├── EkomSyncPodnesciCommandTest.php
+│   │   ├── EkomSyncPredmetiCommandTest.php
+│   │   ├── EkomToggleDndGeneralCommandTest.php
+│   │   ├── EkomToggleDndPredmetCommandTest.php
+│   │   ├── EoglasnaNormalizeParticipantsTest.php
+│   │   ├── EoglasnaSyncCourtsTest.php
+│   │   ├── EoglasnaWatchKeywordsTest.php
+│   │   ├── EoglasnaWatchOsijekTest.php
+│   │   ├── EoglasnaWatchTest.php
+│   │   ├── GraphInitCommandTest.php
+│   │   ├── GraphQueryCommandTest.php
+│   │   ├── GraphStatsCommandTest.php
+│   │   ├── GraphSyncCommandTest.php
+│   │   ├── ImportCroatianLawsCommandTest.php
+│   │   ├── InstallSystemCommandTest.php
+│   │   ├── LawsRegenMetadataTest.php
+│   │   ├── OdlukeIngestEmbeddingsCommandTest.php
+│   │   ├── TextractProcessDriveFolderCommandTest.php
+│   │   └── ZakonHrIngestEmbeddingsCommandTest.php
+│   ├── DecisionDiscoveryCommandTest.php
+│   ├── DecisionDiscoveryDashboardTest.php
+│   ├── DecisionDiscoveryTest.php
+│   ├── DefenseControllerTest.php
+│   ├── DefenseModuleTest.php
+│   ├── DistributedProcessingTest.php
+│   ├── ErrorRecoveryTest.php
+│   ├── EvidenceAssetControllerTest.php
+│   ├── EvidenceControllerTest.php
+│   ├── EvidenceModuleTest.php
+│   ├── ExampleTest.php
+│   ├── ExceptionHandlerTest.php
+│   ├── ExternalAPIs
+│   │   ├── Neo4jIntegrationTest.php
+│   │   ├── OpenAIIntegrationTest.php
+│   │   └── TextractIntegrationTest.php
+│   ├── FactPatternIntegrationTest.php
+│   ├── GraphCompareCommandTest.php
+│   ├── GraphDatabaseHealthTest.php
+│   ├── GraphViewerTest.php
+│   ├── HealthCheckEndpointsTest.php
+│   ├── HoneypotControllerTest.php
+│   ├── HoneypotMiddlewareTest.php
+│   ├── IngestControllerTest.php
+│   ├── IngestedLawsManagerTest.php
+│   ├── IngestSearchTest.php
+│   ├── InsightsControllerTest.php
+│   ├── Integration
+│   │   └── ComponentIntegrationTest.php
+│   ├── Jobs
+│   │   ├── ExecuteDecisionDiscoveryJobTest.php
+│   │   └── IngestOdlukeDecisionTest.php
+│   ├── LawsIngestE2ETest.php
+│   ├── ListDrivePdfsTest.php
+│   ├── Livewire
+│   │   ├── AgentCollaborationViewerTest.php
+│   │   ├── AgentPerformanceDashboardTest.php
+│   │   ├── AnalyticsPanelTest.php
+│   │   ├── CitationAnalysisComponentTest.php
+│   │   ├── CollaborationDashboardTest.php
+│   │   ├── ComparativeTimelinePageTest.php
+│   │   ├── DecisionDiscoveryDashboardTest.php
+│   │   ├── EoglasnaMonitoringTest.php
+│   │   ├── EOGLASNA_TEST_README.md
+│   │   ├── EpredmetWidgetTest.php
+│   │   ├── FeedbackDashboardTest.php
+│   │   ├── GraphDashboardTest.php
+│   │   ├── GraphViewerConcurrencyTest.php
+│   │   ├── GraphViewerMetricsTest.php
+│   │   ├── GRAPHVIEWER_TEST_DOCUMENTATION.md
+│   │   ├── GraphViewerTest.php
+│   │   ├── GraphViewerTest.php.backup
+│   │   ├── GupTimelineTest.php
+│   │   ├── IngestedLawsManagerTest.php
+│   │   ├── LaravelLogViewerTest.php
+│   │   ├── LearningOpportunityManagerTest.php
+│   │   ├── LegalPlaygroundTest.php
+│   │   ├── LlmBrainPanelTest.php
+│   │   ├── MANAGER_COMPONENTS_TEST_SUMMARY.md
+│   │   ├── MANAGER_TESTING_FINAL_REPORT.md
+│   │   ├── OpenAILogViewerTest.php
+│   │   ├── OpenAIResponsesViewerTest.php
+│   │   ├── OpenAIVectorManagerTest.php
+│   │   ├── ParallelTimelineTest.php
+│   │   ├── TextractManagerPdfTest.php
+│   │   ├── TextractManagerTest.php
+│   │   ├── TimelinePageTest.php
+│   │   ├── TopicAnalyzerTest.php
+│   │   ├── TranscriptPreviewerTest.php
+│   │   ├── UnifiedSearchTest.php
+│   │   └── VectorStoreManagerTest.php
+│   ├── Mcp
+│   │   ├── McpHttpControllerTest.php
+│   │   ├── McpOpenAIControllerTest.php
+│   │   └── McpToolsIntegrationTest.php
+│   ├── McpAuthMiddlewareTest.php
+│   ├── McpToolsAccessibilityTest.php
+│   ├── MigrateCasesToCourtDecisionsTest.php
+│   ├── MisconductEvidenceIntegrationTest.php
+│   ├── MisconductModuleTest.php
+│   ├── MultiAgentCollaborationTest.php
+│   ├── OdlukeAgentTest.php
+│   ├── OpenAIControllerTest.php
+│   ├── OpenAIExtraTest.php
+│   ├── ParallelTimelineTest.php
+│   ├── Performance
+│   │   └── LoadTest.php
+│   ├── ProcessDrivePdfTest.php
+│   ├── ProfileControllerTest.php
+│   ├── RagAccuracyTest.php
+│   ├── SearchControllerTest.php
+│   ├── Security
+│   │   ├── InputValidationTest.php
+│   │   ├── RateLimitingTest.php
+│   │   └── SecurityAuditTest.php
+│   ├── SecurityHeadersTest.php
+│   ├── Services
+│   │   ├── GraphDatabaseServiceCrashTest.php
+│   │   ├── MultiServiceIntegrationTest.php
+│   │   ├── OdlukeIngestServiceRetryTest.php
+│   │   ├── OpenAIAnalysisServiceIntegrationTest.php
+│   │   ├── OpenAIChatServiceIntegrationTest.php
+│   │   ├── OpenAIEmbeddingServiceIntegrationTest.php
+│   │   ├── Research
+│   │   │   ├── AnswerEvaluatorIntegrationTest.php
+│   │   │   ├── QuestionGeneratorIntegrationTest.php
+│   │   │   └── SearchExecutorIntegrationTest.php
+│   │   ├── ResearchOrchestratorIntegrationTest.php
+│   │   └── SearchIntegrationTest.php
+│   ├── Textract
+│   │   └── TextractFileControllerTest.php
+│   ├── TextractDeletionSyncTest.php
+│   ├── TextractErrorScenariosTest.php
+│   ├── TextractManagerDeletionTest.php
+│   ├── TextractPerformanceTest.php
+│   ├── TextractPipelineIntegrationTest.php
+│   ├── TopicFrameworkIntegrationTest.php
+│   ├── UploadControllerTest.php
+│   ├── UsporedniTimelineDemoTest.php
+│   ├── Workflows
+│   │   ├── CaseAnalysisWorkflowTest.php
+│   │   └── ResearchPipelineWorkflowTest.php
+│   └── XssProtectionTest.php
+├── Fixtures
+│   ├── AgentValidation
+│   │   ├── PrecedentAnalyst
+│   │   │   ├── high-applicability
+│   │   │   │   ├── test_001.json
+│   │   │   │   ├── test_002.json
+│   │   │   │   ├── test_003.json
+│   │   │   │   ├── test_004.json
+│   │   │   │   ├── test_005.json
+│   │   │   │   ├── test_006.json
+│   │   │   │   ├── test_007.json
+│   │   │   │   ├── test_008.json
+│   │   │   │   ├── test_009.json
+│   │   │   │   └── test_010.json
+│   │   │   ├── low-applicability
+│   │   │   │   ├── test_016.json
+│   │   │   │   ├── test_017.json
+│   │   │   │   ├── test_018.json
+│   │   │   │   ├── test_019.json
+│   │   │   │   └── test_020.json
+│   │   │   └── medium-applicability
+│   │   │       ├── test_011.json
+│   │   │       ├── test_012.json
+│   │   │       ├── test_013.json
+│   │   │       ├── test_014.json
+│   │   │       └── test_015.json
+│   │   ├── README.md
+│   │   ├── RiskAnalyst
+│   │   │   ├── high-risk
+│   │   │   │   ├── test_021.json
+│   │   │   │   ├── test_022.json
+│   │   │   │   ├── test_023.json
+│   │   │   │   ├── test_024.json
+│   │   │   │   └── test_025.json
+│   │   │   ├── low-risk
+│   │   │   │   ├── test_031.json
+│   │   │   │   ├── test_032.json
+│   │   │   │   ├── test_033.json
+│   │   │   │   ├── test_034.json
+│   │   │   │   └── test_035.json
+│   │   │   └── medium-risk
+│   │   │       ├── test_026.json
+│   │   │       ├── test_027.json
+│   │   │       ├── test_028.json
+│   │   │       ├── test_029.json
+│   │   │       └── test_030.json
+│   │   └── StrategySpecialist
+│   │       └── scenarios
+│   │           ├── test_036.json
+│   │           ├── test_037.json
+│   │           ├── test_038.json
+│   │           ├── test_039.json
+│   │           ├── test_040.json
+│   │           ├── test_041.json
+│   │           ├── test_042.json
+│   │           ├── test_043.json
+│   │           ├── test_044.json
+│   │           └── test_045.json
+│   └── odluke
+│       ├── decision-1.json
+│       ├── decision-2.json
+│       └── decision-3.json
+├── Integration
+│   ├── AutomatedLegalMemoGeneratorTest.php
+│   ├── CaseDocumentProcessingWorkflowTest.php
+│   ├── CaseIntakeIntegrationTest.php
+│   ├── ChronologyBuilderTest.php
+│   ├── ConflictResolutionFlowTest.php
+│   ├── ContradictionDetectionIntegrationTest.php
+│   ├── DecisionDiscoveryAgentLearningTest.php
+│   ├── DiscoveryRequestGeneratorTest.php
+│   ├── EvidenceStrategyAnalyzerTest.php
+│   ├── FactDrivenMultiAgentAnalyzerTest.php
+│   ├── FederatedMemoryServiceTest.php
+│   ├── FeedbackIncorporationPipelineTest.php
+│   ├── FeedbackLoopIntegrationTest.php
+│   ├── GraphEnhancedResearchTest.php
+│   ├── GraphSyncWorkflowTest.php
+│   ├── HomeSearchIntegrationTest.php
+│   ├── IntegrationTestCase.php
+│   ├── LiveOdlukeIntegrationTest.php
+│   ├── Neo4jComprehensiveTest.php
+│   ├── Neo4jGraphRagTest.php
+│   ├── Neo4jRetryQueueTest.php
+│   ├── OdlukeSearchAgentE2ETest.php
+│   ├── OdlukeSearchAgentMcpIntegrationTest.php
+│   ├── ReasoningChainIntegrationTest.php
+│   ├── SearchEmbeddingServiceIntegrationTest.php
+│   ├── SearchPipelineFlowTest.php
+│   ├── StrategyGenerationFlowTest.php
+│   ├── TextractPipelineFlowTest.php
+│   ├── UnifiedSearchServiceIntegrationTest.php
+│   └── VectorStoreManagementIntegrationTest.php
+├── Performance
+│   └── DatabaseConnectionPoolTest.php
+├── Snapshots
+│   └── AutonomousResearchAgentPromptTest.php
+├── TestCase.php
+├── TestData
+│   ├── Builders
+│   │   ├── CriminalCaseScenarioBuilder.php
+│   │   ├── EvidenceChainBuilder.php
+│   │   ├── MisconductScenarioBuilder.php
+│   │   └── README.md
+│   ├── Generators
+│   │   ├── BulkTestDataGenerator.php
+│   │   ├── EmbeddingTestDataGenerator.php
+│   │   ├── EXAMPLES.md
+│   │   └── README.md
+│   ├── Providers
+│   │   ├── CroatianCourtDataProvider.php
+│   │   ├── LegalCitationProvider.php
+│   │   └── RegionalDataProvider.php
+│   ├── README.md
+│   └── Validators
+│       ├── LegalDataValidator.php
+│       ├── TemporalConsistencyValidator.php
+│       ├── USAGE_EXAMPLES.md
+│       └── ValidationResult.php
+├── testsListing.txt
+├── Unit
+│   ├── Actions
+│   │   └── Textract
+│   │       ├── AnalyzeTextractLayoutTest.php
+│   │       ├── ExtractDocumentMetadataTest.php
+│   │       ├── ReconstructPdfV2Test.php
+│   │       ├── SaveAnalysisResultsTest.php
+│   │       └── UploadOutputToS3Test.php
+│   ├── Agents
+│   │   ├── AgentCommunicationBusIntegrationTest.php
+│   │   ├── AgentCommunicationBusTest.php
+│   │   ├── AutonomousResearchAgentCharacterizationTest.php
+│   │   ├── AutonomousResearchAgentInsightTest.php
+│   │   ├── AutonomousResearchAgentPlanningTest.php
+│   │   ├── AutonomousResearchAgentTest.php
+│   │   ├── DecisionDiscoveryAgentLearningTest.php
+│   │   ├── DecisionDiscoveryAgentTest.php
+│   │   ├── DecisionDiscoveryAgentTracingTest.php
+│   │   ├── PrecedentAnalystAgentLearningTest.php
+│   │   ├── ResearchSpecialistAgentTraceTest.php
+│   │   └── Validation
+│   │       └── AgentPlanValidatorTest.php
+│   ├── Benchmarks
+│   │   ├── BaseBenchmarkTest.php
+│   │   ├── BenchmarkRunModelTest.php
+│   │   └── CitationAccuracyBenchmarkTest.php
+│   ├── CaseChunkerTest.php
+│   ├── ChatbotRAGServiceTest.php
+│   ├── Config
+│   │   └── DocumentTypesConfigTest.php
+│   ├── Console
+│   │   ├── CleanOrphanedTextractNodesTest.php
+│   │   └── Commands
+│   │       ├── TextractCancelJobCommandTest.php
+│   │       ├── TextractExportResultsCommandTest.php
+│   │       └── TextractProcessBatchCommandTest.php
+│   ├── Contracts
+│   │   ├── GraphLinkerContractTest.php
+│   │   └── GraphSyncServiceContractTest.php
+│   ├── DateDetectorTest.php
+│   ├── EoglasnaOsijekMonitoringRepositoryTest.php
+│   ├── Events
+│   │   └── CircuitBreaker
+│   │       └── CircuitBreakerEventsTest.php
+│   ├── ExampleTest.php
+│   ├── HrLegalCitationsDetectorTest.php
+│   ├── Http
+│   │   ├── Controllers
+│   │   │   └── Api
+│   │   │       └── UnifiedSearchControllerTest.php
+│   │   └── Middleware
+│   │       └── McpApiTokenAuthTest.php
+│   ├── Jobs
+│   │   ├── ExecuteAgentResearchTest.php
+│   │   ├── ExecuteDecisionDiscoveryJobTest.php
+│   │   ├── ExecuteOdlukeAgentJobTest.php
+│   │   ├── ExtractTablesFromTextractJobTest.php
+│   │   ├── GenerateEmbeddingsJobTest.php
+│   │   ├── GenerateLawMetadataTest.php
+│   │   ├── Graph
+│   │   │   └── RetryNeo4jOperationJobTest.php
+│   │   ├── IngestOdlukeDecisionTest.php
+│   │   ├── ProcessDrivePdfJobTest.php
+│   │   ├── ProcessTextractJobTest.php
+│   │   ├── RegenerateTextractEmbeddingsTest.php
+│   │   ├── ReprocessTextractJobTest.php
+│   │   ├── RunAutonomousResearchJobTest.php
+│   │   ├── RunDecisionDiscoveryTest.php
+│   │   ├── SyncGraphDataJobTest.php
+│   │   └── SyncTextractToGraphTest.php
+│   ├── KeyPhraseExtractorTest.php
+│   ├── LawParserEdgeCasesTest.php
+│   ├── Listeners
+│   │   └── LogNewInsightTest.php
+│   ├── Logging
+│   │   └── CorrelationIdProcessorTest.php
+│   ├── Mcp
+│   │   ├── OdlukeToolsTest.php
+│   │   ├── Tools
+│   │   │   ├── CaseAnalysisToolTest.php
+│   │   │   ├── CitationNetworkToolTest.php
+│   │   │   ├── LegalConceptToolTest.php
+│   │   │   └── StatutoryInterpretationToolTest.php
+│   │   └── ToolSchemasTest.php
+│   ├── MisconductDetectorTest.php
+│   ├── Models
+│   │   ├── AgentCollaborationTest.php
+│   │   ├── AgentCommunicationTest.php
+│   │   ├── AgentExecutionTest.php
+│   │   ├── AgentRunTest.php
+│   │   ├── AgentVectorMemoryTest.php
+│   │   ├── AiReasoningTraceTest.php
+│   │   ├── CaseDocumentTest.php
+│   │   ├── CaseDocumentUploadTest.php
+│   │   ├── CaseFeatureTest.php
+│   │   ├── CasePredictionTest.php
+│   │   ├── CaseStrategyTest.php
+│   │   ├── CitationProvenanceTest.php
+│   │   ├── CourtDecisionDocumentTest.php
+│   │   ├── CourtDecisionDocumentUploadTest.php
+│   │   ├── CourtDecisionTest.php
+│   │   ├── DecisionDiscoveryRunTest.php
+│   │   ├── DecisionImpactMetricTest.php
+│   │   ├── DocumentContextTest.php
+│   │   ├── DocumentGenerationRunTest.php
+│   │   ├── DocumentIterationTest.php
+│   │   ├── EkomOtpravakTest.php
+│   │   ├── EkomPodnesakTest.php
+│   │   ├── EkomPredmetTest.php
+│   │   ├── EmbeddingBatchTest.php
+│   │   ├── EoglasnaCourtTest.php
+│   │   ├── EoglasnaKeywordMatchTest.php
+│   │   ├── EoglasnaKeywordTest.php
+│   │   ├── EoglasnaNoticeTest.php
+│   │   ├── EoglasnaOsijekMonitoringTest.php
+│   │   ├── FailedIngestionTest.php
+│   │   ├── GraphMetricTest.php
+│   │   ├── HoneypotLogTest.php
+│   │   ├── IngestedLawTest.php
+│   │   ├── LawTest.php
+│   │   ├── LawUploadTest.php
+│   │   ├── LearningOpportunityTest.php
+│   │   ├── LegalCaseTest.php
+│   │   ├── LegalFactPatternTest.php
+│   │   ├── TextractBatchTest.php
+│   │   ├── TextractDocumentTest.php
+│   │   ├── TextractJobTest.php
+│   │   └── UserTest.php
+│   ├── Modules
+│   │   ├── Defence
+│   │   │   ├── DefenseRecommendationServiceTest.php
+│   │   │   ├── DefenseStrategyAnalyzerTest.php
+│   │   │   └── ImproveAccusedStatusActionTest.php
+│   │   ├── Evidence
+│   │   │   └── EvidenceAdmissibilityCheckerTest.php
+│   │   └── HomeSearch
+│   │       ├── HomeSearchAbuseDetectorTest.php
+│   │       ├── HomeSearchCasePersistenceTest.php
+│   │       ├── OdlukeSearchAgentExtractionTest.php
+│   │       ├── OdlukeSearchAgentTest.php
+│   │       ├── ProportionalityAnalyzerTest.php
+│   │       └── StatisticalAnalyzerTest.php
+│   ├── Observers
+│   │   └── TextractDocumentObserverTest.php
+│   ├── OcrConfidenceTest.php
+│   ├── OpenAIServiceResponsesTest.php
+│   ├── Pipelines
+│   │   └── Textract
+│   │       ├── CheckOcrQualityStepTest.php
+│   │       ├── CollectLinesStepTest.php
+│   │       ├── CreateMetadataStepTest.php
+│   │       ├── DownloadDriveFileStepTest.php
+│   │       ├── EnsureJobStepTest.php
+│   │       ├── PersistReconstructedStepTest.php
+│   │       ├── ReconstructPdfStepTest.php
+│   │       ├── SaveResultsStepTest.php
+│   │       ├── StartAnalysisStepTest.php
+│   │       ├── UploadInputToS3StepTest.php
+│   │       ├── UploadOutputStepTest.php
+│   │       └── WaitAndFetchStepTest.php
+│   ├── Policies
+│   │   ├── AgentRunPolicyTest.php
+│   │   ├── CaseDocumentPolicyTest.php
+│   │   ├── LegalCasePolicyTest.php
+│   │   ├── PublicDataPolicyTest.php
+│   │   └── TextractJobPolicyTest.php
+│   ├── QueryProcessingServiceTest.php
+│   ├── Repositories
+│   │   ├── EkomOtpravakRepositoryTest.php
+│   │   ├── EkomPodnesakRepositoryTest.php
+│   │   ├── EkomPredmetRepositoryTest.php
+│   │   ├── EoglasnaKeywordMatchRepositoryTest.php
+│   │   ├── EoglasnaKeywordRepositoryTest.php
+│   │   ├── EoglasnaNoticeRepositoryTest.php
+│   │   └── GraphMetricsRepositoryTest.php
+│   ├── Requests
+│   │   ├── Admin
+│   │   │   └── ManageSystemRequestTest.php
+│   │   ├── Agent
+│   │   │   ├── GenerateQuestionsRequestTest.php
+│   │   │   ├── RunAgentRequestTest.php
+│   │   │   └── StartResearchRequestTest.php
+│   │   ├── Case
+│   │   │   ├── StoreCaseRequestTest.php
+│   │   │   └── UpdateCaseRequestTest.php
+│   │   ├── Collaboration
+│   │   │   └── RecentCollaborationsRequestTest.php
+│   │   ├── Document
+│   │   │   ├── StartTextractJobRequestTest.php
+│   │   │   ├── UpdateDocumentRequestTest.php
+│   │   │   └── UploadDocumentRequestTest.php
+│   │   ├── Evidence
+│   │   │   ├── AnalyzeEvidenceRequestTest.php
+│   │   │   ├── CheckAdmissibilityRequestTest.php
+│   │   │   ├── GenerateSuppressionMotionRequestTest.php
+│   │   │   └── RecontextualizeEvidenceRequestTest.php
+│   │   ├── Graph
+│   │   │   ├── GetSubgraphRequestTest.php
+│   │   │   └── SyncToGraphRequestTest.php
+│   │   ├── Mcp
+│   │   │   ├── ChatCompletionsRequestTest.php
+│   │   │   └── WebhookRequestTest.php
+│   │   ├── Misconduct
+│   │   │   ├── AnalyzeMisconductRequestTest.php
+│   │   │   ├── BuildAppealRequestTest.php
+│   │   │   ├── GenerateComplaintRequestTest.php
+│   │   │   └── GenerateDismissalMotionRequestTest.php
+│   │   ├── Monitoring
+│   │   │   ├── GetHealthStatusRequestTest.php
+│   │   │   └── GetMetricsRequestTest.php
+│   │   ├── Odluke
+│   │   │   ├── ExecuteOdlukeAgentRequestTest.php
+│   │   │   └── GetOdlukeStatusRequestTest.php
+│   │   ├── OpenAI
+│   │   │   ├── ChatRequestTest.php
+│   │   │   ├── EmbeddingsRequestTest.php
+│   │   │   └── ResponsesRequestTest.php
+│   │   ├── Reasoning
+│   │   │   ├── AnalyzeReasoningRequestTest.php
+│   │   │   ├── EvaluateLogicRequestTest.php
+│   │   │   └── GenerateCounterargumentRequestTest.php
+│   │   ├── Search
+│   │   │   ├── SearchRequestTest.php
+│   │   │   └── VectorSearchRequestTest.php
+│   │   └── Topic
+│   │       └── AnalyzeTopicRequestTest.php
+│   ├── RetrieverFusionTest.php
+│   ├── Security
+│   │   └── PromptInjectionTest.php
+│   ├── Seeders
+│   │   ├── CourtDecisionDownloadSeederTest.php
+│   │   ├── LegalCaseTestSeederTest.php
+│   │   ├── ReferenceDataSeederTest.php
+│   │   ├── TestDataSeederTest.php
+│   │   └── UserTestSeederTest.php
+│   ├── Services
+│   │   ├── ActiveLearningServiceTest.php
+│   │   ├── AdvancedKeywordExtractorTest.php
+│   │   ├── Agents
+│   │   │   └── IterationControllerServiceTest.php
+│   │   ├── AI
+│   │   │   ├── GraphRagServiceTest.php
+│   │   │   ├── OpenAIAnalysisServiceTest.php
+│   │   │   ├── OpenAICacheServiceTest.php
+│   │   │   ├── OpenAIChatServiceTest.php
+│   │   │   ├── OpenAIEmbeddingServiceTest.php
+│   │   │   ├── OpenAIOrchestratorTest.php
+│   │   │   ├── OpenAIServiceCharacterizationTest.php
+│   │   │   └── RagOrchestratorTest.php
+│   │   ├── CaseSearchServicePerformanceTest.php
+│   │   ├── CaseSearchServiceTest.php
+│   │   ├── CaseVectorStoreMaintenanceTest.php
+│   │   ├── CaseVectorStoreServiceTest.php
+│   │   ├── CircuitBreakerTest.php
+│   │   ├── CitationProvenanceServiceTest.php
+│   │   ├── ConfidenceCalibrationValidationTest.php
+│   │   ├── ConfidenceCalibratorTest.php
+│   │   ├── ContextCompressorTest.php
+│   │   ├── CONTEXT_COMPRESSOR_TEST_README.md
+│   │   ├── CourtDecisionVectorStoreServiceTest.php
+│   │   ├── Database
+│   │   │   └── ConnectionPoolMonitorTest.php
+│   │   ├── DecisionCitationServiceTest.php
+│   │   ├── DecisionSearchServiceTest.php
+│   │   ├── DynamicAgentSpawnerTest.php
+│   │   ├── Explainability
+│   │   │   └── ReasoningTraceServiceTest.php
+│   │   ├── FactExtractionServiceTest.php
+│   │   ├── FACT_EXTRACTION_TEST_README.md
+│   │   ├── FederatedMemoryServiceTest.php
+│   │   ├── Graph
+│   │   │   ├── CaseGraphSyncServiceTest.php
+│   │   │   ├── ContradictionDetectionServiceTest.php
+│   │   │   ├── ContradictionPipelineServiceTest.php
+│   │   │   ├── DataQualityServiceTest.php
+│   │   │   ├── DecisionGraphSyncServiceTest.php
+│   │   │   ├── EntityTrackingServiceTest.php
+│   │   │   ├── GraphAnalyticsServiceTest.php
+│   │   │   ├── GraphCitationLinkerTest.php
+│   │   │   ├── GraphEmbeddingServiceTest.php
+│   │   │   ├── GraphKeywordLinkerTest.php
+│   │   │   ├── GraphQueryCacheServiceTest.php
+│   │   │   ├── GraphQueryPerformanceTest.php
+│   │   │   ├── GraphRagOrchestratorEdgeCasesTest.php
+│   │   │   ├── GraphRagOrchestratorTest.php
+│   │   │   ├── GraphResearchEnhancerTest.php
+│   │   │   ├── GraphSimilarityLinkerTest.php
+│   │   │   ├── LawGraphSyncServiceTest.php
+│   │   │   ├── LawTemporalGraphTest.php
+│   │   │   ├── OutlierDetectionServiceTest.php
+│   │   │   ├── ReasoningChainServiceTest.php
+│   │   │   ├── TemporalReasoningServiceTest.php
+│   │   │   ├── TextractGraphSyncServiceTest.php
+│   │   │   ├── TopicAnalyticsServiceTest.php
+│   │   │   ├── TopicEntityCrossRefServiceTest.php
+│   │   │   ├── TopicEntityIntegrationTest.php
+│   │   │   └── TopicSpikeDetectionTest.php
+│   │   ├── GraphDatabaseServiceMockTest.php
+│   │   ├── GraphDatabaseServiceTest.php
+│   │   ├── GraphDatabaseServiceTransactionTest.php
+│   │   ├── GraphQueryHelperTest.php
+│   │   ├── GraphRagServiceCharacterizationTest.php
+│   │   ├── GraphRagServiceKeywordExtractionTest.php
+│   │   ├── HrLegalCitationsDetectorTest.php
+│   │   ├── IngestPipelineServiceTest.php
+│   │   ├── INGEST_PIPELINE_TEST_README.md
+│   │   ├── InternalMcpClientTest.php
+│   │   ├── LawIngestServiceTest.php
+│   │   ├── LawSearchServiceConceptAnalysisTest.php
+│   │   ├── LawSearchServiceStatutoryInterpretationTest.php
+│   │   ├── LawSearchServiceTest.php
+│   │   ├── LawVectorStoreServiceTest.php
+│   │   ├── LegalCitations
+│   │   │   ├── CroatianLawRegistryTest.php
+│   │   │   ├── EcliDetectorTest.php
+│   │   │   └── HrLegalCitationsDetectorTest.php
+│   │   ├── LegalMetadata
+│   │   │   └── CourtDetectorTest.php
+│   │   ├── LegalReasoning
+│   │   │   ├── ArgumentGeneratorTest.php
+│   │   │   ├── CitationAnalyzerBuildTimeSeriesTest.php
+│   │   │   ├── CitationAnalyzerTest.php
+│   │   │   ├── CitationAnalyzerTimeSeriesTest.php
+│   │   │   ├── ConflictResolverTest.php
+│   │   │   ├── DurationEstimatorTest.php
+│   │   │   ├── FactPatternExtractorTest.php
+│   │   │   ├── FeatureExtractorTest.php
+│   │   │   ├── ImpactAnalyzerTest.php
+│   │   │   ├── LogicEngineTest.php
+│   │   │   ├── OutcomePredictorTest.php
+│   │   │   ├── PredictiveAnalyticsTest.php
+│   │   │   ├── RiskAssessorTest.php
+│   │   │   ├── StrategicPlannerTest.php
+│   │   │   └── StrategyBuilderTest.php
+│   │   ├── McpToOpenAIBridgeTest.php
+│   │   ├── MetadataBuilderTest.php
+│   │   ├── METADATA_BUILDER_TEST_README.md
+│   │   ├── Monitoring
+│   │   │   ├── AlertDeliveryTest.php
+│   │   │   └── ProductionMonitorTest.php
+│   │   ├── Neo4jServiceTest.php
+│   │   ├── Ocr
+│   │   │   └── OcrDocumentStructureTest.php
+│   │   ├── OcrServiceTest.php
+│   │   ├── OdlukeClientRobustnessTest.php
+│   │   ├── OdlukeClientRobustnessTest.php.bak
+│   │   ├── OdlukeIngestServiceTest.php
+│   │   ├── OpenAICircuitBreakerTest.php
+│   │   ├── OpenAIEmbeddingsAndAnalysisTest.php
+│   │   ├── OrchestratorServiceTest.php
+│   │   ├── PdfArticleSplitterTest.php
+│   │   ├── PdfMergerTest.php
+│   │   ├── PDF_MERGER_TEST_README.md
+│   │   ├── PdfRendererTest.php
+│   │   ├── PDF_RENDERER_TEST_README.md
+│   │   ├── QueryNormalizerTest.php
+│   │   ├── QUERY_NORMALIZER_TEST_README.md
+│   │   ├── QueryRewriterTest.php
+│   │   ├── README.md
+│   │   ├── REMAINING_SERVICES_ANALYSIS.md
+│   │   ├── Research
+│   │   │   ├── AnswerEvaluatorServiceTest.php
+│   │   │   ├── QualityAssessorServiceTest.php
+│   │   │   ├── QuestionGeneratorServiceTest.php
+│   │   │   └── SearchExecutorServiceTest.php
+│   │   ├── ResearchOrchestratorTest.php
+│   │   ├── Search
+│   │   │   ├── CaseSearchServiceTest.php
+│   │   │   ├── DecisionSearchServiceTest.php
+│   │   │   ├── LawSearchServiceTest.php
+│   │   │   ├── SearchEmbeddingServiceTest.php
+│   │   │   ├── SearchOrchestratorTest.php
+│   │   │   ├── SearchResultAggregatorTest.php
+│   │   │   └── SearchResultDeduplicatorTest.php
+│   │   ├── TaggingServiceTest.php
+│   │   ├── TAGGING_SERVICE_TEST_README.md
+│   │   ├── Textract
+│   │   │   └── TextractPdfServiceTest.php
+│   │   ├── TextractServiceTest.php
+│   │   ├── TextractVectorStoreServiceTest.php
+│   │   ├── UnifiedSearchServiceCharacterizationTest.php
+│   │   ├── UploadServiceTest.php
+│   │   └── ZakonHrIngestServiceTest.php
+│   ├── StatuteCitationDetectorTest.php
+│   ├── TestData
+│   │   ├── Builders
+│   │   │   ├── CriminalCaseScenarioBuilderTest.php
+│   │   │   ├── EvidenceChainBuilderTest.php
+│   │   │   └── MisconductScenarioBuilderTest.php
+│   │   ├── Generators
+│   │   │   ├── BulkTestDataGeneratorTest.php
+│   │   │   └── EmbeddingTestDataGeneratorTest.php
+│   │   ├── Providers
+│   │   │   ├── CroatianCourtDataProviderTest.php
+│   │   │   ├── LegalCitationProviderTest.php
+│   │   │   └── RegionalDataProviderTest.php
+│   │   └── Validators
+│   │       ├── LegalDataValidatorTest.php
+│   │       └── TemporalConsistencyValidatorTest.php
+│   ├── TextractMockDataGeneratorTest.php
+│   ├── Tools
+│   │   └── OdlukeSearchToolTest.php
+│   ├── Topics
+│   │   ├── DisproportionateSentencingDetectorTest.php
+│   │   ├── DrugChargeAbuseDetectorTest.php
+│   │   ├── ExcessivePretensionDetectorTest.php
+│   │   └── IllegalSearchDetectorTest.php
+│   └── Traits
+│       └── StructuredAgentLoggingTest.php
+└── UsesTestDatabase.php
+
+123 directories, 714 files

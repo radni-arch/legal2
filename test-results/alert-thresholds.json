@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "description": "Thresholds for telemetry alerts and error budgeting",
+  "thresholds": {
+    "consecutive_failures": {
+      "enabled": true,
+      "limit": 3,
+      "description": "Alert after N consecutive test failures (any component)"
+    },
+    "component_failure_streak": {
+      "enabled": true,
+      "limit": 2,
+      "description": "Alert after same component fails N times in a row"
+    },
+    "duration_spike": {
+      "enabled": true,
+      "multiplier": 3.0,
+      "min_baseline_runs": 5,
+      "description": "Alert when duration exceeds baseline avg * multiplier"
+    },
+    "hourly_failure_rate": {
+      "enabled": true,
+      "max_percent": 50,
+      "min_runs": 5,
+      "description": "Alert when hourly failure rate exceeds threshold"
+    }
+  },
+  "alert_display": {
+    "show_last_n_failures": 5,
+    "box_style": "prominent"
+  },
+  "meta": {
+    "created": "2025-12-18",
+    "notes": "Override thresholds via environment: ALERT_CONSECUTIVE_FAILURES=5"
+  }
+}

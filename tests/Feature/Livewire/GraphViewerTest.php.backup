@@ -1,0 +1,278 @@
+<?php
+
+namespace Tests\Feature\Livewire;
+
+use App\Http\Livewire\GraphViewer;
+use App\Repositories\GraphMetricsRepository;
+use App\Services\GraphDatabaseService;
+use Livewire\Livewire;
+use Mockery;
+use Tests\TestCase;
+use Tests\UsesTestDatabase;
+
+class GraphViewerTest extends TestCase
+{
+    use UsesTestDatabase;
+
+    protected $graphService;
+
+    protected $metricsRepository;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Mock the GraphDatabaseService
+        $this->graphService = Mockery::mock(GraphDatabaseService::class);
+        $this->app->instance(GraphDatabaseService::class, $this->graphService);
+
+        // Mock the GraphMetricsRepository
+        $this->metricsRepository = Mockery::mock(GraphMetricsRepository::class);
+        $this->app->instance(GraphMetricsRepository::class, $this->metricsRepository);
+    }
+
+    /**
+     * Test 1: Component renders correctly with initial state
+     *
+     * @test
+     */
+    public function test_component_renders_correctly()
+    {
+        // Mock the mount dependencies
+        $this->graphService->shouldReceive('run')->andReturn(collect([]));
+        $this->metricsRepository->shouldReceive('getInfluentialDecisions')->andReturn([]);
+        $this->metricsRepository->shouldReceive('getCitationClusters')->andReturn([]);
+        $this->metricsRepository->shouldReceive('getNetworkStatistics')->andReturn(null);
+
+        Livewire::test(GraphViewer::class)
+            ->assertStatus(200)
+            ->assertViewIs('livewire.graph-viewer')
+            ->assertSet('searchTerm', '')
+            ->assertSet('selectedNodeType', 'CourtDecisionDocument')
+            ->assertSet('selectedNodeId', '')
+            ->assertSet('selectedNode', null)
+            ->assertSet('depth', 2)
+            ->assertSet('relationshipType', '')
+            ->assertSet('limit', 50)
+            ->assertSet('includeProperties', true)
+            ->assertSet('loading', false)
+            ->assertSet('error', null)
+            ->assertSet('viewMode', 'graph')
+            ->assertSet('showMetrics', true);
+    }
+
+    /**
+     * Test 2: Search term input binding works
+     *
+     * @test
+     */
+    public function test_search_term_input_binding_works()
+    {
+        $this->graphService->shouldReceive('run')->andReturn(collect([]));
+        $this->metricsRepository->shouldReceive('getInfluentialDecisions')->andReturn([]);
+        $this->metricsRepository->shouldReceive('getCitationClusters')->andReturn([]);
+        $this->metricsRepository->shouldReceive('getNetworkStatistics')->andReturn(null);
+
+        Livewire::test(GraphViewer::class)
+            ->assertSet('searchTerm', '')
+            ->set('searchTerm', 'test search')
+            ->assertSet('searchTerm', 'test search');
+    }
+
+    /**
+     * Test 3: Node type selection works
+     *
+     * @test
+     */
+    public function test_node_type_selection_works()
+    {
+        $this->graphService->shouldReceive('run')->andReturn(collect([]));
+        $this->metricsRepository->shouldReceive('getInfluentialDecisions')->andReturn([]);
+        $this->metricsRepository->shouldReceive('getCitationClusters')->andReturn([]);
+        $this->metricsRepository->shouldReceive('getNetworkStatistics')->andReturn(null);
+
+        Livewire::test(GraphViewer::class)
+            ->assertSet('selectedNodeType', 'CourtDecisionDocument')
+            ->set('selectedNodeType', 'LawDocument')
+            ->assertSet('selectedNodeType', 'LawDocument')
+            ->set('selectedNodeType', 'Court')
+            ->assertSet('selectedNodeType', 'Court');
+    }
+
+    /**
+     * Test 4: Graph configuration properties work
+     *
+     * @test
+     */
+    public function test_graph_configuration_properties_work()
+    {
+        $this->graphService->shouldReceive('run')->andReturn(collect([]));
+        $this->metricsRepository->shouldReceive('getInfluentialDecisions')->andReturn([]);
+        $this->metricsRepository->shouldReceive('getCitationClusters')->andReturn([]);
+        $this->metricsRepository->shouldReceive('getNetworkStatistics')->andReturn(null);
+
+        Livewire::test(GraphViewer::class)
+            ->set('depth', 3)
+            ->assertSet('depth', 3)
+            ->set('relationshipType', 'CITES')
+            ->assertSet('relationshipType', 'CITES')
+            ->set('limit', 100)
+            ->assertSet('limit', 100)
+            ->set('includeProperties', false)
+            ->assertSet('includeProperties', false);
+    }
+
+    /**
+     * Test 5: View mode toggle works
+     *
+     * @test
+     */
+    public function test_view_mode_toggle_works()
+    {
+        $this->graphService->shouldReceive('run')->andReturn(collect([]));
+        $this->metricsRepository->shouldReceive('getInfluentialDecisions')->andReturn([]);
+        $this->metricsRepository->shouldReceive('getCitationClusters')->andReturn([]);
+        $this->metricsRepository->shouldReceive('getNetworkStatistics')->andReturn(null);
+
+        Livewire::test(GraphViewer::class)
+            ->assertSet('viewMode', 'graph')
+            ->set('viewMode', 'table')
+            ->assertSet('viewMode', 'table')
+            ->set('viewMode', 'json')
+            ->assertSet('viewMode', 'json')
+            ->set('viewMode', 'graph')
+            ->assertSet('viewMode', 'graph');
+    }
+
+    /**
+     * Test 6: Search validation - empty search term shows error
+     *
+     * @test
+     */
+    public function test_search_validation_empty_term_shows_error()
+    {
+        $this->graphService->shouldReceive('run')->andReturn(collect([]));
+        $this->metricsRepository->shouldReceive('getInfluentialDecisions')->andReturn([]);
+        $this->metricsRepository->shouldReceive('getCitationClusters')->andReturn([]);
+        $this->metricsRepository->shouldReceive('getNetworkStatistics')->andReturn(null);
+
+        Livewire::test(GraphViewer::class)
+            ->set('searchTerm', '')
+            ->call('searchNodes')
+            ->assertSet('error', 'Please enter a search term');
+    }
+
+    /**
+     * Test 7: Search with no results shows appropriate message
+     *
+     * @test
+     */
+    public function test_search_with_no_results_shows_message()
+    {
+        // Mock mount dependencies
+        $this->graphService->shouldReceive('run')->once()->andReturn(collect([]));
+        $this->metricsRepository->shouldReceive('getInfluentialDecisions')->andReturn([]);
+        $this->metricsRepository->shouldReceive('getCitationClusters')->andReturn([]);
+        $this->metricsRepository->shouldReceive('getNetworkStatistics')->andReturn(null);
+
+        // Mock search query
+        $this->graphService->shouldReceive('run')
+            ->with(Mockery::type('string'), ['term' => 'nonexistent'])
+            ->once()
+            ->andReturn(collect([]));
+
+        Livewire::test(GraphViewer::class)
+            ->set('searchTerm', 'nonexistent')
+            ->call('searchNodes')
+            ->assertSet('error', 'No nodes found matching your search')
+            ->assertSet('graphData', null);
+    }
+
+    /**
+     * Test 8: Metrics panel toggle works
+     *
+     * @test
+     */
+    public function test_metrics_panel_toggle_works()
+    {
+        $this->graphService->shouldReceive('run')->andReturn(collect([]));
+        $this->metricsRepository->shouldReceive('getInfluentialDecisions')->andReturn([]);
+        $this->metricsRepository->shouldReceive('getCitationClusters')->andReturn([]);
+        $this->metricsRepository->shouldReceive('getNetworkStatistics')->andReturn(null);
+
+        Livewire::test(GraphViewer::class)
+            ->assertSet('showMetrics', true)
+            ->set('showMetrics', false)
+            ->assertSet('showMetrics', false)
+            ->set('showMetrics', true)
+            ->assertSet('showMetrics', true);
+    }
+
+    /**
+     * Test 9: Loading state management
+     *
+     * @test
+     */
+    public function test_loading_state_initially_false()
+    {
+        $this->graphService->shouldReceive('run')->andReturn(collect([]));
+        $this->metricsRepository->shouldReceive('getInfluentialDecisions')->andReturn([]);
+        $this->metricsRepository->shouldReceive('getCitationClusters')->andReturn([]);
+        $this->metricsRepository->shouldReceive('getNetworkStatistics')->andReturn(null);
+
+        Livewire::test(GraphViewer::class)
+            ->assertSet('loading', false);
+    }
+
+    /**
+     * Test 10: Node types property contains expected types
+     *
+     * @test
+     */
+    public function test_node_types_property_contains_expected_types()
+    {
+        $this->graphService->shouldReceive('run')->andReturn(collect([]));
+        $this->metricsRepository->shouldReceive('getInfluentialDecisions')->andReturn([]);
+        $this->metricsRepository->shouldReceive('getCitationClusters')->andReturn([]);
+        $this->metricsRepository->shouldReceive('getNetworkStatistics')->andReturn(null);
+
+        $component = Livewire::test(GraphViewer::class);
+
+        $nodeTypes = $component->get('nodeTypes');
+
+        $this->assertIsArray($nodeTypes);
+        $this->assertArrayHasKey('CourtDecisionDocument', $nodeTypes);
+        $this->assertArrayHasKey('LawDocument', $nodeTypes);
+        $this->assertArrayHasKey('Court', $nodeTypes);
+        $this->assertArrayHasKey('Keyword', $nodeTypes);
+    }
+
+    /**
+     * Test 11: Relationship types property contains expected types
+     *
+     * @test
+     */
+    public function test_relationship_types_property_contains_expected_types()
+    {
+        $this->graphService->shouldReceive('run')->andReturn(collect([]));
+        $this->metricsRepository->shouldReceive('getInfluentialDecisions')->andReturn([]);
+        $this->metricsRepository->shouldReceive('getCitationClusters')->andReturn([]);
+        $this->metricsRepository->shouldReceive('getNetworkStatistics')->andReturn(null);
+
+        $component = Livewire::test(GraphViewer::class);
+
+        $relationshipTypes = $component->get('relationshipTypes');
+
+        $this->assertIsArray($relationshipTypes);
+        $this->assertArrayHasKey('CITES', $relationshipTypes);
+        $this->assertArrayHasKey('REFERENCES', $relationshipTypes);
+        $this->assertArrayHasKey('OVERRULES', $relationshipTypes);
+        $this->assertArrayHasKey('SIMILAR_TO', $relationshipTypes);
+    }
+
+    protected function tearDown(): void
+    {
+        Mockery::close();
+        parent::tearDown();
+    }
+}

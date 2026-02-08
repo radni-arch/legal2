@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "description": "Registry of known flaky tests that should be retried on failure",
+  "defaults": {
+    "max_retries": 1
+  },
+  "tests": {
+  },
+  "patterns": {
+    "dusk": {
+      "match": "tests/Browser/",
+      "max_retries": 1,
+      "reason": "Browser tests have inherent timing variability",
+      "recovery": "add_stabilization_flags"
+    }
+  },
+  "error_signatures": {
+    "db_connection": {
+      "patterns": [
+        "SQLSTATE\\[HY000\\].*Connection refused",
+        "SQLSTATE\\[08006\\]",
+        "could not connect to server"
+      ],
+      "max_retries": 1,
+      "recovery": "clear_config_cache",
+      "reason": "Transient database connectivity issue"
+    },
+    "db_lock": {
+      "patterns": [
+        "SQLSTATE\\[40001\\].*Deadlock",
+        "Lock wait timeout exceeded"
+      ],
+      "max_retries": 1,
+      "recovery": "none",
+      "reason": "Database lock contention"
+    }
+  },
+  "hard_cap": 2,
+  "meta": {
+    "created": "2025-12-18",
+    "notes": "Add specific flaky tests to 'tests' object with test class/method as key"
+  }
+}

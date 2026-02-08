@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+>
+    <testsuites>
+        <testsuite name="Unit">
+            <directory>tests/Unit</directory>
+        </testsuite>
+        <testsuite name="Feature">
+            <directory>tests/Feature</directory>
+        </testsuite>
+        <testsuite name="Integration">
+            <directory>tests/Integration</directory>
+        </testsuite>
+        <testsuite name="Browser">
+            <directory suffix="Test.php">./tests/Browser</directory>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory>app</directory>
+        </include>
+    </source>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <env name="APP_MAINTENANCE_DRIVER" value="file"/>
+        <env name="BCRYPT_ROUNDS" value="4"/>
+        <env name="CACHE_STORE" value="array"/>
+        <env name="DB_CONNECTION" value="pgsql"/>
+        <env name="DB_HOST" value="127.0.0.1"/>
+        <env name="DB_PORT" value="5432"/>
+        <env name="DB_DATABASE" value="ai_legal_war_machine"/>
+        <env name="DB_USERNAME" value="claude"/>
+        <env name="DB_PASSWORD" value="claude"/>
+        <env name="MAIL_MAILER" value="array"/>
+        <env name="QUEUE_CONNECTION" value="sync"/>
+        <env name="SESSION_DRIVER" value="array"/>
+        <env name="PULSE_ENABLED" value="false"/>
+        <env name="TELESCOPE_ENABLED" value="false"/>
+        <env name="NIGHTWATCH_ENABLED" value="false"/>
+        <env name="NEO4J_SYNC_ENABLED" value="true"/>
+        <env name="NEO4J_ENABLED" value="true"/>
+        <env name="NEO4J_PASSWORD" value="password"/>
+        <env name="NEO4J_URI" value="bolt://localhost:7687"/>
+        <env name="NEO4J_USER" value="neo4j"/>
+        <env name="VIZRA_ADK_VECTOR_ENABLED" value="false"/>
+        <env name="AWS_ACCESS_KEY_ID" value="test"/>
+        <env name="AWS_SECRET_ACCESS_KEY" value="test"/>
+        <env name="AWS_DEFAULT_REGION" value="eu-central-1"/>
+        <env name="AWS_BUCKET" value="test-bucket"/>
+        <env name="OPENAI_API_KEY" value="sk-test-fake-key-for-testing-only"/>
+    </php>
+</phpunit>

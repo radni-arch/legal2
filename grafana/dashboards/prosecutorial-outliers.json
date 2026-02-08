@@ -1,0 +1,528 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      },
+      {
+        "datasource": {
+          "type": "postgres",
+          "uid": "ai-legal-postgres"
+        },
+        "enable": true,
+        "iconColor": "blue",
+        "name": "Detection Runs",
+        "rawQuery": "SELECT detected_at as time, 'Outlier Detection Run' as text FROM prosecutor_outliers GROUP BY detected_at ORDER BY detected_at",
+        "textColumn": "text",
+        "timeColumn": "time"
+      }
+    ]
+  },
+  "description": "Sprint 8.3: Statistical analysis for prosecutors and courts with anomalous evidence suppression or rights violation rates (z-score > 2.0)",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "ai-legal-postgres"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {"color": "green", "value": null},
+              {"color": "yellow", "value": 1},
+              {"color": "orange", "value": 3},
+              {"color": "red", "value": 5}
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {"h": 8, "w": 6, "x": 0, "y": 0},
+      "id": 1,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.0",
+      "targets": [
+        {
+          "datasource": {"type": "postgres", "uid": "ai-legal-postgres"},
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT COUNT(*) FROM prosecutor_outliers WHERE detected_at >= NOW() - INTERVAL '30 days' AND severity IN ('moderate', 'high', 'extreme')",
+          "refId": "A"
+        }
+      ],
+      "title": "Outliers Detected (Last 30 Days)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "ai-legal-postgres"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "palette-classic"},
+          "custom": {
+            "hideFrom": {"legend": false, "tooltip": false, "viz": false}
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {"h": 8, "w": 6, "x": 6, "y": 0},
+      "id": 2,
+      "options": {
+        "legend": {"displayMode": "table", "placement": "right", "showLegend": true, "values": ["value"]},
+        "pieType": "pie",
+        "tooltip": {"mode": "single", "sort": "none"}
+      },
+      "targets": [
+        {
+          "datasource": {"type": "postgres", "uid": "ai-legal-postgres"},
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT severity, COUNT(*) as count FROM prosecutor_outliers WHERE detected_at >= NOW() - INTERVAL '30 days' GROUP BY severity ORDER BY CASE severity WHEN 'extreme' THEN 1 WHEN 'high' THEN 2 WHEN 'moderate' THEN 3 ELSE 4 END",
+          "refId": "A"
+        }
+      ],
+      "title": "Outliers by Severity",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "ai-legal-postgres"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "thresholds"},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {"color": "green", "value": null},
+              {"color": "yellow", "value": 1},
+              {"color": "red", "value": 3}
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {"h": 8, "w": 6, "x": 12, "y": 0},
+      "id": 3,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.0",
+      "targets": [
+        {
+          "datasource": {"type": "postgres", "uid": "ai-legal-postgres"},
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT COUNT(*) FROM prosecutor_outliers WHERE detected_at >= NOW() - INTERVAL '30 days' AND severity = 'extreme' AND metric_type = 'suppression_rate'",
+          "refId": "A"
+        }
+      ],
+      "title": "Extreme Suppression Rate Outliers",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "ai-legal-postgres"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "thresholds"},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {"color": "green", "value": null},
+              {"color": "yellow", "value": 1},
+              {"color": "red", "value": 2}
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {"h": 8, "w": 6, "x": 18, "y": 0},
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.0",
+      "targets": [
+        {
+          "datasource": {"type": "postgres", "uid": "ai-legal-postgres"},
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT COUNT(*) FROM prosecutor_outliers WHERE detected_at >= NOW() - INTERVAL '30 days' AND court IS NOT NULL AND severity IN ('high', 'extreme')",
+          "refId": "A"
+        }
+      ],
+      "title": "Court Violation Outliers",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "ai-legal-postgres"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "palette-classic"},
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "opacity",
+            "hideFrom": {"legend": false, "tooltip": false, "viz": false},
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {"type": "linear"},
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {"group": "A", "mode": "none"},
+            "thresholdsStyle": {"mode": "off"}
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {"color": "green", "value": null}
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {"id": "byName", "options": "extreme"},
+            "properties": [
+              {"id": "color", "value": {"fixedColor": "red", "mode": "fixed"}},
+              {"id": "custom.lineWidth", "value": 3}
+            ]
+          },
+          {
+            "matcher": {"id": "byName", "options": "high"},
+            "properties": [{"id": "color", "value": {"fixedColor": "orange", "mode": "fixed"}}]
+          },
+          {
+            "matcher": {"id": "byName", "options": "moderate"},
+            "properties": [{"id": "color", "value": {"fixedColor": "yellow", "mode": "fixed"}}]
+          }
+        ]
+      },
+      "gridPos": {"h": 10, "w": 24, "x": 0, "y": 8},
+      "id": 5,
+      "options": {
+        "legend": {"calcs": ["mean", "max"], "displayMode": "table", "placement": "right", "showLegend": true},
+        "tooltip": {"mode": "multi", "sort": "desc"}
+      },
+      "targets": [
+        {
+          "datasource": {"type": "postgres", "uid": "ai-legal-postgres"},
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT detected_at as time, severity, COUNT(*) as count FROM prosecutor_outliers WHERE detected_at >= NOW() - INTERVAL '90 days' GROUP BY detected_at, severity ORDER BY detected_at",
+          "refId": "A"
+        }
+      ],
+      "title": "Outlier Detection Trend (90 Days)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "ai-legal-postgres"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "thresholds"},
+          "custom": {
+            "align": "left",
+            "cellOptions": {"type": "auto"},
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {"color": "green", "value": null}
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {"id": "byName", "options": "severity"},
+            "properties": [
+              {"id": "custom.cellOptions", "value": {"type": "color-background"}},
+              {"id": "mappings", "value": [
+                {"options": {"extreme": {"color": "dark-red", "index": 0}}, "type": "value"},
+                {"options": {"high": {"color": "dark-orange", "index": 1}}, "type": "value"},
+                {"options": {"moderate": {"color": "dark-yellow", "index": 2}}, "type": "value"}
+              ]}
+            ]
+          },
+          {
+            "matcher": {"id": "byName", "options": "z_score"},
+            "properties": [
+              {"id": "custom.cellOptions", "value": {"mode": "gradient", "type": "gauge"}},
+              {"id": "min", "value": 2},
+              {"id": "max", "value": 5},
+              {"id": "thresholds", "value": {
+                "mode": "absolute",
+                "steps": [
+                  {"color": "yellow", "value": null},
+                  {"color": "orange", "value": 2.5},
+                  {"color": "red", "value": 3}
+                ]
+              }}
+            ]
+          },
+          {
+            "matcher": {"id": "byName", "options": "metric_value"},
+            "properties": [
+              {"id": "custom.cellOptions", "value": {"type": "auto"}},
+              {"id": "unit", "value": "percentunit"}
+            ]
+          }
+        ]
+      },
+      "gridPos": {"h": 10, "w": 24, "x": 0, "y": 18},
+      "id": 6,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {"countRows": false, "fields": "", "reducer": ["sum"], "show": false},
+        "showHeader": true,
+        "sortBy": [{"desc": true, "displayName": "z_score"}]
+      },
+      "pluginVersion": "10.0.0",
+      "targets": [
+        {
+          "datasource": {"type": "postgres", "uid": "ai-legal-postgres"},
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT prosecutor_name, COALESCE(court, 'N/A') as court, metric_type, ROUND(metric_value::numeric, 4) as metric_value, ROUND(z_score::numeric, 2) as z_score, severity, sample_size, TO_CHAR(detected_at, 'YYYY-MM-DD HH24:MI') as detected_at FROM prosecutor_outliers WHERE detected_at >= NOW() - INTERVAL '30 days' ORDER BY ABS(z_score) DESC LIMIT 20",
+          "refId": "A"
+        }
+      ],
+      "title": "Top 20 Outliers (Last 30 Days)",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "ai-legal-postgres"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "palette-classic"},
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {"legend": false, "tooltip": false, "viz": false},
+            "lineWidth": 1,
+            "scaleDistribution": {"type": "linear"},
+            "thresholdsStyle": {"mode": "off"}
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{"color": "green", "value": null}]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 28},
+      "id": 7,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {"calcs": [], "displayMode": "list", "placement": "bottom", "showLegend": true},
+        "orientation": "horizontal",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {"mode": "single", "sort": "none"},
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "10.0.0",
+      "targets": [
+        {
+          "datasource": {"type": "postgres", "uid": "ai-legal-postgres"},
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT prosecutor_name, ROUND(AVG(z_score)::numeric, 2) as avg_z_score FROM prosecutor_outliers WHERE detected_at >= NOW() - INTERVAL '30 days' AND prosecutor_id IS NOT NULL GROUP BY prosecutor_name ORDER BY avg_z_score DESC LIMIT 10",
+          "refId": "A"
+        }
+      ],
+      "title": "Top 10 Prosecutors by Z-Score",
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "ai-legal-postgres"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "palette-classic"},
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {"legend": false, "tooltip": false, "viz": false},
+            "lineWidth": 1,
+            "scaleDistribution": {"type": "linear"},
+            "thresholdsStyle": {"mode": "off"}
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{"color": "green", "value": null}]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 28},
+      "id": 8,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {"calcs": [], "displayMode": "list", "placement": "bottom", "showLegend": true},
+        "orientation": "horizontal",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {"mode": "single", "sort": "none"},
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "10.0.0",
+      "targets": [
+        {
+          "datasource": {"type": "postgres", "uid": "ai-legal-postgres"},
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT court, ROUND(AVG(z_score)::numeric, 2) as avg_z_score FROM prosecutor_outliers WHERE detected_at >= NOW() - INTERVAL '30 days' AND court IS NOT NULL GROUP BY court ORDER BY avg_z_score DESC LIMIT 10",
+          "refId": "A"
+        }
+      ],
+      "title": "Top 10 Courts by Violation Z-Score",
+      "type": "barchart"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["sprint-8.3", "outliers", "prosecutors", "courts", "statistical-analysis"],
+  "templating": {
+    "list": [
+      {
+        "current": {"selected": false, "text": "All", "value": "$__all"},
+        "datasource": {"type": "postgres", "uid": "ai-legal-postgres"},
+        "definition": "SELECT DISTINCT metric_type FROM prosecutor_outliers ORDER BY metric_type",
+        "hide": 0,
+        "includeAll": true,
+        "multi": true,
+        "name": "metric_type",
+        "options": [],
+        "query": "SELECT DISTINCT metric_type FROM prosecutor_outliers ORDER BY metric_type",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {"selected": false, "text": "All", "value": "$__all"},
+        "datasource": {"type": "postgres", "uid": "ai-legal-postgres"},
+        "definition": "SELECT DISTINCT severity FROM prosecutor_outliers ORDER BY CASE severity WHEN 'extreme' THEN 1 WHEN 'high' THEN 2 WHEN 'moderate' THEN 3 ELSE 4 END",
+        "hide": 0,
+        "includeAll": true,
+        "multi": true,
+        "name": "severity",
+        "options": [],
+        "query": "SELECT DISTINCT severity FROM prosecutor_outliers ORDER BY CASE severity WHEN 'extreme' THEN 1 WHEN 'high' THEN 2 WHEN 'moderate' THEN 3 ELSE 4 END",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {"from": "now-90d", "to": "now"},
+  "timepicker": {},
+  "timezone": "",
+  "title": "Prosecutorial Outliers (Sprint 8.3)",
+  "uid": "prosecutorial-outliers",
+  "version": 1,
+  "weekStart": ""
+}

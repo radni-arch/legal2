@@ -1,0 +1,44 @@
+{
+  "test_id": "precedent_low_003",
+  "category": "low-applicability",
+  "expected_score_range": [10, 35],
+  "description": "Outdated precedent superseded by new law",
+
+  "input": {
+    "problem_statement": "Client's DNA sample taken without consent during investigation. Question: Is this legal?",
+    "researched_decisions": [
+      {
+        "ecli": "HR:VSRH:2010:I-Kž-234",
+        "court": "Vrhovni sud Republike Hrvatske",
+        "case_number": "I Kž-234/2010",
+        "decision_date": "2010-04-12",
+        "title": "Uzimanje DNK uzorka - stara presuda",
+        "summary": "Vrhovni sud dopustio uzimanje DNK uzorka bez pristanka u određenim okolnostima. Međutim, ova presuda donesena prije izmjena ZKP-a iz 2013. koje su uvele strože zaštite i zahtjeve za sudski nalog. Zakon iz 2013. i 2017. značajno promijenio pravni okvir. Presuda više nije primjenjiva."
+      }
+    ],
+    "researched_laws": [
+      {
+        "law_number": "ZKP Članak 221a (dodan 2013)",
+        "title": "Uzimanje bioloških uzoraka",
+        "content": "Zakon iz 2013. uveo nove zaštite koje nisu postojale u vrijeme presude iz 2010.",
+        "similarity": 0.42
+      }
+    ]
+  },
+
+  "expected_output": {
+    "applicability_score": 22,
+    "binding_authority": "informative",
+    "key_factors": [
+      "zastarjela presuda",
+      "zakon promijenjen 2013 i 2017",
+      "drugačiji pravni okvir",
+      "presuda više nije valjana",
+      "niska primjenjivost"
+    ],
+    "favorable": false,
+    "reasoning": "Iako je Vrhovni sud (inače binding), presuda je iz 2010. prije ključnih zakonskih izmjena. Pravni okvir se značajno promijenio. Presuda više ne odražava trenutni zakon. Niska primjenjivost zbog zastarjelosti."
+  },
+
+  "validation_notes": "Should score 10-35 despite Supreme Court source, due to outdated precedent (2010), superseded by 2013/2017 legislative changes, no longer reflects current law."
+}

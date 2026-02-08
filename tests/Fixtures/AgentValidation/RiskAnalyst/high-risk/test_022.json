@@ -1,0 +1,68 @@
+{
+  "test_id": "risk_high_002",
+  "category": "high-risk",
+  "expected_risk_level": "high",
+  "expected_score_range": [77, 92],
+  "description": "Binding adverse precedent with procedural defect",
+
+  "input": {
+    "problem_statement": "Client charged with drug trafficking. Defense argues entrapment but Supreme Court precedent rejected similar entrapment defense. Additionally, statute of limitations may have issues.",
+    "legal_arguments": [
+      {
+        "title": "Entrapment defense",
+        "argument": "Undercover officer provided opportunity to commit crime",
+        "strength_score": 42,
+        "legal_basis": ["KZ Članak 31"],
+        "potential_counterarguments": [
+          "Client had prior drug involvement",
+          "Supreme Court rejected similar defense in 2022",
+          "Officer did not induce, only provided opportunity"
+        ]
+      }
+    ],
+    "strongest_precedents": [],
+    "strategic_recommendations": {
+      "procedural_steps": [
+        "File entrapment motion",
+        "Verify statute of limitations timeline"
+      ]
+    }
+  },
+
+  "expected_output": {
+    "overall_risk_score": {
+      "score": 84,
+      "level": "high"
+    },
+    "argument_risks": [
+      {
+        "argument_index": 0,
+        "risk_level": "critical",
+        "impact_if_fails": "high",
+        "weaknesses": [
+          "Binding adverse precedent exists",
+          "Client has prior involvement",
+          "Facts distinguishable from classic entrapment"
+        ]
+      }
+    ],
+    "adverse_precedents": [
+      {
+        "description": "Supreme Court 2022 - rejected entrapment in similar facts",
+        "severity": "critical",
+        "likelihood_opposing_uses": "high",
+        "why_harmful": "Binding authority directly contradicts defense theory"
+      }
+    ],
+    "procedural_risks": [
+      {
+        "risk_type": "Statute of limitations calculation",
+        "severity": "medium",
+        "probability": "medium",
+        "description": "Unclear when offense began for SOL purposes"
+      }
+    ]
+  },
+
+  "validation_notes": "Should score 77-92 (high risk) due to binding adverse Supreme Court precedent directly on point, weak argument with prior involvement undermining entrapment claim, procedural uncertainty on SOL."
+}

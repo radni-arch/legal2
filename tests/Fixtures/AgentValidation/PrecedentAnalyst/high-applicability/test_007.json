@@ -1,0 +1,50 @@
+{
+  "test_id": "precedent_high_007",
+  "category": "high-applicability",
+  "expected_score_range": [84, 94],
+  "description": "Constitutional Court ruling on due process violation - denial of access to case file",
+
+  "input": {
+    "problem_statement": "Defense attorney denied access to complete case file until 3 days before trial. Multiple requests were ignored by prosecution. Question: Was this a due process violation requiring new trial?",
+    "researched_decisions": [
+      {
+        "ecli": "HR:USRH:2021:U-III-4789",
+        "court": "Ustavni sud Republike Hrvatske",
+        "case_number": "U-III-4789/2021",
+        "decision_date": "2021-10-22",
+        "title": "Povreda prava na obranu - uskraćen uvid u spise",
+        "summary": "Ustavni sud utvrdio povredu prava na učinkovitu obranu. Uskraćivanje uvida u spise do 3 dana prije glavne rasprave onemogućilo je adekvatnu pripremu obrane. Sud utvrdio povredu Ustava RH Članka 29 stavak 2 i naredio novo suđenje."
+      }
+    ],
+    "researched_laws": [
+      {
+        "law_number": "ZKP Članak 65",
+        "title": "Pravo na uvid u spise",
+        "content": "Branitelj i okrivljenik imaju pravo u svako doba pregledati spise kaznenog postupka. Uskraćivanje ovog prava predstavlja povredu prava na obranu.",
+        "similarity": 0.95
+      },
+      {
+        "law_number": "Ustav RH Članak 29 stavak 2",
+        "title": "Pravo na pripremu obrane",
+        "content": "Okrivljeniku mora biti osigurano dovoljno vremena i mogućnosti za pripremu obrane.",
+        "similarity": 0.90
+      }
+    ]
+  },
+
+  "expected_output": {
+    "applicability_score": 89,
+    "binding_authority": "binding",
+    "key_factors": [
+      "uskraćen uvid u spise",
+      "nedovoljan rok za pripremu",
+      "povreda prava na obranu",
+      "povreda ustavnog prava",
+      "novo suđenje"
+    ],
+    "favorable": true,
+    "reasoning": "Ustavnosudska odluka najvišeg autoriteta. Identična situacija (uskraćen uvid do 3 dana prije suđenja). Jasno utvrđena povreda prava na pripremu obrane. Nalaženo novo suđenje."
+  },
+
+  "validation_notes": "Should score 87-92 due to Constitutional Court highest authority, identical timeline (3 days before trial), clear due process violation, and favorable outcome (new trial ordered)."
+}

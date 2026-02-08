@@ -1,0 +1,4 @@
+generated/
+generated/*
+!case-documents/
+!case-documents/*

@@ -1,0 +1,89 @@
+# =============================================================================
+# AI Legal War Machine - .gitignore
+# =============================================================================
+# POLICY: Track all AI execution artifacts for human oversight and auditability.
+# Only ignore true build artifacts, secrets, and vendor dependencies.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Environment & Secrets (NEVER commit)
+# -----------------------------------------------------------------------------
+.env
+.env.backup
+.env.production
+.env.testing.backup
+.env.dusk.local
+/auth.json
+/storage/*.key
+
+# -----------------------------------------------------------------------------
+# IDE & Editor (personal preference)
+# -----------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+.phpactor.json
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed
+
+# -----------------------------------------------------------------------------
+# Build Artifacts & Dependencies (reproducible)
+# -----------------------------------------------------------------------------
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/vendor
+Homestead.json
+Homestead.yaml
+
+# -----------------------------------------------------------------------------
+# PHP Cache (ephemeral)
+# -----------------------------------------------------------------------------
+.phpunit.result.cache
+/.phpunit.cache
+
+# -----------------------------------------------------------------------------
+# Laravel Storage Pail (streaming logs - ephemeral)
+# -----------------------------------------------------------------------------
+/storage/pail
+
+# =============================================================================
+# TRACKED FOR HUMAN OVERSIGHT
+# =============================================================================
+# The following are INTENTIONALLY TRACKED (not ignored):
+#
+# .claude/logs/                    - Agent execution logs (JSONL)
+# .claude/session-state.md         - Session handoff state
+# test-results/                    - TDD queue, metrics, failures
+# test-logs/                       - Test execution logs
+#
+# These provide visibility into AI agent behavior and execution history.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Temporary files only (in tracked directories)
+# -----------------------------------------------------------------------------
+*.bak
+*.tmp
+*.swp
+*~
+
+# -----------------------------------------------------------------------------
+# Browser test screenshots (large, regenerable)
+# But keep console logs and source for debugging
+# -----------------------------------------------------------------------------
+tests/Browser/screenshots/*.png
+court_analysis_results/
+court_analysis_results/*
+court_analysis_results__bak22/
+court_analysis_results__bak22/*
+court_analysis_results_bak/
+court_analysis_results_bak/*
+court_analysis_results_bak2/
+court_analysis_results_bak2/*
+# =============================================================================
+# END OF FILE
+# =============================================================================

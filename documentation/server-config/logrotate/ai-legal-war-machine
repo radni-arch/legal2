@@ -1,0 +1,155 @@
+# ============================================
+# Logrotate Configuration
+# AI Legal War Machine
+# ============================================
+#
+# This configuration manages log file rotation for the application.
+# Install location: /etc/logrotate.d/ai-legal-war-machine
+#
+# Logrotate runs daily via cron (/etc/cron.daily/logrotate)
+#
+# ============================================
+
+# Application logs
+/var/www/ai-legal-war-machine/storage/logs/*.log {
+    # Rotate daily
+    daily
+
+    # Keep 14 days of logs
+    rotate 14
+
+    # Don't error if log file is missing
+    missingok
+
+    # Don't rotate empty log files
+    notifempty
+
+    # Compress rotated logs
+    compress
+
+    # Delay compression until next rotation (keeps most recent backup uncompressed)
+    delaycompress
+
+    # Create new log file with these permissions after rotation
+    create 0644 www-data www-data
+
+    # Use date as suffix (e.g., laravel-2025-11-08.log)
+    dateext
+    dateformat -%Y-%m-%d
+
+    # Run scripts only once for all logs
+    sharedscripts
+
+    # After rotation, clear Laravel's cached config
+    postrotate
+        # Optionally restart queue workers to pick up new log files
+        # /usr/bin/supervisorctl restart ai-legal-queue-worker:* > /dev/null 2>&1 || true
+    endscript
+}
+
+# Performance logs (keep shorter - 7 days)
+/var/www/ai-legal-war-machine/storage/logs/performance.log {
+    daily
+    rotate 7
+    missingok
+    notifempty
+    compress
+    delaycompress
+    create 0644 www-data www-data
+    dateext
+    dateformat -%Y-%m-%d
+}
+
+# Queue logs (keep shorter - 7 days)
+/var/www/ai-legal-war-machine/storage/logs/queue.log {
+    daily
+    rotate 7
+    missingok
+    notifempty
+    compress
+    delaycompress
+    create 0644 www-data www-data
+    dateext
+    dateformat -%Y-%m-%d
+}
+
+# Security logs (keep longer - 30 days)
+/var/www/ai-legal-war-machine/storage/logs/security.log {
+    daily
+    rotate 30
+    missingok
+    notifempty
+    compress
+    delaycompress
+    create 0644 www-data www-data
+    dateext
+    dateformat -%Y-%m-%d
+
+    # Don't compress security logs (for easier searching)
+    nocompress
+}
+
+# API logs
+/var/www/ai-legal-war-machine/storage/logs/api.log {
+    daily
+    rotate 7
+    missingok
+    notifempty
+    compress
+    delaycompress
+    create 0644 www-data www-data
+    dateext
+    dateformat -%Y-%m-%d
+}
+
+# Database logs (keep very short - 3 days, can be large)
+/var/www/ai-legal-war-machine/storage/logs/database.log {
+    daily
+    rotate 3
+    missingok
+    notifempty
+    compress
+    delaycompress
+    create 0644 www-data www-data
+    dateext
+    dateformat -%Y-%m-%d
+
+    # Compress immediately (database logs can be large)
+    nodelaycompress
+}
+
+# Supervisor logs
+/var/www/ai-legal-war-machine/storage/logs/queue-worker.log {
+    daily
+    rotate 7
+    missingok
+    notifempty
+    compress
+    delaycompress
+    create 0644 www-data www-data
+    dateext
+    dateformat -%Y-%m-%d
+
+    # Restart workers after rotating their log file
+    postrotate
+        /usr/bin/supervisorctl restart ai-legal-queue-worker:* > /dev/null 2>&1 || true
+    endscript
+}
+
+# ============================================
+# NOTES
+# ============================================
+#
+# Test configuration:
+#   sudo logrotate -d /etc/logrotate.d/ai-legal-war-machine
+#
+# Force rotation (for testing):
+#   sudo logrotate -f /etc/logrotate.d/ai-legal-war-machine
+#
+# View rotated logs:
+#   ls -lah /var/www/ai-legal-war-machine/storage/logs/
+#
+# Uncompress rotated log:
+#   gunzip /var/www/ai-legal-war-machine/storage/logs/laravel-2025-11-08.log.gz
+#
+# ============================================

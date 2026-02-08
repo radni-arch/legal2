@@ -1,0 +1,159 @@
+{
+  "dashboard": {
+    "title": "AI Legal War Machine - Benchmarks",
+    "description": "15 benchmark scores over time, regression detection, test suite pass rate",
+    "tags": ["ai-legal", "benchmarks", "quality"],
+    "timezone": "browser",
+    "schemaVersion": 38,
+    "version": 1,
+    "refresh": "5m",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Benchmark Scores Over Time",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "benchmark_score",
+            "legendFormat": "{{benchmark_name}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percentunit",
+            "min": 0,
+            "max": 1,
+            "thresholds": {
+              "steps": [
+                {"value": 0, "color": "red"},
+                {"value": 0.7, "color": "yellow"},
+                {"value": 0.8, "color": "green"}
+              ]
+            }
+          }
+        },
+        "gridPos": {"h": 10, "w": 24, "x": 0, "y": 0}
+      },
+      {
+        "id": 2,
+        "title": "Latest Benchmark Scores",
+        "type": "table",
+        "targets": [
+          {
+            "expr": "benchmark_score",
+            "format": "table",
+            "instant": true
+          }
+        ],
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "renameByName": {
+                "benchmark_name": "Benchmark",
+                "Value": "Score"
+              }
+            }
+          }
+        ],
+        "fieldConfig": {
+          "overrides": [
+            {
+              "matcher": {"id": "byName", "options": "Score"},
+              "properties": [
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-background",
+                    "mode": "gradient"
+                  }
+                },
+                {
+                  "id": "thresholds",
+                  "value": {
+                    "steps": [
+                      {"value": 0, "color": "red"},
+                      {"value": 0.7, "color": "yellow"},
+                      {"value": 0.8, "color": "green"}
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 10}
+      },
+      {
+        "id": 3,
+        "title": "Regression Detection (Score Drops >5%)",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "delta(benchmark_score[24h]) < -0.05",
+            "legendFormat": "{{benchmark_name}} REGRESSION"
+          }
+        ],
+        "alert": {
+          "name": "Benchmark Regression",
+          "conditions": [
+            {
+              "evaluator": {"type": "lt", "params": [-0.05]},
+              "operator": {"type": "and"},
+              "query": {"params": ["A", "5m", "now"]},
+              "reducer": {"type": "avg"}
+            }
+          ],
+          "frequency": "5m",
+          "handler": 1,
+          "message": "Benchmark {{benchmark_name}} dropped by >5%",
+          "noDataState": "no_data",
+          "executionErrorState": "alerting"
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 10}
+      },
+      {
+        "id": 4,
+        "title": "Test Suite Pass Rate",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "test_suite_pass_rate",
+            "legendFormat": "Pass Rate"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "decimals": 1,
+            "thresholds": {
+              "steps": [
+                {"value": 0, "color": "red"},
+                {"value": 90, "color": "yellow"},
+                {"value": 95, "color": "green"}
+              ]
+            }
+          }
+        },
+        "gridPos": {"h": 4, "w": 6, "x": 0, "y": 18}
+      },
+      {
+        "id": 5,
+        "title": "Benchmark Run Duration",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "benchmark_run_duration_seconds",
+            "legendFormat": "{{benchmark_name}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "s"
+          }
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 6, "y": 18}
+      }
+    ]
+  }
+}

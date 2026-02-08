@@ -1,0 +1,8 @@
+{
+    "predsjednik_suda": {
+        "required_sections": ["heading", "case_reference", "identification", "facts_chronology", "legal_arguments", "requests", "legal_remedy_demand", "signature"],
+        "expected_citations": ["ZKP cl.150", "Ustav cl.18", "Ustav cl.34"],
+        "min_paragraphs": 4,
+        "expected_tone": "formal_assertive"
+    }
+}

@@ -1,0 +1,50 @@
+{
+  "test_id": "precedent_high_002",
+  "category": "high-applicability",
+  "expected_score_range": [88, 98],
+  "description": "Constitutional Court ruling on illegal surveillance without court order",
+
+  "input": {
+    "problem_statement": "Client's phone was wiretapped for 3 months without court authorization. Prosecution using recorded conversations as primary evidence. Question: Should evidence be excluded?",
+    "researched_decisions": [
+      {
+        "ecli": "HR:USRH:2023:U-III-2145",
+        "court": "Ustavni sud Republike Hrvatske",
+        "case_number": "U-III-2145/2023",
+        "decision_date": "2023-03-20",
+        "title": "Povreda prava na privatnost nezakonitim prisluškivanjem",
+        "summary": "Ustavni sud utvrdio povredu ustavnog prava na privatnost (Članak 37 Ustava RH). Prisluškivanje bez sudskog naloga predstavlja težu povredu postupka. Dokazi prikupljeni nezakonitim prisluškivanjem moraju biti isključeni iz dokaznog postupka (načelo ploda otrovnog drveta)."
+      }
+    ],
+    "researched_laws": [
+      {
+        "law_number": "ZKP Članak 332",
+        "title": "Prisluškivanje i snimanje telekomunikacija",
+        "content": "Prisluškivanje i snimanje telekomunikacija može odrediti isključivo sudac istrage na obrazloženi prijedlog državnog odvjetnika. Dokazi prikupljeni prisluškivanjem bez sudskog naloga ne smiju se upotrijebiti u kaznenom postupku.",
+        "similarity": 0.95
+      },
+      {
+        "law_number": "Ustav RH Članak 37",
+        "title": "Zaštita privatnosti",
+        "content": "Jamči se nepovredivost tajnosti pisama i svih drugih sredstava općenja. Iznimke može odrediti isključivo sud u skladu sa zakonom.",
+        "similarity": 0.91
+      }
+    ]
+  },
+
+  "expected_output": {
+    "applicability_score": 94,
+    "binding_authority": "binding",
+    "key_factors": [
+      "nezakonito prisluškivanje",
+      "bez sudskog naloga",
+      "povreda ustavnog prava",
+      "plod otrovnog drveta",
+      "isključenje dokaza"
+    ],
+    "favorable": true,
+    "reasoning": "Ustavnosudska odluka predstavlja najviši autoritet. Identična povreda (prisluškivanje bez naloga). Jasno utvrđena obaveza isključenja dokaza. Presuda iz 2023. godine, vrlo aktualna."
+  },
+
+  "validation_notes": "Should score 93+ due to Constitutional Court highest binding authority, identical violation (wiretap without warrant), recent decision, and mandatory evidence exclusion rule."
+}

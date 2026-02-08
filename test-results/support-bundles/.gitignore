@@ -1,0 +1,7 @@
+# Support bundles are tracked for human oversight
+# These provide debug artifacts for escalation review
+# (Remove entries when trust is established)
+
+# Only ignore temporary/backup files
+*.bak
+*.tmp

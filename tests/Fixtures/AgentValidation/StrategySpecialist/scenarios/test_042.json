@@ -1,0 +1,58 @@
+{
+  "test_id": "strategy_moderate_004",
+  "description": "Moderate position: Contested facts with balanced evidence",
+
+  "input": {
+    "problem_statement": "Client charged with assault. Victim claims unprovoked attack. Client claims mutual fight. Two witnesses each side. Physical evidence inconclusive.",
+    "strongest_precedents": [
+      {
+        "court": "Županijski sud u Splitu",
+        "applicability_score": 63,
+        "binding_authority": "persuasive",
+        "case_number": "K-912/2020",
+        "favorable": null
+      }
+    ],
+    "analyzed_laws": [
+      {
+        "law_number": "KZ Članak 118",
+        "title": "Tjelesna ozljeda",
+        "relevance_score": 0.88,
+        "applicability": "directly_applicable"
+      }
+    ]
+  },
+
+  "expected_output": {
+    "arguments_count_range": [3, 4],
+    "primary_strategy_theme": "reasonable doubt from conflicting evidence",
+    "success_probability_range": [0.42, 0.58],
+    "should_include": {
+      "settlement_recommendation": true,
+      "procedural_steps": [
+        "impeach victim's witnesses for bias/inconsistency",
+        "bolster defense witnesses",
+        "emphasize burden of proof on prosecution",
+        "negotiate mutual combat plea or dismissal",
+        "prepare for trial but push settlement"
+      ],
+      "evidence_needed": [
+        "witness prior statements for impeachment",
+        "relationship documentation showing witness bias",
+        "medical records showing mutual injuries",
+        "any video or photos of scene"
+      ],
+      "argument_titles": [
+        "Conflicting witness accounts create reasonable doubt",
+        "Physical evidence shows mutual combat",
+        "Prosecution cannot meet burden beyond reasonable doubt"
+      ]
+    },
+    "expected_argument_strengths": {
+      "average_range": [52, 66],
+      "strongest_argument_score_min": 62
+    }
+  },
+
+  "validation_notes": "Should generate 3-4 arguments (avg 52-66), recommend settlement (evidence truly balanced), success probability 42-58% (coin flip), emphasize reasonable doubt and burden of proof, realistic about uncertainty."
+}

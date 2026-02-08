@@ -1,0 +1,142 @@
+# Alertmanager Configuration
+# Sprint 1.7: Observability Setup
+#
+# Routes alerts from Prometheus to appropriate channels (Slack, PagerDuty, Email)
+# Configure notification endpoints via environment variables
+
+global:
+  resolve_timeout: 5m
+  slack_api_url: '${SLACK_WEBHOOK_URL}'
+  pagerduty_url: '${PAGERDUTY_URL}'
+  smtp_smarthost: '${SMTP_HOST}:${SMTP_PORT}'
+  smtp_from: '${SMTP_FROM}'
+  smtp_auth_username: '${SMTP_USERNAME}'
+  smtp_auth_password: '${SMTP_PASSWORD}'
+
+# Templates for alert messages
+templates:
+  - '/etc/alertmanager/templates/*.tmpl'
+
+# Alert routing tree
+route:
+  receiver: 'default'
+  group_by: ['alertname', 'agent_name', 'severity']
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 12h
+
+  routes:
+    # CRITICAL alerts -> PagerDuty + Slack
+    - match:
+        severity: critical
+      receiver: 'pagerduty-critical'
+      group_wait: 10s
+      repeat_interval: 5m
+      continue: true  # Also send to other receivers
+
+    - match:
+        severity: critical
+      receiver: 'slack-critical'
+      group_wait: 10s
+
+    # WARNING alerts -> Slack only
+    - match:
+        severity: warning
+      receiver: 'slack-warnings'
+      group_wait: 30s
+      repeat_interval: 3h
+
+    # INFO alerts -> Slack (low-priority channel)
+    - match:
+        severity: info
+      receiver: 'slack-info'
+      group_wait: 1m
+      repeat_interval: 24h
+
+    # Cost-related alerts -> Finance team
+    - match_re:
+        cost: high
+      receiver: 'email-finance'
+      group_wait: 5m
+      repeat_interval: 24h
+
+# Inhibition rules - suppress certain alerts when others are firing
+inhibit_rules:
+  # Suppress low success rate alerts if consecutive failures alert is firing
+  - source_match:
+      alertname: 'AgentConsecutiveFailures'
+    target_match:
+      alertname: 'AgentLowSuccessRate'
+    equal: ['agent_name']
+
+  # Suppress no executions alert if error spike is firing
+  - source_match:
+      alertname: 'AgentErrorSpike'
+    target_match:
+      alertname: 'AgentNoExecutions'
+    equal: ['agent_name']
+
+# Notification receivers
+receivers:
+  - name: 'default'
+    slack_configs:
+      - channel: '#ai-agents-alerts'
+        title: '{{ .GroupLabels.alertname }}'
+        text: '{{ range .Alerts }}{{ .Annotations.description }}{{ end }}'
+
+  - name: 'pagerduty-critical'
+    pagerduty_configs:
+      - service_key: '${PAGERDUTY_SERVICE_KEY}'
+        description: '{{ .GroupLabels.alertname }}: {{ .GroupLabels.agent_name }}'
+        severity: '{{ .GroupLabels.severity }}'
+
+  - name: 'slack-critical'
+    slack_configs:
+      - channel: '#ai-agents-critical'
+        color: 'danger'
+        title: '🚨 CRITICAL: {{ .GroupLabels.alertname }}'
+        text: |
+          *Agent:* {{ .GroupLabels.agent_name }}
+          *Severity:* {{ .GroupLabels.severity }}
+
+          {{ range .Alerts }}
+          *Summary:* {{ .Annotations.summary }}
+          *Description:*
+          {{ .Annotations.description }}
+          *Runbook:* {{ .Annotations.runbook_url }}
+          {{ end }}
+        send_resolved: true
+
+  - name: 'slack-warnings'
+    slack_configs:
+      - channel: '#ai-agents-warnings'
+        color: 'warning'
+        title: '⚠️ WARNING: {{ .GroupLabels.alertname }}'
+        text: |
+          *Agent:* {{ .GroupLabels.agent_name }}
+
+          {{ range .Alerts }}
+          {{ .Annotations.summary }}
+          {{ end }}
+        send_resolved: true
+
+  - name: 'slack-info'
+    slack_configs:
+      - channel: '#ai-agents-info'
+        color: 'good'
+        title: 'ℹ️ INFO: {{ .GroupLabels.alertname }}'
+        text: |
+          {{ range .Alerts }}
+          {{ .Annotations.summary }}
+          {{ end }}
+
+  - name: 'email-finance'
+    email_configs:
+      - to: '${FINANCE_EMAIL}'
+        subject: 'AI Agent Cost Alert: {{ .GroupLabels.alertname }}'
+        html: |
+          <h2>{{ .GroupLabels.alertname }}</h2>
+          {{ range .Alerts }}
+          <p><strong>{{ .Annotations.summary }}</strong></p>
+          <pre>{{ .Annotations.description }}</pre>
+          {{ end }}

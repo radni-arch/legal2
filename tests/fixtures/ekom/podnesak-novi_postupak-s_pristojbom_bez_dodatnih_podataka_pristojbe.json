@@ -1,0 +1,56 @@
+{
+  "sudId": 123,
+  "vrstaPodneskaId": 2,
+  "vrstaPostupkaId": 1,
+  "ulogaPodnositeljaId": 1,
+  "stranke": [
+    {
+      "tip": "FIZICKA_OSOBA",
+      "ime": "Petar",
+      "prezime": "Petric",
+      "oib": "22233344455",
+      "ulogaId": 1,
+      "adresa": {
+        "drzavaOznaka": "HR",
+        "postanskiBroj": "51000",
+        "ulicaIKucniBroj": "Korzo 1, Rijeka"
+      }
+    }
+  ],
+  "protustranke": [
+    {
+      "tip": "FIZICKA_OSOBA",
+      "ime": "Marija",
+      "prezime": "Maric",
+      "oib": "55566677788",
+      "ulogaId": 4,
+      "adresa": {
+        "drzavaOznaka": "HR",
+        "postanskiBroj": "51000",
+        "ulicaIKucniBroj": "Fiumara 5, Rijeka"
+      }
+    }
+  ],
+  "sadrzaj": {
+    "naziv": "prijedlog_za_ovrhu.pdf",
+    "sadrzaj": "JVBERi0xLjQKJeLjz9MKMSAwIG9iago8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFI+PgplbmRvYmoK",
+    "brojStranica": 3,
+    "ignorirajUpozorenja": false
+  },
+  "pristojba": {
+    "vrsta": "SUDSKA",
+    "iznos": 50.00,
+    "valuta": "EUR"
+  },
+  "prilozi": [
+    {
+      "opis": "Ovrsna isprava",
+      "sadrzaj": {
+        "naziv": "ovrsna_isprava.pdf",
+        "sadrzaj": "JVBERi0xLjQK",
+        "brojStranica": 2,
+        "ignorirajUpozorenja": false
+      }
+    }
+  ]
+}

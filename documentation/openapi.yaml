@@ -1,0 +1,1289 @@
+openapi: 3.0.3
+info:
+  title: AI Legal War Machine API
+  description: |
+    Comprehensive AI-powered legal defense tools for Croatian criminal defense attorneys.
+
+    ## Features
+
+    - **Evidence Analysis** - ZKP compliance, constitutional violations, suppression motions
+    - **Misconduct Detection** - 6 types of prosecutorial misconduct with severity scoring
+    - **Topic Framework** - Modular abuse detection (drug charges, illegal searches, etc.)
+    - **Multi-Agent Collaboration** - Research, precedent analysis, strategy, and risk assessment
+    - **Search & RAG** - Vector + Graph hybrid search across laws, court decisions, and cases
+    - **Predictive Analytics** - Case outcome prediction and duration estimation
+    - **Legal Strategy** - Argument generation and risk assessment
+
+    ## Authentication
+
+    Most endpoints require API token authentication via the `X-API-Token` header:
+
+    ```
+    X-API-Token: your_api_token_here
+    ```
+
+    MCP endpoints use `X-MCP-Token` header instead.
+
+    ## Rate Limiting
+
+    - **Default**: 60 requests/minute
+    - **OpenAI**: 50 requests/minute
+    - **Search**: 60 requests/minute
+    - **Agents**: 30 requests/minute
+
+    Rate limit headers are included in responses:
+    - `X-RateLimit-Limit`
+    - `X-RateLimit-Remaining`
+    - `X-RateLimit-Reset`
+
+    ## Error Handling
+
+    All endpoints return consistent error structures:
+
+    ```json
+    {
+      "success": false,
+      "error": "Error message",
+      "code": "ERROR_CODE",
+      "details": {}
+    }
+    ```
+
+    ## Croatian Legal Context
+
+    This API operates under Croatian law:
+    - **ZKP** - Zakon o kaznenom postupku (Criminal Procedure Act)
+    - **KZ** - Kazneni zakon (Criminal Code)
+    - **Ustav RH** - Ustav Republike Hrvatske (Croatian Constitution)
+
+  version: 1.1.0
+  contact:
+    name: AI Legal War Machine Support
+    email: support@example.com
+  license:
+    name: Proprietary
+
+servers:
+  - url: https://api.example.com/api
+    description: Production server
+  - url: https://staging.example.com/api
+    description: Staging server
+  - url: http://localhost/api
+    description: Local development
+
+security:
+  - ApiToken: []
+
+tags:
+  - name: Health
+    description: System health checks
+  - name: Evidence
+    description: Evidence analysis and admissibility (ZKP & Ustav RH)
+  - name: Misconduct
+    description: Prosecutorial misconduct detection
+  - name: Topics
+    description: Topic-based abuse detection framework
+  - name: Agents
+    description: Autonomous research agents
+  - name: Collaboration
+    description: Multi-agent collaboration system
+  - name: Search
+    description: Unified search across legal corpora
+  - name: Reasoning
+    description: Legal reasoning and conflict resolution
+  - name: Analytics
+    description: Predictive analytics and case outcome prediction
+  - name: Strategy
+    description: Legal strategy building and argument generation
+  - name: MCP
+    description: Model Context Protocol tools
+  - name: Monitoring
+    description: System monitoring and metrics
+  - name: Graph
+    description: Neo4j graph visualization
+
+paths:
+  /health:
+    get:
+      tags: [Health]
+      summary: System health check
+      description: Check if the API is running and accessible (no authentication required)
+      operationId: getHealth
+      security: []
+      responses:
+        '200':
+          description: System is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  timestamp:
+                    type: string
+                    format: date-time
+                  version:
+                    type: string
+                    example: 1.1.0
+
+  /evidence/analyze/{caseId}:
+    post:
+      tags: [Evidence]
+      summary: Comprehensive evidence analysis
+      description: |
+        Analyzes evidence for ZKP compliance, constitutional violations (Ustav RH),
+        and generates excludability scores.
+      operationId: analyzeEvidence
+      parameters:
+        - name: caseId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Case ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [evidence]
+              properties:
+                evidence:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/EvidenceItem'
+            example:
+              evidence:
+                - id: ev1
+                  type: physical
+                  description: Stolen items found during search
+                  collection_method: warrantless home search
+                  collection_location: defendant home
+                  warrant: false
+                  chain_of_custody:
+                    - handler: Officer Marić
+                      timestamp: "2025-01-15T14:30:00Z"
+                      action: Collected at scene
+      responses:
+        '200':
+          description: Evidence analysis complete
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenceAnalysisResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+
+  /evidence/suppress-motion/{caseId}:
+    post:
+      tags: [Evidence]
+      summary: Generate suppression motion
+      description: |
+        Generates formal Croatian court motion "Prijedlog za isključenje dokaza"
+        for evidence exclusion.
+      operationId: generateSuppressionMotion
+      parameters:
+        - name: caseId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [evidence_ids]
+              properties:
+                evidence_ids:
+                  type: array
+                  items:
+                    type: string
+                  example: [ev1, ev2]
+      responses:
+        '200':
+          description: Motion generated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuppressionMotionResponse'
+
+  /misconduct/detect/{caseId}:
+    post:
+      tags: [Misconduct]
+      summary: Detect prosecutorial misconduct
+      description: |
+        Detects 6 types of prosecutorial misconduct with severity scoring:
+        - Brady violations (exculpatory evidence suppression)
+        - Selective prosecution
+        - Evidence fabrication
+        - Witness tampering
+        - Improper conduct
+        - Vindictive prosecution
+      operationId: detectMisconduct
+      parameters:
+        - name: caseId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Misconduct analysis complete
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MisconductDetectionResponse'
+
+  /misconduct/dismissal-motion/{caseId}:
+    post:
+      tags: [Misconduct]
+      summary: Generate dismissal motion
+      description: |
+        Generates formal Croatian "Prijedlog za obustavu postupka"
+        (motion to dismiss) based on detected misconduct.
+      operationId: generateDismissalMotion
+      parameters:
+        - name: caseId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Dismissal motion generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DismissalMotionResponse'
+
+  /topics:
+    get:
+      tags: [Topics]
+      summary: List available topics
+      description: Returns list of all available abuse detection topics
+      operationId: listTopics
+      responses:
+        '200':
+          description: Topics list retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  topics:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: drug_charge_abuse
+                        name:
+                          type: string
+                          example: Drug Charge Abuse
+                        description:
+                          type: string
+                        endpoints:
+                          type: object
+                          properties:
+                            analyze:
+                              type: string
+                            statistics:
+                              type: string
+                            compare_regions:
+                              type: string
+
+  /topics/{topic}/analyze/{caseId}:
+    post:
+      tags: [Topics]
+      summary: Analyze case for specific topic
+      description: |
+        Analyzes case for specific abuse pattern (e.g., drug overcharging,
+        illegal searches, disproportionate sentencing).
+      operationId: analyzeTopic
+      parameters:
+        - name: topic
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [drug_charge_abuse, illegal_search, disproportionate_sentencing, excessive_pretension]
+          description: Topic to analyze
+        - name: caseId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Topic analysis complete
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicAnalysisResponse'
+
+  /agent/research/start:
+    post:
+      tags: [Agents]
+      summary: Start autonomous research
+      description: |
+        Starts an autonomous research agent that iteratively improves
+        its research quality through self-evaluation.
+      operationId: startResearch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [problem]
+              properties:
+                problem:
+                  type: string
+                  description: Legal problem statement
+                  example: What are the requirements for suppressing evidence obtained without a warrant?
+                parameters:
+                  type: object
+                  properties:
+                    max_iterations:
+                      type: integer
+                      default: 3
+                    quality_threshold:
+                      type: number
+                      default: 80
+      responses:
+        '202':
+          description: Research started
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  run_id:
+                    type: string
+                    format: uuid
+                  status:
+                    type: string
+                    example: pending
+
+  /agent/research/{id}:
+    get:
+      tags: [Agents]
+      summary: Get research results
+      description: Retrieve research agent results and evaluation
+      operationId: getResearch
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Research results retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResearchRunResponse'
+
+  /collaboration/solve:
+    post:
+      tags: [Collaboration]
+      summary: Solve problem with multi-agent team
+      description: |
+        Orchestrates multiple specialist agents to solve complex legal problems:
+        - Research Specialist: Finds relevant laws and decisions
+        - Precedent Analyst: Analyzes applicability
+        - Strategy Specialist: Develops legal strategy
+        - Risk Analyst: Identifies risks and weaknesses
+      operationId: solveCollaboration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [problem, case_id]
+              properties:
+                problem:
+                  type: string
+                  example: How can we challenge evidence obtained during a warrantless home search?
+                case_id:
+                  type: integer
+                context:
+                  type: object
+                  description: Additional case context
+      responses:
+        '200':
+          description: Collaboration complete
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollaborationResponse'
+
+  /search:
+    post:
+      tags: [Search]
+      summary: Unified search across all corpora
+      description: |
+        Searches across laws, court decisions, and cases using vector + graph hybrid search.
+      operationId: unifiedSearch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [query]
+              properties:
+                query:
+                  type: string
+                  example: proportionality of home search warrants
+                corpus:
+                  type: array
+                  items:
+                    type: string
+                    enum: [laws, decisions, cases]
+                  default: [laws, decisions]
+                limit:
+                  type: integer
+                  default: 10
+                  minimum: 1
+                  maximum: 50
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+
+  /reasoning/analyze-conflict:
+    post:
+      tags: [Reasoning]
+      summary: Analyze legal conflicts
+      description: Detects conflicts between laws, regulations, or court decisions
+      operationId: analyzeConflict
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [law_ids]
+              properties:
+                law_ids:
+                  type: array
+                  items:
+                    type: integer
+                  example: [1, 2, 3]
+      responses:
+        '200':
+          description: Conflict analysis complete
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictAnalysisResponse'
+
+  /analytics/predict-outcome/{caseId}:
+    post:
+      tags: [Analytics]
+      summary: Predict case outcome
+      description: |
+        Predicts case outcome using ML models trained on historical data
+      operationId: predictOutcome
+      parameters:
+        - name: caseId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Prediction complete
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OutcomePredictionResponse'
+
+  /strategy/build/{caseId}:
+    post:
+      tags: [Strategy]
+      summary: Build legal strategy
+      description: |
+        Generates comprehensive legal strategy with IRAC-based arguments
+      operationId: buildStrategy
+      parameters:
+        - name: caseId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Strategy generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StrategyResponse'
+
+  /mcp/law.search:
+    post:
+      tags: [MCP]
+      summary: Search Croatian laws
+      description: MCP tool for searching law articles (ZKP, KZ, Ustav RH)
+      operationId: mcpLawSearch
+      security:
+        - McpToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [query]
+              properties:
+                query:
+                  type: string
+                  example: proportionality principle
+                law_type:
+                  type: string
+                  enum: [ZKP, KZ, Ustav]
+                limit:
+                  type: integer
+                  default: 10
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LawSearchResponse'
+
+  /mcp/decision.search:
+    post:
+      tags: [MCP]
+      summary: Search court decisions
+      description: MCP tool for searching Croatian court decisions
+      operationId: mcpDecisionSearch
+      security:
+        - McpToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [query]
+              properties:
+                query:
+                  type: string
+                court:
+                  type: string
+                  example: Županijski sud u Osijeku
+                date_from:
+                  type: string
+                  format: date
+                date_to:
+                  type: string
+                  format: date
+                limit:
+                  type: integer
+                  default: 10
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DecisionSearchResponse'
+
+  /monitoring/health/system:
+    get:
+      tags: [Monitoring]
+      summary: System health check
+      description: Comprehensive system health including database, cache, queue
+      operationId: systemHealth
+      responses:
+        '200':
+          description: System health status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemHealthResponse'
+
+  /graph/visualize/{nodeId}:
+    get:
+      tags: [Graph]
+      summary: Visualize graph node
+      description: Returns node with neighbors for visualization
+      operationId: visualizeGraph
+      parameters:
+        - name: nodeId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: depth
+          in: query
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+            maximum: 3
+      responses:
+        '200':
+          description: Graph visualization data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphVisualizationResponse'
+
+components:
+  securitySchemes:
+    ApiToken:
+      type: apiKey
+      in: header
+      name: X-API-Token
+      description: API token for authentication
+    McpToken:
+      type: apiKey
+      in: header
+      name: X-MCP-Token
+      description: MCP API token for Model Context Protocol endpoints
+
+  schemas:
+    EvidenceItem:
+      type: object
+      required: [id, type, description]
+      properties:
+        id:
+          type: string
+          description: Unique evidence identifier
+        type:
+          type: string
+          enum: [physical, testimonial, digital, forensic, documentary]
+          description: Evidence type
+        description:
+          type: string
+          description: Evidence description
+        collection_method:
+          type: string
+          description: How evidence was collected
+        collection_location:
+          type: string
+        warrant:
+          type: boolean
+          description: Was warrant obtained?
+        chain_of_custody:
+          type: array
+          items:
+            type: object
+            properties:
+              handler:
+                type: string
+              timestamp:
+                type: string
+                format: date-time
+              action:
+                type: string
+
+    EvidenceAnalysisResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            case_id:
+              type: integer
+            total_evidence_items:
+              type: integer
+            highly_challengeable:
+              type: integer
+              description: Count of evidence with score ≥80
+            evidence_analysis:
+              type: array
+              items:
+                type: object
+                properties:
+                  evidence_id:
+                    type: string
+                  description:
+                    type: string
+                  type:
+                    type: string
+                  admissibility:
+                    type: object
+                    properties:
+                      admissible:
+                        type: boolean
+                      confidence:
+                        type: integer
+                        minimum: 0
+                        maximum: 100
+                      issues:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            check:
+                              type: string
+                            description:
+                              type: string
+                            legal_basis:
+                              type: string
+                            severity:
+                              type: integer
+                  constitutional_issues:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        article:
+                          type: string
+                          example: Ustav RH Članak 34
+                        violation:
+                          type: string
+                        severity:
+                          type: integer
+                        remedy:
+                          type: string
+                  excludability_score:
+                    type: integer
+                    minimum: 0
+                    maximum: 100
+                    description: |
+                      Score indicating likelihood of exclusion:
+                      - 80-100: Highly challengeable
+                      - 60-79: Challengeable
+                      - 40-59: Possibly challengeable
+                      - 0-39: Not challengeable
+
+    SuppressionMotionResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            motion_type:
+              type: string
+              example: Prijedlog za isključenje dokaza
+            case_id:
+              type: integer
+            evidence_ids:
+              type: array
+              items:
+                type: string
+            primary_grounds:
+              type: array
+              items:
+                type: object
+            legal_authorities:
+              type: object
+              properties:
+                statutes:
+                  type: array
+                  items:
+                    type: string
+                  example: [ZKP Članak 11]
+                constitution:
+                  type: array
+                  items:
+                    type: string
+                  example: [Ustav RH Članak 34]
+            motion_text:
+              type: string
+              description: Full Croatian motion text
+            filing_instructions:
+              type: object
+              properties:
+                court:
+                  type: string
+                filing_method:
+                  type: string
+                deadline:
+                  type: string
+                service:
+                  type: string
+
+    MisconductDetectionResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            case_id:
+              type: integer
+            severity_score:
+              type: integer
+              minimum: 0
+              maximum: 100
+              description: |
+                Overall severity:
+                - 85-100: Severe (dismissal likely)
+                - 70-84: Serious (strong remedies)
+                - 50-69: Moderate (sanctions/warnings)
+                - <50: Minor
+            misconduct_types:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    enum: [brady_violation, selective_prosecution, evidence_fabrication, witness_tampering, improper_conduct, vindictive_prosecution]
+                  detected:
+                    type: boolean
+                  severity:
+                    type: integer
+                  description:
+                    type: string
+                  legal_basis:
+                    type: array
+                    items:
+                      type: string
+                  evidence:
+                    type: array
+                    items:
+                      type: string
+            recommended_actions:
+              type: array
+              items:
+                type: string
+                example: File dismissal motion
+
+    DismissalMotionResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            motion_type:
+              type: string
+              example: Prijedlog za obustavu postupka
+            case_id:
+              type: integer
+            grounds:
+              type: array
+              items:
+                type: object
+            motion_text:
+              type: string
+
+    TopicAnalysisResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            case_id:
+              type: integer
+            topic:
+              type: string
+            abuse_detected:
+              type: boolean
+            severity:
+              type: integer
+            comparison:
+              type: object
+              properties:
+                regional_average:
+                  type: number
+                national_average:
+                  type: number
+                percentile:
+                  type: integer
+            details:
+              type: object
+
+    ResearchRunResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            run_id:
+              type: string
+              format: uuid
+            status:
+              type: string
+              enum: [pending, running, completed, failed]
+            problem:
+              type: string
+            iterations:
+              type: integer
+            final_quality_score:
+              type: number
+            results:
+              type: object
+              properties:
+                laws_found:
+                  type: array
+                  items:
+                    type: object
+                decisions_found:
+                  type: array
+                  items:
+                    type: object
+                summary:
+                  type: string
+            evaluation:
+              type: object
+              properties:
+                completeness:
+                  type: number
+                accuracy:
+                  type: number
+                relevance:
+                  type: number
+                overall:
+                  type: number
+
+    CollaborationResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            collaboration_id:
+              type: string
+              format: uuid
+            problem:
+              type: string
+            agents_executed:
+              type: array
+              items:
+                type: string
+              example: [ResearchSpecialist, PrecedentAnalyst, StrategySpecialist, RiskAnalyst]
+            execution_time_ms:
+              type: number
+            results:
+              type: object
+              properties:
+                research:
+                  type: object
+                precedents:
+                  type: object
+                strategy:
+                  type: object
+                risks:
+                  type: object
+
+    SearchResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            query:
+              type: string
+            results:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  type:
+                    type: string
+                    enum: [law, decision, case]
+                  title:
+                    type: string
+                  content:
+                    type: string
+                  similarity_score:
+                    type: number
+                  metadata:
+                    type: object
+            total:
+              type: integer
+
+    ConflictAnalysisResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            conflicts:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  laws:
+                    type: array
+                    items:
+                      type: integer
+                  description:
+                    type: string
+                  resolution:
+                    type: string
+
+    OutcomePredictionResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            case_id:
+              type: integer
+            predicted_outcome:
+              type: string
+              enum: [acquittal, conviction, dismissal, plea]
+            confidence:
+              type: number
+              minimum: 0
+              maximum: 1
+            probabilities:
+              type: object
+              properties:
+                acquittal:
+                  type: number
+                conviction:
+                  type: number
+                dismissal:
+                  type: number
+                plea:
+                  type: number
+            factors:
+              type: array
+              items:
+                type: object
+
+    StrategyResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            case_id:
+              type: integer
+            strategy:
+              type: object
+              properties:
+                primary_approach:
+                  type: string
+                arguments:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                      description:
+                        type: string
+                      irac:
+                        type: object
+                        properties:
+                          issue:
+                            type: string
+                          rule:
+                            type: string
+                          application:
+                            type: string
+                          conclusion:
+                            type: string
+                risks:
+                  type: array
+                  items:
+                    type: object
+                success_probability:
+                  type: number
+
+    LawSearchResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              law_id:
+                type: integer
+              law_number:
+                type: string
+              article_number:
+                type: string
+              title:
+                type: string
+              content:
+                type: string
+              similarity_score:
+                type: number
+
+    DecisionSearchResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              decision_id:
+                type: integer
+              ecli:
+                type: string
+              court:
+                type: string
+              decision_date:
+                type: string
+                format: date
+              summary:
+                type: string
+              similarity_score:
+                type: number
+
+    SystemHealthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [healthy, degraded, unhealthy]
+        components:
+          type: object
+          properties:
+            database:
+              type: object
+              properties:
+                status:
+                  type: string
+                response_time_ms:
+                  type: number
+            cache:
+              type: object
+            queue:
+              type: object
+            neo4j:
+              type: object
+            openai:
+              type: object
+        timestamp:
+          type: string
+          format: date-time
+
+    GraphVisualizationResponse:
+      type: object
+      properties:
+        nodes:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              label:
+                type: string
+              type:
+                type: string
+              properties:
+                type: object
+        edges:
+          type: array
+          items:
+            type: object
+            properties:
+              from:
+                type: string
+              to:
+                type: string
+              type:
+                type: string
+              properties:
+                type: object
+
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: object
+
+  responses:
+    Unauthorized:
+      description: Unauthorized - Invalid or missing API token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            success: false
+            error: Unauthorized
+            code: INVALID_TOKEN
+
+    ValidationError:
+      description: Validation error - Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            success: false
+            error: Validation failed
+            code: VALIDATION_ERROR
+            details:
+              evidence: [The evidence field is required]
+
+    RateLimitExceeded:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            success: false
+            error: Rate limit exceeded
+            code: RATE_LIMIT_EXCEEDED
+      headers:
+        X-RateLimit-Limit:
+          schema:
+            type: integer
+          description: Request limit per minute
+        X-RateLimit-Remaining:
+          schema:
+            type: integer
+          description: Remaining requests in current window
+        X-RateLimit-Reset:
+          schema:
+            type: integer
+          description: Unix timestamp when limit resets

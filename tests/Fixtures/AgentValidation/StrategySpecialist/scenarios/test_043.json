@@ -1,0 +1,59 @@
+{
+  "test_id": "strategy_weak_001",
+  "description": "Weak position: Multiple charges with adverse precedents",
+
+  "input": {
+    "problem_statement": "Client charged with armed robbery. Video evidence, three eyewitnesses, forensic evidence. Client claims alibi but uncorroborated. Adverse precedents exist.",
+    "strongest_precedents": [
+      {
+        "court": "Vrhovni sud RH",
+        "applicability_score": 78,
+        "binding_authority": "binding",
+        "case_number": "I Kž-234/2019",
+        "favorable": false
+      }
+    ],
+    "analyzed_laws": [
+      {
+        "law_number": "KZ Članak 218",
+        "title": "Razbojništvo",
+        "relevance_score": 0.95,
+        "applicability": "directly_applicable"
+      }
+    ]
+  },
+
+  "expected_output": {
+    "arguments_count_range": [2, 3],
+    "primary_strategy_theme": "damage control and mitigation",
+    "success_probability_range": [0.10, 0.25],
+    "should_include": {
+      "settlement_recommendation": true,
+      "procedural_steps": [
+        "negotiate plea to lesser charge if possible",
+        "focus on mitigation not acquittal",
+        "gather mitigation evidence (family, employment, remorse)",
+        "explore cooperation opportunities",
+        "prepare for sentencing phase"
+      ],
+      "evidence_needed": [
+        "character witnesses",
+        "employment records",
+        "family circumstances",
+        "mental health evaluation if relevant",
+        "any mitigating factors"
+      ],
+      "argument_titles": [
+        "Challenge video quality (weak argument)",
+        "Mitigation: first offense, family support",
+        "Cooperation can reduce sentence"
+      ]
+    },
+    "expected_argument_strengths": {
+      "average_range": [25, 42],
+      "strongest_argument_score_min": 38
+    }
+  },
+
+  "validation_notes": "Should generate 2-3 weak arguments (avg 25-42), strongly recommend plea bargain, very low success probability 10-25%, focus entirely on mitigation and damage control, realistic about overwhelming prosecution case."
+}

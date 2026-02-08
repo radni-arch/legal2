@@ -1,0 +1,71 @@
+{
+  "test_id": "strategy_strong_002",
+  "description": "Strong position: Proportionality violation with Constitutional Court support",
+
+  "input": {
+    "problem_statement": "Client charged with minor drug possession (1g marijuana) after 6-hour home search. Clear proportionality violation.",
+    "strongest_precedents": [
+      {
+        "court": "Ustavni sud RH",
+        "applicability_score": 91,
+        "binding_authority": "binding",
+        "case_number": "U-III-2145/2023",
+        "favorable": true
+      },
+      {
+        "court": "Vrhovni sud RH",
+        "applicability_score": 89,
+        "binding_authority": "binding",
+        "case_number": "I Kž-1543/2022",
+        "favorable": true
+      }
+    ],
+    "analyzed_laws": [
+      {
+        "law_number": "Ustav RH Članak 34",
+        "title": "Nepovredivost stana",
+        "relevance_score": 0.93,
+        "applicability": "directly_applicable"
+      },
+      {
+        "law_number": "ZKP Članak 197",
+        "title": "Pretres stana",
+        "relevance_score": 0.91,
+        "applicability": "directly_applicable"
+      }
+    ]
+  },
+
+  "expected_output": {
+    "arguments_count_range": [3, 5],
+    "primary_strategy_theme": "proportionality violation",
+    "success_probability_range": [0.75, 0.90],
+    "should_include": {
+      "settlement_recommendation": false,
+      "procedural_steps": [
+        "file motion to suppress evidence",
+        "cite Constitutional Court precedent",
+        "document extent and duration of search",
+        "if suppression granted, move to dismiss"
+      ],
+      "evidence_needed": [
+        "search warrant documentation",
+        "timeline of search duration",
+        "inventory of items searched",
+        "photos showing extent of search"
+      ],
+      "argument_titles": [
+        "Constitutional violation of home privacy",
+        "Disproportionate search for minor offense",
+        "Binding precedent mandates exclusion",
+        "If evidence excluded, case must be dismissed"
+      ]
+    },
+    "expected_argument_strengths": {
+      "average_range": [80, 92],
+      "strongest_argument_score_min": 88
+    }
+  },
+
+  "validation_notes": "Should generate 3-5 very strong arguments (avg 80-92), no settlement (position too strong), success probability 75-90%, emphasize Constitutional Court authority and proportionality doctrine, focus on suppression then dismissal strategy."
+}

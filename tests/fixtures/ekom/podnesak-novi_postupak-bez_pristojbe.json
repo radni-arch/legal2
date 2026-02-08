@@ -1,0 +1,103 @@
+{
+  "sudOznaka": "OGs zg",
+  "vrstaPodneskaId": 1,
+  "vrstaPostupkaId": 1,
+  "ulogaPodnositeljaId": 1,
+  "podnositeljRbr": 2,
+  "vanjskaUstrojstvenaJedinica": "Odvjetnik Marko Markovic",
+  "vanjskiPredmet": "OD-2024/12345",
+  "stranke": [
+    {
+      "tip": "FIZICKA_OSOBA",
+      "ime": "Ivan",
+      "prezime": "Horvat",
+      "oib": "12345678901",
+      "ulogaId": 1,
+      "adresa": {
+        "drzavaOznaka": "HR",
+        "zupanijaId": 1,
+        "opcinaId": 100,
+        "naseljeId": 1000,
+        "postanskiBroj": "10000",
+        "ulicaIKucniBroj": "Ilica 1"
+      }
+    },
+    {
+      "tip": "PRAVNA_OSOBA",
+      "naziv": "Primjer d.o.o.",
+      "oib": "98765432109",
+      "ulogaId": 2,
+      "adresa": {
+        "drzavaOznaka": "HR",
+        "postanskiBroj": "10000",
+        "ulicaIKucniBroj": "Savska 10"
+      },
+      "predstavljaniSubjekt": {
+        "tip": "FIZICKA_OSOBA",
+        "ime": "Ana",
+        "prezime": "Anic",
+        "oib": "11122233344"
+      }
+    },
+    {
+      "tip": "TIJELO",
+      "naziv": "Ministarstvo pravosuđa i uprave",
+      "ulogaId": 3,
+      "adresa": {
+        "drzavaOznaka": "HR",
+        "postanskiBroj": "10000",
+        "ulicaIKucniBroj": "Ulica grada Vukovara 49"
+      }
+    }
+  ],
+  "protustranke": [
+    {
+      "tip": "PRAVNA_OSOBA",
+      "naziv": "Protivnik d.d.",
+      "oib": "55566677788",
+      "ulogaId": 4,
+      "adresa": {
+        "drzavaOznaka": "HR",
+        "postanskiBroj": "21000",
+        "ulicaIKucniBroj": "Vukovarska 1, Split"
+      }
+    }
+  ],
+  "sadrzaj": {
+    "naziv": "tuzba.pdf",
+    "sadrzaj": "JVBERi0xLjQKJeLjz9MKMSAwIG9iago8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFI+PgplbmRvYmoKMiAwIG9iago8PC9UeXBlL1BhZ2VzL0NvdW50IDEvS2lkc1szIDAgUl0+PgplbmRvYmoKMyAwIG9iago8PC9UeXBlL1BhZ2UvTWVkaWFCb3hbMCAwIDYxMiA3OTJdL1BhcmVudCAyIDAgUi9SZXNvdXJjZXM8PD4+Pj4KZW5kb2JqCnhyZWYKMCA0CjAwMDAwMDAwMDAgNjU1MzUgZiAKMDAwMDAwMDAwOSAwMDAwMCBuIAowMDAwMDAwMDU4IDAwMDAwIG4gCjAwMDAwMDAxMTUgMDAwMDAgbiAKdHJhaWxlcgo8PC9TaXplIDQvUm9vdCAxIDAgUj4+CnN0YXJ0eHJlZgoyMTEKJSVFT0Y=",
+    "brojStranica": 5,
+    "ignorirajUpozorenja": false
+  },
+  "prilozi": [
+    {
+      "opis": "Punomoć za zastupanje",
+      "primjedba": "Ovjerena kod javnog bilježnika",
+      "sadrzaj": {
+        "naziv": "punomoc.pdf",
+        "sadrzaj": "JVBERi0xLjQKJeLjz9MK",
+        "brojStranica": 1,
+        "ignorirajUpozorenja": false
+      }
+    },
+    {
+      "opis": "Izvod iz sudskog registra",
+      "sadrzaj": {
+        "naziv": "izvod_sudski_registar.pdf",
+        "sadrzaj": "JVBERi0xLjQKJeLjz9MK",
+        "brojStranica": 3,
+        "ignorirajUpozorenja": false
+      }
+    },
+    {
+      "opis": "Dokaz o plaćanju",
+      "primjedba": "Potvrda banke o izvršenoj transakciji",
+      "sadrzaj": {
+        "naziv": "dokaz_placanja.pdf",
+        "sadrzaj": "JVBERi0xLjQKJeLjz9MK",
+        "brojStranica": 1,
+        "ignorirajUpozorenja": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "test_id": "risk_medium_002",
+  "category": "medium-risk",
+  "expected_risk_level": "medium",
+  "expected_score_range": [52, 68],
+  "description": "Persuasive adverse precedent that can be distinguished",
+
+  "input": {
+    "problem_statement": "Client charged with drug possession after car search. Defense argues search was illegal. County court precedent upheld similar search, but facts are distinguishable.",
+    "legal_arguments": [
+      {
+        "title": "Illegal search - no probable cause",
+        "argument": "Officer had no reasonable suspicion to search vehicle",
+        "strength_score": 58,
+        "legal_basis": ["ZKP Članak 227", "Constitutional privacy rights"],
+        "potential_counterarguments": [
+          "County court upheld similar search in 2020",
+          "Officer claimed suspicious behavior",
+          "Dog alerted to vehicle"
+        ]
+      }
+    ],
+    "strongest_precedents": [],
+    "strategic_recommendations": {
+      "procedural_steps": [
+        "File suppression motion",
+        "Challenge dog alert reliability",
+        "Distinguish from county court precedent"
+      ]
+    }
+  },
+
+  "expected_output": {
+    "overall_risk_score": {
+      "score": 60,
+      "level": "medium"
+    },
+    "argument_risks": [
+      {
+        "argument_index": 0,
+        "risk_level": "medium",
+        "impact_if_fails": "high",
+        "weaknesses": [
+          "County court precedent accepted dog alert as probable cause"
+        ],
+        "evidence_gaps": [
+          "Need dog training records",
+          "Need documentation of officer's stated reasons"
+        ]
+      }
+    ],
+    "adverse_precedents": [
+      {
+        "description": "County court 2020 - upheld search after dog alert",
+        "severity": "medium",
+        "likelihood_opposing_uses": "high",
+        "how_to_distinguish": "Challenge dog's reliability, different circumstances of alert"
+      }
+    ],
+    "procedural_risks": [
+      {
+        "risk_type": "Suppression hearing",
+        "severity": "medium",
+        "probability": "medium",
+        "description": "Outcome depends on officer testimony credibility"
+      }
+    ]
+  },
+
+  "validation_notes": "Should score 52-68 (medium risk) due to persuasive (not binding) adverse precedent, arguable probable cause issue, ability to distinguish precedent, moderate evidence gaps."
+}

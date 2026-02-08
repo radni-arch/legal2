@@ -1,0 +1,44 @@
+{
+  "test_id": "precedent_medium_005",
+  "category": "medium-applicability",
+  "expected_score_range": [54, 69],
+  "description": "Appellate court chain of custody case with distinguishable facts",
+
+  "input": {
+    "problem_statement": "Blood sample for DUI test sat in storage for 45 days before testing, with incomplete documentation. Question: Should results be excluded due to chain of custody issues?",
+    "researched_decisions": [
+      {
+        "ecli": "HR:VSZG:2019:Kž-445",
+        "court": "Županijski sud u Zagrebu",
+        "case_number": "Kž-445/2019",
+        "decision_date": "2019-09-25",
+        "title": "Nedostaci u lancu čuvanja - urinsko testiranje",
+        "summary": "Županijski sud prihvatio uzorak koji je bio u čuvanju 30 dana s manjim nedostacima u dokumentaciji. Sud utvrdio da su nedostaci bili formalne prirode i da nije bilo indicija kvarenja uzorka. Međutim, riječ je bila o urinu, ne krvi, i 30 dana, ne 45."
+      }
+    ],
+    "researched_laws": [
+      {
+        "law_number": "ZKP Članak 289",
+        "title": "Postupanje s dokaznim predmetima",
+        "content": "Predmeti koji služe kao dokazi moraju se pravilno čuvati s potpunom dokumentacijom. Nedostaci u dokumentaciji mogu dovesti do isključenja dokaza.",
+        "similarity": 0.74
+      }
+    ]
+  },
+
+  "expected_output": {
+    "applicability_score": 61,
+    "binding_authority": "persuasive",
+    "key_factors": [
+      "nedostaci u dokumentaciji",
+      "različit tip uzorka (urin vs krv)",
+      "različit rok čuvanja (30 vs 45 dana)",
+      "sud prihvatio dokaz",
+      "razlikovne činjenice"
+    ],
+    "favorable": false,
+    "reasoning": "Županijski sud (persuasive). Sličan problem (dugačko čuvanje + dokumentacija) ali različite činjenice. Sud prihvatio dokaze u njihovom slučaju. Krv je osjetljivija od urina, 45 dana duže od 30. Zahtijeva pažljivo razlikovanje činjenica."
+  },
+
+  "validation_notes": "Should score 54-69 due to persuasive authority, partial similarity (storage issues), distinguishable facts (different sample type, longer storage period), unfavorable outcome requiring careful distinction."
+}

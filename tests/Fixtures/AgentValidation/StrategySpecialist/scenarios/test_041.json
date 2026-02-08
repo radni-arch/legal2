@@ -1,0 +1,64 @@
+{
+  "test_id": "strategy_moderate_003",
+  "description": "Moderate position: Property crime with some procedural issues",
+
+  "input": {
+    "problem_statement": "Client charged with theft. Some chain of custody issues with evidence but not severe. Partial identification.",
+    "strongest_precedents": [
+      {
+        "court": "Županijski sud u Zagrebu",
+        "applicability_score": 61,
+        "binding_authority": "persuasive",
+        "case_number": "Kž-445/2019",
+        "favorable": true
+      }
+    ],
+    "analyzed_laws": [
+      {
+        "law_number": "ZKP Članak 289",
+        "title": "Postupanje s dokaznim predmetima",
+        "relevance_score": 0.72,
+        "applicability": "potentially_applicable"
+      },
+      {
+        "law_number": "KZ Članak 228",
+        "title": "Krađa",
+        "relevance_score": 0.85,
+        "applicability": "directly_applicable"
+      }
+    ]
+  },
+
+  "expected_output": {
+    "arguments_count_range": [3, 5],
+    "primary_strategy_theme": "challenge evidence reliability",
+    "success_probability_range": [0.38, 0.58],
+    "should_include": {
+      "settlement_recommendation": true,
+      "procedural_steps": [
+        "challenge chain of custody documentation",
+        "challenge identification reliability",
+        "seek restitution-based plea",
+        "explore diversion programs if available",
+        "prepare mitigation evidence"
+      ],
+      "evidence_needed": [
+        "chain of custody logs",
+        "identification procedure documentation",
+        "client's financial situation",
+        "character references"
+      ],
+      "argument_titles": [
+        "Chain of custody gaps create reasonable doubt",
+        "Identification procedure flawed",
+        "Client willing to make restitution"
+      ]
+    },
+    "expected_argument_strengths": {
+      "average_range": [48, 62],
+      "strongest_argument_score_min": 58
+    }
+  },
+
+  "validation_notes": "Should generate 3-5 arguments (avg 48-62), recommend settlement (procedural issues not fatal), success probability 38-58%, practical focus on restitution and mitigation, realistic about evidentiary challenges."
+}

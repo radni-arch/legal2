@@ -1,0 +1,7 @@
+# Failure briefs are tracked for human oversight
+# These provide visibility into test failures and RCA
+# (Remove entries when trust is established)
+
+# Only ignore temporary/backup files
+*.bak
+*.tmp

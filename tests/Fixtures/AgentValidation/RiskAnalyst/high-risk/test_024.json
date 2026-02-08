@@ -1,0 +1,89 @@
+{
+  "test_id": "risk_high_004",
+  "category": "high-risk",
+  "expected_risk_level": "high",
+  "expected_score_range": [75, 90],
+  "description": "DNA evidence contradicting defense theory with weak counterarguments",
+
+  "input": {
+    "problem_statement": "Client charged with assault. Defense claims mistaken identity. Prosecution has DNA from crime scene matching client with 99.9% probability. Client has no explanation for DNA presence.",
+    "legal_arguments": [
+      {
+        "title": "Mistaken identity",
+        "argument": "Victim identified wrong person in lineup",
+        "strength_score": 38,
+        "legal_basis": ["Eyewitness identification unreliable"],
+        "potential_counterarguments": [
+          "DNA evidence conclusively places client at scene",
+          "99.9% match probability",
+          "Client cannot explain DNA presence",
+          "Victim injury consistent with client's height/build"
+        ]
+      },
+      {
+        "title": "Chain of custody issues",
+        "argument": "DNA sample may have been contaminated",
+        "strength_score": 25,
+        "legal_basis": ["ZKP evidence handling requirements"],
+        "potential_counterarguments": [
+          "No documented chain of custody breaks",
+          "Lab protocols properly followed",
+          "Defense speculation without evidence"
+        ]
+      }
+    ],
+    "strongest_precedents": [],
+    "strategic_recommendations": {
+      "procedural_steps": [
+        "Request independent DNA testing",
+        "Challenge lab procedures",
+        "Explore secondary transfer theory"
+      ]
+    }
+  },
+
+  "expected_output": {
+    "overall_risk_score": {
+      "score": 83,
+      "level": "high"
+    },
+    "argument_risks": [
+      {
+        "argument_index": 0,
+        "risk_level": "critical",
+        "impact_if_fails": "high",
+        "weaknesses": [
+          "DNA evidence destroys mistaken identity defense",
+          "No alternative explanation for DNA",
+          "Very high match probability"
+        ]
+      },
+      {
+        "argument_index": 1,
+        "risk_level": "critical",
+        "impact_if_fails": "high",
+        "weaknesses": [
+          "No evidence of contamination",
+          "Speculative argument",
+          "Lab followed protocols"
+        ]
+      }
+    ],
+    "adverse_precedents": [
+      {
+        "description": "Courts highly value DNA evidence with >99% match",
+        "severity": "high"
+      }
+    ],
+    "procedural_risks": [
+      {
+        "risk_type": "Expert testimony",
+        "severity": "medium",
+        "probability": "medium",
+        "description": "May need expensive DNA expert to challenge testing"
+      }
+    ]
+  },
+
+  "validation_notes": "Should score 75-90 (high risk) due to devastating DNA evidence (99.9% match), both arguments critically weak, no explanation for DNA presence, courts heavily favor DNA evidence."
+}

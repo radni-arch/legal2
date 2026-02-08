@@ -1,0 +1,50 @@
+{
+  "id": "pp_prz_74_2025",
+  "title": "PP/PRZ 74-2025",
+  "summary": "Parnica radi naknade stete i nezakonitog otkaza ugovora o radu, s fokusom na povredu procedura i dokazivanje imovinske stete.",
+  "timeline": [
+    {
+      "date": "2024-01-15",
+      "title": "Sklapanje ugovora o radu",
+      "detail": "Tuzitelj zapocinje radni odnos na neodredeno vrijeme u svojstvu voditelja prodaje."
+    },
+    {
+      "date": "2024-05-22",
+      "title": "Upozorenje poslodavca",
+      "detail": "Poslodavac dostavlja pisano upozorenje zbog navodno neispunjenih prodajnih ciljeva."
+    },
+    {
+      "date": "2024-07-05",
+      "title": "Izvanredni otkaz",
+      "detail": "Tuzitelj prima izvanredni otkaz bez prethodnog saslusanja ili mogucnosti obrane."
+    },
+    {
+      "date": "2024-07-20",
+      "title": "Pokretanje parnicnog postupka",
+      "detail": "Podnosi se tuzba radi utvrdenja nezakonitosti otkaza i naknade stete."
+    },
+    {
+      "date": "2024-10-11",
+      "title": "Pripremno rociste",
+      "detail": "Sud nalaze dostavu dodatne dokumentacije o internim procedurama i KPI izvjestajima."
+    }
+  ],
+  "facts": [
+    {
+      "label": "Nedostatak saslusanja",
+      "detail": "Tuzitelj nije bio pozvan na ocitovanje prije izvanrednog otkaza."
+    },
+    {
+      "label": "Neuruceni KPI izvjestaji",
+      "detail": "Poslodavac nije dokazao dostavu KPI izvjestaja koji bi potvrdili navodne propuste."
+    },
+    {
+      "label": "Gubitak prihoda",
+      "detail": "Tuzitelj potrazuje naknadu izgubljene place i bonusa za razdoblje nakon otkaza."
+    },
+    {
+      "label": "Povreda interne procedure",
+      "detail": "Interni pravilnik zahtijeva disciplinski postupak prije izvanrednog otkaza."
+    }
+  ]
+}

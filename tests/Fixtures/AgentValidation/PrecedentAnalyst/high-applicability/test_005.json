@@ -1,0 +1,50 @@
+{
+  "test_id": "precedent_high_005",
+  "category": "high-applicability",
+  "expected_score_range": [86, 96],
+  "description": "Constitutional Court ruling on fair trial violation due to prosecutorial misconduct",
+
+  "input": {
+    "problem_statement": "State attorney withheld exculpatory evidence (witness statement supporting alibi) from defense. Evidence was discovered only after conviction. Question: Should conviction be overturned?",
+    "researched_decisions": [
+      {
+        "ecli": "HR:USRH:2023:U-III-3456",
+        "court": "Ustavni sud Republike Hrvatske",
+        "case_number": "U-III-3456/2023",
+        "decision_date": "2023-06-12",
+        "title": "Povreda prava na pravično suđenje - prikrivanje razrješavajućih dokaza",
+        "summary": "Ustavni sud utvrdio povredu prava na pravično suđenje (Ustav RH Članak 29). Državno odvjetništvo namjerno prikrilo iskaz svjedoka koji podupire alibi okrivljenika. Takvo postupanje predstavlja težu povredu koja ugrožava fer postupak. Sud je ukinuo presudu i naredio novo suđenje."
+      }
+    ],
+    "researched_laws": [
+      {
+        "law_number": "ZKP Članak 9",
+        "title": "Načelo objektivnosti državnog odvjetništva",
+        "content": "Državni odvjetnik dužan je podjednako ispitati okolnosti koje terete i koje idu u korist osumnjičenika. Državni odvjetnik mora otkriti sve dokaze obrani, uključujući one koji idu u korist okrivljenika.",
+        "similarity": 0.96
+      },
+      {
+        "law_number": "Ustav RH Članak 29 stavak 1",
+        "title": "Pravo na pravično suđenje",
+        "content": "Svatko ima pravo da zakonom ustanovljeni neovisni i nepristrani sud pravično i u razumnom roku odluči o njegovim pravima i obvezama.",
+        "similarity": 0.91
+      }
+    ]
+  },
+
+  "expected_output": {
+    "applicability_score": 91,
+    "binding_authority": "binding",
+    "key_factors": [
+      "namjerno prikrivanje razrješavajućih dokaza",
+      "povreda prava na pravično suđenje",
+      "kršenje načela objektivnosti",
+      "ukidanje presude",
+      "novo suđenje"
+    ],
+    "favorable": true,
+    "reasoning": "Ustavnosudska odluka najvišeg autoriteta. Identičan slučaj prikrivanja dokaza koji podupiru alibi. Jasno utvrđena povreda prava na pravično suđenje. Mandat za ukidanje presude. Presuda iz 2023, vrlo recentna."
+  },
+
+  "validation_notes": "Should score 89-94 due to Constitutional Court highest authority, identical prosecutorial misconduct (withholding exculpatory evidence), recent precedent, and favorable outcome (conviction overturned)."
+}

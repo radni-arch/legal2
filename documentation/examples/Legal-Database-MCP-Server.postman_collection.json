@@ -1,0 +1,502 @@
+{
+  "info": {
+    "name": "Legal Database MCP Server",
+    "description": "MCP tools for searching and retrieving Croatian legal data (laws, decisions, cases)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "2.0.0"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "value",
+        "value": "{{mcpToken}}",
+        "type": "string"
+      },
+      {
+        "key": "key",
+        "value": "X-MCP-Token",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "mcpToken",
+      "value": "your-mcp-api-token-here",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Law Tools",
+      "item": [
+        {
+          "name": "Search Laws - Basic Query",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"radno pravo\",\n  \"country\": \"HR\",\n  \"language\": \"hr\",\n  \"limit\": 10,\n  \"page\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mcp/law.search",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "mcp", "law.search"]
+            },
+            "description": "Search for laws using a free text query with filters"
+          }
+        },
+        {
+          "name": "Search Laws - By Law Number",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"law_number\": \"93/14\",\n  \"country\": \"HR\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mcp/law.search",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "mcp", "law.search"]
+            },
+            "description": "Find a specific law by its number"
+          }
+        },
+        {
+          "name": "Search Laws - By Tags",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"ugovor\",\n  \"tags\": \"labor,employment\",\n  \"jurisdiction\": \"national\",\n  \"limit\": 20\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mcp/law.search",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "mcp", "law.search"]
+            },
+            "description": "Search laws filtered by tags"
+          }
+        },
+        {
+          "name": "Get Law Article - All Chunks",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"doc_id\": \"nn_93_2014\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mcp/law.get_article",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "mcp", "law.get_article"]
+            },
+            "description": "Retrieve all chunks of a specific law"
+          }
+        },
+        {
+          "name": "Get Law Article - Specific Chunk",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"doc_id\": \"nn_93_2014\",\n  \"number\": 5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mcp/law.get_article",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "mcp", "law.get_article"]
+            },
+            "description": "Retrieve a specific chunk by index"
+          }
+        },
+        {
+          "name": "Get Law Article - By Chapter",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"doc_id\": \"nn_93_2014\",\n  \"chapter\": \"Glava III\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mcp/law.get_article",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "mcp", "law.get_article"]
+            },
+            "description": "Retrieve articles from a specific chapter"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Court Decision Tools",
+      "item": [
+        {
+          "name": "Search Decisions - Basic Query",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"nezakonit otkaz\",\n  \"limit\": 10,\n  \"page\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mcp/decision.search",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "mcp", "decision.search"]
+            },
+            "description": "Search court decisions by query"
+          }
+        },
+        {
+          "name": "Search Decisions - By Court",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"radni spor\",\n  \"court\": \"Vrhovni sud\",\n  \"decision_type\": \"Presuda\",\n  \"limit\": 20\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mcp/decision.search",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "mcp", "decision.search"]
+            },
+            "description": "Search decisions filtered by court"
+          }
+        },
+        {
+          "name": "Search Decisions - Date Range",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"ugovor o radu\",\n  \"date_from\": \"2023-01-01\",\n  \"date_to\": \"2023-12-31\",\n  \"tags\": \"labor\",\n  \"limit\": 15\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mcp/decision.search",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "mcp", "decision.search"]
+            },
+            "description": "Search decisions within a date range"
+          }
+        },
+        {
+          "name": "Search Decisions - By ECLI",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ecli\": \"ECLI:HR:VSRH:2023:Gž.1234\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mcp/decision.search",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "mcp", "decision.search"]
+            },
+            "description": "Find a specific decision by ECLI identifier"
+          }
+        },
+        {
+          "name": "Get Decision - Metadata Only",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"01HQYYY123456789\",\n  \"include_documents\": true,\n  \"include_content\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mcp/decision.get",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "mcp", "decision.get"]
+            },
+            "description": "Get decision metadata without full content"
+          }
+        },
+        {
+          "name": "Get Decision - Full Content",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"01HQYYY123456789\",\n  \"include_documents\": true,\n  \"include_content\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mcp/decision.get",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "mcp", "decision.get"]
+            },
+            "description": "Get decision with full document content"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Case Tools (Private)",
+      "item": [
+        {
+          "name": "Search Cases - By Case Number",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"case_number\": \"P-123/2023\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mcp/case.search",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "mcp", "case.search"]
+            },
+            "description": "Find a case by its case number"
+          }
+        },
+        {
+          "name": "Search Cases - By Client",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_name\": \"Marković\",\n  \"status\": \"active\",\n  \"limit\": 10\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mcp/case.search",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "mcp", "case.search"]
+            },
+            "description": "Search cases by client name"
+          }
+        },
+        {
+          "name": "Search Case Documents",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"case_id\": \"01HQZZZ123456789\",\n  \"query\": \"ugovor o radu\",\n  \"search_documents\": true,\n  \"include_content\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mcp/case.search",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "mcp", "case.search"]
+            },
+            "description": "Search within case documents"
+          }
+        },
+        {
+          "name": "Get All Case Documents",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"case_id\": \"01HQZZZ123456789\",\n  \"search_documents\": true,\n  \"limit\": 100\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mcp/case.search",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "mcp", "case.search"]
+            },
+            "description": "Retrieve all documents for a case"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Workflow Examples",
+      "item": [
+        {
+          "name": "1. Research Labor Law - Search Laws",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"otkaz ugovora o radu\",\n  \"country\": \"HR\",\n  \"tags\": \"labor\",\n  \"limit\": 5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mcp/law.search",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "mcp", "law.search"]
+            },
+            "description": "Step 1: Find relevant laws"
+          }
+        },
+        {
+          "name": "2. Research Labor Law - Search Decisions",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"otkaz ugovora o radu\",\n  \"tags\": \"labor\",\n  \"date_from\": \"2020-01-01\",\n  \"limit\": 10\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mcp/decision.search",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "mcp", "decision.search"]
+            },
+            "description": "Step 2: Find related court decisions"
+          }
+        },
+        {
+          "name": "3. Research Labor Law - Get Law Article",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"doc_id\": \"nn_93_2014\",\n  \"chapter\": \"Otkaz ugovora o radu\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mcp/law.get_article",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "mcp", "law.get_article"]
+            },
+            "description": "Step 3: Get full law article"
+          }
+        },
+        {
+          "name": "4. Research Labor Law - Get Decision Details",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"01HQYYY123456789\",\n  \"include_documents\": true,\n  \"include_content\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/mcp/decision.get",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "mcp", "decision.get"]
+            },
+            "description": "Step 4: Get full decision text"
+          }
+        }
+      ]
+    }
+  ]
+}

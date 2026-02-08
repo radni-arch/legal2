@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-02-08T03:51:40Z",
+  "budget_bytes": 2000,
+  "used_bytes": 1008,
+  "under_budget": true,
+  "trimmed_sections": "",
+  "sections": {
+    "primer": 400,
+    "status": 300,
+    "queue": 600,
+    "component": 400,
+    "message": 300
+  }
+}

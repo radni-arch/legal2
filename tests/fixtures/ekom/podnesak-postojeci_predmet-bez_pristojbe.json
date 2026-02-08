@@ -1,0 +1,24 @@
+{
+  "predmetOznaka": "P-1/2023",
+  "vrstaPodneskaId": 10,
+  "podnositeljSlobodanUnos": "podnositelj",
+  "stranke": [],
+  "protustranke": [],
+  "sadrzaj": {
+    "naziv": "podnesak_u_predmetu.pdf",
+    "sadrzaj": "JVBERi0xLjQKJeLjz9MK",
+    "brojStranica": 2,
+    "ignorirajUpozorenja": false
+  },
+  "prilozi": [
+    {
+      "opis": "Dokaz",
+      "sadrzaj": {
+        "naziv": "dokaz.pdf",
+        "sadrzaj": "JVBERi0xLjQK",
+        "brojStranica": 1,
+        "ignorirajUpozorenja": false
+      }
+    }
+  ]
+}

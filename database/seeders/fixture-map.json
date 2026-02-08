@@ -1,0 +1,125 @@
+{
+  "description": "Maps test domains/components to required seeders for focused fixture loading",
+  "version": 1,
+  "default": [
+    "UserTestSeeder",
+    "ReferenceDataSeeder"
+  ],
+  "domains": {
+    "vector_stores": [
+      "UserTestSeeder",
+      "LegalCaseTestSeeder"
+    ],
+    "textract_pipeline": [
+      "UserTestSeeder",
+      "LegalCaseTestSeeder"
+    ],
+    "search_services": [
+      "UserTestSeeder",
+      "LegalCaseTestSeeder",
+      "ReferenceDataSeeder"
+    ],
+    "graph_and_neo4j": [
+      "UserTestSeeder",
+      "LegalCaseTestSeeder"
+    ],
+    "court_integration": [
+      "UserTestSeeder",
+      "CourtDecisionDownloadSeeder"
+    ],
+    "decision_discovery": [
+      "UserTestSeeder",
+      "CourtDecisionDownloadSeeder",
+      "LegalCaseTestSeeder"
+    ],
+    "evidence_management": [
+      "UserTestSeeder",
+      "LegalCaseTestSeeder"
+    ],
+    "legal_reasoning": [
+      "UserTestSeeder",
+      "LegalCaseTestSeeder",
+      "CourtDecisionDownloadSeeder"
+    ],
+    "agents_and_research": [
+      "UserTestSeeder",
+      "LegalCaseTestSeeder"
+    ],
+    "openai_and_llm": [
+      "UserTestSeeder",
+      "LegalCaseTestSeeder"
+    ],
+    "collaboration": [
+      "UserTestSeeder",
+      "LegalCaseTestSeeder"
+    ],
+    "dashboards_and_viewers": [
+      "UserTestSeeder",
+      "LegalCaseTestSeeder",
+      "CourtDecisionDownloadSeeder"
+    ],
+    "timeline_views": [
+      "UserTestSeeder",
+      "LegalCaseTestSeeder"
+    ],
+    "manager_components": [
+      "UserTestSeeder",
+      "LegalCaseTestSeeder",
+      "ReferenceDataSeeder"
+    ],
+    "authentication": [
+      "UserTestSeeder"
+    ],
+    "authorization": [
+      "UserTestSeeder"
+    ],
+    "security": [
+      "UserTestSeeder"
+    ],
+    "api_endpoints": [
+      "UserTestSeeder",
+      "LegalCaseTestSeeder"
+    ],
+    "background_jobs": [
+      "UserTestSeeder",
+      "LegalCaseTestSeeder"
+    ],
+    "console_commands": [
+      "UserTestSeeder",
+      "ReferenceDataSeeder"
+    ],
+    "models": [
+      "UserTestSeeder",
+      "LegalCaseTestSeeder"
+    ],
+    "services": [
+      "UserTestSeeder",
+      "LegalCaseTestSeeder"
+    ],
+    "request_validation": [
+      "UserTestSeeder"
+    ],
+    "blade_components": [
+      "UserTestSeeder"
+    ],
+    "mcp_integration": [
+      "UserTestSeeder",
+      "LegalCaseTestSeeder"
+    ],
+    "general": [
+      "UserTestSeeder",
+      "ReferenceDataSeeder"
+    ]
+  },
+  "full_seed": [
+    "ReferenceDataSeeder",
+    "UserTestSeeder",
+    "LegalCaseTestSeeder",
+    "EoglasnaKeywordSeeder",
+    "CourtDecisionDownloadSeeder"
+  ],
+  "meta": {
+    "created": "2025-12-18",
+    "notes": "Add new domains as needed. Seeders run in order listed."
+  }
+}

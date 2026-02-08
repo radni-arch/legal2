@@ -1,0 +1,1014 @@
+[
+  {
+    "oid": "a7a7dad316cf943c7352aa576039348faf011a23",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-10T15:45:43+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc",
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/81847?s=64&v=4",
+      "signerLogin": "claude",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "SshSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "94bfa7f526cf0e6348709d09e3c42e1530826884",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-10T15:25:21+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "B5690EEEBB952194",
+      "keyRevoked": false,
+      "signedByGitHub": true,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/19864447?s=64&v=4",
+      "signerLogin": "web-flow",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "GpgSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "64d273730a2050ff665c1494c23df62c66371986",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-10T14:25:13+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc",
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/81847?s=64&v=4",
+      "signerLogin": "claude",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "SshSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "e0041d00d9c3014ffe97515070f4f3ead540da35",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-10T03:32:01+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc",
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/81847?s=64&v=4",
+      "signerLogin": "claude",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "SshSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "c90d61e0dec698d9faf337ca15dc93fecfff2b6e",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "2 / 3 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-10T03:02:51+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "B5690EEEBB952194",
+      "keyRevoked": false,
+      "signedByGitHub": true,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/19864447?s=64&v=4",
+      "signerLogin": "web-flow",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "GpgSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "acc19d42127b2560d659794f71a92184a5ef8a05",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-10T02:18:09+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc",
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/81847?s=64&v=4",
+      "signerLogin": "claude",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "SshSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "9fca2e68950dddc922254861f71574c0f21cc3c5",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-09T20:47:14+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc",
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/81847?s=64&v=4",
+      "signerLogin": "claude",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "SshSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "73bbb021cf506260b00cf293dbeb7e41460e81f0",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-09T16:11:14+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc",
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/81847?s=64&v=4",
+      "signerLogin": "claude",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "SshSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "a91553729993355609cb6412b86b356a8902ea11",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "unsigned",
+    "signatureInformation": {
+      "signatureVerificationReason": "unsigned",
+      "hasSignature": false,
+      "verifiedAt": null,
+      "isViewer": null,
+      "keyExpired": null,
+      "keyId": null,
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": null,
+      "signerLogin": null,
+      "signatureCertificateSubject": null,
+      "signatureCertificateIssuer": null,
+      "signatureType": null
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "ea0efc224d146fdd75fb018e6e8fbb484a360f85",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "unsigned",
+    "signatureInformation": {
+      "signatureVerificationReason": "unsigned",
+      "hasSignature": false,
+      "verifiedAt": null,
+      "isViewer": null,
+      "keyExpired": null,
+      "keyId": null,
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": null,
+      "signerLogin": null,
+      "signatureCertificateSubject": null,
+      "signatureCertificateIssuer": null,
+      "signatureType": null
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "5a6c2ea96b0655467053b02ea8aaba0bb89602a8",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-09T15:48:01+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc",
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/81847?s=64&v=4",
+      "signerLogin": "claude",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "SshSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "6c1663b2724522a0347991479ad68d97466bb757",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-09T02:34:46+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc",
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/81847?s=64&v=4",
+      "signerLogin": "claude",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "SshSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "e81f09bec8876bab5dbe987488b53b6907e94088",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-09T01:33:57+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc",
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/81847?s=64&v=4",
+      "signerLogin": "claude",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "SshSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "027e2a086df19dd5ba4b0bedc031a7bb26313a8e",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "unsigned",
+    "signatureInformation": {
+      "signatureVerificationReason": "unsigned",
+      "hasSignature": false,
+      "verifiedAt": null,
+      "isViewer": null,
+      "keyExpired": null,
+      "keyId": null,
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": null,
+      "signerLogin": null,
+      "signatureCertificateSubject": null,
+      "signatureCertificateIssuer": null,
+      "signatureType": null
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "bce644c33824d40fbae49991e12db948137126ad",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "unsigned",
+    "signatureInformation": {
+      "signatureVerificationReason": "unsigned",
+      "hasSignature": false,
+      "verifiedAt": null,
+      "isViewer": null,
+      "keyExpired": null,
+      "keyId": null,
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": null,
+      "signerLogin": null,
+      "signatureCertificateSubject": null,
+      "signatureCertificateIssuer": null,
+      "signatureType": null
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "98e533f8a445001b9b10a12d3b1536ae7a7a495c",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-08T21:34:31+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc",
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/81847?s=64&v=4",
+      "signerLogin": "claude",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "SshSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "6345467d02e4a504313561257fd7a3ff6f8bd244",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-08T20:55:19+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc",
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/81847?s=64&v=4",
+      "signerLogin": "claude",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "SshSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "2a441e3a902a7915e3e754ae81e2486cb4a94d90",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-08T20:31:59+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc",
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/81847?s=64&v=4",
+      "signerLogin": "claude",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "SshSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "8fafbb906e080fb3ac9c2e858f9bb13ff3117bda",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "unsigned",
+    "signatureInformation": {
+      "signatureVerificationReason": "unsigned",
+      "hasSignature": false,
+      "verifiedAt": null,
+      "isViewer": null,
+      "keyExpired": null,
+      "keyId": null,
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": null,
+      "signerLogin": null,
+      "signatureCertificateSubject": null,
+      "signatureCertificateIssuer": null,
+      "signatureType": null
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "57356d45e95255b64ed88e3e445151ad6f8410d4",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-08T17:36:48+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc",
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/81847?s=64&v=4",
+      "signerLogin": "claude",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "SshSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "c764cdcbf3aa5a5c7e0a18f3c5545d5274868c2b",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-08T16:46:11+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc",
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/81847?s=64&v=4",
+      "signerLogin": "claude",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "SshSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "9fcfc8800c1b26c109de5f4b91aa34f41181dc30",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-08T15:27:13+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc",
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/81847?s=64&v=4",
+      "signerLogin": "claude",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "SshSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "5db56bf38d39a0d66d17246fb2f38e565f3537ff",
+    "commentCount": 0,
+    "statusCheckStatus": null,
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-08T14:54:53+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc",
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/81847?s=64&v=4",
+      "signerLogin": "claude",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "SshSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "7aef260eba6e2cbcc0e3ea39678d1a080459db6f",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 2 checks OK"
+    },
+    "verifiedStatus": "unsigned",
+    "signatureInformation": {
+      "signatureVerificationReason": "unsigned",
+      "hasSignature": false,
+      "verifiedAt": null,
+      "isViewer": null,
+      "keyExpired": null,
+      "keyId": null,
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": null,
+      "signerLogin": null,
+      "signatureCertificateSubject": null,
+      "signatureCertificateIssuer": null,
+      "signatureType": null
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "95635ae00883000a501a7c5610426ee51d89dd03",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-08T04:33:34+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc",
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/81847?s=64&v=4",
+      "signerLogin": "claude",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "SshSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "71530267247ed918fcf9ef3c4cac92673684a5ae",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-08T03:45:17+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc",
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/81847?s=64&v=4",
+      "signerLogin": "claude",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "SshSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "4ebce1c3eb2cb9b7a5152c300d5d9aea721f67be",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-08T03:35:07+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc",
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/81847?s=64&v=4",
+      "signerLogin": "claude",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "SshSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "4cec328d3f251756849183a5ee654338f5a51439",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-08T03:12:01+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc",
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/81847?s=64&v=4",
+      "signerLogin": "claude",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "SshSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "c8ab5539661805afdfc3d6a963223d5c4ace4695",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-08T02:51:11+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc",
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/81847?s=64&v=4",
+      "signerLogin": "claude",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "SshSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "2b37ca0427a767079956226fee917bf89e01ca53",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "verified",
+    "signatureInformation": {
+      "signatureVerificationReason": "valid",
+      "hasSignature": true,
+      "verifiedAt": "2026-01-08T02:21:28+01:00",
+      "isViewer": false,
+      "keyExpired": null,
+      "keyId": "32dP45eSMmVSt/G/CGvcxl/P+MO3Nwj9xeTh/GSA2wc",
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": "https://avatars.githubusercontent.com/u/81847?s=64&v=4",
+      "signerLogin": "claude",
+      "signatureCertificateSubject": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureCertificateIssuer": {
+        "common_name": null,
+        "email_address": null,
+        "organization": null,
+        "organization_unit": null
+      },
+      "signatureType": "SshSignature"
+    },
+    "onBehalfOf": null
+  },
+  {
+    "oid": "cc4dfe000b2c582ea78fb90cf6f4130d4d542ea6",
+    "commentCount": 0,
+    "statusCheckStatus": {
+      "state": "failure",
+      "short_text": "0 / 1 checks OK"
+    },
+    "verifiedStatus": "unsigned",
+    "signatureInformation": {
+      "signatureVerificationReason": "unsigned",
+      "hasSignature": false,
+      "verifiedAt": null,
+      "isViewer": null,
+      "keyExpired": null,
+      "keyId": null,
+      "keyRevoked": null,
+      "signedByGitHub": false,
+      "signerAvatarUrl": null,
+      "signerLogin": null,
+      "signatureCertificateSubject": null,
+      "signatureCertificateIssuer": null,
+      "signatureType": null
+    },
+    "onBehalfOf": null
+  }
+]

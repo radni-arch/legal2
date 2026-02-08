@@ -1,0 +1,374 @@
+### Legal Database MCP Server - HTTP Examples
+###
+### These examples demonstrate how to call MCP tools via HTTP
+### Use with REST Client extensions in VS Code or similar tools
+###
+### Set these variables for your environment:
+@baseUrl = http://localhost:8000
+@mcpToken = your-mcp-api-token-here
+
+###############################################################################
+# LAW TOOLS
+###############################################################################
+
+### 1. Search Laws - Basic Query
+POST {{baseUrl}}/api/mcp/law.search
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "query": "radno pravo",
+  "country": "HR",
+  "language": "hr",
+  "limit": 10,
+  "page": 1
+}
+
+### 2. Search Laws - Filter by Law Number
+POST {{baseUrl}}/api/mcp/law.search
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "law_number": "93/14",
+  "country": "HR"
+}
+
+### 3. Search Laws - Filter by Tags
+POST {{baseUrl}}/api/mcp/law.search
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "query": "ugovor",
+  "tags": "labor,employment",
+  "jurisdiction": "national",
+  "limit": 20
+}
+
+### 4. Search Laws - Specific Document ID
+POST {{baseUrl}}/api/mcp/law.search
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "doc_id": "nn_93_2014"
+}
+
+### 5. Get Law Article - All Chunks
+POST {{baseUrl}}/api/mcp/law.get_article
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "doc_id": "nn_93_2014"
+}
+
+### 6. Get Law Article - Specific Chunk
+POST {{baseUrl}}/api/mcp/law.get_article
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "doc_id": "nn_93_2014",
+  "number": 5
+}
+
+### 7. Get Law Article - Filter by Chapter
+POST {{baseUrl}}/api/mcp/law.get_article
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "doc_id": "nn_93_2014",
+  "chapter": "Glava III"
+}
+
+###############################################################################
+# COURT DECISION TOOLS
+###############################################################################
+
+### 8. Search Court Decisions - Basic Query
+POST {{baseUrl}}/api/mcp/decision.search
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "query": "nezakonit otkaz",
+  "limit": 10,
+  "page": 1
+}
+
+### 9. Search Court Decisions - Filter by Court
+POST {{baseUrl}}/api/mcp/decision.search
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "query": "radni spor",
+  "court": "Vrhovni sud",
+  "decision_type": "Presuda",
+  "limit": 20
+}
+
+### 10. Search Court Decisions - Date Range
+POST {{baseUrl}}/api/mcp/decision.search
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "query": "ugovor o radu",
+  "date_from": "2023-01-01",
+  "date_to": "2023-12-31",
+  "tags": "labor",
+  "limit": 15
+}
+
+### 11. Search Court Decisions - By Case Number
+POST {{baseUrl}}/api/mcp/decision.search
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "case_number": "Gž-1234/2023"
+}
+
+### 12. Search Court Decisions - By ECLI
+POST {{baseUrl}}/api/mcp/decision.search
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "ecli": "ECLI:HR:VSRH:2023:Gž.1234"
+}
+
+### 13. Get Court Decision - Metadata Only
+POST {{baseUrl}}/api/mcp/decision.get
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "id": "01HQYYY123456789",
+  "include_documents": true,
+  "include_content": false
+}
+
+### 14. Get Court Decision - With Full Content
+POST {{baseUrl}}/api/mcp/decision.get
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "id": "01HQYYY123456789",
+  "include_documents": true,
+  "include_content": true
+}
+
+### 15. Get Court Decision - No Documents
+POST {{baseUrl}}/api/mcp/decision.get
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "id": "01HQYYY123456789",
+  "include_documents": false
+}
+
+###############################################################################
+# CASE TOOLS (PRIVATE - Requires Authentication)
+###############################################################################
+
+### 16. Search Cases - By Case Number
+POST {{baseUrl}}/api/mcp/case.search
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "case_number": "P-123/2023"
+}
+
+### 17. Search Cases - By Client Name
+POST {{baseUrl}}/api/mcp/case.search
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "client_name": "Marković",
+  "status": "active",
+  "limit": 10
+}
+
+### 18. Search Cases - Search Documents
+POST {{baseUrl}}/api/mcp/case.search
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "case_id": "01HQZZZ123456789",
+  "query": "ugovor o radu",
+  "search_documents": true,
+  "include_content": false
+}
+
+### 19. Search Cases - Get All Case Documents
+POST {{baseUrl}}/api/mcp/case.search
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "case_id": "01HQZZZ123456789",
+  "search_documents": true,
+  "limit": 100
+}
+
+### 20. Search Cases - Complex Filter
+POST {{baseUrl}}/api/mcp/case.search
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "court": "Općinski sud u Zagrebu",
+  "status": "active",
+  "tags": "labor,dispute",
+  "search_documents": false,
+  "limit": 20
+}
+
+###############################################################################
+# COMBINED WORKFLOW EXAMPLES
+###############################################################################
+
+### 21. Workflow: Research Labor Law Topic
+# Step 1: Find relevant laws
+POST {{baseUrl}}/api/mcp/law.search
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "query": "otkaz ugovora o radu",
+  "country": "HR",
+  "tags": "labor",
+  "limit": 5
+}
+
+###
+# Step 2: Find related court decisions
+POST {{baseUrl}}/api/mcp/decision.search
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "query": "otkaz ugovora o radu",
+  "tags": "labor",
+  "date_from": "2020-01-01",
+  "limit": 10
+}
+
+###
+# Step 3: Get full law article
+POST {{baseUrl}}/api/mcp/law.get_article
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "doc_id": "nn_93_2014",
+  "chapter": "Otkaz ugovora o radu"
+}
+
+###
+# Step 4: Get full decision text
+POST {{baseUrl}}/api/mcp/decision.get
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "id": "01HQYYY123456789",
+  "include_documents": true,
+  "include_content": true
+}
+
+###############################################################################
+# ERROR HANDLING EXAMPLES
+###############################################################################
+
+### 22. Test Rate Limiting
+# Send multiple requests rapidly to trigger rate limit
+POST {{baseUrl}}/api/mcp/law.search
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "query": "test"
+}
+
+### 23. Test Authentication - Missing Token
+POST {{baseUrl}}/api/mcp/law.search
+Content-Type: application/json
+
+{
+  "query": "test"
+}
+
+### 24. Test Authentication - Invalid Token
+POST {{baseUrl}}/api/mcp/law.search
+Content-Type: application/json
+X-MCP-Token: invalid-token
+
+{
+  "query": "test"
+}
+
+### 25. Test Not Found
+POST {{baseUrl}}/api/mcp/decision.get
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "id": "01HQNONEXISTENT"
+}
+
+### 26. Test Invalid Parameters
+POST {{baseUrl}}/api/mcp/law.search
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "limit": 500
+}
+
+###############################################################################
+# PAGINATION EXAMPLES
+###############################################################################
+
+### 27. Pagination - Page 1
+POST {{baseUrl}}/api/mcp/law.search
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "query": "zakon",
+  "limit": 10,
+  "page": 1
+}
+
+### 28. Pagination - Page 2
+POST {{baseUrl}}/api/mcp/law.search
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "query": "zakon",
+  "limit": 10,
+  "page": 2
+}
+
+### 29. Pagination - Large Page Size
+POST {{baseUrl}}/api/mcp/law.search
+Content-Type: application/json
+X-MCP-Token: {{mcpToken}}
+
+{
+  "query": "zakon",
+  "limit": 100,
+  "page": 1
+}

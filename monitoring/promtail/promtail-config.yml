@@ -1,0 +1,156 @@
+# Promtail Configuration
+# Sprint 1.7: Observability Setup
+#
+# Ships Laravel logs to Loki for aggregation and querying
+# Parses JSON logs and adds labels for filtering
+
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  # Agent logs (JSON format)
+  - job_name: agents
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: agents
+          __path__: /var/log/laravel/agents.log
+    pipeline_stages:
+      - json:
+          expressions:
+            level: level_name
+            message: message
+            agent_name: context.agent_name
+            operation: context.operation
+            correlation_id: context.correlation_id
+            status: context.status
+            duration_ms: context.duration_ms
+      - labels:
+          level:
+          agent_name:
+          operation:
+          status:
+      - timestamp:
+          source: time
+          format: RFC3339
+      - output:
+          source: message
+
+  # Laravel general logs (JSON format)
+  - job_name: laravel
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: laravel
+          __path__: /var/log/laravel/laravel.log
+    pipeline_stages:
+      - json:
+          expressions:
+            level: level_name
+            message: message
+            correlation_id: context.correlation_id
+            user_id: context.user_id
+      - labels:
+          level:
+      - timestamp:
+          source: time
+          format: RFC3339
+
+  # API logs
+  - job_name: api
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: api
+          __path__: /var/log/laravel/api.log
+    pipeline_stages:
+      - json:
+          expressions:
+            level: level_name
+            message: message
+            method: context.method
+            uri: context.uri
+            status_code: context.status_code
+            correlation_id: context.correlation_id
+      - labels:
+          level:
+          method:
+      - timestamp:
+          source: time
+          format: RFC3339
+
+  # Queue logs
+  - job_name: queue
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: queue
+          __path__: /var/log/laravel/queue.log
+    pipeline_stages:
+      - json:
+          expressions:
+            level: level_name
+            message: message
+            job_class: context.job
+            queue: context.queue
+      - labels:
+          level:
+          queue:
+      - timestamp:
+          source: time
+          format: RFC3339
+
+  # Security logs
+  - job_name: security
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: security
+          __path__: /var/log/laravel/security.log
+    pipeline_stages:
+      - json:
+          expressions:
+            level: level_name
+            message: message
+            ip: context.ip
+            user_id: context.user_id
+      - labels:
+          level:
+      - timestamp:
+          source: time
+          format: RFC3339
+
+  # OpenAI logs (for cost tracking)
+  - job_name: openai
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: openai
+          __path__: /var/log/laravel/openai.log
+    pipeline_stages:
+      - json:
+          expressions:
+            level: level_name
+            message: message
+            model: context.model
+            tokens: context.tokens
+            cost: context.cost
+      - labels:
+          level:
+          model:
+      - timestamp:
+          source: time
+          format: RFC3339

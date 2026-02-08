@@ -1,0 +1,64 @@
+{
+  "test_id": "risk_low_002",
+  "category": "low-risk",
+  "expected_risk_level": "low",
+  "expected_score_range": [18, 42],
+  "description": "No adverse precedents with favorable binding authority",
+
+  "input": {
+    "problem_statement": "Client charged with drug possession after illegal search. Supreme Court precedent directly supports suppression of evidence for identical illegal search scenario.",
+    "legal_arguments": [
+      {
+        "title": "Evidence suppression - illegal search",
+        "argument": "Search violated ZKP Članak 197, precedent mandates exclusion",
+        "strength_score": 88,
+        "legal_basis": ["ZKP Članak 197", "Supreme Court binding precedent (2022)"],
+        "potential_counterarguments": [
+          "Prosecution may argue good faith exception",
+          "No clearly established Croatian good faith doctrine"
+        ]
+      }
+    ],
+    "strongest_precedents": [
+      {
+        "court": "Vrhovni sud RH",
+        "applicability_score": 92,
+        "binding_authority": "binding",
+        "favorable": true,
+        "case_number": "I Kž-789/2022"
+      }
+    ],
+    "strategic_recommendations": {
+      "procedural_steps": [
+        "File suppression motion",
+        "Cite binding precedent",
+        "If granted, motion to dismiss (no evidence)"
+      ]
+    }
+  },
+
+  "expected_output": {
+    "overall_risk_score": {
+      "score": 28,
+      "level": "low"
+    },
+    "argument_risks": [
+      {
+        "argument_index": 0,
+        "risk_level": "low",
+        "impact_if_fails": "high",
+        "weaknesses": [
+          "Speculative good faith argument by prosecution"
+        ],
+        "mitigation_suggestions": [
+          "Note Croatia has not adopted good faith exception",
+          "Cite binding precedent's mandatory language"
+        ]
+      }
+    ],
+    "adverse_precedents": [],
+    "procedural_risks": []
+  },
+
+  "validation_notes": "Should score 18-42 (low risk) due to binding Supreme Court precedent directly on point (92% applicability), clear illegal search, mandatory exclusionary rule, no established good faith exception in Croatia, strong favorable authority."
+}

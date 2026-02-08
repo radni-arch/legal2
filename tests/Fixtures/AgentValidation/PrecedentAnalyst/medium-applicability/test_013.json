@@ -1,0 +1,44 @@
+{
+  "test_id": "precedent_medium_003",
+  "category": "medium-applicability",
+  "expected_score_range": [52, 68],
+  "description": "Lower court evidence suppression with older precedent",
+
+  "input": {
+    "problem_statement": "Client's email account accessed by police without warrant. Emails used as evidence. Question: Should emails be suppressed?",
+    "researched_decisions": [
+      {
+        "ecli": "HR:MSOS:2015:K-678",
+        "court": "Općinski kazneni sud u Osijeku",
+        "case_number": "K-678/2015",
+        "decision_date": "2015-03-22",
+        "title": "Pristup email računu bez naloga - starija presuda",
+        "summary": "Općinski sud isključio email dokaze prikupljene bez naloga. Međutim, presuda je iz 2015. prije izmjena ZKP-a iz 2017. koje su pojačale zaštitu elektroničke komunikacije. Primjenljivost može biti ograničena zbog zakonskih izmjena."
+      }
+    ],
+    "researched_laws": [
+      {
+        "law_number": "ZKP Članak 332 (verzija iz 2017)",
+        "title": "Snimanje telekomunikacija",
+        "content": "Izmjene iz 2017. proširile zaštitu na elektroničku poštu. Sadašnji zakon strožiji od verzije iz 2015.",
+        "similarity": 0.69
+      }
+    ]
+  },
+
+  "expected_output": {
+    "applicability_score": 60,
+    "binding_authority": "persuasive",
+    "key_factors": [
+      "stara presuda (2015)",
+      "zakonske izmjene 2017",
+      "općinski sud",
+      "sličan tip dokaza",
+      "potrebna adaptacija"
+    ],
+    "favorable": true,
+    "reasoning": "Općinski sud (niska razina). Povoljna presuda ali stara (2015), prije relevantnih zakonskih izmjena. Osnovni princip još uvijek primjenjiv ali trebaju se razmotriti izmjene zakona. Persuasive ali slabije zbog starosti."
+  },
+
+  "validation_notes": "Should score 52-68 due to lowest court level (municipal), older precedent (pre-2017 amendments), favorable outcome but may need adaptation to current law."
+}

@@ -1,0 +1,50 @@
+{
+  "test_id": "precedent_high_009",
+  "category": "high-applicability",
+  "expected_score_range": [80, 90],
+  "description": "Supreme Court ruling on excessive force during arrest and evidence exclusion",
+
+  "input": {
+    "problem_statement": "Client suffered broken arm during arrest for misdemeanor theft. Police used arm lock despite no resistance. Evidence collected after arrest. Question: Should evidence be excluded due to excessive force?",
+    "researched_decisions": [
+      {
+        "ecli": "HR:VSRH:2020:I-Kž-892",
+        "court": "Vrhovni sud Republike Hrvatske",
+        "case_number": "I Kž-892/2020",
+        "decision_date": "2020-11-30",
+        "title": "Prekomjerna uporaba sile pri uhićenju - isključenje dokaza",
+        "summary": "Vrhovni sud utvrdio da je uporaba sile koja je rezultirala teškom tjelesnom ozljedom kod uhićenja zbog lakog kaznenog djela bila neproporcionalna. Policajac nije bio ovlašten koristiti takvu silu prema osobi koja se nije opirala. Dokazi prikupljeni nakon nezakonitog uhićenja isključeni su iz postupka."
+      }
+    ],
+    "researched_laws": [
+      {
+        "law_number": "Zakon o policiji Članak 32",
+        "title": "Načela uporabe sile",
+        "content": "Policijski službenik smije upotrijebiti silu samo kad je to nužno i samo u opsegu potrebnom za izvršavanje zakonite zadaće. Uporaba sile mora biti proporcionalna težini kaznenog djela i otporu osobe.",
+        "similarity": 0.91
+      },
+      {
+        "law_number": "ZKP Članak 103 stavak 2",
+        "title": "Zakonitost uhićenja",
+        "content": "Uhićenje mora biti provedeno na zakonit način uz poštovanje dostojanstva osobe. Prekomjerna uporaba sile čini uhićenje nezakonitim.",
+        "similarity": 0.88
+      }
+    ]
+  },
+
+  "expected_output": {
+    "applicability_score": 85,
+    "binding_authority": "binding",
+    "key_factors": [
+      "prekomjerna uporaba sile",
+      "neproporcionalna težini djela",
+      "nema opiranja",
+      "tjelesna ozljeda",
+      "isključenje dokaza"
+    ],
+    "favorable": true,
+    "reasoning": "Vrhovno sudska presuda o prekomjernoj sili kod uhićenja za lako djelo. Slična vrsta ozljede (slomljena ruka). Nema opiranja u oba slučaja. Jasno primijenjeno načelo proporcionalnosti s isključenjem dokaza."
+  },
+
+  "validation_notes": "Should score 83-88 due to Supreme Court binding authority, similar facts (excessive force for misdemeanor, injury during arrest, no resistance), and favorable outcome (evidence exclusion)."
+}

@@ -1,0 +1,50 @@
+{
+  "test_id": "precedent_high_010",
+  "category": "high-applicability",
+  "expected_score_range": [82, 92],
+  "description": "Supreme Court ruling on illegal vehicle search without probable cause",
+
+  "input": {
+    "problem_statement": "Client stopped for broken taillight. Police searched entire vehicle without consent or probable cause, finding drugs in trunk. Question: Should evidence be suppressed?",
+    "researched_decisions": [
+      {
+        "ecli": "HR:VSRH:2022:I-Kž-1534",
+        "court": "Vrhovni sud Republike Hrvatske",
+        "case_number": "I Kž-1534/2022",
+        "decision_date": "2022-04-08",
+        "title": "Nezakonit pretres vozila bez osnovanesumnje",
+        "summary": "Vrhovni sud utvrdio da je pretres vozila bez osnované sumnje bio nezakonit. Prekršaj (neispravna rasvjeta) ne opravdava pretres cijelog vozila. Policija nije imala osnované sumnje na kazneno djelo. Dokazi (droga u prtljažniku) prikupljeni nezakonitim pretresom isključeni su iz postupka."
+      }
+    ],
+    "researched_laws": [
+      {
+        "law_number": "ZKP Članak 227",
+        "title": "Pretres vozila",
+        "content": "Pretres vozila dopušten je samo ako postoji osnovana sumnja da se u vozilu nalaze predmeti ili tragovi kaznenog djela. Pretres vozila zbog prekršaja nije dopušten bez posebne osnované sumnje.",
+        "similarity": 0.94
+      },
+      {
+        "law_number": "Ustav RH Članak 36",
+        "title": "Sloboda kretanja",
+        "content": "Zaštićena je sloboda kretanja i boravka. Pregled vozila dopušten je samo uz zakonsku osnovu i osnovanu sumnju.",
+        "similarity": 0.86
+      }
+    ]
+  },
+
+  "expected_output": {
+    "applicability_score": 87,
+    "binding_authority": "binding",
+    "key_factors": [
+      "zaustavljanje zbog prekršaja",
+      "pretraga bez osnované sumnje",
+      "pretraga cijelog vozila",
+      "nezakonit pretres",
+      "isključenje dokaza"
+    ],
+    "favorable": true,
+    "reasoning": "Vrhovno sudska presuda s identičnom situacijom (zaustavljanje za prekršaj + pretres bez osnované sumnje). Isti tip dokaza (droga u vozilu). Jasno pravilo da prekršaj ne opravdava pretres. Binding precedent."
+  },
+
+  "validation_notes": "Should score 85-90 due to Supreme Court binding authority, identical scenario (traffic stop escalating to full vehicle search without cause), recent decision (2022), and favorable outcome (evidence suppressed)."
+}

@@ -1,0 +1,152 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The skeleton application for the Laravel framework.",
+    "keywords": ["laravel", "framework"],
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "ext-exif": "*",
+        "ext-mbstring": "*",
+        "aws/aws-sdk-php": "^3.300",
+        "barryvdh/laravel-dompdf": "^3.1",
+        "google/apiclient": "^2.15",
+        "laravel/framework": "^12.0",
+        "laravel/horizon": "^5.43",
+        "laravel/reverb": "^1.7",
+        "laravel/tinker": "^2.10.1",
+        "laudis/neo4j-php-client": "^3.4",
+        "league/flysystem-aws-s3-v3": "^3.29",
+        "livewire/livewire": "^3.6",
+        "lorisleiva/laravel-actions": "^2.9",
+        "mews/purifier": "*",
+        "php-mcp/laravel": "^1.1",
+        "sentry/sentry-laravel": "^4.18",
+        "setasign/fpdi-tcpdf": "^2.3",
+        "smalot/pdfparser": "^2.12",
+        "symfony/css-selector": "^7.4",
+        "symfony/dom-crawler": "^7.4",
+        "tecnickcom/tcpdf": "*",
+        "thiagoalessio/tesseract_ocr": "^2.13",
+        "vizra/vizra-adk": "*"
+    },
+    "require-dev": {
+        "doctrine/dbal": "^4.3",
+        "fakerphp/faker": "^1.23",
+        "laravel/boost": "1.2.*",
+        "laravel/browser-kit-testing": "^7.2",
+        "laravel/dusk": "^8.3",
+        "laravel/pail": "^1.2.2",
+        "laravel/pint": "^1.24",
+        "laravel/sail": "^1.41",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.6",
+        "phpunit/phpunit": "^11.5.3"
+    },
+    "autoload": {
+        "files": [
+            "app/helpers.php"
+        ],
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/",
+            "Vizra\\": "app/Vizra/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "setup": [
+            "composer install",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php artisan key:generate",
+            "npm install",
+            "npm run build"
+        ],
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74,#a3e635,#f472b6\" \"php artisan serve\" \"php artisan horizon\" \"php artisan reverb:start\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,horizon,reverb,logs,vite --kill-others"
+        ],
+        "test": [
+            "@php artisan config:clear --ansi",
+            "@php artisan test"
+        ],
+        "test:integrated": [
+            "./scripts/run-tests.sh"
+        ],
+        "test:setup": [
+            "scripts/archive/setup-test-db.sh"
+        ],
+        "test:all": [
+            "./scripts/run-tests.sh --setup"
+        ],
+        "test:unit": [
+            "./scripts/run-tests.sh --unit"
+        ],
+        "test:feature": [
+            "./scripts/run-tests.sh --feature"
+        ],
+        "test:coverage": [
+            "./scripts/run-tests.sh --coverage"
+        ],
+        "test:parallel": [
+            "./scripts/run-tests.sh --parallel"
+        ],
+        "test:quick": [
+            "./scripts/run-tests.sh --parallel --stop-on-failure"
+        ],
+        "test:e2e": "./scripts/run-e2e-tests.sh --suite=all",
+        "test:e2e:auth": "./scripts/run-e2e-tests.sh --suite=auth",
+        "test:e2e:playground": "./scripts/run-e2e-tests.sh --suite=playground",
+        "test:e2e:textract": "./scripts/run-e2e-tests.sh --suite=textract",
+        "test:e2e:graph": "./scripts/run-e2e-tests.sh --suite=graph",
+        "test:e2e:laws": "./scripts/run-e2e-tests.sh --suite=laws",
+        "test:e2e:timeline": "./scripts/run-e2e-tests.sh --suite=timeline",
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php artisan key:generate --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\""
+        ],
+        "pre-package-uninstall": [
+            "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://repo.packagist.org"
+        }
+    }
+}

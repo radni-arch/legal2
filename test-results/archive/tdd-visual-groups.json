@@ -1,0 +1,2534 @@
+{
+    "generated_at": "2025-11-22T04:16:05+00:00",
+    "tests_root": "tests",
+    "summary": {
+        "total_tests": 592,
+        "visual_groups": 59,
+        "sequence_items": 161
+    },
+    "groups": [
+        {
+            "id": "transcriptpreviewer",
+            "name": "TranscriptPreviewer",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/TranscriptPreviewerTest.php",
+                    "type": "feature_livewire",
+                    "className": "TranscriptPreviewerTest"
+                },
+                {
+                    "path": "tests/Browser/TranscriptPreviewerTest.php",
+                    "type": "browser",
+                    "className": "TranscriptPreviewerTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "eoglasnamonitoring",
+            "name": "EoglasnaMonitoring",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/EoglasnaMonitoringTest.php",
+                    "type": "feature_livewire",
+                    "className": "EoglasnaMonitoringTest"
+                },
+                {
+                    "path": "tests/Browser/EoglasnaMonitoringTest.php",
+                    "type": "browser",
+                    "className": "EoglasnaMonitoringTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "legalplayground",
+            "name": "LegalPlayground",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/LegalPlaygroundTest.php",
+                    "type": "feature_livewire",
+                    "className": "LegalPlaygroundTest"
+                },
+                {
+                    "path": "tests/Browser/LegalPlaygroundTest.php",
+                    "type": "browser",
+                    "className": "LegalPlaygroundTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "comparativetimelinepage",
+            "name": "ComparativeTimelinePage",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/ComparativeTimelinePageTest.php",
+                    "type": "feature_livewire",
+                    "className": "ComparativeTimelinePageTest"
+                },
+                {
+                    "path": "tests/Browser/ComparativeTimelinePageTest.php",
+                    "type": "browser",
+                    "className": "ComparativeTimelinePageTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "agentcollaborationviewer",
+            "name": "AgentCollaborationViewer",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/AgentCollaborationViewerTest.php",
+                    "type": "feature_livewire",
+                    "className": "AgentCollaborationViewerTest"
+                },
+                {
+                    "path": "tests/Browser/AgentCollaborationViewerTest.php",
+                    "type": "browser",
+                    "className": "AgentCollaborationViewerTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "decisiondiscoverydashboard",
+            "name": "DecisionDiscoveryDashboard",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/DecisionDiscoveryDashboardTest.php",
+                    "type": "feature_livewire",
+                    "className": "DecisionDiscoveryDashboardTest"
+                }
+            ],
+            "supporting_tests": [
+                {
+                    "path": "tests/Feature/DecisionDiscoveryDashboardTest.php",
+                    "type": "feature",
+                    "className": "DecisionDiscoveryDashboardTest"
+                }
+            ]
+        },
+        {
+            "id": "laravellogviewer",
+            "name": "LaravelLogViewer",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/LaravelLogViewerTest.php",
+                    "type": "feature_livewire",
+                    "className": "LaravelLogViewerTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "graphviewermetrics",
+            "name": "GraphViewerMetrics",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/GraphViewerMetricsTest.php",
+                    "type": "feature_livewire",
+                    "className": "GraphViewerMetricsTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "graphviewer",
+            "name": "GraphViewer",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/GraphViewerTest.php",
+                    "type": "feature_livewire",
+                    "className": "GraphViewerTest"
+                },
+                {
+                    "path": "tests/Browser/GraphViewerTest.php",
+                    "type": "browser",
+                    "className": "GraphViewerTest"
+                }
+            ],
+            "supporting_tests": [
+                {
+                    "path": "tests/Feature/GraphViewerTest.php",
+                    "type": "feature",
+                    "className": "GraphViewerTest"
+                }
+            ]
+        },
+        {
+            "id": "feedbackdashboard",
+            "name": "FeedbackDashboard",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/FeedbackDashboardTest.php",
+                    "type": "feature_livewire",
+                    "className": "FeedbackDashboardTest"
+                },
+                {
+                    "path": "tests/Browser/FeedbackDashboardTest.php",
+                    "type": "browser",
+                    "className": "FeedbackDashboardTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "agentperformancedashboard",
+            "name": "AgentPerformanceDashboard",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/AgentPerformanceDashboardTest.php",
+                    "type": "feature_livewire",
+                    "className": "AgentPerformanceDashboardTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "textractmanagerpdf",
+            "name": "TextractManagerPdf",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/TextractManagerPdfTest.php",
+                    "type": "feature_livewire",
+                    "className": "TextractManagerPdfTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "analyticspanel",
+            "name": "AnalyticsPanel",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/AnalyticsPanelTest.php",
+                    "type": "feature_livewire",
+                    "className": "AnalyticsPanelTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "openairesponsesviewer",
+            "name": "OpenAIResponsesViewer",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/OpenAIResponsesViewerTest.php",
+                    "type": "feature_livewire",
+                    "className": "OpenAIResponsesViewerTest"
+                },
+                {
+                    "path": "tests/Browser/OpenAIResponsesViewerTest.php",
+                    "type": "browser",
+                    "className": "OpenAIResponsesViewerTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "collaborationdashboard",
+            "name": "CollaborationDashboard",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/CollaborationDashboardTest.php",
+                    "type": "feature_livewire",
+                    "className": "CollaborationDashboardTest"
+                },
+                {
+                    "path": "tests/Browser/CollaborationDashboardTest.php",
+                    "type": "browser",
+                    "className": "CollaborationDashboardTest"
+                }
+            ],
+            "supporting_tests": [
+                {
+                    "path": "tests/Feature/CollaborationDashboardTest.php",
+                    "type": "feature",
+                    "className": "CollaborationDashboardTest"
+                }
+            ]
+        },
+        {
+            "id": "unifiedsearch",
+            "name": "UnifiedSearch",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/UnifiedSearchTest.php",
+                    "type": "feature_livewire",
+                    "className": "UnifiedSearchTest"
+                }
+            ],
+            "supporting_tests": [
+                {
+                    "path": "tests/Unit/Services/UnifiedSearchServiceCharacterizationTest.php",
+                    "type": "unit",
+                    "className": "UnifiedSearchServiceCharacterizationTest"
+                },
+                {
+                    "path": "tests/Unit/Http/Controllers/Api/UnifiedSearchControllerTest.php",
+                    "type": "unit",
+                    "className": "UnifiedSearchControllerTest"
+                },
+                {
+                    "path": "tests/Integration/UnifiedSearchServiceIntegrationTest.php",
+                    "type": "integration",
+                    "className": "UnifiedSearchServiceIntegrationTest"
+                }
+            ]
+        },
+        {
+            "id": "graphviewerconcurrency",
+            "name": "GraphViewerConcurrency",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/GraphViewerConcurrencyTest.php",
+                    "type": "feature_livewire",
+                    "className": "GraphViewerConcurrencyTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "ingestedlawsmanager",
+            "name": "IngestedLawsManager",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/IngestedLawsManagerTest.php",
+                    "type": "feature_livewire",
+                    "className": "IngestedLawsManagerTest"
+                },
+                {
+                    "path": "tests/Browser/IngestedLawsManagerTest.php",
+                    "type": "browser",
+                    "className": "IngestedLawsManagerTest"
+                }
+            ],
+            "supporting_tests": [
+                {
+                    "path": "tests/Feature/IngestedLawsManagerTest.php",
+                    "type": "feature",
+                    "className": "IngestedLawsManagerTest"
+                }
+            ]
+        },
+        {
+            "id": "learningopportunitymanager",
+            "name": "LearningOpportunityManager",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/LearningOpportunityManagerTest.php",
+                    "type": "feature_livewire",
+                    "className": "LearningOpportunityManagerTest"
+                },
+                {
+                    "path": "tests/Browser/LearningOpportunityManagerTest.php",
+                    "type": "browser",
+                    "className": "LearningOpportunityManagerTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "openailogviewer",
+            "name": "OpenAILogViewer",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/OpenAILogViewerTest.php",
+                    "type": "feature_livewire",
+                    "className": "OpenAILogViewerTest"
+                },
+                {
+                    "path": "tests/Browser/OpenAILogViewerTest.php",
+                    "type": "browser",
+                    "className": "OpenAILogViewerTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "graphdashboard",
+            "name": "GraphDashboard",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/GraphDashboardTest.php",
+                    "type": "feature_livewire",
+                    "className": "GraphDashboardTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "paralleltimeline",
+            "name": "ParallelTimeline",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/ParallelTimelineTest.php",
+                    "type": "feature_livewire",
+                    "className": "ParallelTimelineTest"
+                },
+                {
+                    "path": "tests/Browser/ParallelTimelineTest.php",
+                    "type": "browser",
+                    "className": "ParallelTimelineTest"
+                }
+            ],
+            "supporting_tests": [
+                {
+                    "path": "tests/Feature/ParallelTimelineTest.php",
+                    "type": "feature",
+                    "className": "ParallelTimelineTest"
+                }
+            ]
+        },
+        {
+            "id": "citationanalysiscomponent",
+            "name": "CitationAnalysisComponent",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/CitationAnalysisComponentTest.php",
+                    "type": "feature_livewire",
+                    "className": "CitationAnalysisComponentTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "topicanalyzer",
+            "name": "TopicAnalyzer",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/TopicAnalyzerTest.php",
+                    "type": "feature_livewire",
+                    "className": "TopicAnalyzerTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "textractmanager",
+            "name": "TextractManager",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/TextractManagerTest.php",
+                    "type": "feature_livewire",
+                    "className": "TextractManagerTest"
+                },
+                {
+                    "path": "tests/Browser/TextractManagerTest.php",
+                    "type": "browser",
+                    "className": "TextractManagerTest"
+                }
+            ],
+            "supporting_tests": [
+                {
+                    "path": "tests/Feature/TextractManagerDeletionTest.php",
+                    "type": "feature",
+                    "className": "TextractManagerDeletionTest"
+                }
+            ]
+        },
+        {
+            "id": "vectorstoremanager",
+            "name": "VectorStoreManager",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/VectorStoreManagerTest.php",
+                    "type": "feature_livewire",
+                    "className": "VectorStoreManagerTest"
+                },
+                {
+                    "path": "tests/Browser/VectorStoreManagerTest.php",
+                    "type": "browser",
+                    "className": "VectorStoreManagerTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "timelinepage",
+            "name": "TimelinePage",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/TimelinePageTest.php",
+                    "type": "feature_livewire",
+                    "className": "TimelinePageTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "openaivectormanager",
+            "name": "OpenAIVectorManager",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/OpenAIVectorManagerTest.php",
+                    "type": "feature_livewire",
+                    "className": "OpenAIVectorManagerTest"
+                },
+                {
+                    "path": "tests/Browser/OpenAIVectorManagerTest.php",
+                    "type": "browser",
+                    "className": "OpenAIVectorManagerTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "guptimeline",
+            "name": "GupTimeline",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/GupTimelineTest.php",
+                    "type": "feature_livewire",
+                    "className": "GupTimelineTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "llmbrainpanel",
+            "name": "LlmBrainPanel",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/LlmBrainPanelTest.php",
+                    "type": "feature_livewire",
+                    "className": "LlmBrainPanelTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "epredmetwidget",
+            "name": "EpredmetWidget",
+            "visual_tests": [
+                {
+                    "path": "tests/Feature/Livewire/EpredmetWidgetTest.php",
+                    "type": "feature_livewire",
+                    "className": "EpredmetWidgetTest"
+                },
+                {
+                    "path": "tests/Browser/EpredmetWidgetTest.php",
+                    "type": "browser",
+                    "className": "EpredmetWidgetTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "htmlsource",
+            "name": "HtmlSource",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/HtmlSourceTest.php",
+                    "type": "browser",
+                    "className": "HtmlSourceTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "multiusercollaboration",
+            "name": "MultiUserCollaboration",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/MultiUserCollaborationTest.php",
+                    "type": "browser",
+                    "className": "MultiUserCollaborationTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "search",
+            "name": "Search",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/SearchTest.php",
+                    "type": "browser",
+                    "className": "SearchTest"
+                }
+            ],
+            "supporting_tests": [
+                {
+                    "path": "tests/Unit/Topics/IllegalSearchDetectorTest.php",
+                    "type": "unit",
+                    "className": "IllegalSearchDetectorTest"
+                },
+                {
+                    "path": "tests/Unit/Tools/OdlukeSearchToolTest.php",
+                    "type": "unit",
+                    "className": "OdlukeSearchToolTest"
+                },
+                {
+                    "path": "tests/Unit/Services/LawSearchServiceTest.php",
+                    "type": "unit",
+                    "className": "LawSearchServiceTest"
+                },
+                {
+                    "path": "tests/Unit/Services/CaseSearchServiceTest.php",
+                    "type": "unit",
+                    "className": "CaseSearchServiceTest"
+                },
+                {
+                    "path": "tests/Unit/Services/LawSearchServiceConceptAnalysisTest.php",
+                    "type": "unit",
+                    "className": "LawSearchServiceConceptAnalysisTest"
+                },
+                {
+                    "path": "tests/Unit/Services/Search/SearchEmbeddingServiceTest.php",
+                    "type": "unit",
+                    "className": "SearchEmbeddingServiceTest"
+                },
+                {
+                    "path": "tests/Unit/Services/Search/LawSearchServiceTest.php",
+                    "type": "unit",
+                    "className": "LawSearchServiceTest"
+                },
+                {
+                    "path": "tests/Unit/Services/Search/CaseSearchServiceTest.php",
+                    "type": "unit",
+                    "className": "CaseSearchServiceTest"
+                },
+                {
+                    "path": "tests/Unit/Services/Search/SearchResultAggregatorTest.php",
+                    "type": "unit",
+                    "className": "SearchResultAggregatorTest"
+                },
+                {
+                    "path": "tests/Unit/Services/Search/SearchResultDeduplicatorTest.php",
+                    "type": "unit",
+                    "className": "SearchResultDeduplicatorTest"
+                },
+                {
+                    "path": "tests/Unit/Services/Search/DecisionSearchServiceTest.php",
+                    "type": "unit",
+                    "className": "DecisionSearchServiceTest"
+                },
+                {
+                    "path": "tests/Unit/Services/Search/SearchOrchestratorTest.php",
+                    "type": "unit",
+                    "className": "SearchOrchestratorTest"
+                },
+                {
+                    "path": "tests/Unit/Services/UnifiedSearchServiceCharacterizationTest.php",
+                    "type": "unit",
+                    "className": "UnifiedSearchServiceCharacterizationTest"
+                },
+                {
+                    "path": "tests/Unit/Services/CaseSearchServicePerformanceTest.php",
+                    "type": "unit",
+                    "className": "CaseSearchServicePerformanceTest"
+                },
+                {
+                    "path": "tests/Unit/Services/ResearchOrchestratorTest.php",
+                    "type": "unit",
+                    "className": "ResearchOrchestratorTest"
+                },
+                {
+                    "path": "tests/Unit/Services/Graph/GraphResearchEnhancerTest.php",
+                    "type": "unit",
+                    "className": "GraphResearchEnhancerTest"
+                },
+                {
+                    "path": "tests/Unit/Services/DecisionSearchServiceTest.php",
+                    "type": "unit",
+                    "className": "DecisionSearchServiceTest"
+                },
+                {
+                    "path": "tests/Unit/Services/Research/SearchExecutorServiceTest.php",
+                    "type": "unit",
+                    "className": "SearchExecutorServiceTest"
+                },
+                {
+                    "path": "tests/Unit/Services/LawSearchServiceStatutoryInterpretationTest.php",
+                    "type": "unit",
+                    "className": "LawSearchServiceStatutoryInterpretationTest"
+                },
+                {
+                    "path": "tests/Unit/Agents/AutonomousResearchAgentTest.php",
+                    "type": "unit",
+                    "className": "AutonomousResearchAgentTest"
+                },
+                {
+                    "path": "tests/Unit/Agents/AutonomousResearchAgentCharacterizationTest.php",
+                    "type": "unit",
+                    "className": "AutonomousResearchAgentCharacterizationTest"
+                },
+                {
+                    "path": "tests/Unit/Agents/ResearchSpecialistAgentTraceTest.php",
+                    "type": "unit",
+                    "className": "ResearchSpecialistAgentTraceTest"
+                },
+                {
+                    "path": "tests/Unit/Agents/AutonomousResearchAgentPlanningTest.php",
+                    "type": "unit",
+                    "className": "AutonomousResearchAgentPlanningTest"
+                },
+                {
+                    "path": "tests/Unit/Agents/AutonomousResearchAgentInsightTest.php",
+                    "type": "unit",
+                    "className": "AutonomousResearchAgentInsightTest"
+                },
+                {
+                    "path": "tests/Unit/Http/Controllers/Api/UnifiedSearchControllerTest.php",
+                    "type": "unit",
+                    "className": "UnifiedSearchControllerTest"
+                },
+                {
+                    "path": "tests/Unit/Jobs/ExecuteAgentResearchTest.php",
+                    "type": "unit",
+                    "className": "ExecuteAgentResearchTest"
+                },
+                {
+                    "path": "tests/Unit/Jobs/RunAutonomousResearchJobTest.php",
+                    "type": "unit",
+                    "className": "RunAutonomousResearchJobTest"
+                },
+                {
+                    "path": "tests/Unit/Requests/Search/SearchRequestTest.php",
+                    "type": "unit",
+                    "className": "SearchRequestTest"
+                },
+                {
+                    "path": "tests/Unit/Requests/Search/VectorSearchRequestTest.php",
+                    "type": "unit",
+                    "className": "VectorSearchRequestTest"
+                },
+                {
+                    "path": "tests/Unit/Requests/Agent/StartResearchRequestTest.php",
+                    "type": "unit",
+                    "className": "StartResearchRequestTest"
+                },
+                {
+                    "path": "tests/Unit/Modules/HomeSearch/OdlukeSearchAgentExtractionTest.php",
+                    "type": "unit",
+                    "className": "OdlukeSearchAgentExtractionTest"
+                },
+                {
+                    "path": "tests/Unit/Modules/HomeSearch/HomeSearchCasePersistenceTest.php",
+                    "type": "unit",
+                    "className": "HomeSearchCasePersistenceTest"
+                },
+                {
+                    "path": "tests/Unit/Modules/HomeSearch/HomeSearchAbuseDetectorTest.php",
+                    "type": "unit",
+                    "className": "HomeSearchAbuseDetectorTest"
+                },
+                {
+                    "path": "tests/Unit/Modules/HomeSearch/OdlukeSearchAgentTest.php",
+                    "type": "unit",
+                    "className": "OdlukeSearchAgentTest"
+                },
+                {
+                    "path": "tests/Feature/Workflows/ResearchPipelineWorkflowTest.php",
+                    "type": "feature",
+                    "className": "ResearchPipelineWorkflowTest"
+                },
+                {
+                    "path": "tests/Feature/SearchControllerTest.php",
+                    "type": "feature",
+                    "className": "SearchControllerTest"
+                },
+                {
+                    "path": "tests/Feature/IngestSearchTest.php",
+                    "type": "feature",
+                    "className": "IngestSearchTest"
+                },
+                {
+                    "path": "tests/Feature/CaseSearchServiceIntegrationTest.php",
+                    "type": "feature",
+                    "className": "CaseSearchServiceIntegrationTest"
+                },
+                {
+                    "path": "tests/Feature/Services/ResearchOrchestratorIntegrationTest.php",
+                    "type": "feature",
+                    "className": "ResearchOrchestratorIntegrationTest"
+                },
+                {
+                    "path": "tests/Feature/Services/SearchIntegrationTest.php",
+                    "type": "feature",
+                    "className": "SearchIntegrationTest"
+                },
+                {
+                    "path": "tests/Feature/Services/Research/SearchExecutorIntegrationTest.php",
+                    "type": "feature",
+                    "className": "SearchExecutorIntegrationTest"
+                },
+                {
+                    "path": "tests/Feature/Agents/AutonomousResearchAgentTest.php",
+                    "type": "feature",
+                    "className": "AutonomousResearchAgentTest"
+                },
+                {
+                    "path": "tests/Integration/SearchPipelineFlowTest.php",
+                    "type": "integration",
+                    "className": "SearchPipelineFlowTest"
+                },
+                {
+                    "path": "tests/Integration/HomeSearchIntegrationTest.php",
+                    "type": "integration",
+                    "className": "HomeSearchIntegrationTest"
+                },
+                {
+                    "path": "tests/Integration/UnifiedSearchServiceIntegrationTest.php",
+                    "type": "integration",
+                    "className": "UnifiedSearchServiceIntegrationTest"
+                },
+                {
+                    "path": "tests/Integration/OdlukeSearchAgentE2ETest.php",
+                    "type": "integration",
+                    "className": "OdlukeSearchAgentE2ETest"
+                },
+                {
+                    "path": "tests/Integration/SearchEmbeddingServiceIntegrationTest.php",
+                    "type": "integration",
+                    "className": "SearchEmbeddingServiceIntegrationTest"
+                },
+                {
+                    "path": "tests/Integration/OdlukeSearchAgentMcpIntegrationTest.php",
+                    "type": "integration",
+                    "className": "OdlukeSearchAgentMcpIntegrationTest"
+                },
+                {
+                    "path": "tests/Integration/GraphEnhancedResearchTest.php",
+                    "type": "integration",
+                    "className": "GraphEnhancedResearchTest"
+                },
+                {
+                    "path": "tests/Snapshots/AutonomousResearchAgentPromptTest.php",
+                    "type": "other",
+                    "className": "AutonomousResearchAgentPromptTest"
+                }
+            ]
+        },
+        {
+            "id": "useronboarding",
+            "name": "UserOnboarding",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/UserOnboardingTest.php",
+                    "type": "browser",
+                    "className": "UserOnboardingTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "example",
+            "name": "Example",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/ExampleTest.php",
+                    "type": "browser",
+                    "className": "ExampleTest"
+                }
+            ],
+            "supporting_tests": [
+                {
+                    "path": "tests/Unit/ExampleTest.php",
+                    "type": "unit",
+                    "className": "ExampleTest"
+                },
+                {
+                    "path": "tests/Feature/ExampleTest.php",
+                    "type": "feature",
+                    "className": "ExampleTest"
+                }
+            ]
+        },
+        {
+            "id": "authentication",
+            "name": "Authentication",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/AuthenticationTest.php",
+                    "type": "browser",
+                    "className": "AuthenticationTest"
+                }
+            ],
+            "supporting_tests": [
+                {
+                    "path": "tests/Feature/Api/AuthenticationTest.php",
+                    "type": "feature",
+                    "className": "AuthenticationTest"
+                }
+            ]
+        },
+        {
+            "id": "textractpdfpreview",
+            "name": "TextractPdfPreview",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/TextractPdfPreviewTest.php",
+                    "type": "browser",
+                    "className": "TextractPdfPreviewTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "lawdownload",
+            "name": "LawDownload",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/LawDownloadTest.php",
+                    "type": "browser",
+                    "className": "LawDownloadTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "errorrecovery",
+            "name": "ErrorRecovery",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/ErrorRecoveryTest.php",
+                    "type": "browser",
+                    "className": "ErrorRecoveryTest"
+                }
+            ],
+            "supporting_tests": [
+                {
+                    "path": "tests/Feature/ErrorRecoveryTest.php",
+                    "type": "feature",
+                    "className": "ErrorRecoveryTest"
+                }
+            ]
+        },
+        {
+            "id": "timeline",
+            "name": "Timeline",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/TimelineTest.php",
+                    "type": "browser",
+                    "className": "TimelineTest"
+                }
+            ],
+            "supporting_tests": [
+                {
+                    "path": "tests/Feature/ParallelTimelineTest.php",
+                    "type": "feature",
+                    "className": "ParallelTimelineTest"
+                },
+                {
+                    "path": "tests/Feature/UsporedniTimelineDemoTest.php",
+                    "type": "feature",
+                    "className": "UsporedniTimelineDemoTest"
+                }
+            ]
+        },
+        {
+            "id": "misconductdashboard",
+            "name": "MisconductDashboard",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/MisconductDashboardTest.php",
+                    "type": "browser",
+                    "className": "MisconductDashboardTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "federatedmemorysearch",
+            "name": "FederatedMemorySearch",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/FederatedMemorySearchTest.php",
+                    "type": "browser",
+                    "className": "FederatedMemorySearchTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "lawimportprogress",
+            "name": "LawImportProgress",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/LawImportProgressTest.php",
+                    "type": "browser",
+                    "className": "LawImportProgressTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "decisiondiscovery",
+            "name": "DecisionDiscovery",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/DecisionDiscoveryTest.php",
+                    "type": "browser",
+                    "className": "DecisionDiscoveryTest"
+                }
+            ],
+            "supporting_tests": [
+                {
+                    "path": "tests/Unit/Agents/DecisionDiscoveryAgentTracingTest.php",
+                    "type": "unit",
+                    "className": "DecisionDiscoveryAgentTracingTest"
+                },
+                {
+                    "path": "tests/Unit/Agents/DecisionDiscoveryAgentTest.php",
+                    "type": "unit",
+                    "className": "DecisionDiscoveryAgentTest"
+                },
+                {
+                    "path": "tests/Unit/Agents/DecisionDiscoveryAgentLearningTest.php",
+                    "type": "unit",
+                    "className": "DecisionDiscoveryAgentLearningTest"
+                },
+                {
+                    "path": "tests/Unit/Jobs/RunDecisionDiscoveryTest.php",
+                    "type": "unit",
+                    "className": "RunDecisionDiscoveryTest"
+                },
+                {
+                    "path": "tests/Unit/Jobs/ExecuteDecisionDiscoveryJobTest.php",
+                    "type": "unit",
+                    "className": "ExecuteDecisionDiscoveryJobTest"
+                },
+                {
+                    "path": "tests/Unit/Models/DecisionDiscoveryRunTest.php",
+                    "type": "unit",
+                    "className": "DecisionDiscoveryRunTest"
+                },
+                {
+                    "path": "tests/Feature/DecisionDiscoveryDashboardTest.php",
+                    "type": "feature",
+                    "className": "DecisionDiscoveryDashboardTest"
+                },
+                {
+                    "path": "tests/Feature/DecisionDiscoveryCommandTest.php",
+                    "type": "feature",
+                    "className": "DecisionDiscoveryCommandTest"
+                },
+                {
+                    "path": "tests/Feature/DecisionDiscoveryTest.php",
+                    "type": "feature",
+                    "className": "DecisionDiscoveryTest"
+                },
+                {
+                    "path": "tests/Feature/Jobs/ExecuteDecisionDiscoveryJobTest.php",
+                    "type": "feature",
+                    "className": "ExecuteDecisionDiscoveryJobTest"
+                },
+                {
+                    "path": "tests/Feature/API/DecisionDiscoveryAPITest.php",
+                    "type": "feature",
+                    "className": "DecisionDiscoveryAPITest"
+                },
+                {
+                    "path": "tests/Integration/DecisionDiscoveryAgentLearningTest.php",
+                    "type": "integration",
+                    "className": "DecisionDiscoveryAgentLearningTest"
+                }
+            ]
+        },
+        {
+            "id": "caseanalysis",
+            "name": "CaseAnalysis",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/CaseAnalysisTest.php",
+                    "type": "browser",
+                    "className": "CaseAnalysisTest"
+                }
+            ],
+            "supporting_tests": [
+                {
+                    "path": "tests/Unit/Mcp/Tools/CaseAnalysisToolTest.php",
+                    "type": "unit",
+                    "className": "CaseAnalysisToolTest"
+                },
+                {
+                    "path": "tests/Feature/Workflows/CaseAnalysisWorkflowTest.php",
+                    "type": "feature",
+                    "className": "CaseAnalysisWorkflowTest"
+                }
+            ]
+        },
+        {
+            "id": "citationtimeseriesviewer",
+            "name": "CitationTimeSeriesViewer",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/CitationTimeSeriesViewerTest.php",
+                    "type": "browser",
+                    "className": "CitationTimeSeriesViewerTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "chromestability",
+            "name": "ChromeStability",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/ChromeStabilityTest.php",
+                    "type": "browser",
+                    "className": "ChromeStabilityTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "citationnetworkanalysis",
+            "name": "CitationNetworkAnalysis",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/CitationNetworkAnalysisTest.php",
+                    "type": "browser",
+                    "className": "CitationNetworkAnalysisTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "logindebug",
+            "name": "LoginDebug",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/LoginDebugTest.php",
+                    "type": "browser",
+                    "className": "LoginDebugTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "screenshot",
+            "name": "Screenshot",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/ScreenshotTest.php",
+                    "type": "browser",
+                    "className": "ScreenshotTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "legalconceptanalysis",
+            "name": "LegalConceptAnalysis",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/LegalConceptAnalysisTest.php",
+                    "type": "browser",
+                    "className": "LegalConceptAnalysisTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "lawdownloadworkflow",
+            "name": "LawDownloadWorkflow",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/LawDownloadWorkflowTest.php",
+                    "type": "browser",
+                    "className": "LawDownloadWorkflowTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "evidenceanalysis",
+            "name": "EvidenceAnalysis",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/EvidenceAnalysisTest.php",
+                    "type": "browser",
+                    "className": "EvidenceAnalysisTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "completecaseworkflow",
+            "name": "CompleteCaseWorkflow",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/CompleteCaseWorkflowTest.php",
+                    "type": "browser",
+                    "className": "CompleteCaseWorkflowTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "collaboration",
+            "name": "Collaboration",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/CollaborationTest.php",
+                    "type": "browser",
+                    "className": "CollaborationTest"
+                }
+            ],
+            "supporting_tests": [
+                {
+                    "path": "tests/Unit/Requests/Collaboration/RecentCollaborationsRequestTest.php",
+                    "type": "unit",
+                    "className": "RecentCollaborationsRequestTest"
+                },
+                {
+                    "path": "tests/Unit/Models/AgentCollaborationTest.php",
+                    "type": "unit",
+                    "className": "AgentCollaborationTest"
+                },
+                {
+                    "path": "tests/Feature/Api/AgentCollaborationApiTest.php",
+                    "type": "feature",
+                    "className": "AgentCollaborationApiTest"
+                },
+                {
+                    "path": "tests/Feature/MultiAgentCollaborationTest.php",
+                    "type": "feature",
+                    "className": "MultiAgentCollaborationTest"
+                },
+                {
+                    "path": "tests/Feature/CollaborationDashboardTest.php",
+                    "type": "feature",
+                    "className": "CollaborationDashboardTest"
+                },
+                {
+                    "path": "tests/Feature/CollaborationControllerTest.php",
+                    "type": "feature",
+                    "className": "CollaborationControllerTest"
+                }
+            ]
+        },
+        {
+            "id": "cloudexecutionproof",
+            "name": "CloudExecutionProof",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/CloudExecutionProofTest.php",
+                    "type": "browser",
+                    "className": "CloudExecutionProofTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "casetimeline",
+            "name": "CaseTimeline",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/CaseTimelineTest.php",
+                    "type": "browser",
+                    "className": "CaseTimelineTest"
+                }
+            ],
+            "supporting_tests": []
+        },
+        {
+            "id": "chromefixverification",
+            "name": "ChromeFixVerification",
+            "visual_tests": [
+                {
+                    "path": "tests/Browser/ChromeFixVerificationTest.php",
+                    "type": "browser",
+                    "className": "ChromeFixVerificationTest"
+                }
+            ],
+            "supporting_tests": []
+        }
+    ],
+    "sequence": [
+        {
+            "group_id": "transcriptpreviewer",
+            "group_name": "TranscriptPreviewer",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "TranscriptPreviewerTest",
+            "test_path": "tests/Feature/Livewire/TranscriptPreviewerTest.php"
+        },
+        {
+            "group_id": "transcriptpreviewer",
+            "group_name": "TranscriptPreviewer",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "TranscriptPreviewerTest",
+            "test_path": "tests/Browser/TranscriptPreviewerTest.php"
+        },
+        {
+            "group_id": "eoglasnamonitoring",
+            "group_name": "EoglasnaMonitoring",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "EoglasnaMonitoringTest",
+            "test_path": "tests/Feature/Livewire/EoglasnaMonitoringTest.php"
+        },
+        {
+            "group_id": "eoglasnamonitoring",
+            "group_name": "EoglasnaMonitoring",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "EoglasnaMonitoringTest",
+            "test_path": "tests/Browser/EoglasnaMonitoringTest.php"
+        },
+        {
+            "group_id": "legalplayground",
+            "group_name": "LegalPlayground",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "LegalPlaygroundTest",
+            "test_path": "tests/Feature/Livewire/LegalPlaygroundTest.php"
+        },
+        {
+            "group_id": "legalplayground",
+            "group_name": "LegalPlayground",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "LegalPlaygroundTest",
+            "test_path": "tests/Browser/LegalPlaygroundTest.php"
+        },
+        {
+            "group_id": "comparativetimelinepage",
+            "group_name": "ComparativeTimelinePage",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "ComparativeTimelinePageTest",
+            "test_path": "tests/Feature/Livewire/ComparativeTimelinePageTest.php"
+        },
+        {
+            "group_id": "comparativetimelinepage",
+            "group_name": "ComparativeTimelinePage",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "ComparativeTimelinePageTest",
+            "test_path": "tests/Browser/ComparativeTimelinePageTest.php"
+        },
+        {
+            "group_id": "agentcollaborationviewer",
+            "group_name": "AgentCollaborationViewer",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "AgentCollaborationViewerTest",
+            "test_path": "tests/Feature/Livewire/AgentCollaborationViewerTest.php"
+        },
+        {
+            "group_id": "agentcollaborationviewer",
+            "group_name": "AgentCollaborationViewer",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "AgentCollaborationViewerTest",
+            "test_path": "tests/Browser/AgentCollaborationViewerTest.php"
+        },
+        {
+            "group_id": "decisiondiscoverydashboard",
+            "group_name": "DecisionDiscoveryDashboard",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "DecisionDiscoveryDashboardTest",
+            "test_path": "tests/Feature/DecisionDiscoveryDashboardTest.php"
+        },
+        {
+            "group_id": "decisiondiscoverydashboard",
+            "group_name": "DecisionDiscoveryDashboard",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "DecisionDiscoveryDashboardTest",
+            "test_path": "tests/Feature/Livewire/DecisionDiscoveryDashboardTest.php"
+        },
+        {
+            "group_id": "laravellogviewer",
+            "group_name": "LaravelLogViewer",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "LaravelLogViewerTest",
+            "test_path": "tests/Feature/Livewire/LaravelLogViewerTest.php"
+        },
+        {
+            "group_id": "graphviewermetrics",
+            "group_name": "GraphViewerMetrics",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "GraphViewerMetricsTest",
+            "test_path": "tests/Feature/Livewire/GraphViewerMetricsTest.php"
+        },
+        {
+            "group_id": "graphviewer",
+            "group_name": "GraphViewer",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "GraphViewerTest",
+            "test_path": "tests/Feature/GraphViewerTest.php"
+        },
+        {
+            "group_id": "graphviewer",
+            "group_name": "GraphViewer",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "GraphViewerTest",
+            "test_path": "tests/Feature/Livewire/GraphViewerTest.php"
+        },
+        {
+            "group_id": "graphviewer",
+            "group_name": "GraphViewer",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "GraphViewerTest",
+            "test_path": "tests/Browser/GraphViewerTest.php"
+        },
+        {
+            "group_id": "feedbackdashboard",
+            "group_name": "FeedbackDashboard",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "FeedbackDashboardTest",
+            "test_path": "tests/Feature/Livewire/FeedbackDashboardTest.php"
+        },
+        {
+            "group_id": "feedbackdashboard",
+            "group_name": "FeedbackDashboard",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "FeedbackDashboardTest",
+            "test_path": "tests/Browser/FeedbackDashboardTest.php"
+        },
+        {
+            "group_id": "agentperformancedashboard",
+            "group_name": "AgentPerformanceDashboard",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "AgentPerformanceDashboardTest",
+            "test_path": "tests/Feature/Livewire/AgentPerformanceDashboardTest.php"
+        },
+        {
+            "group_id": "textractmanagerpdf",
+            "group_name": "TextractManagerPdf",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "TextractManagerPdfTest",
+            "test_path": "tests/Feature/Livewire/TextractManagerPdfTest.php"
+        },
+        {
+            "group_id": "analyticspanel",
+            "group_name": "AnalyticsPanel",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "AnalyticsPanelTest",
+            "test_path": "tests/Feature/Livewire/AnalyticsPanelTest.php"
+        },
+        {
+            "group_id": "openairesponsesviewer",
+            "group_name": "OpenAIResponsesViewer",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "OpenAIResponsesViewerTest",
+            "test_path": "tests/Feature/Livewire/OpenAIResponsesViewerTest.php"
+        },
+        {
+            "group_id": "openairesponsesviewer",
+            "group_name": "OpenAIResponsesViewer",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "OpenAIResponsesViewerTest",
+            "test_path": "tests/Browser/OpenAIResponsesViewerTest.php"
+        },
+        {
+            "group_id": "collaborationdashboard",
+            "group_name": "CollaborationDashboard",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "CollaborationDashboardTest",
+            "test_path": "tests/Feature/CollaborationDashboardTest.php"
+        },
+        {
+            "group_id": "collaborationdashboard",
+            "group_name": "CollaborationDashboard",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "CollaborationDashboardTest",
+            "test_path": "tests/Feature/Livewire/CollaborationDashboardTest.php"
+        },
+        {
+            "group_id": "collaborationdashboard",
+            "group_name": "CollaborationDashboard",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "CollaborationDashboardTest",
+            "test_path": "tests/Browser/CollaborationDashboardTest.php"
+        },
+        {
+            "group_id": "unifiedsearch",
+            "group_name": "UnifiedSearch",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "UnifiedSearchControllerTest",
+            "test_path": "tests/Unit/Http/Controllers/Api/UnifiedSearchControllerTest.php"
+        },
+        {
+            "group_id": "unifiedsearch",
+            "group_name": "UnifiedSearch",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "UnifiedSearchServiceCharacterizationTest",
+            "test_path": "tests/Unit/Services/UnifiedSearchServiceCharacterizationTest.php"
+        },
+        {
+            "group_id": "unifiedsearch",
+            "group_name": "UnifiedSearch",
+            "role": "supporting",
+            "type": "integration",
+            "test_class": "UnifiedSearchServiceIntegrationTest",
+            "test_path": "tests/Integration/UnifiedSearchServiceIntegrationTest.php"
+        },
+        {
+            "group_id": "unifiedsearch",
+            "group_name": "UnifiedSearch",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "UnifiedSearchTest",
+            "test_path": "tests/Feature/Livewire/UnifiedSearchTest.php"
+        },
+        {
+            "group_id": "graphviewerconcurrency",
+            "group_name": "GraphViewerConcurrency",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "GraphViewerConcurrencyTest",
+            "test_path": "tests/Feature/Livewire/GraphViewerConcurrencyTest.php"
+        },
+        {
+            "group_id": "ingestedlawsmanager",
+            "group_name": "IngestedLawsManager",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "IngestedLawsManagerTest",
+            "test_path": "tests/Feature/IngestedLawsManagerTest.php"
+        },
+        {
+            "group_id": "ingestedlawsmanager",
+            "group_name": "IngestedLawsManager",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "IngestedLawsManagerTest",
+            "test_path": "tests/Feature/Livewire/IngestedLawsManagerTest.php"
+        },
+        {
+            "group_id": "ingestedlawsmanager",
+            "group_name": "IngestedLawsManager",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "IngestedLawsManagerTest",
+            "test_path": "tests/Browser/IngestedLawsManagerTest.php"
+        },
+        {
+            "group_id": "learningopportunitymanager",
+            "group_name": "LearningOpportunityManager",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "LearningOpportunityManagerTest",
+            "test_path": "tests/Feature/Livewire/LearningOpportunityManagerTest.php"
+        },
+        {
+            "group_id": "learningopportunitymanager",
+            "group_name": "LearningOpportunityManager",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "LearningOpportunityManagerTest",
+            "test_path": "tests/Browser/LearningOpportunityManagerTest.php"
+        },
+        {
+            "group_id": "openailogviewer",
+            "group_name": "OpenAILogViewer",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "OpenAILogViewerTest",
+            "test_path": "tests/Feature/Livewire/OpenAILogViewerTest.php"
+        },
+        {
+            "group_id": "openailogviewer",
+            "group_name": "OpenAILogViewer",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "OpenAILogViewerTest",
+            "test_path": "tests/Browser/OpenAILogViewerTest.php"
+        },
+        {
+            "group_id": "graphdashboard",
+            "group_name": "GraphDashboard",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "GraphDashboardTest",
+            "test_path": "tests/Feature/Livewire/GraphDashboardTest.php"
+        },
+        {
+            "group_id": "paralleltimeline",
+            "group_name": "ParallelTimeline",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "ParallelTimelineTest",
+            "test_path": "tests/Feature/ParallelTimelineTest.php"
+        },
+        {
+            "group_id": "paralleltimeline",
+            "group_name": "ParallelTimeline",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "ParallelTimelineTest",
+            "test_path": "tests/Feature/Livewire/ParallelTimelineTest.php"
+        },
+        {
+            "group_id": "paralleltimeline",
+            "group_name": "ParallelTimeline",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "ParallelTimelineTest",
+            "test_path": "tests/Browser/ParallelTimelineTest.php"
+        },
+        {
+            "group_id": "citationanalysiscomponent",
+            "group_name": "CitationAnalysisComponent",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "CitationAnalysisComponentTest",
+            "test_path": "tests/Feature/Livewire/CitationAnalysisComponentTest.php"
+        },
+        {
+            "group_id": "topicanalyzer",
+            "group_name": "TopicAnalyzer",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "TopicAnalyzerTest",
+            "test_path": "tests/Feature/Livewire/TopicAnalyzerTest.php"
+        },
+        {
+            "group_id": "textractmanager",
+            "group_name": "TextractManager",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "TextractManagerDeletionTest",
+            "test_path": "tests/Feature/TextractManagerDeletionTest.php"
+        },
+        {
+            "group_id": "textractmanager",
+            "group_name": "TextractManager",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "TextractManagerTest",
+            "test_path": "tests/Feature/Livewire/TextractManagerTest.php"
+        },
+        {
+            "group_id": "textractmanager",
+            "group_name": "TextractManager",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "TextractManagerTest",
+            "test_path": "tests/Browser/TextractManagerTest.php"
+        },
+        {
+            "group_id": "vectorstoremanager",
+            "group_name": "VectorStoreManager",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "VectorStoreManagerTest",
+            "test_path": "tests/Feature/Livewire/VectorStoreManagerTest.php"
+        },
+        {
+            "group_id": "vectorstoremanager",
+            "group_name": "VectorStoreManager",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "VectorStoreManagerTest",
+            "test_path": "tests/Browser/VectorStoreManagerTest.php"
+        },
+        {
+            "group_id": "timelinepage",
+            "group_name": "TimelinePage",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "TimelinePageTest",
+            "test_path": "tests/Feature/Livewire/TimelinePageTest.php"
+        },
+        {
+            "group_id": "openaivectormanager",
+            "group_name": "OpenAIVectorManager",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "OpenAIVectorManagerTest",
+            "test_path": "tests/Feature/Livewire/OpenAIVectorManagerTest.php"
+        },
+        {
+            "group_id": "openaivectormanager",
+            "group_name": "OpenAIVectorManager",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "OpenAIVectorManagerTest",
+            "test_path": "tests/Browser/OpenAIVectorManagerTest.php"
+        },
+        {
+            "group_id": "guptimeline",
+            "group_name": "GupTimeline",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "GupTimelineTest",
+            "test_path": "tests/Feature/Livewire/GupTimelineTest.php"
+        },
+        {
+            "group_id": "llmbrainpanel",
+            "group_name": "LlmBrainPanel",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "LlmBrainPanelTest",
+            "test_path": "tests/Feature/Livewire/LlmBrainPanelTest.php"
+        },
+        {
+            "group_id": "epredmetwidget",
+            "group_name": "EpredmetWidget",
+            "role": "visual_hotspot",
+            "type": "feature_livewire",
+            "test_class": "EpredmetWidgetTest",
+            "test_path": "tests/Feature/Livewire/EpredmetWidgetTest.php"
+        },
+        {
+            "group_id": "epredmetwidget",
+            "group_name": "EpredmetWidget",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "EpredmetWidgetTest",
+            "test_path": "tests/Browser/EpredmetWidgetTest.php"
+        },
+        {
+            "group_id": "htmlsource",
+            "group_name": "HtmlSource",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "HtmlSourceTest",
+            "test_path": "tests/Browser/HtmlSourceTest.php"
+        },
+        {
+            "group_id": "multiusercollaboration",
+            "group_name": "MultiUserCollaboration",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "MultiUserCollaborationTest",
+            "test_path": "tests/Browser/MultiUserCollaborationTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "AutonomousResearchAgentCharacterizationTest",
+            "test_path": "tests/Unit/Agents/AutonomousResearchAgentCharacterizationTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "AutonomousResearchAgentInsightTest",
+            "test_path": "tests/Unit/Agents/AutonomousResearchAgentInsightTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "AutonomousResearchAgentPlanningTest",
+            "test_path": "tests/Unit/Agents/AutonomousResearchAgentPlanningTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "AutonomousResearchAgentTest",
+            "test_path": "tests/Unit/Agents/AutonomousResearchAgentTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "CaseSearchServicePerformanceTest",
+            "test_path": "tests/Unit/Services/CaseSearchServicePerformanceTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "CaseSearchServiceTest",
+            "test_path": "tests/Unit/Services/CaseSearchServiceTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "CaseSearchServiceTest",
+            "test_path": "tests/Unit/Services/Search/CaseSearchServiceTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "DecisionSearchServiceTest",
+            "test_path": "tests/Unit/Services/Search/DecisionSearchServiceTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "DecisionSearchServiceTest",
+            "test_path": "tests/Unit/Services/DecisionSearchServiceTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "ExecuteAgentResearchTest",
+            "test_path": "tests/Unit/Jobs/ExecuteAgentResearchTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "GraphResearchEnhancerTest",
+            "test_path": "tests/Unit/Services/Graph/GraphResearchEnhancerTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "HomeSearchAbuseDetectorTest",
+            "test_path": "tests/Unit/Modules/HomeSearch/HomeSearchAbuseDetectorTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "HomeSearchCasePersistenceTest",
+            "test_path": "tests/Unit/Modules/HomeSearch/HomeSearchCasePersistenceTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "IllegalSearchDetectorTest",
+            "test_path": "tests/Unit/Topics/IllegalSearchDetectorTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "LawSearchServiceConceptAnalysisTest",
+            "test_path": "tests/Unit/Services/LawSearchServiceConceptAnalysisTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "LawSearchServiceStatutoryInterpretationTest",
+            "test_path": "tests/Unit/Services/LawSearchServiceStatutoryInterpretationTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "LawSearchServiceTest",
+            "test_path": "tests/Unit/Services/LawSearchServiceTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "LawSearchServiceTest",
+            "test_path": "tests/Unit/Services/Search/LawSearchServiceTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "OdlukeSearchAgentExtractionTest",
+            "test_path": "tests/Unit/Modules/HomeSearch/OdlukeSearchAgentExtractionTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "OdlukeSearchAgentTest",
+            "test_path": "tests/Unit/Modules/HomeSearch/OdlukeSearchAgentTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "OdlukeSearchToolTest",
+            "test_path": "tests/Unit/Tools/OdlukeSearchToolTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "ResearchOrchestratorTest",
+            "test_path": "tests/Unit/Services/ResearchOrchestratorTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "ResearchSpecialistAgentTraceTest",
+            "test_path": "tests/Unit/Agents/ResearchSpecialistAgentTraceTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "RunAutonomousResearchJobTest",
+            "test_path": "tests/Unit/Jobs/RunAutonomousResearchJobTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "SearchEmbeddingServiceTest",
+            "test_path": "tests/Unit/Services/Search/SearchEmbeddingServiceTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "SearchExecutorServiceTest",
+            "test_path": "tests/Unit/Services/Research/SearchExecutorServiceTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "SearchOrchestratorTest",
+            "test_path": "tests/Unit/Services/Search/SearchOrchestratorTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "SearchRequestTest",
+            "test_path": "tests/Unit/Requests/Search/SearchRequestTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "SearchResultAggregatorTest",
+            "test_path": "tests/Unit/Services/Search/SearchResultAggregatorTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "SearchResultDeduplicatorTest",
+            "test_path": "tests/Unit/Services/Search/SearchResultDeduplicatorTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "StartResearchRequestTest",
+            "test_path": "tests/Unit/Requests/Agent/StartResearchRequestTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "UnifiedSearchControllerTest",
+            "test_path": "tests/Unit/Http/Controllers/Api/UnifiedSearchControllerTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "UnifiedSearchServiceCharacterizationTest",
+            "test_path": "tests/Unit/Services/UnifiedSearchServiceCharacterizationTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "VectorSearchRequestTest",
+            "test_path": "tests/Unit/Requests/Search/VectorSearchRequestTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "integration",
+            "test_class": "GraphEnhancedResearchTest",
+            "test_path": "tests/Integration/GraphEnhancedResearchTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "integration",
+            "test_class": "HomeSearchIntegrationTest",
+            "test_path": "tests/Integration/HomeSearchIntegrationTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "integration",
+            "test_class": "OdlukeSearchAgentE2ETest",
+            "test_path": "tests/Integration/OdlukeSearchAgentE2ETest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "integration",
+            "test_class": "OdlukeSearchAgentMcpIntegrationTest",
+            "test_path": "tests/Integration/OdlukeSearchAgentMcpIntegrationTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "integration",
+            "test_class": "SearchEmbeddingServiceIntegrationTest",
+            "test_path": "tests/Integration/SearchEmbeddingServiceIntegrationTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "integration",
+            "test_class": "SearchPipelineFlowTest",
+            "test_path": "tests/Integration/SearchPipelineFlowTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "integration",
+            "test_class": "UnifiedSearchServiceIntegrationTest",
+            "test_path": "tests/Integration/UnifiedSearchServiceIntegrationTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "AutonomousResearchAgentTest",
+            "test_path": "tests/Feature/Agents/AutonomousResearchAgentTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "CaseSearchServiceIntegrationTest",
+            "test_path": "tests/Feature/CaseSearchServiceIntegrationTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "IngestSearchTest",
+            "test_path": "tests/Feature/IngestSearchTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "ResearchOrchestratorIntegrationTest",
+            "test_path": "tests/Feature/Services/ResearchOrchestratorIntegrationTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "ResearchPipelineWorkflowTest",
+            "test_path": "tests/Feature/Workflows/ResearchPipelineWorkflowTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "SearchControllerTest",
+            "test_path": "tests/Feature/SearchControllerTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "SearchExecutorIntegrationTest",
+            "test_path": "tests/Feature/Services/Research/SearchExecutorIntegrationTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "SearchIntegrationTest",
+            "test_path": "tests/Feature/Services/SearchIntegrationTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "SearchTest",
+            "test_path": "tests/Browser/SearchTest.php"
+        },
+        {
+            "group_id": "search",
+            "group_name": "Search",
+            "role": "supporting",
+            "type": "other",
+            "test_class": "AutonomousResearchAgentPromptTest",
+            "test_path": "tests/Snapshots/AutonomousResearchAgentPromptTest.php"
+        },
+        {
+            "group_id": "useronboarding",
+            "group_name": "UserOnboarding",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "UserOnboardingTest",
+            "test_path": "tests/Browser/UserOnboardingTest.php"
+        },
+        {
+            "group_id": "example",
+            "group_name": "Example",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "ExampleTest",
+            "test_path": "tests/Unit/ExampleTest.php"
+        },
+        {
+            "group_id": "example",
+            "group_name": "Example",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "ExampleTest",
+            "test_path": "tests/Feature/ExampleTest.php"
+        },
+        {
+            "group_id": "example",
+            "group_name": "Example",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "ExampleTest",
+            "test_path": "tests/Browser/ExampleTest.php"
+        },
+        {
+            "group_id": "authentication",
+            "group_name": "Authentication",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "AuthenticationTest",
+            "test_path": "tests/Feature/Api/AuthenticationTest.php"
+        },
+        {
+            "group_id": "authentication",
+            "group_name": "Authentication",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "AuthenticationTest",
+            "test_path": "tests/Browser/AuthenticationTest.php"
+        },
+        {
+            "group_id": "textractpdfpreview",
+            "group_name": "TextractPdfPreview",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "TextractPdfPreviewTest",
+            "test_path": "tests/Browser/TextractPdfPreviewTest.php"
+        },
+        {
+            "group_id": "lawdownload",
+            "group_name": "LawDownload",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "LawDownloadTest",
+            "test_path": "tests/Browser/LawDownloadTest.php"
+        },
+        {
+            "group_id": "errorrecovery",
+            "group_name": "ErrorRecovery",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "ErrorRecoveryTest",
+            "test_path": "tests/Feature/ErrorRecoveryTest.php"
+        },
+        {
+            "group_id": "errorrecovery",
+            "group_name": "ErrorRecovery",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "ErrorRecoveryTest",
+            "test_path": "tests/Browser/ErrorRecoveryTest.php"
+        },
+        {
+            "group_id": "timeline",
+            "group_name": "Timeline",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "ParallelTimelineTest",
+            "test_path": "tests/Feature/ParallelTimelineTest.php"
+        },
+        {
+            "group_id": "timeline",
+            "group_name": "Timeline",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "UsporedniTimelineDemoTest",
+            "test_path": "tests/Feature/UsporedniTimelineDemoTest.php"
+        },
+        {
+            "group_id": "timeline",
+            "group_name": "Timeline",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "TimelineTest",
+            "test_path": "tests/Browser/TimelineTest.php"
+        },
+        {
+            "group_id": "misconductdashboard",
+            "group_name": "MisconductDashboard",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "MisconductDashboardTest",
+            "test_path": "tests/Browser/MisconductDashboardTest.php"
+        },
+        {
+            "group_id": "federatedmemorysearch",
+            "group_name": "FederatedMemorySearch",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "FederatedMemorySearchTest",
+            "test_path": "tests/Browser/FederatedMemorySearchTest.php"
+        },
+        {
+            "group_id": "lawimportprogress",
+            "group_name": "LawImportProgress",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "LawImportProgressTest",
+            "test_path": "tests/Browser/LawImportProgressTest.php"
+        },
+        {
+            "group_id": "decisiondiscovery",
+            "group_name": "DecisionDiscovery",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "DecisionDiscoveryAgentLearningTest",
+            "test_path": "tests/Unit/Agents/DecisionDiscoveryAgentLearningTest.php"
+        },
+        {
+            "group_id": "decisiondiscovery",
+            "group_name": "DecisionDiscovery",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "DecisionDiscoveryAgentTest",
+            "test_path": "tests/Unit/Agents/DecisionDiscoveryAgentTest.php"
+        },
+        {
+            "group_id": "decisiondiscovery",
+            "group_name": "DecisionDiscovery",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "DecisionDiscoveryAgentTracingTest",
+            "test_path": "tests/Unit/Agents/DecisionDiscoveryAgentTracingTest.php"
+        },
+        {
+            "group_id": "decisiondiscovery",
+            "group_name": "DecisionDiscovery",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "DecisionDiscoveryRunTest",
+            "test_path": "tests/Unit/Models/DecisionDiscoveryRunTest.php"
+        },
+        {
+            "group_id": "decisiondiscovery",
+            "group_name": "DecisionDiscovery",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "ExecuteDecisionDiscoveryJobTest",
+            "test_path": "tests/Unit/Jobs/ExecuteDecisionDiscoveryJobTest.php"
+        },
+        {
+            "group_id": "decisiondiscovery",
+            "group_name": "DecisionDiscovery",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "RunDecisionDiscoveryTest",
+            "test_path": "tests/Unit/Jobs/RunDecisionDiscoveryTest.php"
+        },
+        {
+            "group_id": "decisiondiscovery",
+            "group_name": "DecisionDiscovery",
+            "role": "supporting",
+            "type": "integration",
+            "test_class": "DecisionDiscoveryAgentLearningTest",
+            "test_path": "tests/Integration/DecisionDiscoveryAgentLearningTest.php"
+        },
+        {
+            "group_id": "decisiondiscovery",
+            "group_name": "DecisionDiscovery",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "DecisionDiscoveryAPITest",
+            "test_path": "tests/Feature/API/DecisionDiscoveryAPITest.php"
+        },
+        {
+            "group_id": "decisiondiscovery",
+            "group_name": "DecisionDiscovery",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "DecisionDiscoveryCommandTest",
+            "test_path": "tests/Feature/DecisionDiscoveryCommandTest.php"
+        },
+        {
+            "group_id": "decisiondiscovery",
+            "group_name": "DecisionDiscovery",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "DecisionDiscoveryDashboardTest",
+            "test_path": "tests/Feature/DecisionDiscoveryDashboardTest.php"
+        },
+        {
+            "group_id": "decisiondiscovery",
+            "group_name": "DecisionDiscovery",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "DecisionDiscoveryTest",
+            "test_path": "tests/Feature/DecisionDiscoveryTest.php"
+        },
+        {
+            "group_id": "decisiondiscovery",
+            "group_name": "DecisionDiscovery",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "ExecuteDecisionDiscoveryJobTest",
+            "test_path": "tests/Feature/Jobs/ExecuteDecisionDiscoveryJobTest.php"
+        },
+        {
+            "group_id": "decisiondiscovery",
+            "group_name": "DecisionDiscovery",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "DecisionDiscoveryTest",
+            "test_path": "tests/Browser/DecisionDiscoveryTest.php"
+        },
+        {
+            "group_id": "caseanalysis",
+            "group_name": "CaseAnalysis",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "CaseAnalysisToolTest",
+            "test_path": "tests/Unit/Mcp/Tools/CaseAnalysisToolTest.php"
+        },
+        {
+            "group_id": "caseanalysis",
+            "group_name": "CaseAnalysis",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "CaseAnalysisWorkflowTest",
+            "test_path": "tests/Feature/Workflows/CaseAnalysisWorkflowTest.php"
+        },
+        {
+            "group_id": "caseanalysis",
+            "group_name": "CaseAnalysis",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "CaseAnalysisTest",
+            "test_path": "tests/Browser/CaseAnalysisTest.php"
+        },
+        {
+            "group_id": "citationtimeseriesviewer",
+            "group_name": "CitationTimeSeriesViewer",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "CitationTimeSeriesViewerTest",
+            "test_path": "tests/Browser/CitationTimeSeriesViewerTest.php"
+        },
+        {
+            "group_id": "chromestability",
+            "group_name": "ChromeStability",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "ChromeStabilityTest",
+            "test_path": "tests/Browser/ChromeStabilityTest.php"
+        },
+        {
+            "group_id": "citationnetworkanalysis",
+            "group_name": "CitationNetworkAnalysis",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "CitationNetworkAnalysisTest",
+            "test_path": "tests/Browser/CitationNetworkAnalysisTest.php"
+        },
+        {
+            "group_id": "logindebug",
+            "group_name": "LoginDebug",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "LoginDebugTest",
+            "test_path": "tests/Browser/LoginDebugTest.php"
+        },
+        {
+            "group_id": "screenshot",
+            "group_name": "Screenshot",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "ScreenshotTest",
+            "test_path": "tests/Browser/ScreenshotTest.php"
+        },
+        {
+            "group_id": "legalconceptanalysis",
+            "group_name": "LegalConceptAnalysis",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "LegalConceptAnalysisTest",
+            "test_path": "tests/Browser/LegalConceptAnalysisTest.php"
+        },
+        {
+            "group_id": "lawdownloadworkflow",
+            "group_name": "LawDownloadWorkflow",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "LawDownloadWorkflowTest",
+            "test_path": "tests/Browser/LawDownloadWorkflowTest.php"
+        },
+        {
+            "group_id": "evidenceanalysis",
+            "group_name": "EvidenceAnalysis",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "EvidenceAnalysisTest",
+            "test_path": "tests/Browser/EvidenceAnalysisTest.php"
+        },
+        {
+            "group_id": "completecaseworkflow",
+            "group_name": "CompleteCaseWorkflow",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "CompleteCaseWorkflowTest",
+            "test_path": "tests/Browser/CompleteCaseWorkflowTest.php"
+        },
+        {
+            "group_id": "collaboration",
+            "group_name": "Collaboration",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "AgentCollaborationTest",
+            "test_path": "tests/Unit/Models/AgentCollaborationTest.php"
+        },
+        {
+            "group_id": "collaboration",
+            "group_name": "Collaboration",
+            "role": "supporting",
+            "type": "unit",
+            "test_class": "RecentCollaborationsRequestTest",
+            "test_path": "tests/Unit/Requests/Collaboration/RecentCollaborationsRequestTest.php"
+        },
+        {
+            "group_id": "collaboration",
+            "group_name": "Collaboration",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "AgentCollaborationApiTest",
+            "test_path": "tests/Feature/Api/AgentCollaborationApiTest.php"
+        },
+        {
+            "group_id": "collaboration",
+            "group_name": "Collaboration",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "CollaborationControllerTest",
+            "test_path": "tests/Feature/CollaborationControllerTest.php"
+        },
+        {
+            "group_id": "collaboration",
+            "group_name": "Collaboration",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "CollaborationDashboardTest",
+            "test_path": "tests/Feature/CollaborationDashboardTest.php"
+        },
+        {
+            "group_id": "collaboration",
+            "group_name": "Collaboration",
+            "role": "supporting",
+            "type": "feature",
+            "test_class": "MultiAgentCollaborationTest",
+            "test_path": "tests/Feature/MultiAgentCollaborationTest.php"
+        },
+        {
+            "group_id": "collaboration",
+            "group_name": "Collaboration",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "CollaborationTest",
+            "test_path": "tests/Browser/CollaborationTest.php"
+        },
+        {
+            "group_id": "cloudexecutionproof",
+            "group_name": "CloudExecutionProof",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "CloudExecutionProofTest",
+            "test_path": "tests/Browser/CloudExecutionProofTest.php"
+        },
+        {
+            "group_id": "casetimeline",
+            "group_name": "CaseTimeline",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "CaseTimelineTest",
+            "test_path": "tests/Browser/CaseTimelineTest.php"
+        },
+        {
+            "group_id": "chromefixverification",
+            "group_name": "ChromeFixVerification",
+            "role": "visual_hotspot",
+            "type": "browser",
+            "test_class": "ChromeFixVerificationTest",
+            "test_path": "tests/Browser/ChromeFixVerificationTest.php"
+        }
+    ]
+}

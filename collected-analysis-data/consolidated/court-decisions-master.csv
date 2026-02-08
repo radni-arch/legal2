@@ -1,0 +1,131 @@
+case_number,court,date,outcome,evidence_type,summary,source
+11 Gžr-80/11-2,Županijski sud u Zagrebu,2011-06-14,not_applicable,N/A,Labor law dispute regarding employment termination; not a criminal procedure case,json_report
+2 Kov-2/20-8,Županijski sud u Zadru,2020-07-02,excluded,testimony,"SUCCESSFUL - Child witness examination record (DVD recording) excluded; defense counsel not present during mandatory representation case (Art. 238(3), 66(1) ZKP)",json_report
+5 Kž-720/2017-3,Županijski sud u Zagrebu,2017-09-05,judgment_quashed,surveillance,PARTIAL - Telecom metadata (call logs/IMEI) EXCLUDED without judge's order per Art. 339 ZKP; phone owner ID retained,json_report
+6-Kž-746/11-3,Županijski sud u Zagrebu,2012-06-06,not_excluded,physical,Search warrant valid - explosives and ammunition evidence retained,json_report
+7 Kž-884/2021-3,Županijski sud u Zagrebu,2021-10-12,not_excluded,physical,"Appellate court reversed exclusion; lawful inspection under Art. 75(1)(2) Police Act, not unlawful search",json_report
+8 Kž-314/16-4,Županijski sud u Varaždinu,2016-09-14,excluded,physical,"SUCCESSFUL - 9 kg tobacco excluded; search without written warrant and required witnesses (Art. 240, 254 ZKP)",json_report
+Gž-1738/2023-3,Županijski sud u Splitu,2023-09-21,not_applicable,N/A,"Civil case - donation contract dispute, not criminal evidence exclusion",json_report
+Gž-2275/15,Visoki prekršajni sud Republike Hrvatske,2017-04-05,not_excluded,documentary,Customs inspection report admitted under Misdemeanor Act Article 158(5),json_report
+I Kž 125/2011-4,Vrhovni sud Republike Hrvatske,2013-06-05,not_excluded,search_record,"Cannabis cultivation search valid; warrant from County Court Požega, witnesses present, no objections raised",json_report
+I Kž 13/2021-4,Vrhovni sud Republike Hrvatske,2021-03-17,not_excluded,physical,Apartment search evidence retained - search conducted lawfully per court authorization,json_report
+I Kž 148/12-4,Vrhovni sud Republike Hrvatske,2013-05-21,not_excluded,physical,"Garage search evidence retained - voluntary surrender, not illegal search",json_report
+I Kž 15/2020-4,Vrhovni sud Republike Hrvatske,2020-02-12,excluded,testimony,SUCCESSFUL - Privileged witness testimony excluded; court failed to record statutory warning per Article 285(3) ZKP,json_report
+I Kž 181/10-3,Vrhovni sud Republike Hrvatske,2010-05-12,judgment_quashed,search_record,PARTIAL - Bedroom/bathroom search excluded (witnesses not continuously present); kitchen search retained,json_report
+I Kž 191/12-7,Vrhovni sud Republike Hrvatske,2012-04-18,not_excluded,confession,"Police interrogation records valid - defense counsel present, missing signature insufficient to invalidate",json_report
+I Kž 246/13-4,Vrhovni sud Republike Hrvatske,2013-05-08,not_excluded,confession,"Interrogation records retained - no evidence of police coercion, proper custody timeline",json_report
+I Kž 40/10-3,Vrhovni sud Republike Hrvatske,2010-05-18,not_excluded,physical,House search evidence retained - grandmother's voluntary consent made entry lawful,json_report
+I Kž 419/10-3,Vrhovni sud Republike Hrvatske,2010-10-06,not_excluded,physical,Heroin in courtyard lawful; Art. 211.a(2) ZKP - open natural space doesn't require search warrant or witness presence,json_report
+I Kž 439/16.-4,Vrhovni sud Republike Hrvatske,2016-08-30,excluded,search_record,SUCCESSFUL - Documents from home entry excluded; disputed consent vs coercion insufficiently established,json_report
+I Kž 484/2011-4,Vrhovni sud,2011,EXCLUDED,Items seized during home entry,,exclusions_md
+I Kž 517/10-8,Vrhovni sud Republike Hrvatske,2010-09-21,not_excluded,surveillance,Wiretap evidence retained - clerical errors don't invalidate properly directed surveillance,json_report
+I Kž 581/11-4,Vrhovni sud,2011-09-21,EXCLUDED,Search record and confirmation of temporary seizure,,exclusions_md
+I Kž 609/14-4,Vrhovni sud Republike Hrvatske,2014-11-12,not_excluded,search_record,Supreme Court overturned lower court exclusion - nighttime search lawful under ZKP 247(3) as defendant requested it,json_report
+I Kž 68/11-6,Vrhovni sud Republike Hrvatske,2012-08-29,not_excluded,search_record,Police report challenge rejected - report did not have evidentiary status under čl. 9 ZKP/97,json_report
+I Kž 915/09-3,Vrhovni sud Republike Hrvatske,2010-03-11,not_excluded,physical,"Abandoned property doctrine - handbag thrown from window, no warrant required",json_report
+I Kž-100/2022-6,Visoki kazneni sud Republike Hrvatske,2022-09-28,judgment_quashed,search_record,SUCCESSFUL - Robbery conviction quashed; remanded for retrial due to prior exclusion of search records,json_report
+I Kž-1019/2010-4,Vrhovni sud,,partial_excluded,,,partial_exclusions_md
+I Kž-1021/2005-3,Vrhovni sud Republike Hrvatske,2006-01-19,excluded,search_record,"SUCCESSFUL - Search record, seizure confirmations, expert report, photos excluded; witnesses not simultaneously present throughout search (Art. 214(1), 217, 331(2) ZKP)",json_report
+I Kž-1067/2007-6,Vrhovni sud Republike Hrvatske,2009-02-04,partial_excluded,search_record,"PARTIAL - Courtyard search excluded due to witness issues; house and automobile search retained (Art. 214, 217 ZKP)",json_report
+I Kž-110/2011-4,Vrhovni sud,,partial_excluded,,,partial_exclusions_md
+I Kž-115/2005-3,Vrhovni sud Republike Hrvatske,2008-01-29,excluded,search_record,"SUCCESSFUL - Bag search records excluded; opening bag contents exceeds inspection scope, requires warrant (Art. 9(2), 213(1), 217 ZKP)",json_report
+I Kž-119/1999-3,Vrhovni sud Republike Hrvatske,1999,excluded,search_record,"SUCCESSFUL - Search records, seizure certificates, official notes, expert records excluded; warrantless house search without witnesses (Art. 9(2), 216(2) ZKP)",json_report
+I Kž-121/2019-4,Vrhovni sud,2019,EXCLUDED,Telecommunication traffic data + derived evidence,,exclusions_md
+I Kž-132/2003-3,Vrhovni sud Republike Hrvatske,2006-02-08,excluded,search_record,"SUCCESSFUL - Search records, seizure certs, expert report excluded; urgency no longer applied once defendant detained (Art. 216(1)-(2), 213(1), 217 ZKP)",json_report
+I Kž-135/2003-7,Vrhovni sud Republike Hrvatske,2003-08-26,partial_excluded,documentary,PARTIAL - Fax police information report excluded; witness testimony from international judicial assistance retained (Art. 78(4) ZKP),json_report
+I Kž-14/2001-3,Vrhovni sud Republike Hrvatske,2002-09-11,excluded,physical,"SUCCESSFUL - Heroin (0.09g), toxicology, seizure excluded; garage search without warrant or witnesses (Art. 217, 9(2), 213, 214 ZKP)",json_report
+I Kž-145/2021-4,Vrhovni sud,2021,EXCLUDED,Police informal records,,exclusions_md
+I Kž-164/1999-5,Vrhovni sud Republike Hrvatske,2002-09-18,partial_excluded,testimony,"PARTIAL - Witness testimony about defendant/spouse statements during search excluded; conviction partially annulled (Art. 9, 177(5), 234(1) ZKP)",json_report
+I Kž-170/1999-3,Vrhovni sud Republike Hrvatske,1999-04-14,partial_excluded,search_record,"PARTIAL - Physical evidence from initial home entry excluded; warrantless entry without witnesses present - second entry tainted by unified operation (Art. 34 Ustav, 213-217 ZKP)",json_report
+I Kž-191/2016-5,Vrhovni sud Republike Hrvatske,2016-04-13,not_excluded,search_record,Search records retained - warrant contained all required elements; čl. 250 ZKP exhaustive list not triggered,json_report
+I Kž-194/2002-3,Vrhovni sud Republike Hrvatske,2002-03-12,partial_excluded,testimony,"PARTIAL - PROCEEDINGS DISCONTINUED - Citizen-sourced witness statements excluded; police officers cannot testify about citizen information (Art. 174(4), 177(3), 78(3) ZKP)",json_report
+I Kž-207/2021-13,Vrhovni sud,2021,EXCLUDED,Physician testimony,,exclusions_md
+I Kž-216/2007-3,Vrhovni sud Republike Hrvatske,2007-03-13,excluded,documentary,"SUCCESSFUL - Police official notes (službene bilješke) excluded ex officio (Art. 78, 274(4) ZKP)",json_report
+I Kž-221/2021-4,Visoki kazneni sud,2021-12-14,EXCLUDED,Portion of forensic medical expert report (knife wound mechanism conclusions),,exclusions_md
+I Kž-23/2005-3,Vrhovni sud Republike Hrvatske,2007-01-16,excluded,testimony,SUCCESSFUL - Witness statements excluded as unlawful evidence (Art. 9 ZKP); acquittal resulted,json_report
+I Kž-237/1999-5,Vrhovni sud Republike Hrvatske,2002-11-19,excluded,search_record,"SUCCESSFUL - Vehicle search evidence excluded; police opened bag before obtaining warrant (Art. 213(1), 217 ZKP)",json_report
+I Kž-25/2004-8,Vrhovni sud Republike Hrvatske,2004-05-27,partial_excluded,surveillance,"PARTIAL - Undercover investigator report portions on inducement excluded; phone records and photodocumentation retained (Art. 367(2), 177 ZKP)",json_report
+I Kž-251/2020-4,Vrhovni sud Republike Hrvatske,2020-05-21,not_excluded,search_record,"Home search records retained - proper judicial authorization, defendant voluntarily declined counsel",json_report
+I Kž-281/2008-3,Vrhovni sud Republike Hrvatske,2008,excluded,search_record,"SUCCESSFUL - Evidence excluded; warrant faxed 45 minutes AFTER search had already started (Art. 213, 217 ZKP)",json_report
+I Kž-302/1998-3,Vrhovni sud Republike Hrvatske,1998-06-11,partial_excluded,confession,"PARTIAL - Police interrogation records of 4 suspects excluded; violation of right to counsel during questioning (Art. 177(5), 63(1), 9(2) ZKP)",json_report
+I Kž-305/2003-3,Vrhovni sud Republike Hrvatske,2003,partial_excluded,physical,PARTIAL - Seizure certificates excluded; evidence of coercion (defendant had broken teeth) (Art. 9(2) ZKP),json_report
+I Kž-340/2006-3,Vrhovni sud Republike Hrvatske,2006-05-18,partial_excluded,testimony,"PARTIAL - Hearsay about suspect's informal police conversation excluded; search records and marijuana seizure retained (Art. 177(4), 9(2) ZKP)",json_report
+I Kž-360/2004-3,Vrhovni sud Republike Hrvatske,2005-01-20,excluded,search_record,"SUCCESSFUL - Search warrant record, seizure certificates, forensic findings excluded; warrantless search without Art. 216(1) requirements (Art. 217 ZKP)",json_report
+I Kž-364/2003-3,Vrhovni sud Republike Hrvatske,2003,partial_excluded,testimony,"PARTIAL - Official note, partial testimony, video recording excluded; police informal conversation violated Art. 186(4), 78 ZKP",json_report
+I Kž-383/1999-3,Vrhovni sud Republike Hrvatske,2000-03-22,excluded,documentary,"SUCCESSFUL - Police official notes about questioning defendant excluded; police may not question suspects (Art. 177(6), 367(2) ZKP)",json_report
+I Kž-395/2004-3,Vrhovni sud Republike Hrvatske,2004-06-30,partial_excluded,testimony,PARTIAL - Informal conversation portion excluded; obavijesni razgovor violated Art. 177(3) ZKP restrictions,json_report
+I Kž-396/2004-3,Vrhovni sud Republike Hrvatske,2004-09-14,excluded,search_record,"SUCCESSFUL - Search protocol, forensic findings, photos excluded; witnesses not simultaneously present throughout search (Art. 331(2), 9(2), 214(1) ZKP)",json_report
+I Kž-428/1999-3,Vrhovni sud Republike Hrvatske,1999,excluded,search_record,"SUCCESSFUL - Evidence excluded; inspection transformed into search + coercion through threats (Art. 177, 9(2) ZKP)",json_report
+I Kž-431/2005-3,Vrhovni sud Republike Hrvatske,2005-09-22,partial_excluded,physical,"PARTIAL - Envelope, expert report from unlawful vehicle search excluded; witness testimony portions retained (Art. 217, 9 ZKP)",json_report
+I Kž-431/2019-4,Vrhovni sud Republike Hrvatske,2019-08-20,not_excluded,search_record,"Drug/weapons case - all procedures compliant, proper rights warnings, documented timestamps",json_report
+I Kž-459/2006-3,Vrhovni sud Republike Hrvatske,2006,excluded,search_record,"SUCCESSFUL - Evidence excluded; only 1 witness actually participated, second only signed after (Art. 214(1), 217 ZKP)",json_report
+I Kž-464/2022-12,Visoki kazneni sud Republike Hrvatske,2022,not_excluded,physical,"WhatsApp messages from victim's phone retained - lawful provision to police, expert had court authorization",json_report
+I Kž-478/2007-5,Vrhovni sud Republike Hrvatske,2007-06-14,excluded,search_record,"SUCCESSFUL - Search warrant records, seizure certs, toxicology, photos excluded; witness left to make phone call during search (Art. 214(1), 9(2), 217 ZKP)",json_report
+I Kž-487/2001-3,Vrhovni sud Republike Hrvatske,2001-12-12,partial_excluded,physical,PARTIAL - Minor's luggage search evidence and toxicology excluded; fruit of poisonous tree from unlawful police procedures (Art. 9(2) ZKP),json_report
+I Kž-492/1997-6,Vrhovni sud Republike Hrvatske,1999-01-21,excluded,physical,"SUCCESSFUL - All items seized from attorney's office excluded; search without Bar Association representative (Art. 17 Law on Attorneys, Art. 9(2) ZKP)",json_report
+I Kž-499/2003-3,Vrhovni sud Republike Hrvatske,2003,excluded,physical,SUCCESSFUL - All evidence from warrantless search excluded; police used outdated statutory form (Art. 197(4) ZKP/93),json_report
+I Kž-506/2011-4,Vrhovni sud,2011,EXCLUDED,Knife and hatchet seized from home,,exclusions_md
+I Kž-527/1999-5,Vrhovni sud Republike Hrvatske,1999,partial_excluded,search_record,"PARTIAL - Search record portions excluded; witness presence issues (Art. 214, 217 ZKP)",json_report
+I Kž-570/2018-8,Vrhovni sud Republike Hrvatske,2019-02-21,not_excluded,search_record,Murder case - search at third party's house lawful with consent; witness statements read with all parties' consent,json_report
+I Kž-593/10-3,Vrhovni sud Republike Hrvatske,2010-07-08,excluded,search_record,SUCCESSFUL - Search excluded due to minor witness (20 days underage) violating čl. 217 ZKP; all derivative evidence excluded,json_report
+I Kž-626/1998-3,Vrhovni sud Republike Hrvatske,1998-11-26,excluded,search_record,"SUCCESSFUL - Search records, seizure, witness statements excluded; home search without required witness presence (Art. 216(2), 78(1), 217 ZKP)",json_report
+I Kž-638/2010-6,Vrhovni sud Republike Hrvatske,2011-05-12,not_excluded,expert,"Psychological assessment admitted - proper methodology used, not derived from unlawful police notes",json_report
+I Kž-666/2019-4,Vrhovni sud Republike Hrvatske,2019-12-19,not_excluded,physical,Mobile phone search records retained - defendants waived counsel presence after proper rights warning,json_report
+I Kž-668/2019-4,Vrhovni sud,2020-04-20,EXCLUDED,IT expert report and opinion (pages 1292-1304),,exclusions_md
+I Kž-7/2021-4,Visoki kazneni sud Republike Hrvatske,2021-03-03,not_excluded,physical,WhatsApp screenshots retained - voluntary presentation to police not a 'search' requiring warrant,json_report
+I Kž-70/2007-4,Vrhovni sud Republike Hrvatske,2007-02-27,excluded,expert,"SUCCESSFUL - DNA analysis excluded as fruit of poisoned tree; derived from prior unlawful search (Art. 9(2), 367(2) ZKP)",json_report
+I Kž-702/2020-4,Vrhovni sud,2020,EXCLUDED,Items seized from home search,,exclusions_md
+I Kž-72/2017-4,Vrhovni sud Republike Hrvatske,2017-02-21,partial_excluded,testimony,PARTIAL - 47 witness interview notes excluded; Art. 86(3) bars citizen interview notes for serious crimes (>5 years imprisonment),json_report
+I Kž-751/1999-3,Vrhovni sud Republike Hrvatske,1999-11-09,partial_excluded,search_record,"PARTIAL - Search record, seizure confirmations excluded; search commenced without required witnesses (Art. 217, 216 ZKP)",json_report
+I Kž-766/2003-3,Vrhovni sud Republike Hrvatske,2003,partial_excluded,documentary,"PARTIAL - SMS messages from seized phones excluded; requires Art. 180 interception authorization (Art. 9, 180 ZKP)",json_report
+I Kž-771/2001-3,Vrhovni sud Republike Hrvatske,2001-12-11,excluded,search_record,"SUCCESSFUL - Search records, drugs, witness testimony excluded; warrantless apartment search + witnesses separated (Art. 214(2), 213(1-2), 217 ZKP)",json_report
+I Kž-79/2001-3,Vrhovni sud Republike Hrvatske,2001,excluded,search_record,"SUCCESSFUL - Evidence excluded; warrantless search without genuine urgency or emergency (Art. 216, 217 ZKP)",json_report
+I Kž-81/2022-4,Visoki kazneni sud Republike Hrvatske,2023-01-31,not_excluded,testimony,Minor witness statements admitted - proper evidentiary hearing conducted with defense present,json_report
+I Kž-818/2001-4,Vrhovni sud Republike Hrvatske,2001-11-28,partial_excluded,testimony,"PARTIAL - Witness statement portions excluded; procedural defects in witness examination (Art. 331(2), 78 ZKP)",json_report
+I Kž-893/2004-3,Vrhovni sud Republike Hrvatske,2004,partial_excluded,search_record,"PARTIAL - Search records, seizure certificates, expert reports excluded; one witness per search group violated two-witness requirement (Art. 217, 214(1-2), 9(2) ZKP)",json_report
+I Kž-98/2003-3,Vrhovni sud Republike Hrvatske,2003-02-18,partial_excluded,search_record,"PARTIAL - Search record, seizure confirmations excluded; witnesses not continuously present during search (Art. 331(2), 9, 214 ZKP)",json_report
+I Kž-Us 61/12-4,Vrhovni sud Republike Hrvatske,2012-07-03,judgment_quashed,confession,PARTIAL - USKOK questioning record EXCLUDED; attorney lacked required 10 years practice. Other forensic evidence retained,json_report
+I Kž-Us-1/2024-4,Visoki kazneni sud Republike Hrvatske,2024-02-08,partial_excluded,surveillance,"PARTIAL - Telecommunications expert report, phone records excluded; fruit of poisonous tree - telecom data acquired without judicial order (Art. 339.a, 10(2)(2) ZKP)",json_report
+I Kž-Us-126/2010-4,Vrhovni sud,2010,EXCLUDED,Items seized during home entry,,exclusions_md
+I Kž-Us-137/2016-8,Vrhovni sud Republike Hrvatske,2018-05-10,not_applicable,N/A,Bribery case acquittals upheld due to insufficient evidence,json_report
+I Kž-Us-25/2011-4,Vrhovni sud Republike Hrvatske,2011-03-09,not_excluded,surveillance,All investigative judge orders lawful; surveillance expansion from unknown to identified persons permissible,json_report
+I Kž-Us-30/2022-4,Vrhovni sud,2022,EXCLUDED,Defendant's statements during questioning,,exclusions_md
+I Kž-Us-33/2014-4,Vrhovni sud Republike Hrvatske,2017-03-23,not_excluded,search_record,"Despite search record declared unlawful, conviction not based on it - insufficient for trial renewal",json_report
+I Kž-Us-57/2020-4,Vrhovni sud Republike Hrvatske,2020-09-10,judgment_quashed,search_record,"PARTIAL - Home search of M.M. remanded for retrial; other evidence (warehouse search, witness statements) retained",json_report
+I Kž-Us-62/2023-7,Visoki kazneni sud Republike Hrvatske,2023-08-01,not_excluded,physical,Temporary seizures lawful; mobile device identification not unlawful search; surveillance within authorized scope,json_report
+I Kž-Us-79/2010-6,Vrhovni sud Republike Hrvatske,2010-09-15,not_excluded,confession,"Defendant examined with counsel present, proper warnings, signed record; search with court order and witnesses",json_report
+I Kžzd-29/2021-4,Visoki kazneni sud Republike Hrvatske,2021-11-05,not_excluded,search_record,Mobile phone data and investigative reports lawfully obtained with proper maternal consent,json_report
+II Kž 104/11-4,Vrhovni sud Republike Hrvatske,2011-03-02,not_applicable,N/A,Pretrial detention case - not an evidence exclusion matter,json_report
+III Kr 165/11-5,Vrhovni sud Republike Hrvatske,2012-09-19,judgment_quashed,physical,"PARTIAL - Sharp 8 MB memory card EXCLUDED as unlawful; apartment, laptop, vehicle searches and TDK CDs retained",json_report
+III Kr 71/2023-3,Vrhovni sud Republike Hrvatske,2023-10-26,not_excluded,documentary,SMS messages from mobile phone admitted - phone search conducted under valid court order,json_report
+III Kr-112/2016-10,Vrhovni sud Republike Hrvatske,2017-01-26,not_excluded,search_record,"All evidence admitted - home search had proper order, phone surveillance authorized, witness testimony proper",json_report
+K-31/2020-127,Županijski sud u Splitu,2021-02-23,EXCLUDED,Police informational statements (službene bilješke),,exclusions_md
+K-57/2013-1,Županijski sud u Splitu,2015-11-04,not_applicable,N/A,Murder conviction; no evidence exclusion issues discussed,json_report
+K-Us-13/2019-131,Županijski sud u Splitu,2021-03-09,not_excluded,physical,Firearms trafficking - all evidence admitted without defense challenges to admissibility,json_report
+K-Us-4/2019-20,Županijski sud u Splitu,2021-11-17,not_applicable,N/A,Abuse of official position conviction; not an evidence exclusion case,json_report
+Kov-10/2019-31,Sud,2019,EXCLUDED,Police informational notes (službene bilješke),,exclusions_md
+Kzz 33/2021-3,Vrhovni sud Republike Hrvatske,2021-10-19,excluded,search_record,SUCCESSFUL - Search records and toxicological reports excluded based on deficiencies in search authorization,json_report
+Kzz-10/2003-2,Vrhovni sud Republike Hrvatske,2003,excluded,physical,"SUCCESSFUL - Evidence excluded; financial police opened locked furniture without authorization (Art. 9(2), 213 ZKP)",json_report
+Kzz-12/1999-2,Vrhovni sud Republike Hrvatske,2005-03-24,excluded,search_record,"SUCCESSFUL - Vehicle search certificates excluded; search conducted with only 1 witness instead of required 2 (Art. 214(2), 213(1), 9(2) ZKP)",json_report
+Kž-136/2021-6,Županijski sud,2021,EXCLUDED,Search report and seized items,,exclusions_md
+Kž-187/2015-4,Županijski sud u Osijeku,2015-05-21,not_excluded,search_record,House search lawful - defense arguments on warrant delivery under ZKP 239(2)(1) rejected,json_report
+Kž-210/2017-7,Županijski sud u Puli,2017-12-19,judgment_quashed,surveillance,PARTIAL - Defendant's phone logs EXCLUDED as unlawful; victim's phone evidence retained with fruit of poisonous tree issue noted,json_report
+Kž-231/2022-8,Županijski sud u Šibeniku,2023-03-09,not_excluded,search_record,Vehicle search challenge rejected - distinction between owner and authorized user does not invalidate search,json_report
+Kž-234/2023-7,Županijski sud u Osijeku,2023-09-01,excluded,search_record,SUCCESSFUL - Search report containing statement and police testimony excluded as unlawful per prior decision Kž-523/2021-4,json_report
+Kž-243/2022-4,Županijski sud u Osijeku,2022-05-20,not_excluded,physical,Drug evidence admitted - no Article 10 ZKP challenge raised by defense,json_report
+Kž-270/2022-10,Županijski sud u Bjelovaru,2022-09-21,judgment_quashed,surveillance,PARTIAL - Audio recording EXCLUDED (no consent/authorization under Art. 10(2) ZKP); photographs from lawful search retained,json_report
+Kž-305/2016-1,Županijski sud u Splitu,2016-06-23,excluded,testimony,SUCCESSFUL - Police witness testimony portions excluded as hearsay under čl. 344(4) and 86 ZKP/08,json_report
+Kž-318/2004-3,Županijski sud,2004,excluded,physical,"SUCCESSFUL - 12g marijuana, search records, police testimony, THC test excluded; unlawful personal search without warrant or emergency (Art. 9(2), 213(1), 216(3), 217 ZKP); ACQUITTAL",json_report
+Kž-33/2017-5,Županijski sud u Bjelovaru,2017-02-23,excluded,search_record,SUCCESSFUL - Police conducted home search under guise of inspection; lacked authorization and proper witness presence,json_report
+Kž-361/2023-6,Županijski sud,2023,EXCLUDED,Spouse testimony + search evidence,,exclusions_md
+Kž-375/2007-3,Županijski sud,2007,excluded,confession,SUCCESSFUL - Police interrogation record excluded; police cannot interrogate defendants (Art. 78(1) ZKP),json_report
+Kž-409/2023-10,Županijski sud u Puli,2024-02-29,EXCLUDED,"Search record, seizure confirmations, toxicological expert report",,exclusions_md
+Kž-427/2020-5,Županijski sud u Varaždinu,2020-09-29,excluded,expert_report,"SUCCESSFUL - Expert opinion on digital data excluded; computer search conducted without written authorization (Art. 250(1), 10(2)(3) ZKP)",json_report
+Kž-445/2021-7,Županijski sud u Varaždinu,2022-01-25,judgment_quashed,physical,SUCCESSFUL - Home search without warrant and witnesses violated čl. 34 Constitution; fruit of poisonous tree applied,json_report
+Kž-602/2023-4,Županijski sud u Osijeku,2024-02-01,excluded,physical,"SUCCESSFUL - All evidence excluded; police entered apartment without warrant or invitation, violating Article 74 Law on Police Duties",json_report
+Kž-72/2025-7,Županijski sud u Puli-Pola,2025-02-26,partial_excluded,surveillance,"PARTIAL - WhatsApp audio recordings excluded; recordings without consent of recorded parties (Art. 10(2)(2), 285(3) ZKP)",json_report
+Kžm-13/2020-4,Vrhovni sud,2020,EXCLUDED,Blood sample analysis results (juvenile case),,exclusions_md
+Kžm-31/2020-4,Vrhovni sud,,partial_excluded,,,partial_exclusions_md
+Kžm-65/2008-3,Vrhovni sud Republike Hrvatske,2009-01-15,partial_excluded,search_record,"PARTIAL - Search record, seizure confirmations, partial toxicology excluded; warrantless apartment entry violated Art. 9 ZKP, Art. 34 Constitution",json_report
+Kžzd-7/2017-4,Vrhovni sud,2017-10-19,EXCLUDED,Victim's written statement + derived witness examination record,,exclusions_md
+Revd-3078/2020-2,Vrhovni sud Republike Hrvatske,2020-10-28,not_applicable,N/A,"Civil procedure case - damages claim, not criminal evidence exclusion",json_report

@@ -1,0 +1,1949 @@
+   PASS  Tests\Unit\Actions\Textract\AnalyzeTextractLayoutTest
+  ✓ it parses textract blocks page line word                             0.16s  
+  ✓ it reconstructs document structure with multiple pages               0.03s  
+  ✓ it identifies headers with bold style inference                      0.03s  
+  ✓ it extracts reading order top to bottom left to right                0.03s  
+  ✓ it handles multi column layouts                                      0.03s  
+  ✓ it identifies tables and extracts structure                          0.03s  
+  ✓ it handles rotated text                                              0.03s  
+  ✓ it calculates confidence scores per section                          0.03s  
+  ✓ it identifies form fields key value pairs                            0.03s  
+  ✓ it handles missing blocks gracefully                                 0.03s  
+  ✓ it handles malformed blocks without geometry                         0.03s  
+  ✓ it preserves spatial relationships with normalized coordinates       0.03s  
+  ✓ it generates layout metadata with page count and line count          0.03s  
+  ✓ it handles signature blocks                                          0.03s  
+  ✓ it clamps out of range coordinates                                   0.03s  
+  ✓ it parses json string input                                          0.03s  
+  ✓ it throws exception for invalid json string                          0.03s  
+  ✓ it throws exception when no pages found                              0.03s  
+  ✓ it handles action with file path                                     0.03s  
+
+   PASS  Tests\Unit\Actions\Textract\ExtractDocumentMetadataTest
+  ✓ it extracts case numbers with croatian patterns                      0.32s  
+  ✓ it extracts croatian court names                                     0.07s  
+  ✓ it extracts dates in multiple formats                                0.05s  
+  ✓ it extracts judge names                                              0.05s  
+  ✓ it extracts party names plaintiff and defendant                      0.05s  
+  ✓ it extracts document type presuda rjesenje zapisnik                  0.05s  
+  ✓ it extracts legal citations zkp zpp ustav rh                         0.05s  
+  ✓ it handles multiple date formats croatian months                     0.05s  
+  ✓ it handles missing metadata gracefully                               0.05s  
+  ✓ it validates extracted data structure                                0.05s  
+  ✓ it handles croatian language text with diacritics                    0.05s  
+  ✓ it extracts jmbg and oib numbers                                     0.05s  
+  ✓ it extracts addresses                                                0.05s  
+  ✓ it provides confidence scoring for each field                        0.05s  
+  ✓ it handles ocr errors in metadata extraction                         0.05s  
+  ✓ it returns structured metadata object                                0.05s  
+  ✓ it throws exception if job not found                                 0.05s  
+  ✓ it throws exception if json not found                                0.05s  
+  ✓ it saves metadata to job when requested                              0.08s  
+
+   PASS  Tests\Unit\Actions\Textract\ReconstructPdfV2Test
+  ✓ it generates searchable pdf from ocr document                        0.30s  
+  ✓ it positions text with normalized coordinates                        0.09s  
+  ✓ it handles multi page documents                                      0.09s  
+  ✓ it renders croatian diacritics correctly                             0.09s  
+  ✓ it handles large documents with 100 plus pages                       0.21s  
+  ✓ it validates pdf file size optimization                              0.10s  
+  ✓ it preserves pdf metadata                                            0.09s  
+  ✓ it generates pdf with utf8 encoding                                  0.09s  
+  ✓ it handles missing or empty text blocks                              0.09s  
+  ✓ it renders signature boxes on pages                                  0.09s  
+  ✓ it disables signature rendering when configured                      0.09s  
+  ✓ it estimates font size from bounding box height                      0.09s  
+  ✓ it applies shrink to fit for long text                               0.09s  
+  ✓ it validates pdf structure is valid                                  0.09s  
+  ✓ it throws exception for empty document                               0.05s  
+  ✓ it creates output directory if not exists                            0.09s  
+  ✓ it handles text with different confidence levels                     0.09s  
+  ✓ it handles text at page boundaries                                   0.09s  
+  ✓ it returns absolute path to generated pdf                            0.09s  
+
+   PASS  Tests\Unit\Actions\Textract\SaveAnalysisResultsTest
+  ✓ it saves raw textract json to s3 storage                             0.20s  
+  ✓ it saves raw textract json to local filesystem                       0.05s  
+  ✓ it saves extracted text to database                                  0.06s  
+  ✓ it saves metadata to database                                        0.05s  
+  ✓ it updates job status to completed                                   0.06s  
+  ✓ it records processing timestamps                                     0.06s  
+  ✓ it handles database transaction rollback on error                    0.06s  
+  ✓ it compresses large json results                                     0.08s  
+  ✓ it validates json structure before saving                            0.05s  
+  ✓ it rejects invalid json structure                                    0.05s  
+  ✓ it updates statistics page count and word count                      0.05s  
+  ✓ it triggers textract completed event                                 0.05s  
+
+   PASS  Tests\Unit\Actions\Textract\UploadOutputToS3Test
+  ✓ it uploads searchable pdf to s3 output bucket                        0.14s  
+  ✓ it uploads metadata json to s3                                       0.05s  
+  ✓ it generates correct s3 keys                                         0.05s  
+  ✓ it sets correct s3 metadata                                          0.05s  
+  ✓ it updates job with output uris                                      0.05s  
+  ✓ it handles s3 upload failures                                        0.05s  
+  ✓ it validates file exists before upload                               0.05s  
+  ✓ it validates file is readable                                        0.05s  
+  ✓ it sets correct acl private                                          0.05s  
+  ✓ it compresses large files                                            0.09s  
+  ✓ it records upload sizes                                              0.06s  
+  ✓ it handles multiple uploads overwrites existing                      0.05s  
+  ✓ it uses configurable output prefix                                   0.05s  
+
+   PASS  Tests\Unit\Agents\AutonomousResearchAgentInsightTest
+  ✓ it extracts insight from law results                                 0.17s  
+  ✓ it extracts insight from decision results                            0.05s  
+  ✓ it returns null for irrelevant results                               0.05s  
+  ✓ it returns null for empty response                                   0.05s  
+  ✓ it returns null for empty results                                    0.05s  
+  ✓ it falls back on extraction error                                    0.05s  
+  ✓ it formats results for llm                                           0.05s  
+  ✓ it formats multiple result types                                     0.05s  
+  ✓ it limits formatted results to three per category                    0.08s  
+  ✓ it truncates long formatted results                                  0.05s  
+  ✓ it tracks token usage from insight extraction                        0.05s  
+  ✓ it uses simple extraction for laws                                   0.05s  
+  ✓ it uses simple extraction for decisions                              0.05s  
+  ✓ it uses simple extraction for graph results                          0.05s  
+  ✓ it returns null from simple extraction for empty results             0.05s  
+
+   PASS  Tests\Unit\Agents\AutonomousResearchAgentPlanningTest
+  ✓ it builds planning context with objective                            0.17s  
+  ✓ it builds context with previous insights                             0.05s  
+  ✓ it includes previous iterations in context                           0.05s  
+  ✓ it calls llm for planning                                            0.05s  
+  ✓ it validates plan structure                                          0.05s  
+  ✓ it falls back when llm planning fails                                0.05s  
+  ✓ it falls back when llm returns invalid json                          0.05s  
+  ✓ it tracks token usage from planning                                  0.05s  
+  ✓ it calculates cost correctly                                         0.05s  
+  ✓ it generates fallback actions for first iteration                    0.05s  
+  ✓ it generates fallback actions for subsequent iterations              0.05s  
+
+   WARN  Tests\Unit\Agents\AutonomousResearchAgentTest
+  ✓ start run preloads past insights                                     0.15s  
+  ✓ start run handles no past insights gracefully                        0.05s  
+  ✓ start run handles get recent insights failure                        0.05s  
+  ✓ start run respects custom past insights constraints                  0.05s  
+  ! save insights stores objective in memory → This test did not perfor… 0.10s  
+  ✓ build planning context includes past insights                        0.05s  
+  ✓ build planning context handles no past insights                      0.05s  
+  ! start run logs past insights count → This test did not perform any…  0.05s  
+  ✓ build instructions includes memory reuse section                     0.05s  
+  ✓ build instructions prioritizes successful keywords                   0.05s  
+  ✓ build instructions emphasizes building on existing findings          0.05s  
+  ✓ save insights fires insight discovered events                        0.05s  
+  ✓ save insights sets severity based on iteration                       0.05s  
+  ✓ plan act loop works with insight reuse                               0.05s  
+
+   PASS  Tests\Unit\Agents\DecisionDiscoveryAgentTest
+  ✓ it generates research topics via llm                                 0.17s  
+  ✓ it searches for decisions on topic                                   0.04s  
+  ✓ it scores decisions via llm                                          0.03s  
+  ✓ it filters by relevance threshold                                    0.03s  
+  ✓ it respects global max decisions limit per topic                     0.03s  
+  ✓ it uses ingest per topic when no global limit                        0.03s  
+  ✓ it stops when max ingest is zero                                     0.03s  
+  ✓ it tracks ingestion errors accurately                                0.03s  
+  ✓ it tracks complete ingestion failure                                 0.03s  
+  ✓ it discovers for single topic                                        0.08s  
+  ✓ it respects global limit in single topic discovery                   0.06s  
+  ✓ it uses different cache keys for different topics per run            0.03s  
+  ✓ it uses cached topics when topics per run matches                    0.03s  
+  ✓ it returns correct number of topics from cache for each request siz… 0.03s  
+  ✓ it handles api errors during search                                  0.03s  
+  ✓ it handles non 200 status during search                              0.03s  
+  ✓ it handles legitimate empty search results                           0.03s  
+  ✓ it distinguishes between errors and empty results in stats           0.03s  
+
+   PASS  Tests\Unit\CaseChunkerTest
+  ✓ it chunks text with specified size and overlap                       0.20s  
+  ✓ it creates overlapping chunks                                        0.04s  
+  ✓ it returns single chunk for small text                               0.03s  
+  ✓ it returns empty array for empty text                                0.03s  
+  ✓ it breaks at sentence boundaries when possible                       0.03s  
+  ✓ it handles multibyte croatian characters                             0.03s  
+  ✓ it filters empty chunks                                              0.03s  
+  ✓ it handles paragraph breaks                                          0.03s  
+  ✓ it respects chunk size limits                                        0.03s  
+  ✓ it handles very small chunk size                                     0.03s  
+
+   PASS  Tests\Unit\DateDetectorTest
+  ✓ detects date and includes context                                    0.12s  
+  ✓ detects compact date and context                                     0.03s  
+
+   PASS  Tests\Unit\EoglasnaOsijekMonitoringRepositoryTest
+  ✓ normalize participants decodes unicode and slashes                   0.07s  
+  ✓ parse address hr format                                              0.05s  
+  ✓ fill participant columns for natural and legal                       0.05s  
+
+   PASS  Tests\Unit\ExampleTest
+  ✓ that true is true                                                    0.03s  
+
+   PASS  Tests\Unit\Http\Middleware\McpApiTokenAuthTest
+  ✓ allows request when no token configured                              0.05s  
+  ✓ allows request when empty token configured                           0.03s  
+  ✓ rejects request without authorization header                         0.07s  
+  ✓ rejects request with invalid authorization format                    0.03s  
+  ✓ rejects request with wrong token                                     0.03s  
+  ✓ allows request with correct token                                    0.03s  
+  ✓ is case sensitive for bearer prefix                                  0.03s  
+  ✓ handles token with whitespace                                        0.03s  
+  ✓ returns json response on failure                                     0.03s  
+  ✓ response includes error and message fields                           0.03s  
+
+   PASS  Tests\Unit\Jobs\ExecuteAgentResearchTest
+  ✓ job executes agent research successfully                             0.15s  
+  ✓ job skips execution if run not in running status                     0.05s  
+  ✓ job handles agent execution failure                                  0.07s  
+  ✓ job updates run with error on failure                                0.05s  
+  ✓ job failed method marks run as failed                                0.05s  
+  ✓ job sets correct timeout based on run time limit                     0.05s  
+  ✓ job uses default timeout when no time limit set                      0.05s  
+  ✓ job uses correct queue from config                                   0.05s  
+  ✓ job tags are set correctly                                           0.05s  
+  ✓ job logs start and completion correctly                              0.05s  
+  ✓ job refreshes run before execution                                   0.05s  
+  ✓ job calculates elapsed seconds correctly on failure                  0.05s  
+  ✓ job handles run with context and topics                              0.05s  
+  ✓ it executes agent research run                                       0.08s  
+  ✓ it skips execution if run not in running status                      0.05s  
+  ✓ it sets timeout based on run time limit                              0.05s  
+  ✓ it uses default timeout when no time limit                           0.05s  
+  ✓ it has correct retry configuration                                   0.05s  
+  ✓ it sets queue from config                                            0.05s  
+  ✓ it can be dispatched to queue                                        0.05s  
+  ✓ it refreshes run status before execution                             0.05s  
+  ✓ it handles exceptions during execution                               0.05s  
+
+   FAIL  Tests\Unit\Jobs\GenerateEmbeddingsJobTest
+  ✓ job generates embeddings for textract job successfully               0.25s  
+  ✓ job handles missing textract job gracefully                          0.07s  
+  ✓ job skips embedding when no content available                        0.05s  
+  ✓ job uses manual content when available                               0.05s  
+  ✓ job truncates long text for embedding                                0.05s  
+  ✓ job updates embedding batch on success                               0.06s  
+  ✓ job processes batch by dispatching individual jobs                   0.05s  
+  ⨯ job handles batch item failure gracefully                            0.06s  
+  ✓ job handles missing batch gracefully                                 0.05s  
+  ✓ job retries on openai failure                                        0.05s  
+  ✓ job tags are set correctly                                           0.05s  
+  ✓ job stores correct metadata in vector store                          0.05s  
+  ✓ it processes textract job embeddings                                 0.06s  
+  ✓ it has correct queue configuration                                   0.05s  
+  ⨯ it can be dispatched to queue                                        0.06s  
+  ✓ it accepts optional embedding batch id                               0.05s  
+  ✓ it handles batch source type                                         0.05s  
+  ✓ it handles exceptions gracefully                                     0.05s  
+  ✓ it uses default source type when not specified                       0.05s  
+  ✓ it can be constructed with all parameters                            0.05s  
+
+   PASS  Tests\Unit\Jobs\GenerateLawMetadataTest
+  ✓ job generates metadata and stores it successfully                    0.23s  
+  ✓ job handles missing law gracefully                                   0.05s  
+  ✓ job marks failure on openai error                                    0.05s  
+  ✓ job builds full law text correctly                                   0.05s  
+
+   WARN  Tests\Unit\Jobs\ProcessDrivePdfJobTest
+  ✓ it implements should queue interface                                 0.11s  
+  ✓ it stores drive file id and name                                     0.05s  
+  ! it delegates to process drive pdf action → This test did not perfor… 0.05s  
+  ✓ it updates textract job status on failure                            0.05s  
+  ✓ it handles missing textract job on failure                           0.05s  
+  ✓ it can be dispatched to queue                                        0.05s  
+  ✓ it can be dispatched with delay                                      0.05s  
+  ✓ it can be dispatched to specific queue                               0.05s  
+  ✓ it handles action exception during processing                        0.05s  
+  ✓ it serializes correctly                                              0.05s  
+  ✓ it uses dispatchable trait                                           0.05s  
+  ✓ it uses interacts with queue trait                                   0.05s  
+  ✓ it uses queueable trait                                              0.05s  
+  ✓ it uses serializes models trait                                      0.05s  
+  ✓ it updates only matching textract job on failure                     0.06s  
+  ✓ it preserves error message in textract job                           0.05s  
+
+   PASS  Tests\Unit\Jobs\ProcessTextractJobTest
+  ✓ job processes textract successfully                                  0.21s  
+  ✓ job dispatches follow up jobs when enabled                           0.06s  
+  ✓ job skips follow up jobs when disabled                               0.06s  
+  ✓ job handles missing job gracefully                                   0.05s  
+  ✓ job updates status to processing before execution                    0.06s  
+  ✓ job handles processing failure and marks as failed                   0.06s  
+  ✓ job updates batch on completion                                      0.06s  
+  ✓ job updates batch on failure                                         0.06s  
+  ✓ failed method updates job correctly                                  0.05s  
+  ✓ job tags are set correctly                                           0.07s  
+  ✓ job uses correct queue from textract job                             0.05s  
+  ✓ job stores s3 keys with environment prefixes                         0.06s  
+  ✓ it processes textract job successfully                               0.06s  
+  ✓ it updates job status to processing when starting                    0.06s  
+  ✓ it stores s3 keys in metadata                                        0.06s  
+  ✓ it handles missing job gracefully                                    0.05s  
+  ✓ it sets worker id during processing                                  0.06s  
+  ✓ it tracks retry count                                                0.06s  
+  ✓ it sets correct queue name                                           0.05s  
+  ✓ it uses default queue when not specified                             0.05s  
+  ✓ it has correct retry configuration                                   0.05s  
+  ✓ it can be dispatched to queue                                        0.05s  
+  ✓ it can be dispatched with batch id                                   0.06s  
+
+   WARN  Tests\Unit\Jobs\RunAutonomousResearchJobTest
+  ✓ it implements should queue interface                                 0.25s  
+  ✓ it has timeout of 600 seconds                                        0.04s  
+  ✓ it has one try no retries                                            0.04s  
+  ✓ it stores run id and resuming flag                                   0.04s  
+  ✓ it defaults resuming to false                                        0.04s  
+  ✓ it executes normal research run                                      0.05s  
+  ✓ it resumes research from checkpoint                                  0.05s  
+  ✓ it updates run with job information                                  0.05s  
+  ✓ it broadcasts research completed event                               0.05s  
+  ✓ it handles exception during execution                                0.05s  
+  ✓ it broadcasts research failed event on exception                     0.07s  
+  ✓ it calculates elapsed seconds on failure                             0.05s  
+  ✓ it handles permanent job failure                                     0.05s  
+  ✓ it handles missing run on failure                                    0.04s  
+  ✓ it can be dispatched to queue                                        0.04s  
+  ✓ it can be dispatched with resuming flag                              0.04s  
+  ! it only resumes if run can be resumed → This test did not perform a… 0.05s  
+  ✓ it serializes correctly                                              0.04s  
+  ✓ it uses required traits                                              0.04s  
+
+   WARN  Tests\Unit\Jobs\SyncTextractToGraphTest
+  ✓ it implements should queue interface                                 0.22s  
+  ✓ it has three retry attempts                                          0.04s  
+  ✓ it has exponential backoff                                           0.04s  
+  ✓ it has 300 second timeout                                            0.06s  
+  ✓ it stores textract job id                                            0.04s  
+  ! it skips sync when neo4j disabled → This test did not perform any a… 0.05s  
+  ! it skips sync when job not found → This test did not perform any as… 0.05s  
+  ! it skips sync when embeddings not ready → This test did not perform… 0.05s  
+  ! it skips sync when job not succeeded → This test did not perform an… 0.05s  
+  ! it syncs to graph successfully → This test did not perform any asse… 0.05s  
+  ✓ it updates job status on failure                                     0.05s  
+  ✓ it marks job permanently failed after retries                        0.05s  
+  ✓ it handles missing job on permanent failure                          0.05s  
+  ✓ it returns correct tags                                              0.04s  
+  ✓ it can be dispatched to queue                                        0.04s  
+  ✓ it can be dispatched with delay                                      0.04s  
+  ✓ it can be dispatched to specific queue                               0.06s  
+  ✓ it rethrows exception to trigger retry                               0.05s  
+  ✓ it serializes correctly                                              0.04s  
+  ✓ it uses required traits                                              0.04s  
+  ✓ it logs attempt number                                               0.05s  
+  ! it checks all prerequisites before syncing → This test did not perf… 0.05s  
+  ! it validates embedding status before syncing → This test did not pe… 0.05s  
+  ✓ it includes error prefix in permanent failure                        0.05s  
+  ✓ it includes attempt count in error message                           0.05s  
+
+   PASS  Tests\Unit\KeyPhraseExtractorTest
+  ✓ extracts common croatian legal phrases                               0.27s  
+
+   PASS  Tests\Unit\LawParserEdgeCasesTest
+  ✓ article with dotted letter and parenthesis                           0.04s  
+  ✓ uppercase clanak with letter
+  ✓ missing body tag
+  ✓ nested wrappers
+  ✓ non breaking spaces
+  ✓ nn markers remain in body
+  ✓ lettered articles merged with base
+  ✓ lettered article without base
+  ✓ article with parenthesis after number
+  ✓ article with opening parenthesis
+  ✓ mixed case articles
+  ✓ empty body
+  ✓ preamble text
+  ✓ trailing text
+  ✓ whitespace normalization
+  ✓ article dot letter no space
+  ✓ complex combined scenario
+  ✓ nested wrappers without h tags
+  ✓ multiple nn markers in article
+  ✓ invalid non latin letter in header
+
+   PASS  Tests\Unit\Listeners\LogNewInsightTest
+  ✓ it logs insight when exceeds threshold                               0.10s  
+  ✓ it skips logging when below threshold                                0.05s  
+  ✓ it logs insight when relevance score is null                         0.05s  
+  ✓ it stores all metadata correctly                                     0.05s  
+  ✓ it handles different severity levels                                 0.06s  
+  ✓ it is queueable                                                      0.05s  
+  ✓ it has retry configuration                                           0.05s  
+  ✓ it should queue when exceeds threshold                               0.05s  
+  ✓ it should not queue when below threshold                             0.05s  
+  ✓ it logs error on failure                                             0.05s  
+  ✓ it handles exception gracefully                                      0.05s  
+  ✓ it creates relationship with agent run                               0.05s  
+  ✓ it logs multiple insights for same run                               0.05s  
+
+   FAIL  Tests\Unit\Mcp\OdlukeToolsTest
+  ✓ search returns success response with ids                             1.38s  
+  ✓ search returns error when no ids found                               0.61s  
+  ✓ search respects limit parameter                                      1.18s  
+  ✓ meta returns error when no ids provided                              0.04s  
+  ✓ meta handles single id parameter                                     0.05s  
+  ✓ meta handles multiple ids                                            0.04s  
+  ✓ download validates format parameter                                  0.04s  
+  ✓ download handles pdf format                                          0.05s  
+  ✓ download handles http errors                                         0.05s  
+  ✓ search law articles returns empty result when no laws found          0.05s  
+  ⨯ search law articles finds laws by query                              0.06s  
+  ✓ search law articles filters by law number                            0.06s  
+  ✓ search law articles respects limit                                   0.09s  
+  ⨯ search law articles eager loads articles                             0.06s  
+  ✓ get law article by id returns error when id empty                    0.05s  
+  ✓ get law article by id returns error when not found                   0.05s  
+  ⨯ get law article by id returns article with parent law                0.06s  
+
+   PASS  Tests\Unit\Mcp\ToolSchemasTest
+  ✓ all returns array of schemas                                         0.17s  
+  ✓ schema structure is valid
+  ✓ get returns correct schema for odluke search
+  ✓ get returns correct schema for odluke meta
+  ✓ get returns correct schema for odluke download
+  ✓ get returns correct schema for law articles search
+  ✓ get returns correct schema for law article by id
+  ✓ get returns null for unknown tool
+  ✓ to openai function converts correctly
+  ✓ to openai function converts name to snake case
+  ✓ to openai function returns null for unknown tool
+  ✓ all openai functions returns correct count
+  ✓ all openai functions have correct structure
+  ✓ schemas have proper validation constraints
+  ✓ format enum is correct for download
+
+   FAIL  Tests\Unit\MisconductDetectorTest
+  ⨯ detects fabricated probable cause                                    0.09s  
+  ⨯ detects hidden evidence                                              0.06s  
+  ⨯ detects backdated documents                                          0.06s  
+  … detects rights violations → Evidence model not yet implemented       0.05s  
+  ⨯ detects threats or lying                                             0.06s  
+  ⨯ detects misdemeanor pretexting                                       0.07s  
+  ⨯ returns empty array when no misconduct                               0.06s  
+  ✓ pattern analyzer finds repeated violations                           0.05s  
+  ✓ pattern analyzer detects escalating severity                         0.05s  
+  ✓ pattern analyzer identifies rights violation pattern                 0.06s  
+  ✓ pattern analyzer identifies evidence suppression pattern             0.05s  
+  ✓ pattern analyzer detects systemic issues                             0.05s  
+  ✓ pattern severity calculated correctly                                0.05s  
+  ✓ pattern summary generated correctly                                  0.05s  
+  ✓ get recommendations from patterns                                    0.05s  
+
+   PASS  Tests\Unit\Models\AgentCollaborationTest
+  ✓ uses string primary key                                              0.20s  
+  ✓ auto generates uuid on creation                                      0.07s  
+  ✓ auto generates session id on creation                                0.05s  
+  ✓ has correct fillable attributes                                      0.05s  
+  ✓ has many executions                                                  0.05s  
+  ✓ has many completed executions                                        0.05s  
+  ✓ casts context as array                                               0.05s  
+  ✓ casts agents involved as array                                       0.05s  
+  ✓ casts shared memory as array                                         0.05s  
+  ✓ casts datetime fields correctly                                      0.05s  
+  ✓ scope in progress                                                    0.05s  
+  ✓ scope completed                                                      0.05s  
+  ✓ scope failed                                                         0.05s  
+  ✓ scope recent                                                         0.05s  
+  ✓ add to shared memory                                                 0.05s  
+  ✓ get from shared memory                                               0.06s  
+  ✓ mark completed                                                       0.05s  
+  ✓ mark failed                                                          0.05s  
+  ✓ increment step                                                       0.05s  
+  ✓ add tokens used                                                      0.05s  
+  ✓ get progress attribute                                               0.05s  
+  ✓ get progress attribute with zero total steps                         0.05s  
+  ✓ stores complex execution plan                                        0.05s  
+  ✓ stores agent outputs                                                 0.05s  
+  ✓ handles null optional fields                                         0.05s  
+
+   PASS  Tests\Unit\Models\AgentExecutionTest
+  ✓ it has correct fillable attributes                                   0.30s  
+  ✓ it uses uuid as primary key                                          0.07s  
+  ✓ it auto generates uuid on creation                                   0.05s  
+  ✓ it belongs to collaboration                                          0.05s  
+  ✓ it casts input context as array                                      0.05s  
+  ✓ it casts output as array                                             0.05s  
+  ✓ it casts messages to others as array                                 0.05s  
+  ✓ it casts messages from others as array                               0.05s  
+  ✓ it casts numeric fields correctly                                    0.05s  
+  ✓ it casts cost spent as decimal                                       0.05s  
+  ✓ it casts datetime fields                                             0.06s  
+  ✓ scope pending returns only pending executions                        0.06s  
+  ✓ scope running returns only running executions                        0.06s  
+  ✓ scope completed returns only completed executions                    0.06s  
+  ✓ scope failed returns only failed executions                          0.07s  
+  ✓ scope by agent filters by agent name                                 0.07s  
+  ✓ it marks execution as running                                        0.06s  
+  ✓ it marks execution as completed                                      0.06s  
+  ✓ it marks execution as failed                                         0.06s  
+  ✓ it adds tokens used and calculates cost                              0.06s  
+  ✓ it sends message to another agent                                    0.05s  
+  ✓ it receives message from another agent                               0.06s  
+  ✓ it tracks execution order                                            0.06s  
+  ✓ it handles different agent roles                                     0.06s  
+  ✓ it calculates duration when completed                                0.06s  
+  ✓ it handles null error message for successful executions              0.05s  
+
+   PASS  Tests\Unit\Models\AgentRunTest
+  ✓ has correct fillable attributes                                      0.33s  
+  ✓ casts arrays correctly                                               0.05s  
+  ✓ it has correct fillable attributes                                   0.05s  
+  ✓ it casts attributes correctly                                        0.05s  
+  ✓ casts boolean correctly                                              0.05s  
+  ✓ casts float correctly                                                0.05s  
+  ✓ casts datetime correctly                                             0.05s  
+  ✓ can be resumed returns true when conditions met                      0.05s  
+  ✓ can be resumed returns false when not paused                         0.05s  
+  ✓ can be resumed returns false when cannot resume                      0.05s  
+  ✓ can be resumed returns false when no checkpoint state                0.05s  
+  ✓ it casts datetime attributes                                         0.05s  
+  ✓ it calculates progress percentage correctly                          0.05s  
+  ✓ it returns zero progress when max iterations is zero                 0.06s  
+  ✓ it returns 100 percent when current equals max                       0.05s  
+  ✓ it determines if run can be resumed                                  0.05s  
+  ✓ it cannot be resumed if not paused                                   0.05s  
+  ✓ it cannot be resumed if can resume is false                          0.05s  
+  ✓ it cannot be resumed if no checkpoint state                          0.05s  
+  ✓ get progress percentage calculates correctly                         0.05s  
+  ✓ get progress percentage returns zero when max iterations is zero     0.05s  
+  ✓ get progress percentage rounds to one decimal                        0.05s  
+  ✓ stores decimal budget and usage                                      0.05s  
+  ✓ stores job id and queue                                              0.05s  
+  ✓ stores error information                                             0.04s  
+  ✓ stores elapsed seconds                                               0.05s  
+  ✓ stores final output                                                  0.05s  
+  ✓ handles null optional fields                                         0.06s  
+  ✓ progress percentage handles completion                               0.05s  
+  ✓ stores complex checkpoint state                                      0.05s  
+  ✓ stores complex iterations array                                      0.05s  
+  ✓ it handles pending status                                            0.05s  
+  ✓ it handles running status                                            0.05s  
+  ✓ it handles completed status                                          0.05s  
+  ✓ it handles failed status                                             0.05s  
+  ✓ it handles paused status                                             0.05s  
+  ✓ it tracks token usage and cost                                       0.05s  
+  ✓ it stores iterations as array                                        0.05s  
+  ✓ it stores checkpoint state correctly                                 0.05s  
+  ✓ it handles elapsed time tracking                                     0.05s  
+  ✓ it stores final output as array                                      0.06s  
+  ✓ it handles time limit configuration                                  0.05s  
+  ✓ it tracks score against threshold                                    0.05s  
+  ✓ it handles null optional fields                                      0.05s  
+
+   FAIL  Tests\Unit\Models\AgentVectorMemoryTest
+  ⨯ uses string primary key                                              0.49s  
+  ⨯ has correct fillable attributes                                      0.05s  
+  ⨯ casts metadata as array                                              0.05s  
+  ⨯ casts embedding vector as array                                      0.05s  
+  ⨯ stores agent name                                                    0.05s  
+  ⨯ stores namespace                                                     0.05s  
+  ⨯ stores chunk index for long content                                  0.07s  
+  ⨯ stores embedding metadata                                            0.05s  
+  ⨯ stores content hash and token count                                  0.05s  
+  ⨯ stores source information                                            0.05s  
+  ⨯ handles null optional fields                                         0.05s  
+  ⨯ stores complex metadata structure                                    0.05s  
+  ⨯ can query by agent name                                              0.05s  
+  ⨯ can query by namespace                                               0.05s  
+  ⨯ can query by source                                                  0.05s  
+  ⨯ stores long form content                                             0.05s  
+  ✓ uses configurable table name                                         0.05s  
+  ⨯ stores different embedding providers                                 0.05s  
+  ⨯ supports both embedding columns                                      0.05s  
+  ⨯ it has correct fillable attributes                                   0.05s  
+  ⨯ it uses string primary key                                           0.06s  
+  ⨯ it casts metadata as array                                           0.05s  
+  ⨯ it casts embedding vector as array                                   0.05s  
+  ⨯ it handles different agent names                                     0.05s  
+  ⨯ it handles different namespaces                                      0.05s  
+  ⨯ it stores content                                                    0.05s  
+  ⨯ it tracks source and source id                                       0.05s  
+  ⨯ it handles chunk index for large memories                            0.05s  
+  ⨯ it stores embedding provider and model                               0.05s  
+  ⨯ it stores content hash for deduplication                             0.05s  
+  ⨯ it tracks token count                                                0.05s  
+  ✓ it uses configurable table name                                      0.05s  
+  ⨯ it handles croatian content                                          0.05s  
+  ⨯ it can be scoped by agent using factory                              0.07s  
+  ⨯ it can be scoped by namespace using factory                          0.05s  
+  ⨯ it can have embedding using factory                                  0.05s  
+  ⨯ it handles different source types                                    0.05s  
+  ⨯ it stores comprehensive metadata                                     0.05s  
+  ⨯ it supports both embedding and embedding vector fields               0.05s  
+  ⨯ it handles long content                                              0.05s  
+
+   PASS  Tests\Unit\Models\CaseDocumentTest
+  ✓ uses string primary key                                              0.45s  
+  ✓ has correct fillable attributes                                      0.06s  
+  ✓ belongs to legal case                                                0.06s  
+  ✓ casts tags as array                                                  0.08s  
+  ✓ casts metadata as array                                              0.06s  
+  ✓ casts actual as array                                                0.06s  
+  ✓ casts embedding vector as array                                      0.06s  
+  ✓ stores document categories                                           0.06s  
+  ✓ stores document author                                               0.06s  
+  ✓ stores chunk index for large documents                               0.06s  
+  ✓ stores embedding metadata                                            0.06s  
+  ✓ stores content hash and token count                                  0.05s  
+  ✓ stores source information                                            0.06s  
+  ✓ supports multiple languages                                          0.06s  
+  ✓ handles null optional fields                                         0.06s  
+  ✓ stores croatian content correctly                                    0.06s  
+  ✓ stores upload id reference                                           0.06s  
+  ✓ stores doc id for external reference                                 0.07s  
+  ✓ stores complex metadata structure                                    0.06s  
+  ✓ stores multiple tags for categorization                              0.06s  
+  ✓ it has correct fillable attributes                                   0.06s  
+  ✓ it uses string primary key                                           0.06s  
+  ✓ it belongs to legal case                                             0.06s  
+  ✓ it casts tags as array                                               0.06s  
+  ✓ it casts metadata as array                                           0.06s  
+  ✓ it casts actual as array                                             0.06s  
+  ✓ it casts embedding vector as array                                   0.06s  
+  ✓ it handles different document categories                             0.08s  
+  ✓ it stores chunk information                                          0.06s  
+  ✓ it stores embedding metadata                                         0.06s  
+  ✓ it stores content hash for deduplication                             0.07s  
+  ✓ it tracks token count                                                0.06s  
+  ✓ it handles source tracking                                           0.06s  
+  ✓ it stores author information                                         0.06s  
+  ✓ it handles croatian language                                         0.06s  
+  ✓ it uses configurable table name                                      0.05s  
+  ✓ it handles multiple chunks for same document                         0.07s  
+  ✓ it stores document category evidence                                 0.06s  
+  ✓ it stores document category witness                                  0.06s  
+  ✓ it handles upload reference                                          0.06s  
+
+   PASS  Tests\Unit\Models\CaseDocumentUploadTest
+  ✓ it uses string primary key                                           0.47s  
+  ✓ it has correct fillable attributes                                   0.05s  
+  ✓ it belongs to legal case                                             0.06s  
+  ✓ it casts uploaded at as datetime                                     0.05s  
+  ✓ it stores file metadata                                              0.05s  
+  ✓ it stores upload status                                              0.05s  
+  ✓ it uses configurable table name                                      0.05s  
+
+   PASS  Tests\Unit\Models\CaseFeatureTest
+  ✓ it belongs to legal case                                             0.14s  
+  ✓ it casts embedding vector to array                                   0.05s  
+  ✓ it casts legal issues to array                                       0.05s  
+  ✓ it stores complexity score as float                                  0.05s  
+  ✓ it can scope recent features                                         0.07s  
+  ✓ it can scope complex cases                                           0.09s  
+
+   PASS  Tests\Unit\Models\CasePredictionTest
+  ✓ it belongs to legal case                                             0.13s  
+  ✓ it casts features to array                                           0.06s  
+  ✓ it casts prediction to array                                         0.05s  
+  ✓ it casts similar cases to array                                      0.05s  
+  ✓ it casts dates correctly                                             0.05s  
+  ✓ it stores confidence as float                                        0.05s  
+  ✓ it can filter by prediction type                                     0.07s  
+  ✓ it can filter high confidence predictions                            0.07s  
+
+   PASS  Tests\Unit\Models\CaseStrategyTest
+  ✓ it belongs to legal case                                             0.14s  
+  ✓ it casts case analysis to array                                      0.06s  
+  ✓ it casts arguments to array                                          0.08s  
+  ✓ it casts risk assessment to array                                    0.05s  
+  ✓ it casts action plan to array                                        0.05s  
+  ✓ it stores confidence score as float                                  0.05s  
+  ✓ it casts created at correctly                                        0.05s  
+  ✓ it can filter by status                                              0.08s  
+  ✓ it can filter by version                                             0.07s  
+
+   FAIL  Tests\Unit\Models\CourtDecisionDocumentTest
+  ✓ it uses string primary key                                           0.16s  
+  ⨯ it has correct fillable attributes                                   0.06s  
+  ⨯ it belongs to court decision                                         0.06s  
+  ⨯ it belongs to upload                                                 0.06s  
+  ⨯ it casts tags as array                                               0.08s  
+  ⨯ it casts metadata as array                                           0.05s  
+  ⨯ it casts embedding vector as array                                   0.05s  
+  ⨯ it stores croatian language content                                  0.05s  
+  ✓ it uses configurable table name                                      0.05s  
+
+   PASS  Tests\Unit\Models\CourtDecisionDocumentUploadTest
+  ✓ it uses string primary key                                           0.15s  
+  ✓ it has correct fillable attributes                                   0.05s  
+  ✓ it belongs to court decision                                         0.05s  
+  ✓ it casts uploaded at as datetime                                     0.05s  
+  ✓ it uses configurable table name                                      0.05s  
+
+   FAIL  Tests\Unit\Models\CourtDecisionTest
+  ⨯ it has documents relationship                                        0.11s  
+  ✓ it has impact metrics relationship                                   0.08s  
+  ✓ it uses string primary key                                           0.05s  
+  ✓ it casts dates correctly                                             0.05s  
+  ✓ it casts tags to array                                               0.05s  
+  ⨯ it can filter by court                                               0.06s  
+  ✓ it can filter by finality                                            0.06s  
+  ⨯ it can filter by jurisdiction                                        0.06s  
+  ✓ it can filter decisions with ecli                                    0.06s  
+
+   FAIL  Tests\Unit\Models\DecisionDiscoveryRunTest
+  ✓ it has correct fillable attributes                                   0.15s  
+  ✓ it casts dates as datetime                                           0.05s  
+  ✓ it casts arrays                                                      0.05s  
+  ✓ it calculates duration                                               0.07s  
+  ✓ it returns null duration when not completed                          0.05s  
+  ✓ it has status check methods                                          0.05s  
+  ⨯ it has completed scope                                               0.06s  
+  ✓ it has recent scope                                                  0.05s  
+  ⨯ it gets success rate                                                 0.05s  
+
+   PASS  Tests\Unit\Models\DecisionImpactMetricTest
+  ✓ it belongs to court decision                                         0.16s  
+  ✓ it casts citations over time to array                                0.06s  
+  ✓ it casts jurisdictional spread to array                              0.06s  
+  ✓ it casts citing courts to array                                      0.06s  
+  ✓ it casts influential cases to array                                  0.06s  
+  ✓ it stores scores as floats                                           0.08s  
+  ✓ it casts dates correctly                                             0.05s  
+  ✓ it can scope high authority metrics                                  0.07s  
+  ✓ it can scope recently updated metrics                                0.07s  
+  ✓ it can filter by citation count                                      0.06s  
+  ✓ it uses string primary key                                           0.05s  
+
+   FAIL  Tests\Unit\Models\EkomOtpravakTest
+  ✓ it has correct table name                                            0.16s  
+  ⨯ it has correct fillable attributes                                   0.04s  
+  ✓ it casts data as array                                               0.05s  
+  ✓ it casts primljen zbog isteka roka as boolean                        0.05s  
+  ✓ it casts last synced at as datetime                                  0.05s  
+  ⨯ it stores croatian court dispatch data                               0.05s  
+  ✓ it handles null optional fields                                      0.07s  
+  ✓ it can update sync timestamp                                         0.05s  
+  ✓ it tracks dispatch delivery workflow                                 0.05s  
+  ✓ it marks documents received due to deadline expiration               0.05s  
+
+   PASS  Tests\Unit\Models\EkomPodnesakTest
+  ✓ it has correct table name                                            0.15s  
+  ✓ it has correct fillable attributes                                   0.05s  
+  ✓ it casts data as array                                               0.05s  
+  ✓ it casts last synced at as datetime                                  0.05s  
+  ✓ it stores croatian court submission data                             0.05s  
+  ✓ it handles null optional fields                                      0.05s  
+  ✓ it can update sync timestamp                                         0.05s  
+  ✓ it stores timestamps for submission workflow                         0.05s  
+
+   FAIL  Tests\Unit\Models\EkomPredmetTest
+  ✓ it has correct table name                                            0.16s  
+  ⨯ it has correct fillable attributes                                   0.05s  
+  ⨯ it casts data as array                                               0.05s  
+  ⨯ it casts do not disturb as boolean                                   0.05s  
+  ⨯ it casts last synced at as datetime                                  0.05s  
+  ⨯ it stores croatian court case data                                   0.05s  
+  ⨯ it handles null optional fields                                      0.05s  
+  ⨯ it can update sync timestamp                                         0.05s  
+  ⨯ it can mark case as do not disturb                                   0.05s  
+  ⨯ it stores case number with croatian format                           0.05s  
+  ⨯ it can update case status                                            0.05s  
+
+   FAIL  Tests\Unit\Models\EmbeddingBatchTest
+  ✓ it has correct fillable attributes                                   0.19s  
+  ⨯ it uses uuid as primary key                                          0.05s  
+  ⨯ it auto generates uuid on creation                                   0.05s  
+  ⨯ it casts item ids as array                                           0.05s  
+  ⨯ it casts configuration as array                                      0.05s  
+  ⨯ it casts numeric fields correctly                                    0.05s  
+  ⨯ it casts cost as decimal                                             0.05s  
+  ⨯ it casts datetime fields                                             0.05s  
+  ⨯ it calculates progress percentage                                    0.05s  
+  ⨯ it returns zero progress when total is zero                          0.05s  
+  ⨯ it returns 100 percent when all processed                            0.05s  
+  ⨯ it increments processed count                                        0.05s  
+  ⨯ it increments failed count when failed flag is true                  0.05s  
+  ⨯ it calculates cost correctly                                         0.05s  
+  ⨯ it marks as completed when all items processed                       0.06s  
+  ⨯ it marks as processing                                               0.05s  
+  ⨯ scope pending returns only pending batches                           0.05s  
+  ⨯ scope processing returns only processing batches                     0.05s  
+  ⨯ scope completed returns only completed batches                       0.05s  
+  ⨯ it handles different source types                                    0.05s  
+  ⨯ it stores embedding model name                                       0.05s  
+  ⨯ it tracks total tokens used                                          0.05s  
+  ⨯ it accumulates cost across multiple increments                       0.05s  
+
+   FAIL  Tests\Unit\Models\EoglasnaCourtTest
+  ✓ it has correct table name                                            0.30s  
+  ✓ it has correct fillable attributes                                   0.05s  
+  ✓ it stores commercial court data                                      0.08s  
+  ✓ it stores municipal court data                                       0.05s  
+  ⨯ it stores supreme court data                                         0.05s  
+  ✓ it can find court by code                                            0.05s  
+  ✓ it can filter courts by type                                         0.05s  
+  ✓ it handles null optional fields                                      0.05s  
+  ✓ it can update court information                                      0.05s  
+  ⨯ it stores various croatian court types                               0.05s  
+  ✓ court code can be used as unique identifier                          0.05s  
+
+   FAIL  Tests\Unit\Models\EoglasnaKeywordMatchTest
+  ✓ it has correct table name                                            0.17s  
+  ⨯ it has correct fillable attributes                                   0.06s  
+  ⨯ it casts matched at as datetime                                      0.05s  
+  ⨯ it casts matched fields as array                                     0.08s  
+  ⨯ it stores single field match                                         0.05s  
+  ⨯ it stores multiple field matches                                     0.05s  
+  ⨯ it handles null optional fields                                      0.05s  
+  ⨯ it can query matches by keyword id                                   0.05s  
+  ⨯ it can query matches by notice uuid                                  0.05s  
+  ⨯ it records when match occurred                                       0.05s  
+  ⨯ it stores croatian legal field matches                               0.05s  
+  ⨯ it can update matched fields                                         0.05s  
+  ⨯ it tracks empty matched fields                                       0.05s  
+
+   FAIL  Tests\Unit\Models\EoglasnaKeywordTest
+  ✓ it has correct table name                                            0.19s  
+  ✓ it has correct fillable attributes                                   0.05s  
+  ✓ it casts deep scan as boolean                                        0.07s  
+  ✓ it casts enabled as boolean                                          0.05s  
+  ✓ it casts datetime fields                                             0.05s  
+  ⨯ it has many matches                                                  0.05s  
+  ✓ it stores croatian legal search queries                              0.05s  
+  ⨯ it handles null optional fields                                      0.05s  
+  ✓ it can update last run timestamp                                     0.05s  
+  ✓ it can disable keyword monitoring                                    0.05s  
+  ✓ it can toggle deep scan mode                                         0.05s  
+  ✓ it updates last date published                                       0.05s  
+
+   PASS  Tests\Unit\Models\EoglasnaNoticeTest
+  ✓ it has correct table name                                            0.18s  
+  ✓ it has correct fillable attributes                                   0.05s  
+  ✓ it casts array fields                                                0.07s  
+  ✓ it casts date and datetime fields                                    0.05s  
+  ✓ it stores court notice data                                          0.05s  
+  ✓ it stores institution notice data                                    0.05s  
+  ✓ it handles null optional fields                                      0.05s  
+  ✓ it updates last seen timestamp                                       0.05s  
+  ✓ it stores multiple participants                                      0.05s  
+  ✓ it stores multiple documents                                         0.05s  
+
+   FAIL  Tests\Unit\Models\EoglasnaOsijekMonitoringTest
+  ✓ it has correct table name                                            0.16s  
+  ⨯ it has correct fillable attributes                                   0.05s  
+  ⨯ it casts numeric fields                                              0.05s  
+  ⨯ it casts array fields                                                0.05s  
+  ⨯ it casts datetime fields                                             0.07s  
+  ⨯ it stores osijek court monitoring data                               0.05s  
+  ⨯ it stores participant address data                                   0.05s  
+  ⨯ it handles null optional fields                                      0.05s  
+  ⨯ it updates last seen timestamp                                       0.05s  
+  ⨯ it stores multiple participants with addresses                       0.05s  
+  ⨯ it can query by oib                                                  0.05s  
+  ⨯ it can query by city                                                 0.05s  
+  ⨯ it can query by court code                                           0.05s  
+  ⨯ it stores institution notices                                        0.05s  
+  ⨯ it stores complete osijek bankruptcy case                            0.05s  
+
+   FAIL  Tests\Unit\Models\FailedIngestionTest
+  ⨯ it creates failed ingestion with defaults                            0.25s  
+  ⨯ it records failure using static helper                               0.05s  
+  ✓ it updates existing failure when recording same decision             0.05s  
+  ⨯ it calculates exponential backoff correctly                          0.05s  
+  ✓ it detects max attempts reached                                      0.05s  
+  ✓ it marks as succeeded                                                0.05s  
+  ⨯ it marks as permanently failed                                       0.05s  
+  ✓ it marks as abandoned                                                0.05s  
+  ⨯ it resets retry counter                                              0.05s  
+  ⨯ pending retries scope filters correctly                              0.05s  
+  ✓ ready for retry scope filters by time                                0.05s  
+  ⨯ permanently failed scope filters correctly                           0.05s  
+  ⨯ it provides statistics                                               0.06s  
+  ⨯ status label accessor returns correct values                         0.05s  
+
+   PASS  Tests\Unit\Models\GraphMetricTest
+  ✓ it casts payload to array                                            0.23s  
+  ✓ it casts analyzed at to datetime                                     0.05s  
+  ✓ it scopes by metric type                                             0.05s  
+  ✓ it scopes recent metrics                                             0.05s  
+  ✓ it gets latest metric by type                                        0.05s  
+  ✓ it gets latest of each type                                          0.05s  
+  ✓ it gets metric history                                               0.05s  
+  ✓ it calculates summary statistics                                     0.05s  
+  ✓ it has metric type constants                                         0.05s  
+  ✓ it stores json payload correctly                                     0.05s  
+  ✓ it allows nullable notes                                             0.05s  
+
+   FAIL  Tests\Unit\Models\HoneypotLogTest
+  ✓ it has correct fillable attributes                                   0.20s  
+  ⨯ it casts arrays                                                      0.05s  
+  ⨯ it casts is blocked as boolean                                       0.05s  
+  ⨯ it gets top targeted paths                                           0.05s  
+  ⨯ it gets top attacking ips                                            0.05s  
+  ⨯ it checks if ip should be blocked                                    0.05s  
+  ⨯ it blocks ip                                                         0.05s  
+
+   FAIL  Tests\Unit\Models\IngestedLawTest
+  ✓ uses string primary key                                              0.13s  
+  ✓ has correct fillable attributes                                      0.05s  
+  ✓ casts aliases as array                                               0.05s  
+  ✓ casts keywords as array                                              0.05s  
+  ✓ casts metadata as array                                              0.05s  
+  ✓ casts ingested at as datetime                                        0.07s  
+  ⨯ has many laws relationship                                           0.06s  
+  ✓ stores croatian characters correctly                                 0.05s  
+  ✓ stores source url                                                    0.05s  
+  ✓ handles null optional fields                                         0.05s  
+  ✓ stores law number in official gazette format                         0.05s  
+  ✓ stores keywords text for searchability                               0.05s  
+  ✓ supports different jurisdictions                                     0.05s  
+  ✓ stores complex metadata                                              0.05s  
+  ✓ it has correct fillable attributes                                   0.05s  
+  ⨯ it uses string primary key                                           0.05s  
+  ⨯ it has many laws                                                     0.05s  
+  ⨯ it casts aliases as array                                            0.05s  
+  ⨯ it casts keywords as array                                           0.05s  
+  ⨯ it casts metadata as array                                           0.07s  
+  ⨯ it casts ingested at as datetime                                     0.05s  
+  ⨯ it stores keywords text for search                                   0.05s  
+  ⨯ it handles croatian law numbers                                      0.05s  
+  ⨯ it handles croatian unicode characters                               0.05s  
+  ⨯ it stores source url                                                 0.05s  
+  ⨯ it handles doc id reference                                          0.05s  
+  ⨯ it handles different jurisdictions                                   0.05s  
+  ⨯ it handles multilingual laws                                         0.05s  
+  ⨯ it tracks when law was ingested                                      0.05s  
+  ⨯ it can have multiple aliases                                         0.05s  
+  ⨯ it stores comprehensive metadata                                     0.05s  
+  ✓ it uses configurable table name                                      0.05s  
+  ⨯ it associates with chunked law documents                             0.05s  
+
+   FAIL  Tests\Unit\Models\LawTest
+  ⨯ uses string primary key                                              0.45s  
+  ⨯ has correct fillable attributes                                      0.06s  
+  ⨯ belongs to ingested law                                              0.06s  
+  ⨯ casts tags as array                                                  0.05s  
+  ⨯ casts metadata as array                                              0.05s  
+  ⨯ casts embedding vector as array                                      0.05s  
+  ⨯ casts dates correctly                                                0.05s  
+  ⨯ stores embedding metadata                                            0.05s  
+  ⨯ stores content hash and token count                                  0.05s  
+  ⨯ handles chunk index for split laws                                   0.06s  
+  ⨯ stores croatian content correctly                                    0.05s  
+  ⨯ handles null optional fields                                         0.08s  
+  ⨯ supports version tracking                                            0.05s  
+  ⨯ stores chapter and section                                           0.05s  
+  ⨯ handles repeal date for obsolete laws                                0.05s  
+  ⨯ supports different jurisdictions                                     0.05s  
+  ⨯ stores source url                                                    0.05s  
+  ⨯ it has correct fillable attributes                                   0.05s  
+  ⨯ it uses string primary key                                           0.06s  
+  ⨯ it belongs to ingested law                                           0.05s  
+  ⨯ it handles croatian law numbers                                      0.06s  
+  ⨯ it handles croatian unicode characters                               0.06s  
+  ⨯ it casts tags as array                                               0.06s  
+  ⨯ it casts metadata as array                                           0.06s  
+  ⨯ it casts embedding vector as array                                   0.07s  
+  ⨯ it casts date fields correctly                                       0.06s  
+  ⨯ it handles law versioning                                            0.06s  
+  ⨯ it handles repealed laws                                             0.06s  
+  ⨯ it stores chapter and section information                            0.06s  
+  ⨯ it stores source url                                                 0.06s  
+  ⨯ it handles chunk index for large laws                                0.06s  
+  ⨯ it stores embedding metadata                                         0.06s  
+  ⨯ it stores content hash for deduplication                             0.06s  
+  ⨯ it tracks token count                                                0.06s  
+  ⨯ it handles different jurisdictions                                   0.06s  
+  ⨯ it handles multiple languages                                        0.06s  
+  ✓ it uses configurable table name                                      0.05s  
+
+   FAIL  Tests\Unit\Models\LawUploadTest
+  ✓ it uses string primary key                                           0.48s  
+  ⨯ it has correct fillable attributes                                   0.05s  
+  ⨯ it belongs to ingested law                                           0.05s  
+  ⨯ it casts downloaded at as datetime                                   0.05s  
+  ✓ it uses configurable table name                                      0.05s  
+
+   FAIL  Tests\Unit\Models\LegalCaseTest
+  ✓ uses string primary key                                              0.11s  
+  ⨯ has correct fillable attributes                                      0.05s  
+  ✓ has many documents                                                   0.06s  
+  ✓ casts tags as array                                                  0.05s  
+  ✓ casts filing date as date                                            0.05s  
+  ⨯ casts close date as date                                             0.08s  
+  ✓ stores case number                                                   0.05s  
+  ✓ stores case status                                                   0.05s  
+  ✓ stores jurisdiction                                                  0.05s  
+  ✓ stores court information                                             0.05s  
+  ⨯ stores parties information                                           0.05s  
+  ⨯ stores case outcome                                                  0.05s  
+  ✓ handles null optional fields                                         0.05s  
+  ✓ supports croatian characters in title                                0.05s  
+  ⨯ supports croatian characters in parties                              0.05s  
+  ✓ supports croatian characters in court name                           0.05s  
+  ✓ stores multiple tags for categorization                              0.05s  
+  ✓ can query by status                                                  0.05s  
+  ⨯ can query by jurisdiction                                            0.05s  
+  ✓ stores detailed description                                          0.07s  
+
+   FAIL  Tests\Unit\Models\TextractBatchTest
+  ✓ it uses string primary key                                           0.28s  
+  ✓ it auto generates uuid on create                                     0.05s  
+  ✓ it has correct fillable attributes                                   0.05s  
+  ⨯ it casts arrays                                                      0.05s  
+  ⨯ it calculates progress                                               0.05s  
+  ⨯ it calculates success rate                                           0.05s  
+  ⨯ it increments processed count                                        0.05s  
+  ⨯ it marks as completed when all processed                             0.05s  
+  ⨯ it has status scopes                                                 0.05s  
+
+   FAIL  Tests\Unit\Models\TextractDocumentTest
+  ⨯ has correct fillable attributes                                      0.18s  
+  ⨯ belongs to textract job                                              0.05s  
+  ⨯ belongs to case                                                      0.06s  
+  ⨯ scope processed returns only completed documents                     0.05s  
+  ✓ it has correct fillable attributes                                   0.05s  
+  ⨯ it belongs to textract job                                           0.05s  
+  ⨯ it belongs to legal case                                             0.05s  
+  ⨯ scope processed returns only completed documents                     0.05s  
+  ⨯ scope pending returns only pending documents                         0.05s  
+  ⨯ scope pending returns only pending documents                         0.05s  
+  ⨯ scope failed returns only failed documents                           0.05s  
+  ✓ scope for case filters by case id                                    0.05s  
+  ⨯ scope ordered sorts by chunk index                                   0.05s  
+  ⨯ scope failed returns only failed documents                           0.06s  
+  ⨯ scope for case filters by case id                                    0.05s  
+  ⨯ scope ordered sorts by chunk index                                   0.05s  
+  ⨯ has embedding returns true when embedded                             0.05s  
+  ⨯ has embedding returns false when no embedding                        0.05s  
+  ⨯ has embedding returns false when not completed                       0.05s  
+  ⨯ mark as embedded updates document                                    0.05s  
+  ⨯ mark as failed updates document                                      0.05s  
+  ⨯ cosine similarity calculates correctly                               0.05s  
+  ⨯ cosine similarity returns null when no embedding                     0.05s  
+  ⨯ get full content combines chunks                                     0.05s  
+  ⨯ casts arrays correctly                                               0.05s  
+  ⨯ casts datetime correctly                                             0.05s  
+  ⨯ stores chunk overlap                                                 0.07s  
+  ⨯ it checks if document has embedding                                  0.04s  
+  ⨯ it requires completed status for has embedding                       0.04s  
+  ⨯ it marks document as embedded                                        0.05s  
+  ⨯ it marks document as failed                                          0.05s  
+  ⨯ it calculates cosine similarity                                      0.05s  
+  ⨯ it returns null similarity for orthogonal vectors                    0.05s  
+  ⨯ it returns null similarity without embedding                         0.05s  
+  ⨯ it gets full content by combining chunks                             0.05s  
+  ⨯ it casts embedding as array                                          0.05s  
+  ⨯ it casts metadata as array                                           0.05s  
+  ⨯ it casts embedded at as datetime                                     0.05s  
+  ⨯ it handles chunk overlap correctly                                   0.05s  
+  ⨯ it tracks token count                                                0.05s  
+  ⨯ it stores embedding provider and model                               0.06s  
+  ⨯ it handles processing error messages                                 0.05s  
+
+   FAIL  Tests\Unit\Models\TextractJobTest
+  ✓ has correct fillable attributes                                      0.50s  
+  ⨯ it has correct fillable attributes                                   0.05s  
+  ⨯ belongs to case                                                      0.05s  
+  ✓ belongs to editor                                                    0.06s  
+  ⨯ has many documents                                                   0.05s  
+  ✓ get effective content returns manual when edited                     0.05s  
+  ✓ get effective content returns extracted when not edited              0.05s  
+  ✓ is ready for embedding returns true when ready                       0.07s  
+  ✓ is ready for embedding returns false when no content                 0.05s  
+  ✓ is ready for embedding returns false when not succeeded              0.05s  
+  ✓ is ready for graph sync returns true when ready                      0.05s  
+  ✓ mark as edited updates fields and resets sync status                 0.05s  
+  ✓ it belongs to legal case                                             0.05s  
+  ✓ it belongs to editor user                                            0.05s  
+  ⨯ it has many documents                                                0.05s  
+  ✓ it returns manual content when manually edited                       0.05s  
+  ✓ it returns extracted content when not manually edited                0.05s  
+  ✓ it prefers manual content over extracted when both exist             0.05s  
+  ✓ it checks if ready for embedding                                     0.05s  
+  ✓ it is not ready for embedding without content                        0.05s  
+  ✓ it is not ready for embedding if status not succeeded                0.07s  
+  ✓ it is not ready for embedding if already synced                      0.05s  
+  ✓ it checks if ready for graph sync                                    0.05s  
+  ✓ it is not ready for graph sync if already synced                     0.05s  
+  ✓ it marks job as edited                                               0.06s  
+  ! mark embedding synced updates status and timestamp → This test did…  0.05s  
+  ✓ it marks embedding as synced                                         0.05s  
+  ! mark graph synced updates status and timestamp → This test did not…  0.05s  
+  ✓ it marks graph as synced                                             0.05s  
+  ✓ casts arrays correctly                                               0.05s  
+  ! casts boolean correctly → This test did not perform any assertions   0.05s  
+  ✓ it casts metadata as array                                           0.05s  
+  ✓ it casts manually edited as boolean                                  0.05s  
+  ! casts datetime correctly → This test did not perform any assertions  0.07s  
+  ✓ it casts timestamp fields as datetime                                0.05s  
+  ⨯ stores distributed processing fields                                 0.05s  
+  ✓ stores s3 key and job id                                             0.05s  
+  ✓ stores error information                                             0.05s  
+  ⨯ deleting job cascades to documents                                   0.05s  
+  ✓ effective content prefers manual over extracted                      0.05s  
+  ✓ effective content returns null when no content                       0.05s  
+  ✓ stores performance metrics                                           0.05s  
+  ⨯ it handles distributed processing fields                             0.05s  
+  ✓ it stores performance metrics as array                               0.05s  
+  ✓ it handles status transitions                                        0.05s  
+  ✓ it handles failed status                                             0.05s  
+  ⨯ it deletes related documents when deleted                            0.07s  
+  ✓ it handles s3 key storage                                            0.05s  
+  ✓ it stores textract job id from aws                                   0.05s  
+  ✓ it uses manual content when set                                      0.05s  
+
+   FAIL  Tests\Unit\Models\UserTest
+  ✓ it has correct fillable attributes                                   0.61s  
+  ✓ it hides sensitive attributes                                        0.05s  
+  ⨯ it casts email verified at as datetime                               0.05s  
+  ✓ it generates api token                                               0.05s  
+  ✓ it revokes api token                                                 0.05s  
+  ✓ it hashes password                                                   0.08s  
+
+   PASS  Tests\Unit\Modules\Defence\DefenseRecommendationServiceTest
+  ✓ it generates comprehensive recommendations                           0.12s  
+  ✓ it generates immediate action recommendations                        0.05s  
+  ✓ it marks immediate actions as urgent                                 0.05s  
+  ✓ it generates evidence recommendations based on weaknesses            0.05s  
+  ✓ it generates witness recommendations                                 0.05s  
+  ✓ it generates motion recommendations                                  0.05s  
+  ✓ it generates negotiation recommendations with leverage               0.05s  
+  ✓ it generates negotiation recommendations without leverage            0.05s  
+  ✓ it generates expert recommendations                                  0.05s  
+  ✓ it prioritizes recommendations by score                              0.05s  
+  ✓ it scores urgent priority highest                                    0.07s  
+  ✓ it scores very high impact higher than high impact                   0.05s  
+  ✓ it includes required fields in all recommendations                   0.05s  
+  ✓ it calculates leverage correctly                                     0.05s  
+  ✓ it handles empty context                                             0.05s  
+  ✓ it handles context with missing keys                                 0.05s  
+  ✓ it includes resources in recommendations                             0.05s  
+  ✓ it provides rationale for all recommendations                        0.05s  
+  ✓ it assigns appropriate timelines                                     0.05s  
+  ✓ it generates evidence recommendations with correct priority          0.05s  
+  ✓ it filters low severity weaknesses                                   0.05s  
+  ✓ it merges all recommendation categories                              0.05s  
+  ✓ it uses exploitation strategy in evidence recommendations            0.05s  
+  ✓ it assigns correct score ranges                                      0.07s  
+
+   WARN  Tests\Unit\Modules\Defence\DefenseStrategyAnalyzerTest
+  ✓ it performs comprehensive defense analysis                           0.37s  
+  ✓ it finds prosecution weaknesses                                      0.06s  
+  ✓ it categorizes weaknesses correctly                                  0.05s  
+  ✓ it assesses defense strength                                         0.05s  
+  ✓ it identifies mitigating factors                                     0.05s  
+  ✓ it identifies strategic options                                      0.05s  
+  ✓ it evaluates aggressive motion practice strategy                     0.05s  
+  ✓ it evaluates plea negotiation strategy                               0.05s  
+  ✓ it recommends overall approach                                       0.05s  
+  ✓ it handles case with no weaknesses                                   0.08s  
+  ✓ it handles case with weak defense                                    0.05s  
+  ! it uses gpt 4o for prosecution weaknesses → This test did not perfo… 0.05s  
+  ! it uses gpt 4o mini for defense strengths → This test did not perfo… 0.05s  
+  ✓ it handles llm failure for weaknesses                                0.05s  
+  ✓ it handles invalid json response                                     0.05s  
+  ✓ it identifies all weakness categories                                0.05s  
+  ✓ it prioritizes high severity weaknesses                              0.05s  
+
+   PASS  Tests\Unit\Modules\Defence\ImproveAccusedStatusActionTest
+  ✓ it executes complete status improvement analysis                     0.27s  
+  ✓ it assesses current status with llm                                  0.06s  
+  ✓ it identifies prosecution weaknesses                                 0.08s  
+  ✓ it identifies exploitable points                                     0.06s  
+  ✓ it generates defense arguments                                       0.06s  
+  ✓ it calculates improvement potential                                  0.06s  
+  ✓ it caps improvement score at 100                                     0.06s  
+  ✓ it determines status upgrade potential for high score                0.06s  
+  ✓ it determines status upgrade potential for medium score              0.06s  
+  ✓ it creates action plan with proper categorization                    0.06s  
+  ✓ it generates executive summary                                       0.06s  
+  ✓ it provides aggressive recommendation for strong position            0.06s  
+  ✓ it provides negotiation recommendation for moderate position         0.06s  
+  ✓ it provides mitigation recommendation for weak position              0.09s  
+  ✓ it tracks execution time                                             0.07s  
+  ✓ it includes timestamp in results                                     0.07s  
+  ✓ it handles case not found                                            0.06s  
+  ✓ it handles exception during execution                                0.07s  
+  ✓ it maps weaknesses to arguments                                      0.07s  
+  ✓ it executes all nine phases                                          0.07s  
+  ✓ it loads case with documents relationship                            0.07s  
+  ✓ it calculates realistic improved score                               0.07s  
+  ✓ it includes improvement range in score                               0.07s  
+
+   PASS  Tests\Unit\Modules\Evidence\EvidenceAdmissibilityCheckerTest
+  ✓ it checks evidence admissibility successfully                        0.45s  
+  ✓ it fails lawfulness check for evidence without warrant               0.05s  
+  ✓ it fails lawfulness check for warrantless search                     0.05s  
+  ✓ it detects coercion keywords english                                 0.05s  
+  ✓ it detects coercion keywords croatian                                0.05s  
+  ✓ it fails chain of custody when empty                                 0.05s  
+  ✓ it fails chain of custody when insufficient                          0.05s  
+  ✓ it fails chain of custody when missing required fields               0.05s  
+  ✓ it checks relevance using llm                                        0.04s  
+  ✓ it fails relevance check when not relevant                           0.05s  
+  ✓ it checks documentary evidence authentication                        0.05s  
+  ✓ it checks digital evidence forensic verification                     0.05s  
+  ✓ it accepts digital evidence with hash                                0.07s  
+  ✓ it checks expert testimony qualifications                            0.05s  
+  ✓ it accepts expert testimony with qualifications                      0.05s  
+  ✓ it checks procedural compliance for testimonial evidence             0.05s  
+  ✓ it checks lawyer presence for statements                             0.05s  
+  ✓ it calculates confidence score correctly                             0.05s  
+  ✓ it provides challenge recommendation when inadmissible               0.05s  
+  ✓ it provides accept recommendation when admissible                    0.05s  
+  ✓ it includes legal basis in all checks                                0.05s  
+
+   FAIL  Tests\Unit\Modules\HomeSearch\HomeSearchAbuseDetectorTest
+  ✓ it detects minor offense with invasive search                        0.30s  
+  ✓ it detects disproportionate force                                    0.08s  
+  ✓ it detects weak justification                                        0.05s  
+  ⨯ it detects exceeded warrant scope                                    0.05s  
+  ✓ it detects no judicial approval                                      0.05s  
+  ✓ it detects night raid for minor offense                              0.05s  
+  ✓ it detects pretextual search                                         0.05s  
+  ✓ it calculates abuse severity score                                   0.05s  
+  ✓ it generates defense strategies                                      0.05s  
+  ✓ it identifies legal violations                                       0.05s  
+  ✓ it provides suppression grounds                                      0.05s  
+  ✓ it provides recommended actions                                      0.05s  
+  ✓ it handles proportionate search without false positives              0.05s  
+  ✓ it handles missing data gracefully                                   0.07s  
+  ✓ it validates severity score range                                    0.05s  
+  ⨯ it applies multiple patterns bonus                                   0.05s  
+  ✓ it generates correct abuse level labels                              0.05s  
+  ✓ it estimates suppression likelihood                                  0.05s  
+  ✓ it detects drug case abuse patterns                                  0.05s  
+  ✓ it detects property crime abuse patterns                             0.05s  
+  ✓ it identifies constitutional violations                              0.05s  
+  ! it logs detection process → This test did not perform any assertion… 0.05s  
+  ✓ it returns complete result structure                                 0.05s  
+
+   FAIL  Tests\Unit\Modules\HomeSearch\OdlukeSearchAgentTest
+  ✓ it executes autonomous search for home search cases                  0.35s  
+  ✓ it uses cache for duplicate searches                                 0.05s  
+  ✓ it searches with different criteria combinations                     0.05s  
+  ✓ it falls back to framework mode when live search unavailable         0.05s  
+  ✓ it builds search query with home search keywords                     0.05s  
+  ✓ it includes zkp articles in search query                             0.05s  
+  ✓ it filters query by region                                           0.05s  
+  ✓ it filters query by offense type                                     0.05s  
+  ✓ it gets regional courts for major cities                             0.05s  
+  ✓ it processes search results with valid data                          0.05s  
+  ✓ it handles empty search results                                      0.05s  
+  ✓ it extracts case data using ai                                       0.05s  
+  ✓ it adds metadata to extracted case data                              0.05s  
+  ✓ it returns null for empty decision text                              0.07s  
+  ✓ it handles ai extraction errors gracefully                           0.05s  
+  ✓ it handles invalid json response from ai                             0.05s  
+  ✓ it implements circuit breaker pattern with mcp fallback              0.05s  
+  ✓ it provides framework response with integration options              0.05s  
+  ✓ it has configured rate limit of 10 requests per minute               0.05s  
+  ✓ it has configured cache duration of one week                         0.05s  
+  ✓ it analyzes extracted cases and generates statistics                 0.05s  
+  ⨯ it groups cases by court and year                                    0.05s  
+  ⨯ it identifies alarming finding for high misdemeanor rate             0.05s  
+  ⨯ it identifies alarming finding for high suppression rate             0.05s  
+  ⨯ it identifies alarming finding for low evidence found rate           0.05s  
+  ✓ it handles empty case list in analysis                               0.05s  
+
+   PASS  Tests\Unit\Modules\HomeSearch\ProportionalityAnalyzerTest
+  ✓ it classifies misdemeanor with severity 15                           0.39s  
+  ✓ it classifies minor criminal offense with severity 35                0.05s  
+  ✓ it classifies medium offense with severity 60                        0.05s  
+  ✓ it classifies serious offense with severity 90                       0.05s  
+  ✓ it infers serious offense from croatian keywords                     0.05s  
+  ✓ it infers medium offense from croatian keywords                      0.05s  
+  ✓ it defaults to unknown severity 50 for unrecognized offenses         0.05s  
+  ✓ it scores invasiveness based on search scope                         0.05s  
+  ✓ it scores invasiveness based on force used                           0.05s  
+  ✓ it adds 20 points for night raids                                    0.05s  
+  ✓ it adds 10 points for searches longer than 4 hours                   0.05s  
+  ✓ it calculates combined invasiveness score                            0.08s  
+  ✓ it caps invasiveness score at 100                                    0.05s  
+  ✓ it categorizes invasiveness levels correctly                         0.05s  
+  ✓ it passes legitimacy test for criminal offenses                      0.05s  
+  ✓ it fails legitimacy test for low severity offenses                   0.05s  
+  ✓ it passes suitability test when items sought specified               0.05s  
+  ✓ it fails suitability test when items sought not specified            0.05s  
+  ✓ it passes necessity test for high severity offenses                  0.05s  
+  ✓ it passes necessity test when alternatives considered                0.05s  
+  ✓ it passes proportionality stricto sensu when invasiveness not exces… 0.05s  
+  ✓ it fails proportionality stricto sensu when invasiveness excessive   0.05s  
+  ✓ it passes overall test when all four tests pass                      0.05s  
+  ✓ it fails overall test when any test fails                            0.05s  
+  ✓ it calculates disproportion score from invasiveness severity differ… 0.07s  
+  ✓ it adds 15 points for each failed proportionality test               0.05s  
+  ✓ it enforces minimum 75 for misdemeanor with invasive search          0.05s  
+  ✓ it caps disproportion score at 100                                   0.05s  
+  ✓ it categorizes disproportion levels correctly                        0.05s  
+  ✓ it marks proportionate when disproportion score below 50             0.05s  
+  ✓ it marks disproportionate when disproportion score 50 or above       0.05s  
+  ✓ it generates ai analysis using openai                                0.05s  
+  ✓ it falls back to template when ai analysis fails                     0.05s  
+  ✓ it performs complete proportionality analysis                        0.05s  
+  ✓ it identifies extreme disproportion for misdemeanor with swat raid   0.05s  
+  ✓ it identifies proportionate search for serious offense               0.05s  
+
+   FAIL  Tests\Unit\Modules\HomeSearch\StatisticalAnalyzerTest
+  ✓ it compares osijek to national average                               0.50s  
+  ✓ it identifies osijek as worst region                                 0.05s  
+  ✓ it shows regional disparities in searches per capita                 0.05s  
+  ✓ it identifies geographic targeting patterns                          0.05s  
+  ✓ it ranks regions by problem severity                                 0.05s  
+  ✓ it analyzes year over year trends                                    0.05s  
+  ⨯ it identifies increasing misdemeanor trend                           0.05s  
+  ✓ it analyzes monthly distribution patterns                            0.05s  
+  ✓ it calculates trend magnitude over three years                       0.05s  
+  ✓ it calculates percentage of misdemeanor searches                     0.05s  
+  ✓ it calculates success rates by offense severity                      0.05s  
+  ✓ it identifies low success rates as fishing expeditions               0.05s  
+  ✓ it calculates suppression rates                                      0.07s  
+  ✓ it categorizes problem levels for misdemeanor percentages            0.05s  
+  ✓ it analyzes constitutional complaint success rates                   0.05s  
+  ✓ it fetches real data from odluke agent                               0.05s  
+  ✓ it falls back to simulated data when real data unavailable           0.05s  
+  ✓ it converts agent analysis to statistics format                      0.04s  
+  ✓ it handles empty case data gracefully                                0.05s  
+  ! it caches yearly statistics for 24 hours → This test did not perfor… 0.05s  
+  ✓ it generates unique cache keys for different filters                 0.05s  
+  ✓ it analyzes searches by offense severity                             0.05s  
+  ✓ it identifies extreme misdemeanor problem level                      0.05s  
+  ✓ it provides analysis and recommendations                             0.05s  
+  ✓ it analyzes patterns by judge                                        0.07s  
+  ✓ it identifies judges with extreme misdemeanor approval rates         0.05s  
+  ✓ it analyzes patterns by prosecutor                                   0.05s  
+  ✓ it identifies pattern of prosecutorial misconduct                    0.05s  
+  ✓ it generates alarming findings for osijek                            0.05s  
+  ✓ it identifies osijek as significantly worse than national average    0.05s  
+  ✓ it lists croatian data sources                                       0.05s  
+  ✓ it marks data completeness status                                    0.05s  
+  ✓ it includes data collection timestamp                                0.05s  
+  ✓ it searches for specific patterns                                    0.05s  
+  ✓ it provides implementation guidance for pattern search               0.05s  
+
+   PASS  Tests\Unit\OcrConfidenceTest
+  ✓ it calculates confidence from textract blocks                        0.46s  
+  ✓ it identifies low confidence pages                                   0.03s  
+  ✓ it handles blocks without confidence                                 0.03s  
+  ✓ it estimates quality from raw text                                   0.03s  
+  ✓ it detects poor quality text                                         0.03s  
+  ✓ it returns zero metrics for empty text                               0.03s  
+  ✓ it provides page statistics                                          0.03s  
+  ✓ it calculates coverage correctly                                     0.03s  
+  ✓ it flags document when low confidence pages exceed threshold         0.03s  
+  ✓ it handles document with all low confidence pages                    0.03s  
+  ✓ it correctly identifies mixed quality multipage document             0.03s  
+
+   PASS  Tests\Unit\OpenAIServiceResponsesTest
+  ✓ responses list builds query and beta header                          0.16s  
+  ✓ response input items endpoint and header                             0.06s  
+
+   PASS  Tests\Unit\Pipelines\Textract\CheckOcrQualityStepTest
+  ✓ it analyzes ocr quality from blocks                                  0.08s  
+  ✓ it determines document needs review for low confidence               0.05s  
+  ✓ it determines document needs review for low coverage                 0.05s  
+  ✓ it determines document needs review for too many low confidence pag… 0.05s  
+  ✓ it does not flag for review when quality is good                     0.05s  
+  ✓ it updates job metadata with quality metrics                         0.05s  
+  ✓ it handles empty blocks array                                        0.05s  
+  ✓ it passes all payload to next step                                   0.05s  
+
+   FAIL  Tests\Unit\Pipelines\Textract\CollectLinesStepTest
+  ⨯ it analyzes textract layout from json file                           0.15s  
+  ⨯ it updates job status to reconstructing                              0.08s  
+  ✓ it throws exception if json path not in payload                      0.05s  
+  ✓ it throws exception if json file does not exist                      0.05s  
+  ⨯ it adds ocr document to payload                                      0.05s  
+  ⨯ it passes all payload to next step                                   0.05s  
+
+   FAIL  Tests\Unit\Pipelines\Textract\CreateMetadataStepTest
+  ⨯ it extracts legal metadata from ocr document                         0.13s  
+  ✓ it throws exception if ocr document not in payload                   0.05s  
+  ⨯ it updates job metadata when job is present                          0.05s  
+  ⨯ it works without job in payload                                      0.05s  
+  ⨯ it handles missing drive file info gracefully                        0.07s  
+  ⨯ it passes all payload to next step                                   0.05s  
+
+   FAIL  Tests\Unit\Pipelines\Textract\DownloadDriveFileStepTest
+  ⨯ it downloads file from google drive                                  0.13s  
+  ⨯ it updates job status to uploading                                   0.05s  
+  ⨯ it adds local path to payload                                        0.05s  
+  ⨯ it passes all payload fields to next step                            0.05s  
+  ⨯ it preserves job instance in payload                                 0.05s  
+
+   PASS  Tests\Unit\Pipelines\Textract\EnsureJobStepTest
+  ✓ it creates new textract job when none exists                         0.14s  
+  ✓ it returns existing job if already created                           0.05s  
+  ✓ it sets correct initial status to queued                             0.05s  
+  ✓ it associates job with case id and adds to payload                   0.05s  
+  ✓ it handles null case id gracefully by throwing exception             0.05s  
+  ✓ it sets google drive file id correctly                               0.05s  
+  ✓ it generates unique job id for each job                              0.05s  
+  ✓ it stores metadata correctly                                         0.05s  
+  ✓ it handles database errors gracefully                                0.05s  
+  ✓ it is idempotent and safe to call multiple times                     0.05s  
+
+   FAIL  Tests\Unit\Pipelines\Textract\PersistReconstructedStepTest
+  ✓ it throws exception if case id missing                               0.16s  
+  ✓ it throws exception if case not found                                0.09s  
+  ⨯ it creates case document upload                                      0.05s  
+  ! it ingests document with correct parameters → This test did not per… 0.05s  
+  ✓ it passes all payload to next step                                   0.05s  
+
+   FAIL  Tests\Unit\Pipelines\Textract\ReconstructPdfStepTest
+  ⨯ it reconstructs pdf from ocr document                                0.12s  
+  ⨯ it adds target local path to payload                                 0.05s  
+  ⨯ it uses correct parameters for reconstruction                        0.05s  
+  ⨯ it passes all payload to next step                                   0.05s  
+  ⨯ it preserves job instance in payload                                 0.08s  
+
+   FAIL  Tests\Unit\Pipelines\Textract\SaveResultsStepTest
+  ⨯ it saves analysis results to s3 and local                            0.12s  
+  ⨯ it adds results meta to payload                                      0.05s  
+  ⨯ it passes drive file id and blocks correctly                         0.05s  
+  ⨯ it passes all payload to next step                                   0.05s  
+  ⨯ it preserves job instance                                            0.05s  
+  ⨯ it handles empty blocks array                                        0.05s  
+
+   FAIL  Tests\Unit\Pipelines\Textract\StartAnalysisStepTest
+  ⨯ it calls aws textract start document analysis api                    0.13s  
+  ⨯ it stores textract job id in database                                0.08s  
+  ⨯ it updates job status to analyzing                                   0.05s  
+  ⨯ it handles aws textract throttling exception                         0.06s  
+  ⨯ it handles aws textract provisioned throughput exceeded              0.05s  
+  ⨯ it handles invalid s3 object exception                               0.05s  
+  ⨯ it handles document too large exception                              0.05s  
+  ⨯ it handles unsupported document exception                            0.07s  
+  ⨯ it handles access denied exception                                   0.05s  
+  ⨯ it sets feature types tables forms layout                            0.05s  
+  ⨯ it uses default feature types when not specified                     0.05s  
+  ⨯ it uses custom feature types when specified                          0.05s  
+  ⨯ it adds job id to payload                                            0.07s  
+  ⨯ it passes all payload to next step                                   0.05s  
+  ⨯ it handles bad request exception                                     0.05s  
+  ⨯ it handles limit exceeded exception                                  0.05s  
+  ⨯ it handles internal server error                                     0.05s  
+  ⨯ it handles idle session timeout                                      0.05s  
+  ⨯ it updates both job id and status atomically                         0.07s  
+  ⨯ it handles invalid kms key exception                                 0.05s  
+  ⨯ it handles human loop quota exceeded                                 0.05s  
+
+   PASS  Tests\Unit\Pipelines\Textract\UploadInputToS3StepTest
+  ✓ it uploads file to s3                                                0.32s  
+  ✓ it updates job with s3 key and started status                        0.05s  
+  ✓ it adds s3 key to payload                                            0.05s  
+  ✓ it uses correct parameters for upload action                         0.05s  
+  ✓ it passes payload to next step                                       0.11s  
+
+   PASS  Tests\Unit\Pipelines\Textract\UploadOutputStepTest
+  ✓ it uploads reconstructed pdf to s3                                   0.12s  
+  ✓ it adds out key to payload                                           0.05s  
+  ✓ it uses correct parameters for upload                                0.05s  
+  ✓ it passes all payload to next step                                   0.05s  
+  ✓ it preserves job instance in payload                                 0.05s  
+
+   FAIL  Tests\Unit\Pipelines\Textract\WaitAndFetchStepTest
+  ✓ it polls textract get document analysis api                          0.12s  
+  ⨯ it waits for job to complete with succeeded status                   0.06s  
+  ⨯ it handles in progress status and retries                            2.05s  
+  ✓ it handles failed status and throws exception                        0.07s  
+  ✓ it handles partial success status                                    0.04s  
+  ✓ it fetches all pages with pagination next token                      0.04s  
+  ✓ it assembles complete results from multiple pages                    0.04s  
+  ✓ it handles api throttling during polling                             0.04s  
+  ✓ it respects max wait time timeout                                    3.05s  
+  ✓ it handles network timeouts during long waits                        0.04s  
+  ⨯ it handles exponential backoff between polls                         3.05s  
+  ✓ it handles temporary api failures gracefully                         0.04s  
+  ⨯ it records total processing time                                     2.05s  
+  ⨯ it validates response structure                                      0.11s  
+  ✓ it adds blocks to payload                                            0.05s  
+  ✓ it handles empty blocks array                                        0.05s  
+  ✓ it passes all payload to next step                                   0.05s  
+  ✓ it handles provisioned throughput exceeded exception                 0.04s  
+  ✓ it handles invalid job id exception                                  0.04s  
+  ✓ it handles access denied during polling                              0.04s  
+  ✓ it preserves job instance in payload                                 0.05s  
+  ! it uses job id from payload → This test did not perform any asserti… 0.05s  
+  ⨯ it handles multiple in progress polls before success                 5.05s  
+
+   FAIL  Tests\Unit\Repositories\EkomOtpravakRepositoryTest
+  ⨯ it creates new otpravak from paged api data                          0.39s  
+  ⨯ it updates existing otpravak from paged api data                     0.06s  
+  ✓ it preserves existing status when not provided                       0.05s  
+  ⨯ it extracts nested predmet id                                        0.05s  
+  ✓ it handles primljen zbog isteka roka as true                         0.05s  
+  ✓ it defaults primljen zbog isteka roka to false                       0.05s  
+  ✓ it converts string primljen zbog isteka roka to boolean              0.05s  
+  ✓ it handles missing nested fields                                     0.05s  
+  ⨯ it stores complete api data                                          0.05s  
+  ✓ it updates last synced at timestamp                                  0.05s  
+  ✓ it tracks dispatch delivery workflow                                 0.05s  
+  ✓ it handles deadline expiration scenario                              0.05s  
+  ✓ it handles multiple upserts for same remote id                       0.09s  
+  ✓ it handles different remote ids as separate records                  0.05s  
+
+   PASS  Tests\Unit\Repositories\EkomPodnesakRepositoryTest
+  ✓ it creates new podnesak from paged api data                          0.23s  
+  ✓ it updates existing podnesak from paged api data                     0.05s  
+  ✓ it preserves existing status when not provided                       0.05s  
+  ✓ it extracts nested sud id                                            0.05s  
+  ✓ it extracts nested vrsta podneska id                                 0.05s  
+  ✓ it handles missing nested fields                                     0.05s  
+  ✓ it stores complete api data                                          0.05s  
+  ✓ it updates last synced at timestamp                                  0.05s  
+  ✓ it handles croatian timestamp formats                                0.05s  
+  ✓ upsert from detail api delegates to paged api                        0.05s  
+  ✓ it handles multiple upserts for same remote id                       0.09s  
+  ✓ it handles different remote ids as separate records                  0.05s  
+  ✓ it tracks submission workflow timestamps                             0.05s  
+
+   PASS  Tests\Unit\Repositories\EkomPredmetRepositoryTest
+  ✓ it creates new predmet from api data                                 0.22s  
+  ✓ it updates existing predmet from api data                            0.05s  
+  ✓ it preserves existing values when api data is null                   0.05s  
+  ✓ it updates last synced at timestamp                                  0.05s  
+  ✓ it handles missing sud data                                          0.05s  
+  ✓ it defaults do not disturb to false                                  0.05s  
+  ✓ it sets do not disturb to true when provided                         0.05s  
+  ✓ it converts string do not disturb to boolean                         0.05s  
+  ✓ it stores complete api data in data field                            0.05s  
+  ✓ it extracts nested sud id correctly                                  0.08s  
+  ✓ it handles multiple upserts for same remote id                       0.05s  
+  ✓ it handles different remote ids as separate records                  0.05s  
+
+   FAIL  Tests\Unit\Repositories\EoglasnaKeywordMatchRepositoryTest
+  ⨯ it records new match                                                 0.21s  
+  ⨯ it avoids duplicate matches                                          0.05s  
+  ⨯ it updates matched fields on duplicate                               0.05s  
+  ⨯ it does not update matched at on duplicate                           0.05s  
+  ⨯ it handles empty metadata                                            0.05s  
+  ⨯ it handles null metadata on new match                                0.05s  
+  ⨯ it preserves existing matched fields when metadata is empty array    0.05s  
+  ⨯ it creates separate matches for different keyword ids                0.05s  
+  ⨯ it creates separate matches for different notice uuids               0.05s  
+  ⨯ it handles complex metadata                                          0.08s  
+  ⨯ it persists match to database                                        0.05s  
+  ⨯ it returns existing match on duplicate                               0.05s  
+  ⨯ it handles multiple matches for same keyword                         0.05s  
+  ⨯ it handles multiple keywords matching same notice                    0.05s  
+  ⨯ it sets matched at only for new matches                              0.05s  
+  ⨯ it handles croatian field names in metadata                          0.05s  
+
+   FAIL  Tests\Unit\Repositories\EoglasnaKeywordRepositoryTest
+  ⨯ it returns enabled keywords                                          0.26s  
+  ⨯ it returns empty collection when no enabled keywords                 0.05s  
+  ⨯ it returns keywords ordered by id                                    0.05s  
+  ⨯ it only returns enabled keywords                                     0.05s  
+  ✓ it updates last run at when touching run                             0.08s  
+  ✓ it overwrites previous last run at when touching run                 0.05s  
+  ✓ it persists last run at to database                                  0.05s  
+  ✓ it updates cursor with last date published                           0.05s  
+  ✓ it does not update cursor when last date is null                     0.05s  
+  ✓ it overwrites previous last date published                           0.05s  
+  ✓ it persists cursor update to database                                0.05s  
+  ⨯ it handles complete workflow                                         0.05s  
+  ⨯ it handles multiple keywords with different states                   0.06s  
+  ✓ get enabled returns collection instance                              0.05s  
+
+   FAIL  Tests\Unit\Repositories\EoglasnaNoticeRepositoryTest
+  ✓ it creates new notice from api payload                               0.24s  
+  ⨯ it updates existing notice by uuid                                   0.09s  
+  ✓ it parses expiration date as date string                             0.05s  
+  ✓ it parses date published as datetime                                 0.05s  
+  ✓ it handles null expiration date                                      0.05s  
+  ✓ it handles null date published                                       0.05s  
+  ✓ it stores participants array                                         0.05s  
+  ✓ it stores notice documents array                                     0.05s  
+  ✓ it extracts court fields from nested court object                    0.05s  
+  ✓ it extracts institution fields from nested institution object        0.05s  
+  ✓ it stores court notice details                                       0.05s  
+  ✓ it stores raw payload                                                0.05s  
+  ✓ it sets first seen at for new notice                                 0.06s  
+  ✓ it does not update first seen at for existing notice                 0.05s  
+  ✓ it updates last seen at on every upsert                              0.05s  
+  ✓ it handles complete court notice                                     0.08s  
+  ✓ it handles complete institution notice                               0.05s  
+  ✓ it handles empty participants array                                  0.05s  
+  ✓ it handles missing participants field                                0.05s  
+  ✓ it handles missing notice documents field                            0.05s  
+  ✓ it handles missing court object                                      0.05s  
+  ✓ it handles missing institution object                                0.05s  
+  ✓ it persists notice to database                                       0.05s  
+  ⨯ it handles multiple upserts for same uuid                            0.06s  
+  ⨯ it handles different uuids as separate records                       0.06s  
+
+   PASS  Tests\Unit\Repositories\GraphMetricsRepositoryTest
+  ✓ it returns dashboard data                                            0.38s  
+  ✓ it gets influential decisions                                        0.09s  
+  ✓ it gets citation clusters                                            0.05s  
+  ✓ it gets specific cluster by id                                       0.05s  
+  ✓ it returns null for nonexistent cluster                              0.05s  
+  ✓ it gets network stats                                                0.05s  
+  ✓ it gets most cited decisions                                         0.05s  
+  ✓ it respects limit parameter                                          0.05s  
+  ✓ it gets metrics history                                              0.05s  
+  ✓ it calculates trending data                                          0.05s  
+  ✓ it handles insufficient data for trending                            0.05s  
+  ✓ it gets summary of all metrics                                       0.05s  
+  ✓ it finds decision by case number                                     0.05s  
+  ✓ it returns null for nonexistent decision                             0.05s  
+  ✓ it returns empty arrays when no metrics exist                        0.05s  
+
+   PASS  Tests\Unit\RetrieverFusionTest
+  ✓ rrf fusion correctness                                               0.20s  
+  ✓ rrf score calculation
+  ✓ mmr diversity
+  ✓ mmr respects top k
+  ✓ cosine similarity
+  ✓ rrf stability
+  ✓ corpus caps application
+  ✓ confidence calculation
+  ✓ keyword score calculation
+
+   FAIL  Tests\Unit\Services\AI\GraphRagServiceTest
+  ⨯ it syncs law to graph database                                       0.08s  
+  ✓ it handles missing law gracefully                                    0.05s  
+  ⨯ it skips jurisdiction node when not set                              0.05s  
+  ⨯ it syncs case document to graph                                      0.05s  
+  ✓ it handles missing case document gracefully                          0.05s  
+  ⨯ it auto tags law with metadata                                       0.05s  
+  ⨯ it extracts keywords from law content                                0.05s  
+  ⨯ it extracts citations from law content                               0.05s  
+  ⨯ it creates similarity relationships when embedding exists            0.05s  
+  ⨯ it handles null metadata gracefully                                  0.05s  
+  ⨯ it handles invalid json metadata                                     0.05s  
+  ⨯ it syncs all law properties correctly                                0.05s  
+  ⨯ it uses correct table for law document similarity                    0.08s  
+  ⨯ it uses correct table for court decision document similarity         0.05s  
+  ⨯ it uses correct table for textract document similarity               0.05s  
+  ✓ it handles unknown node label for similarity gracefully              0.05s  
+  ⨯ it skips similarity when neo4j sync disabled                         0.05s  
+
+   PASS  Tests\Unit\Services\AI\RagOrchestratorTest
+  ✓ it orchestrates full rag retrieval pipeline                          0.28s  
+  ✓ it normalizes query before retrieval                                 0.05s  
+  ✓ it detects croatian legal citations                                  0.05s  
+  ✓ it generates query embedding                                         0.05s  
+  ✓ it accepts custom retrieval options                                  0.05s  
+  ✓ it returns retrieval statistics                                      0.05s  
+  ✓ it uses default retrieval parameters                                 0.08s  
+  ✓ it handles empty query                                               0.05s  
+  ✓ it handles very long query                                           0.05s  
+  ✓ it handles croatian unicode characters                               0.05s  
+  ✓ it can exclude specific corpora                                      0.05s  
+  ✓ it applies similarity threshold                                      0.05s  
+
+   FAIL  Tests\Unit\Services\AdvancedKeywordExtractorTest
+  ⨯ it extracts keywords using tfidf when embeddings disabled            0.43s  
+  ✓ it extracts keywords using hybrid approach                           0.06s  
+  ✓ it falls back to tfidf when embeddings fail                          0.05s  
+  ✓ it applies legal term boosting                                       0.26s  
+  ✓ it filters stopwords                                                 0.07s  
+  ✓ it filters short words                                               0.08s  
+  ✓ it respects max keywords limit                                       0.47s  
+  ✓ it normalizes weights to zero to one range                           0.04s  
+  ✓ it caches embeddings when enabled                                    0.04s  
+  ✓ it computes cosine similarity correctly                              0.04s  
+  ✓ it handles empty content gracefully                                  0.05s  
+  ✓ it handles content with only stopwords                               0.05s  
+  ✓ it returns config information                                        0.04s  
+  ⨯ it combines tfidf and semantic scores                                0.04s  
+  ✓ it extracts croatian legal keywords correctly                        0.48s  
+  ✓ it extracts bigrams from content                                     0.26s  
+  ✓ it extracts trigrams from content                                    0.29s  
+  ✓ it filters ngrams with all stopwords                                 0.05s  
+  ✓ it boosts ngrams matching legal patterns                             0.26s  
+  ✓ it detects emerging terms with high semantic similarity              0.08s  
+  ⨯ it respects ngram configuration                                      0.05s  
+  ⨯ it respects max ngram size configuration                             0.26s  
+  ✓ it combines unigrams and ngrams in results                           0.05s  
+  ✓ it extracts legal multi word concepts                                0.47s  
+  ✓ it includes ngram config in get config                               0.04s  
+  ✓ it normalizes ngram weights                                          0.05s  
+  ✓ it handles croatian special characters in ngrams                     0.26s  
+  ✓ it filters ngrams by minimum frequency                               0.05s  
+  ✓ it extracts mixed unigrams and ngrams with embeddings                0.06s  
+
+   FAIL  Tests\Unit\Services\CaseSearchServiceTest
+  ⨯ vector search returns case documents with similarity scores          0.46s  
+  ⨯ search cases with filters                                            0.03s  
+  ⨯ search documents with case relationship                              0.03s  
+  ⨯ search documents with include content                                0.03s  
+  ✓ search method routes to vector                                       0.03s  
+  ⨯ search method routes to cases                                        0.03s  
+  ⨯ search method routes to documents                                    0.03s  
+  ✓ search method throws exception for invalid type                      0.03s  
+  ⨯ vector search handles embedding failure                              0.03s  
+  ⨯ search cases with client and opponent filters                        0.03s  
+  ⨯ search documents with case number filter                             0.03s  
+  ⨯ search cases pagination                                              0.06s  
+
+   FAIL  Tests\Unit\Services\CaseVectorStoreServiceTest
+  ✓ it stores document with embedding                                    0.21s  
+  ✓ it handles pre chunked documents with proper metadata                0.06s  
+  ✓ it calls openai embeddings api with correct model                    0.05s  
+  ✓ it handles openai rate limit errors                                  0.05s  
+  ⨯ it stores chunks with complete metadata                              0.05s  
+  ✓ it generates 1536 dimensional embedding vectors                      0.05s  
+  ⨯ it uses pgvector format for postgresql                               0.05s  
+  - it searches similar chunks by cosine similarity → Search functional… 0.04s  
+  ✓ it filters documents by case id during ingestion                     0.09s  
+  - it orders search results by similarity descending → Search result o… 0.04s  
+  ✓ it handles empty documents gracefully                                0.05s  
+  - it updates embedding for existing chunk → updateEmbedding() to be i… 0.04s  
+  - it deletes all chunks for document → deleteDocument() to be impleme… 0.04s  
+  ✓ it rolls back transaction on api failure                             0.05s  
+  ✓ it processes large batches of chunks                                 0.42s  
+  ⨯ it validates embedding dimensions                                    0.06s  
+  ⨯ it handles database errors gracefully                                0.05s  
+  ✓ it records embedding generation time                                 0.12s  
+  ✓ it prevents duplicate documents using content hash                   0.07s  
+  ✓ it syncs to graph database when enabled                              0.08s  
+
+   PASS  Tests\Unit\Services\CircuitBreakerTest
+  ✓ successful calls pass through in closed state                        0.31s  
+  ✓ circuit opens after failure threshold                                0.03s  
+  ✓ circuit breaker blocks calls when open                               0.03s  
+  ✓ circuit transitions to half open after timeout                       2.04s  
+  ✓ circuit closes after success threshold in half open                  2.07s  
+  ✓ failure in half open immediately opens circuit                       2.07s  
+  ✓ get status returns accurate information                              0.06s  
+  ✓ manual reset closes circuit                                          0.03s  
+  ✓ success in closed state resets failure count                         0.03s  
+  ✓ different services have independent circuits                         0.03s  
+  ✓ circuit breaker handles different exception types                    0.03s  
+  ✓ circuit breaker preserves callback return values                     0.06s  
+
+   PASS  Tests\Unit\Services\ContextCompressorTest
+  ✓ it compresses results to fit token budget                            0.20s  
+  ✓ it uses default token budget when not specified                      0.03s  
+  ✓ it returns empty array for empty results                             0.03s  
+  ✓ it handles results without content field                             0.03s  
+  ✓ it handles results with empty content                                0.03s  
+  ✓ it keeps short content as is                                         0.03s  
+  ✓ it does not mark short content as compressed                         0.03s  
+  ✓ it compresses long content                                           0.03s  
+  ✓ it preserves original content in full content field                  0.03s  
+  ✓ it marks compressed results                                          0.03s  
+  ✓ it adds ellipsis to compressed content                               0.03s  
+  ✓ it stops processing when token budget exceeded                       0.06s  
+  ✓ it tracks tokens used across multiple results                        0.03s  
+  ✓ it allocates max 300 tokens per compressed item                      0.03s  
+  ✓ it extracts keywords from title                                      0.03s  
+  ✓ it extracts keywords from law number                                 0.03s  
+  ✓ it extracts keywords from tags                                       0.03s  
+  ✓ it handles missing metadata fields                                   0.03s  
+  ✓ it lowercases keywords from title                                    0.03s  
+  ✓ it scores sentences with keyword matches                             0.03s  
+  ✓ it boosts sentences with article citations                           0.03s  
+  ✓ it boosts sentences with nn references                               0.03s  
+  ✓ it boosts sentences with zakon o pattern                             0.03s  
+  ✓ it preserves sentence order after scoring                            0.03s  
+  ✓ it takes top 50 percent of sentences                                 0.03s  
+  ✓ it keeps minimum 3 sentences                                         0.06s  
+  ✓ it handles content without sentence delimiters                       0.03s  
+  ✓ it handles empty keywords gracefully                                 0.03s  
+  ✓ it extracts nn law numbers                                           0.03s  
+  ✓ it extracts article references                                       0.03s  
+  ✓ it limits citations to three                                         0.03s  
+  ✓ it handles content without citations                                 0.03s  
+  ✓ it deduplicates citations                                            0.03s  
+  ✓ it truncates at sentence boundary                                    0.03s  
+  ✓ it handles text without periods for truncation                       0.03s  
+  ✓ it reserves space for citations and ellipsis                         0.03s  
+  ✓ it calculates compression ratio                                      0.03s  
+  ✓ it calculates ratio for multiple results                             0.03s  
+  ✓ it returns 1 0 for identical content                                 0.03s  
+  ✓ it returns 1 0 for empty original                                    0.03s  
+  ✓ it handles missing content in compression ratio                      0.06s  
+  ✓ it calculates ratio with mixed content                               0.03s  
+  ✓ it compresses realistic legal document                               0.03s  
+  ✓ it handles mixed length results                                      0.03s  
+  ✓ it preserves metadata in compressed results                          0.03s  
+  ✓ it handles croatian text with diacritics                             0.03s  
+  ✓ it compresses content to reasonable size                             0.04s  
+
+   FAIL  Tests\Unit\Services\CourtDecisionVectorStoreServiceTest
+  ✓ it stores document with embedding                                    0.67s  
+  ✓ it stores multiple documents in batch                                0.06s  
+  ✓ it filters out empty documents                                       0.09s  
+  ✓ it calls openai embeddings api with correct model                    0.05s  
+  ⨯ it converts embedding to pgvector format for postgresql              0.05s  
+  ✓ it prevents duplicate documents via content hash                     0.06s  
+  ✓ it rolls back transaction on openai api failure                      0.05s  
+  ✓ it syncs to graph database when enabled                              0.05s  
+  ✓ it handles graph sync failure gracefully                             0.06s  
+  ⨯ it tracks embedding dimensions correctly                             0.05s  
+  ✓ it estimates token count for content                                 0.06s  
+  ✓ it calculates embedding norm                                         0.05s  
+  ⨯ it accepts custom provider and model                                 0.05s  
+  ⨯ it tracks upload id for batch operations                             0.08s  
+  ✓ it preserves document metadata                                       0.05s  
+  ✓ it stores citation metadata with ecli identifiers                    0.06s  
+  ✓ it stores court hierarchy metadata for search ranking                0.05s  
+  ✓ it assigns different hierarchy scores to different court levels      0.07s  
+  ✓ it stores decision date relevance boost metadata                     0.06s  
+  ✓ it stores jurisdiction metadata for filtering                        0.06s  
+  ✓ it stores multiple citations in document metadata                    0.05s  
+  ✓ it stores combined court attributes for comprehensive search         0.05s  
+
+   FAIL  Tests\Unit\Services\DecisionSearchServiceTest
+  ⨯ vector search returns decisions with similarity scores               0.35s  
+  ✓ keyword search with filters                                          0.09s  
+  ⨯ hybrid search merges and deduplicates results                        0.06s  
+  ⨯ lookup by criteria finds decisions                                   0.05s  
+  ⨯ get by id delegates to mcp tool                                      0.05s  
+  ✓ search method routes to correct implementation                       0.05s  
+  ✓ vector search handles embedding failure                              0.04s  
+  ✓ keyword search with date range filter                                0.05s  
+
+   FAIL  Tests\Unit\Services\FactExtractionServiceTest
+  ✓ it extracts facts successfully with llm                              0.17s  
+  ✓ it extracts facts without llm                                        0.05s  
+  ✓ it returns cached results when available                             0.05s  
+  ✓ it returns error when decision not found                             0.05s  
+  ✓ it handles llm extraction failure gracefully                         0.08s  
+  ✓ it respects cache disabled option                                    0.05s  
+  ⨯ it uses custom cache ttl                                             0.05s  
+  ⨯ it tracks performance metrics                                        0.05s  
+  ⨯ it extracts plaintiffs from croatian text                            0.05s  
+  ⨯ it extracts defendants from croatian text                            0.05s  
+  ⨯ it deduplicates extracted parties                                    0.05s  
+  ✓ it includes judge from metadata                                      0.05s  
+  ✓ it extracts filing date from content                                 0.05s  
+  ✓ it extracts hearing dates from content                               0.05s  
+  ✓ it normalizes croatian dates to iso format                           0.05s  
+  ✓ it handles dates with extra spaces                                   0.05s  
+  ✓ it returns null for invalid dates                                    0.07s  
+  ✓ it includes metadata dates                                           0.05s  
+  ✓ it deduplicates hearing dates                                        0.05s  
+  ⨯ it detects appeal from decision type                                 0.06s  
+  ⨯ it detects appeal from content                                       0.05s  
+  ⨯ it detects revision from decision type                               0.05s  
+  ⨯ it detects revision from content                                     0.06s  
+  ✓ it detects first instance from decision type                         0.05s  
+  ✓ it detects first instance from content                               0.05s  
+  ✓ it extracts prior proceedings references                             0.05s  
+  ✓ it deduplicates prior proceedings                                    0.05s  
+  ✓ it extracts complex facts using llm                                  0.05s  
+  ⨯ it limits content length for llm                                     0.08s  
+  ✓ it handles llm json parsing errors                                   0.05s  
+  ✓ it cleans markdown code blocks from llm response                     0.05s  
+  ✓ it handles empty llm response                                        0.05s  
+  ✓ it logs llm extraction errors                                        0.05s  
+  ✓ it extracts case metadata                                            0.05s  
+  ✓ it compares facts between two decisions                              0.05s  
+  ⨯ it returns error when comparison fails                               0.05s  
+  ✓ it detects same court in comparison                                  0.05s  
+  ✓ it detects different courts in comparison                            0.05s  
+  ✓ it finds shared parties in comparison                                0.05s  
+  ✓ it compares complex facts when available                             0.08s  
+  ✓ it handles complex facts comparison errors                           0.05s  
+  ✓ it uses string similarity for text comparison                        0.05s  
+  ✓ it extracts facts from multiple decisions                            0.05s  
+  ⨯ it handles failures in batch extraction                              0.05s  
+  ✓ it logs batch extraction errors                                      0.05s  
+  ✓ it continues batch processing after errors                           0.05s  
+
+   FAIL  Tests\Unit\Services\GraphDatabaseServiceTest
+  ⨯ it executes cypher query                                             0.65s  
+  ✓ it logs and throws exception on query failure                        0.07s  
+  ⨯ it runs transaction                                                  0.03s  
+  ✓ it initializes schema with constraints and indexes                   0.04s  
+  ✓ it creates unique constraints for all node types                     0.03s  
+  ✓ it upserts node with properties                                      0.03s  
+  ✓ it adds timestamps when upserting node                               0.03s  
+  ✓ it preserves existing created at timestamp                           0.03s  
+  ✓ it creates relationship between nodes                                0.03s  
+  ✓ it deletes node by id                                                0.03s  
+  ⨯ it finds nodes by label                                              0.03s  
+  ⨯ it finds node by id                                                  0.03s  
+  ✓ it handles missing config gracefully                                 0.03s  
+  ✓ it uses correct database name from config                            0.03s  
+  ✓ it constructs correct uri from config                                0.06s  
+  ✓ it adds tls to scheme when configured                                0.03s  
+  ✓ it creates indexes for all searchable fields                         0.03s  
+  ✓ it handles constraint creation errors gracefully                     0.03s  
+  ✓ it handles index creation errors gracefully                          0.04s  
+
+   PASS  Tests\Unit\Services\GraphQueryHelperTest
+  ✓ it finds citing laws                                                 0.29s  
+  ✓ it limits citing laws results                                        0.04s  
+  ✓ it finds cases applying law                                          0.04s  
+  ✓ it finds documents by tag pattern                                    0.03s  
+  ✓ it normalizes tag ids                                                0.03s  
+  ✓ it finds law evolution                                               0.03s  
+  ✓ it returns empty array when no evolution found                       0.07s  
+  ✓ it finds documents by jurisdiction and tags                          0.03s  
+  ✓ it gets keyword network                                              0.03s  
+  ✓ it finds influential documents                                       0.03s  
+  ✓ it finds topic cluster                                               0.03s  
+  ✓ it finds supporting documents                                        0.03s  
+  ✓ it recommends documents                                              0.03s  
+  ✓ it builds decision query with all parameters                         0.03s  
+  ✓ it handles missing metadata in decision query                        0.03s  
+  ✓ it uses foreach for conditional node creation                        0.03s  
+
+   PASS  Tests\Unit\Services\GraphRagServiceKeywordExtractionTest
+  ✓ it uses advanced extractor when available and hybrid enabled         0.26s  
+  ✓ it falls back to legacy extraction when hybrid disabled              0.07s  
+  ✓ it creates keyword nodes for ngrams                                  0.03s  
+  ✓ it handles extraction failure gracefully                             0.03s  
+  ✓ it creates relationships with correct weights                        0.03s  
+  ✓ it normalizes keyword names to lowercase                             0.03s  
+  ✓ it extracts keywords for different node types                        0.03s  
+  ✓ it handles empty keyword results                                     0.03s  
+  ✓ it logs keyword extraction when configured                           0.03s  
+  ✓ it creates unique keyword ids for ngrams                             0.03s  
+
+   PASS  Tests\Unit\Services\HrLegalCitationsDetectorTest
+  ✓ it detects all citation types                                        0.14s  
+  ✓ it detects statute citations
+  ✓ it detects narodne novine citations
+  ✓ it detects case numbers
+  ✓ it detects ecli identifiers
+  ✓ it detects dates
+  ✓ it throws exception for unknown type
+  ✓ it handles empty text
+  ✓ it handles text without citations
+  ✓ it returns array for each detector type
+
+   FAIL  Tests\Unit\Services\IngestPipelineServiceTest
+  ✓ it chunks text with default parameters                               0.07s  
+  ✓ it chunks text with custom chunk size                                0.05s  
+  ✓ it chunks text with overlap                                          0.08s  
+  ✓ it returns empty array for empty text                                0.05s  
+  ✓ it returns single chunk for short text                               0.05s  
+  ✓ it trims whitespace in chunks                                        0.05s  
+  ✓ it ingests text successfully                                         0.05s  
+  ✓ it returns zero count for empty text ingestion                       0.05s  
+  ✓ it respects custom chunk options in text ingestion                   0.06s  
+  ✓ it uses custom model for text ingestion                              0.05s  
+  ✓ it ingests plain text file                                           0.08s  
+  ✓ it ingests pdf file with ocr                                         0.06s  
+  ✓ it falls back to file contents when ocr returns empty                0.05s  
+  ✓ it returns skipped for empty file                                    0.05s  
+  ✓ it handles nonexistent file                                          0.05s  
+  ⨯ it ingests documents with embeddings                                 0.08s  
+  ⨯ it filters empty documents                                           0.05s  
+  ✓ it returns zero for all empty documents                              0.05s  
+  ⨯ it skips duplicate documents by content hash                         0.05s  
+  ✓ it handles embedding count mismatch                                  0.05s  
+  ⨯ it stores metadata as json                                           0.05s  
+  ⨯ it calculates embedding norm correctly                               0.05s  
+  ✓ it estimates token count                                             0.05s  
+  ⨯ it sets chunk index correctly                                        0.05s  
+  ⨯ it searches with vector similarity                                   0.05s  
+  ⨯ it limits search results                                             0.05s  
+  ✓ it returns empty results when no embedding returned                  0.05s  
+  ✓ it returns empty results for zero norm query                         0.05s  
+  ⨯ it filters by namespace in search                                    0.08s  
+  ⨯ it searches without namespace filter                                 0.05s  
+  ⨯ search results include metadata                                      0.05s  
+  ⨯ search results are sorted by similarity                              0.05s  
+  ⨯ it handles missing embeddings in search                              0.05s  
+
+   PASS  Tests\Unit\Services\InternalMcpClientTest
+  ✓ call tool handles odluke search                                      0.49s  
+  ✓ call tool handles odluke meta                                        0.03s  
+  ✓ call tool handles odluke download                                    0.03s  
+  ✓ call tool handles law articles search                                0.03s  
+  ✓ call tool handles law article by id                                  0.03s  
+  ✓ call tool returns error for unknown tool                             0.03s  
+  ✓ call tool handles exceptions gracefully                              0.07s  
+  ✓ call tool uses default values when arguments missing                 0.03s  
+  ✓ list tools returns all available tools                               0.03s  
+  ✓ list tools includes input schemas                                    0.03s  
+

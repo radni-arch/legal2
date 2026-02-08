@@ -1,0 +1,7 @@
+# Iteration logs are tracked for human oversight
+# These provide visibility into autoloop execution
+# (Remove entries when trust is established)
+
+# Only ignore temporary/backup files
+*.bak
+*.tmp

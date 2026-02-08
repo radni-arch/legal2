@@ -1,0 +1,323 @@
+{
+  "dashboard": {
+    "title": "AI Agent Monitoring Dashboard",
+    "description": "Real-time monitoring of AI agent executions, success/failure rates, and performance metrics",
+    "tags": ["agents", "observability", "ai"],
+    "timezone": "browser",
+    "schemaVersion": 39,
+    "version": 1,
+    "refresh": "30s",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Agent Success Rate (Last 1h)",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "sum(rate(agent_executions_total{status=\"success\"}[1h])) / sum(rate(agent_executions_total[1h])) * 100",
+            "refId": "A",
+            "legendFormat": "Success Rate %"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 6,
+          "x": 0,
+          "y": 0
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "value": null,
+                  "color": "red"
+                },
+                {
+                  "value": 80,
+                  "color": "yellow"
+                },
+                {
+                  "value": 95,
+                  "color": "green"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 2,
+        "title": "Agent Executions per Minute",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "sum(rate(agent_executions_total[1m])) by (agent_name)",
+            "refId": "A",
+            "legendFormat": "{{agent_name}}"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 18,
+          "x": 6,
+          "y": 0
+        }
+      },
+      {
+        "id": 3,
+        "title": "Agent Failure Rate (Last 24h)",
+        "type": "table",
+        "targets": [
+          {
+            "expr": "sum(rate(agent_executions_total{status=\"failure\"}[24h])) by (agent_name, operation)",
+            "refId": "A",
+            "format": "table"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        }
+      },
+      {
+        "id": 4,
+        "title": "Average Agent Execution Duration",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "avg(agent_execution_duration_ms) by (agent_name)",
+            "refId": "A",
+            "legendFormat": "{{agent_name}}"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "ms"
+          }
+        }
+      },
+      {
+        "id": 5,
+        "title": "Consecutive Failures Alert",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "max_over_time(consecutive_agent_failures[5m])",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "h": 6,
+          "w": 6,
+          "x": 0,
+          "y": 16
+        },
+        "fieldConfig": {
+          "defaults": {
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "value": null,
+                  "color": "green"
+                },
+                {
+                  "value": 3,
+                  "color": "yellow"
+                },
+                {
+                  "value": 5,
+                  "color": "red"
+                }
+              ]
+            }
+          }
+        },
+        "alert": {
+          "name": "High Consecutive Agent Failures",
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [5],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "and"
+              },
+              "query": {
+                "params": ["A", "5m", "now"]
+              },
+              "reducer": {
+                "type": "max"
+              },
+              "type": "query"
+            }
+          ],
+          "executionErrorState": "alerting",
+          "frequency": "1m",
+          "handler": 1,
+          "noDataState": "no_data",
+          "notifications": []
+        }
+      },
+      {
+        "id": 6,
+        "title": "Agent Tokens Usage (Last 1h)",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "sum(increase(agent_tokens_used_total[1h]))",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "h": 6,
+          "w": 6,
+          "x": 6,
+          "y": 16
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short"
+          }
+        }
+      },
+      {
+        "id": 7,
+        "title": "Agent Cost (Last 24h)",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "sum(increase(agent_cost_usd_total[24h]))",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "h": 6,
+          "w": 6,
+          "x": 12,
+          "y": 16
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "currencyUSD"
+          }
+        }
+      },
+      {
+        "id": 8,
+        "title": "Active Agent Executions",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "sum(agent_active_executions)",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "h": 6,
+          "w": 6,
+          "x": 18,
+          "y": 16
+        }
+      },
+      {
+        "id": 9,
+        "title": "Agent Error Distribution (Last 6h)",
+        "type": "piechart",
+        "targets": [
+          {
+            "expr": "sum(increase(agent_executions_total{status=\"failure\"}[6h])) by (error_class)",
+            "refId": "A",
+            "legendFormat": "{{error_class}}"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 22
+        }
+      },
+      {
+        "id": 10,
+        "title": "Agent Iteration Count Distribution",
+        "type": "heatmap",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, sum(rate(agent_iteration_count_bucket[5m])) by (le, agent_name))",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 22
+        }
+      },
+      {
+        "id": 11,
+        "title": "Agent Logs (Last 100)",
+        "type": "logs",
+        "targets": [
+          {
+            "expr": "{job=\"agents\"} |= \"Agent\" | json",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "h": 10,
+          "w": 24,
+          "x": 0,
+          "y": 30
+        }
+      }
+    ],
+    "annotations": {
+      "list": [
+        {
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": false,
+          "iconColor": "rgba(255, 96, 96, 1)",
+          "name": "Agent Deployments",
+          "tags": ["deployment"]
+        }
+      ]
+    },
+    "templating": {
+      "list": [
+        {
+          "name": "agent_name",
+          "type": "query",
+          "query": "label_values(agent_executions_total, agent_name)",
+          "multi": true,
+          "includeAll": true,
+          "current": {
+            "text": "All",
+            "value": "$__all"
+          }
+        },
+        {
+          "name": "operation",
+          "type": "query",
+          "query": "label_values(agent_executions_total{agent_name=~\"$agent_name\"}, operation)",
+          "multi": true,
+          "includeAll": true
+        }
+      ]
+    }
+  }
+}

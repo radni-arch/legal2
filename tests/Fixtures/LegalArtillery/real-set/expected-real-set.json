@@ -1,0 +1,48 @@
+{
+  "documents": [
+    {
+      "name": "ombudsman_complaint_redacted",
+      "path": "tests/Fixtures/LegalArtillery/real-set/ombudsman-complaint-redacted.txt",
+      "profile": "ombudsman",
+      "required_sections": [
+        "heading",
+        "identification",
+        "narrative_chronology",
+        "rights_violations",
+        "specific_complaint",
+        "requested_action",
+        "signature",
+        "attachments_list"
+      ],
+      "citation_expectations": {
+        "statutes": 3,
+        "nn": 1,
+        "cases": 2,
+        "dates": 2,
+        "courts": 1
+      }
+    },
+    {
+      "name": "ministarstvo_complaint_redacted",
+      "path": "tests/Fixtures/LegalArtillery/real-set/ministarstvo-complaint-redacted.txt",
+      "profile": "ministarstvo_pravosudja",
+      "required_sections": [
+        "heading",
+        "identification",
+        "subject_complaint",
+        "facts_chronology",
+        "administrative_irregularities",
+        "requested_measures",
+        "signature",
+        "attachments_list"
+      ],
+      "citation_expectations": {
+        "statutes": 2,
+        "nn": 1,
+        "cases": 2,
+        "dates": 2,
+        "courts": 1
+      }
+    }
+  ]
+}

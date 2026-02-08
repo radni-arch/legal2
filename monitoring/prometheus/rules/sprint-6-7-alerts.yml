@@ -1,0 +1,205 @@
+# Sprint 6.7: Production Monitoring Setup Alert Rules
+#
+# These rules implement the specific monitoring requirements from Sprint 6.7:
+# - Agent failure rate >10%
+# - Response time >30 seconds
+# - API error rate >5%
+# - Queue backlog >100 jobs
+#
+# Alert priorities: CRITICAL (immediate action), WARNING (review needed), INFO (for awareness)
+
+groups:
+  - name: sprint_6_7_production_monitoring
+    interval: 30s
+    rules:
+      # CRITICAL: Agent failure rate exceeds 10%
+      - alert: AgentFailureRateHigh
+        expr: agent_failure_rate_percent > 10
+        for: 5m
+        labels:
+          severity: critical
+          component: agents
+          team: backend
+          sprint: "6.7"
+        annotations:
+          summary: "Agent failure rate exceeded 10% threshold"
+          description: |
+            Current agent failure rate: {{ $value | humanizePercentage }}
+            Threshold: 10%
+
+            This indicates a significant number of agent executions are failing.
+
+            **Immediate Actions:**
+            1. Check agent logs for error patterns
+            2. Review recent agent runs in database
+            3. Check Sentry for exception details
+            4. Verify external API connectivity (OpenAI, Odluke)
+
+            **Runbook:** /docs/PRODUCTION_RUNBOOK.md#agent-failure-rate-high
+          runbook_url: "http://localhost/docs/PRODUCTION_RUNBOOK.md#agent-failure-rate-high"
+
+      # WARNING: API response time exceeds 30 seconds (P95)
+      - alert: ResponseTimeExcessive
+        expr: api_response_time_p95_ms > 30000
+        for: 3m
+        labels:
+          severity: warning
+          component: api
+          team: backend
+          sprint: "6.7"
+        annotations:
+          summary: "API response time exceeded 30 second threshold"
+          description: |
+            Current P95 response time: {{ $value | humanizeDuration }}
+            Threshold: 30 seconds
+
+            API responses are taking longer than acceptable.
+
+            **Immediate Actions:**
+            1. Check database query performance
+            2. Review slow query logs
+            3. Check external API latency (OpenAI, AWS)
+            4. Monitor CPU and memory usage
+            5. Review recent deployments
+
+            **Runbook:** /docs/PRODUCTION_RUNBOOK.md#response-time-excessive
+          runbook_url: "http://localhost/docs/PRODUCTION_RUNBOOK.md#response-time-excessive"
+
+      # CRITICAL: API error rate exceeds 5%
+      - alert: ApiErrorRateHigh
+        expr: api_error_rate_percent > 5
+        for: 3m
+        labels:
+          severity: critical
+          component: api
+          team: backend
+          sprint: "6.7"
+        annotations:
+          summary: "API error rate exceeded 5% threshold"
+          description: |
+            Current API error rate: {{ $value | humanizePercentage }}
+            Threshold: 5%
+
+            A significant percentage of API requests are failing.
+
+            **Immediate Actions:**
+            1. Check application logs for error patterns
+            2. Review Sentry for recent exceptions
+            3. Verify database connectivity
+            4. Check external service health
+            5. Review recent code deployments
+
+            **Runbook:** /docs/PRODUCTION_RUNBOOK.md#api-error-rate-high
+          runbook_url: "http://localhost/docs/PRODUCTION_RUNBOOK.md#api-error-rate-high"
+
+      # WARNING: Queue backlog exceeds 100 jobs
+      - alert: QueueBacklogHigh
+        expr: queue_total_backlog > 100
+        for: 5m
+        labels:
+          severity: warning
+          component: queue
+          team: backend
+          sprint: "6.7"
+        annotations:
+          summary: "Queue backlog exceeded 100 jobs threshold"
+          description: |
+            Current queue backlog: {{ $value }} jobs
+            Threshold: 100 jobs
+
+            Jobs are accumulating in queues faster than they can be processed.
+
+            **Immediate Actions:**
+            1. Check queue worker status
+            2. Review failed jobs table
+            3. Monitor queue worker CPU/memory
+            4. Check for stuck jobs
+            5. Consider scaling workers
+
+            **Queue breakdown:**
+            - Default queue: {{ with query "queue_default_size" }}{{ . | first | value }}{{ end }}
+            - Agents queue: {{ with query "queue_agents_size" }}{{ . | first | value }}{{ end }}
+            - Textract queue: {{ with query "queue_textract_size" }}{{ . | first | value }}{{ end }}
+
+            **Runbook:** /docs/PRODUCTION_RUNBOOK.md#queue-backlog-high
+          runbook_url: "http://localhost/docs/PRODUCTION_RUNBOOK.md#queue-backlog-high"
+
+      # INFO: Agent failure rate improving but still elevated
+      - alert: AgentFailureRateElevated
+        expr: agent_failure_rate_percent > 5 and agent_failure_rate_percent <= 10
+        for: 10m
+        labels:
+          severity: info
+          component: agents
+          team: backend
+          sprint: "6.7"
+        annotations:
+          summary: "Agent failure rate elevated at {{ $value | humanizePercentage }}"
+          description: |
+            Current agent failure rate: {{ $value | humanizePercentage }}
+            Normal range: <5%
+            Critical threshold: 10%
+
+            Failure rate is elevated but not yet critical. Monitor closely.
+
+            **Actions:**
+            1. Review recent agent runs
+            2. Check for patterns in failures
+            3. Monitor trend over time
+
+            **Runbook:** /docs/PRODUCTION_RUNBOOK.md#agent-failure-rate-elevated
+          runbook_url: "http://localhost/docs/PRODUCTION_RUNBOOK.md#agent-failure-rate-elevated"
+
+      # INFO: Response time degrading
+      - alert: ResponseTimeDegrading
+        expr: api_response_time_p95_ms > 15000 and api_response_time_p95_ms <= 30000
+        for: 10m
+        labels:
+          severity: info
+          component: api
+          team: backend
+          sprint: "6.7"
+        annotations:
+          summary: "API response time degrading: {{ $value | humanizeDuration }}"
+          description: |
+            Current P95 response time: {{ $value | humanizeDuration }}
+            Normal range: <15 seconds
+            Critical threshold: 30 seconds
+
+            Response times are slower than usual. Investigate before it becomes critical.
+
+            **Actions:**
+            1. Check for slow database queries
+            2. Monitor external API latency
+            3. Review application performance
+
+            **Runbook:** /docs/PRODUCTION_RUNBOOK.md#response-time-degrading
+          runbook_url: "http://localhost/docs/PRODUCTION_RUNBOOK.md#response-time-degrading"
+
+      # CRITICAL: Multiple Sprint 6.7 alerts firing simultaneously
+      - alert: MultipleProductionIssues
+        expr: |
+          (count(ALERTS{alertname=~"AgentFailureRateHigh|ResponseTimeExcessive|ApiErrorRateHigh|QueueBacklogHigh",alertstate="firing"}) > 2)
+        for: 2m
+        labels:
+          severity: critical
+          component: system
+          team: backend
+          sprint: "6.7"
+        annotations:
+          summary: "Multiple production monitoring alerts firing"
+          description: |
+            Multiple critical production issues detected simultaneously.
+            This indicates a systemic problem requiring immediate attention.
+
+            **Firing alerts:** {{ $value }}
+
+            **Immediate Actions:**
+            1. Page on-call engineer
+            2. Check system-wide health
+            3. Review recent deployments/changes
+            4. Consider rollback if recent deployment
+            5. Check infrastructure status
+
+            **Runbook:** /docs/PRODUCTION_RUNBOOK.md#multiple-production-issues
+          runbook_url: "http://localhost/docs/PRODUCTION_RUNBOOK.md#multiple-production-issues"

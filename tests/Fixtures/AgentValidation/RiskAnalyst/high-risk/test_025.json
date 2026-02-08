@@ -1,0 +1,92 @@
+{
+  "test_id": "risk_high_005",
+  "category": "high-risk",
+  "expected_risk_level": "high",
+  "expected_score_range": [78, 93],
+  "description": "Multiple eyewitnesses with consistent testimony and forensic corroboration",
+
+  "input": {
+    "problem_statement": "Client charged with burglary. Four independent eyewitnesses saw client leaving building with stolen items. Fingerprints on window match client. Client admits being at location but claims innocence.",
+    "legal_arguments": [
+      {
+        "title": "Innocent explanation for presence",
+        "argument": "Client was walking by and found door open, entered out of curiosity",
+        "strength_score": 28,
+        "legal_basis": ["No criminal intent"],
+        "potential_counterarguments": [
+          "Four witnesses saw client carrying stolen items",
+          "Fingerprints on window suggest forced entry",
+          "Witnesses heard glass breaking",
+          "Client has prior burglary conviction (2019)"
+        ]
+      },
+      {
+        "title": "Witnesses unreliable - nighttime visibility",
+        "argument": "Poor lighting conditions affected identification",
+        "strength_score": 32,
+        "legal_basis": ["Cross-examination of witnesses"],
+        "potential_counterarguments": [
+          "Four independent consistent accounts",
+          "Street lighting adequate",
+          "Forensic evidence corroborates",
+          "One witness knew client personally"
+        ]
+      }
+    ],
+    "strongest_precedents": [],
+    "strategic_recommendations": {
+      "procedural_steps": [
+        "Challenge witness credibility",
+        "Explain fingerprint presence",
+        "Negotiate plea deal"
+      ]
+    }
+  },
+
+  "expected_output": {
+    "overall_risk_score": {
+      "score": 86,
+      "level": "high"
+    },
+    "argument_risks": [
+      {
+        "argument_index": 0,
+        "risk_level": "critical",
+        "impact_if_fails": "high",
+        "weaknesses": [
+          "Implausible explanation",
+          "Contradicted by witnesses seeing stolen items",
+          "Prior burglary conviction undermines",
+          "Forensics support forced entry"
+        ]
+      },
+      {
+        "argument_index": 1,
+        "risk_level": "high",
+        "impact_if_fails": "high",
+        "weaknesses": [
+          "Four independent consistent accounts",
+          "Forensic corroboration",
+          "One witness knew client",
+          "Lighting documented as adequate"
+        ]
+      }
+    ],
+    "adverse_precedents": [
+      {
+        "description": "Multiple independent eyewitness testimony highly persuasive to courts",
+        "severity": "high"
+      }
+    ],
+    "procedural_risks": [
+      {
+        "risk_type": "Prior conviction admissibility",
+        "severity": "high",
+        "probability": "high",
+        "description": "2019 burglary conviction likely admissible to show pattern"
+      }
+    ]
+  },
+
+  "validation_notes": "Should score 78-93 (high risk) due to four independent eyewitnesses, forensic corroboration, implausible defense explanation, prior burglary conviction, both arguments critically weak."
+}

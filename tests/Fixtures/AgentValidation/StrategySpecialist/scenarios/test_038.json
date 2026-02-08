@@ -1,0 +1,70 @@
+{
+  "test_id": "strategy_strong_003",
+  "description": "Strong position: Evidence suppression with Supreme Court backing",
+
+  "input": {
+    "problem_statement": "Client charged with drug trafficking. All evidence obtained through illegal wiretap without court authorization. Supreme Court precedent mandates exclusion.",
+    "strongest_precedents": [
+      {
+        "court": "Ustavni sud RH",
+        "applicability_score": 94,
+        "binding_authority": "binding",
+        "case_number": "U-III-2145/2023",
+        "favorable": true
+      },
+      {
+        "court": "Vrhovni sud RH",
+        "applicability_score": 90,
+        "binding_authority": "binding",
+        "case_number": "I Kž-982/2020",
+        "favorable": true
+      }
+    ],
+    "analyzed_laws": [
+      {
+        "law_number": "ZKP Članak 332",
+        "title": "Prisluškivanje telekomunikacija",
+        "relevance_score": 0.96,
+        "applicability": "directly_applicable"
+      },
+      {
+        "law_number": "Ustav RH Članak 37",
+        "title": "Zaštita privatnosti",
+        "relevance_score": 0.94,
+        "applicability": "directly_applicable"
+      }
+    ]
+  },
+
+  "expected_output": {
+    "arguments_count_range": [3, 4],
+    "primary_strategy_theme": "illegal surveillance",
+    "success_probability_range": [0.80, 0.92],
+    "should_include": {
+      "settlement_recommendation": false,
+      "procedural_steps": [
+        "file motion to suppress all wiretap evidence",
+        "cite binding Constitutional Court precedent",
+        "challenge any derivative evidence (fruit of poisonous tree)",
+        "if granted, prosecution has no case - move to dismiss"
+      ],
+      "evidence_needed": [
+        "wiretap authorization documents (or lack thereof)",
+        "timeline showing no court order",
+        "list of all evidence derived from wiretap"
+      ],
+      "argument_titles": [
+        "Illegal wiretap violates constitutional privacy rights",
+        "No judicial authorization obtained",
+        "Binding precedent mandates complete exclusion",
+        "Derivative evidence also inadmissible (fruit doctrine)"
+      ]
+    },
+    "expected_argument_strengths": {
+      "average_range": [82, 94],
+      "strongest_argument_score_min": 90
+    }
+  },
+
+  "validation_notes": "Should generate 3-4 very strong arguments (avg 82-94), no settlement (position extremely strong), success probability 80-92%, emphasize constitutional violation and fruit of poisonous tree doctrine, likely complete dismissal if motion granted."
+}

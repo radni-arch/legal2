@@ -1,0 +1,44 @@
+{
+  "test_id": "precedent_low_001",
+  "category": "low-applicability",
+  "expected_score_range": [20, 45],
+  "description": "Foreign court precedent from EU jurisdiction",
+
+  "input": {
+    "problem_statement": "Client claims prosecutorial misconduct and demands dismissal. Question: What precedents support this claim?",
+    "researched_decisions": [
+      {
+        "ecli": "ECHR:2018:0305JUD000234",
+        "court": "European Court of Human Rights",
+        "case_number": "Application 234/2018",
+        "decision_date": "2018-03-05",
+        "title": "Prosecutorial misconduct in criminal proceedings",
+        "summary": "ECHR found violation of Article 6 ECHR due to prosecutorial misconduct. However, this is international court ruling that has persuasive but not binding effect in Croatian national courts. Croatian courts may consider ECHR jurisprudence but are not obligated to follow specific remedies."
+      }
+    ],
+    "researched_laws": [
+      {
+        "law_number": "ECHR Article 6",
+        "title": "Right to fair trial",
+        "content": "International convention provision, not Croatian national law.",
+        "similarity": 0.55
+      }
+    ]
+  },
+
+  "expected_output": {
+    "applicability_score": 35,
+    "binding_authority": "informative",
+    "key_factors": [
+      "međunarodni sud",
+      "nije binding u RH",
+      "različit pravni sustav",
+      "persuasive ali ne obvezujuće",
+      "potrebna adaptacija"
+    ],
+    "favorable": true,
+    "reasoning": "ECHR presuda ima samo informativnu vrijednost. Nije obvezujuća za hrvatske sudove. Može se koristiti kao persuasive argument ali nije direktno primjenjiva. Različit pravni okvir i proceduralni sustav."
+  },
+
+  "validation_notes": "Should score 20-45 due to foreign/international court (informative only), different legal system, not binding in Croatia, requires significant adaptation to apply Croatian law."
+}

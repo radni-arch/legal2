@@ -1,0 +1,140 @@
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\AnalyzeTextractLayoutTest::it_parses_textract_blocks_page_line_word(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\AnalyzeTextractLayoutTest::it_reconstructs_document_structure_with_multiple_pages(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\AnalyzeTextractLayoutTest::it_identifies_headers_with_bold_style_inference(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\AnalyzeTextractLayoutTest::it_extracts_reading_order_top_to_bottom_left_to_right(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\AnalyzeTextractLayoutTest::it_handles_multi_column_layouts(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\AnalyzeTextractLayoutTest::it_identifies_tables_and_extracts_structure(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\AnalyzeTextractLayoutTest::it_handles_rotated_text(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\AnalyzeTextractLayoutTest::it_calculates_confidence_scores_per_section(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\AnalyzeTextractLayoutTest::it_identifies_form_fields_key_value_pairs(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\AnalyzeTextractLayoutTest::it_handles_missing_blocks_gracefully(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\AnalyzeTextractLayoutTest::it_handles_malformed_blocks_without_geometry(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\AnalyzeTextractLayoutTest::it_preserves_spatial_relationships_with_normalized_coordinates(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\AnalyzeTextractLayoutTest::it_generates_layout_metadata_with_page_count_and_line_count(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\AnalyzeTextractLayoutTest::it_handles_signature_blocks(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\AnalyzeTextractLayoutTest::it_clamps_out_of_range_coordinates(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\AnalyzeTextractLayoutTest::it_parses_json_string_input(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\AnalyzeTextractLayoutTest::it_throws_exception_for_invalid_json_string(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\AnalyzeTextractLayoutTest::it_throws_exception_when_no_pages_found(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\AnalyzeTextractLayoutTest::it_handles_action_with_file_path(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ExtractDocumentMetadataTest::it_extracts_case_numbers_with_croatian_patterns(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ExtractDocumentMetadataTest::it_extracts_croatian_court_names(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ExtractDocumentMetadataTest::it_extracts_dates_in_multiple_formats(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ExtractDocumentMetadataTest::it_extracts_judge_names(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ExtractDocumentMetadataTest::it_extracts_party_names_plaintiff_and_defendant(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ExtractDocumentMetadataTest::it_extracts_document_type_presuda_rjesenje_zapisnik(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ExtractDocumentMetadataTest::it_extracts_legal_citations_zkp_zpp_ustav_rh(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ExtractDocumentMetadataTest::it_handles_multiple_date_formats_croatian_months(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ExtractDocumentMetadataTest::it_handles_missing_metadata_gracefully(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ExtractDocumentMetadataTest::it_validates_extracted_data_structure(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ExtractDocumentMetadataTest::it_handles_croatian_language_text_with_diacritics(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ExtractDocumentMetadataTest::it_extracts_jmbg_and_oib_numbers(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ExtractDocumentMetadataTest::it_extracts_addresses(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ExtractDocumentMetadataTest::it_provides_confidence_scoring_for_each_field(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ExtractDocumentMetadataTest::it_handles_ocr_errors_in_metadata_extraction(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ExtractDocumentMetadataTest::it_returns_structured_metadata_object(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ExtractDocumentMetadataTest::it_throws_exception_if_job_not_found(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ExtractDocumentMetadataTest::it_throws_exception_if_json_not_found(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ExtractDocumentMetadataTest::it_saves_metadata_to_job_when_requested(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ReconstructPdfV2Test::it_generates_searchable_pdf_from_ocr_document(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ReconstructPdfV2Test::it_positions_text_with_normalized_coordinates(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ReconstructPdfV2Test::it_handles_multi_page_documents(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ReconstructPdfV2Test::it_renders_croatian_diacritics_correctly(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ReconstructPdfV2Test::it_handles_large_documents_with_100_plus_pages(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ReconstructPdfV2Test::it_validates_pdf_file_size_optimization(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ReconstructPdfV2Test::it_preserves_pdf_metadata(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ReconstructPdfV2Test::it_generates_pdf_with_utf8_encoding(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ReconstructPdfV2Test::it_handles_missing_or_empty_text_blocks(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ReconstructPdfV2Test::it_renders_signature_boxes_on_pages(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ReconstructPdfV2Test::it_disables_signature_rendering_when_configured(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ReconstructPdfV2Test::it_estimates_font_size_from_bounding_box_height(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ReconstructPdfV2Test::it_applies_shrink_to_fit_for_long_text(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ReconstructPdfV2Test::it_validates_pdf_structure_is_valid(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ReconstructPdfV2Test::it_throws_exception_for_empty_document(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ReconstructPdfV2Test::it_creates_output_directory_if_not_exists(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ReconstructPdfV2Test::it_handles_text_with_different_confidence_levels(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ReconstructPdfV2Test::it_handles_text_at_page_boundaries(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\ReconstructPdfV2Test::it_returns_absolute_path_to_generated_pdf(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\SaveAnalysisResultsTest::it_saves_raw_textract_json_to_s3_storage(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\SaveAnalysisResultsTest::it_saves_raw_textract_json_to_local_filesystem(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\SaveAnalysisResultsTest::it_saves_extracted_text_to_database(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\SaveAnalysisResultsTest::it_saves_metadata_to_database(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\SaveAnalysisResultsTest::it_updates_job_status_to_completed(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\SaveAnalysisResultsTest::it_records_processing_timestamps(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\SaveAnalysisResultsTest::it_handles_database_transaction_rollback_on_error(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\SaveAnalysisResultsTest::it_compresses_large_json_results(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\SaveAnalysisResultsTest::it_validates_json_structure_before_saving(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\SaveAnalysisResultsTest::it_rejects_invalid_json_structure(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\SaveAnalysisResultsTest::it_updates_statistics_page_count_and_word_count(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\SaveAnalysisResultsTest::it_triggers_textract_completed_event(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Unit\Actions\Textract\UploadOutputToS3Test::it_uploads_searchable_pdf_to_s3_output_bucket(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.

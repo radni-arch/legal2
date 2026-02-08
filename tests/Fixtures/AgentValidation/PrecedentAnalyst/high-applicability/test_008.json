@@ -1,0 +1,50 @@
+{
+  "test_id": "precedent_high_008",
+  "category": "high-applicability",
+  "expected_score_range": [81, 91],
+  "description": "Supreme Court ruling on self-defense justification in assault case",
+
+  "input": {
+    "problem_statement": "Client charged with assault after punching attacker who threatened with knife. Prosecutor argues response was excessive. Question: Does this qualify as justified self-defense?",
+    "researched_decisions": [
+      {
+        "ecli": "HR:VSRH:2021:I-Kž-673",
+        "court": "Vrhovni sud Republike Hrvatske",
+        "case_number": "I Kž-673/2021",
+        "decision_date": "2021-05-14",
+        "title": "Nužna obrana protiv napada hladnim oružjem",
+        "summary": "Vrhovni sud prihvatio obranu nužne obrane. Napad nožem predstavlja ozbiljnu prijetnju životu, te je udarac šakom predstavljao proporcionalan odgovor. Sud utvrdio da je reakcija bila neposredna i nužna za odvrać anje napada. Okrivljenik oslobođen."
+      }
+    ],
+    "researched_laws": [
+      {
+        "law_number": "KZ Članak 18",
+        "title": "Nužna obrana",
+        "content": "Nije kazneno djelo ono djelo koje je netko počinio u nužnoj obrani. Nužna obrana postoji kada se djelo počini u svrhu odbijanja istodobnog protupravnog napada koji prijeti neposredno izvršenju kaznenog djela.",
+        "similarity": 0.93
+      },
+      {
+        "law_number": "KZ Članak 19",
+        "title": "Prekoračenje nužne obrane",
+        "content": "Tko prekorači granice nužne obrane zbog jake razdraženosti ili straha izazvanih napadom, može se osloboditi kazne. Proporcionalnost odgovora ne smije se strogo ocjenjivati u situaciji opasnosti.",
+        "similarity": 0.86
+      }
+    ]
+  },
+
+  "expected_output": {
+    "applicability_score": 86,
+    "binding_authority": "binding",
+    "key_factors": [
+      "napad hladnim oružjem",
+      "ozbiljna prijetnja životu",
+      "proporcionalan odgovor",
+      "neposredna reakcija",
+      "oslobođenje"
+    ],
+    "favorable": true,
+    "reasoning": "Vrhovno sudska presuda o nužnoj obrani protiv napada nožem. Identična vrsta prijetnje (hadno oružje) i odgovora (fizička sila bez oružja). Jasna primjena načela proporcionalnosti. Binding precedent s povoljnim ishodom."
+  },
+
+  "validation_notes": "Should score 84-89 due to Supreme Court binding authority, similar weapon threat scenario (knife attack), proportionate response principle, and favorable outcome (acquittal)."
+}

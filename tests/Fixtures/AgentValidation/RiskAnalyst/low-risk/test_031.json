@@ -1,0 +1,78 @@
+{
+  "test_id": "risk_low_001",
+  "category": "low-risk",
+  "expected_risk_level": "low",
+  "expected_score_range": [20, 45],
+  "description": "Strong defense evidence with weak prosecution case",
+
+  "input": {
+    "problem_statement": "Client charged with assault. Client has video evidence showing victim as initial aggressor. Three witnesses support client's self-defense claim. Medical evidence shows client's injuries more severe than victim's.",
+    "legal_arguments": [
+      {
+        "title": "Self-defense - victim was aggressor",
+        "argument": "Video and three witnesses show victim attacked first, client defended proportionately",
+        "strength_score": 85,
+        "legal_basis": ["KZ Članak 18", "Video evidence", "Three witness statements"],
+        "potential_counterarguments": [
+          "Prosecution has one witness (victim's account)",
+          "Minor inconsistency in one witness timeline"
+        ]
+      },
+      {
+        "title": "Proportionate response",
+        "argument": "Client's response was proportionate - no weapon used, stopped when threat ended",
+        "strength_score": 82,
+        "legal_basis": ["Medical records showing proportionality"],
+        "potential_counterarguments": [
+          "Minor injury to victim"
+        ]
+      }
+    ],
+    "strongest_precedents": [
+      {
+        "court": "Vrhovni sud",
+        "applicability_score": 85,
+        "binding_authority": "binding",
+        "favorable": true
+      }
+    ],
+    "strategic_recommendations": {
+      "procedural_steps": [
+        "Present video evidence",
+        "Call three witnesses",
+        "Enter medical records",
+        "File motion to dismiss"
+      ]
+    }
+  },
+
+  "expected_output": {
+    "overall_risk_score": {
+      "score": 32,
+      "level": "low"
+    },
+    "argument_risks": [
+      {
+        "argument_index": 0,
+        "risk_level": "low",
+        "impact_if_fails": "medium",
+        "weaknesses": [
+          "Minor timeline inconsistency in one witness"
+        ],
+        "mitigation_suggestions": [
+          "Address inconsistency on direct examination"
+        ]
+      },
+      {
+        "argument_index": 1,
+        "risk_level": "low",
+        "impact_if_fails": "low",
+        "weaknesses": []
+      }
+    ],
+    "adverse_precedents": [],
+    "procedural_risks": []
+  },
+
+  "validation_notes": "Should score 20-45 (low risk) due to strong objective evidence (video), multiple corroborating witnesses, favorable Supreme Court precedent, proportionality supported by medical evidence, weak prosecution case."
+}

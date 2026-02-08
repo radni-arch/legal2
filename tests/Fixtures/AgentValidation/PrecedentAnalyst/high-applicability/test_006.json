@@ -1,0 +1,50 @@
+{
+  "test_id": "precedent_high_006",
+  "category": "high-applicability",
+  "expected_score_range": [83, 93],
+  "description": "Supreme Court ruling on entrapment defense in drug buy-bust operation",
+
+  "input": {
+    "problem_statement": "Undercover police officer repeatedly pressured client over 2 months to sell drugs. Client had no prior drug involvement. Finally agreed to single sale and was arrested. Question: Does this constitute entrapment?",
+    "researched_decisions": [
+      {
+        "ecli": "HR:VSRH:2022:I-Kž-1122",
+        "court": "Vrhovni sud Republike Hrvatske",
+        "case_number": "I Kž-1122/2022",
+        "decision_date": "2022-08-18",
+        "title": "Prihvaćanje obrane navođenja na kazneno djelo (agent provocateur)",
+        "summary": "Vrhovni sud prihvatio obranu navođenja. Policijski agent tijekom dva mjeseca nagovarao okrivljenika bez prethodne kriminalne aktivnosti da počini djelo. Sud utvrdio da je policijsko postupanje prešlo granicu dopuštenog i predstavlja agent provocateur. Optužba odbijena."
+      }
+    ],
+    "researched_laws": [
+      {
+        "law_number": "ZKP Članak 332a",
+        "title": "Prikriveni istražitelj",
+        "content": "Prikriveni istražitelj ne smije poticati počinjenje kaznenog djela. Postupanje kojim se netko navodi na djelo koje inače ne bi počinio predstavlja nedopušteno navođenje (agent provocateur).",
+        "similarity": 0.92
+      },
+      {
+        "law_number": "KZ Članak 31 stavak 5",
+        "title": "Isključenje protupravnosti",
+        "content": "Nije protupravno djelo počinjeno pod utjecajem navođenja policijskog službenika koje prelazi granicu dopuštenog.",
+        "similarity": 0.85
+      }
+    ]
+  },
+
+  "expected_output": {
+    "applicability_score": 88,
+    "binding_authority": "binding",
+    "key_factors": [
+      "agent provocateur",
+      "višemjesečno nagovaranje",
+      "nema prethodne kriminalne aktivnosti",
+      "prekoračenje dopuštene policijske taktike",
+      "odbijanje optužbe"
+    ],
+    "favorable": true,
+    "reasoning": "Vrhovno sudska presuda o istoj taktici (produženo nagovaranje osobe bez kriminalne prošlosti). Isti vremenski okvir (2 mjeseca). Jasna primjena obrane navođenja. Binding precedent."
+  },
+
+  "validation_notes": "Should score 86-91 due to Supreme Court binding authority, identical facts (2-month pressure campaign, no prior involvement), favorable outcome (charges dismissed), and recent decision."
+}

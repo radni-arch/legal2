@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+#######################################
+# Git Pre-commit Hook
+#######################################
+# Runs all pre-commit checks.
+# Install: ./scripts/git-hooks/install.sh
+#
+set -uo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# If running from .git/hooks, find the scripts directory
+if [[ "$SCRIPT_DIR" == *".git/hooks"* ]]; then
+    PROJECT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
+    HOOKS_DIR="${PROJECT_DIR}/scripts/git-hooks"
+else
+    HOOKS_DIR="$SCRIPT_DIR"
+fi
+
+# Track if any hook fails
+EXIT_CODE=0
+
+#######################################
+# Run Queue Guard
+#######################################
+if [[ -x "${HOOKS_DIR}/pre-commit-queue-guard.sh" ]]; then
+    if ! "${HOOKS_DIR}/pre-commit-queue-guard.sh"; then
+        EXIT_CODE=1
+    fi
+fi
+
+# Add more hooks here as needed:
+# if [[ -x "${HOOKS_DIR}/pre-commit-other.sh" ]]; then
+#     if ! "${HOOKS_DIR}/pre-commit-other.sh"; then
+#         EXIT_CODE=1
+#     fi
+# fi
+
+exit $EXIT_CODE

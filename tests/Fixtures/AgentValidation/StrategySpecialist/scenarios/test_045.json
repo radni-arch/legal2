@@ -1,0 +1,59 @@
+{
+  "test_id": "strategy_weak_003",
+  "description": "Weak position: Procedural compliance but challenging facts",
+
+  "input": {
+    "problem_statement": "Client charged with embezzlement from employer. Clear paper trail shows unauthorized transfers to client's account totaling 500,000 HRK. Client claims it was bonus owed but no documentation. Employer has detailed records.",
+    "strongest_precedents": [
+      {
+        "court": "Vrhovni sud RH",
+        "applicability_score": 71,
+        "binding_authority": "binding",
+        "case_number": "I Kž-567/2018",
+        "favorable": false
+      }
+    ],
+    "analyzed_laws": [
+      {
+        "law_number": "KZ Članak 224",
+        "title": "Pronevjera",
+        "relevance_score": 0.93,
+        "applicability": "directly_applicable"
+      }
+    ]
+  },
+
+  "expected_output": {
+    "arguments_count_range": [2, 3],
+    "primary_strategy_theme": "restitution and mitigation",
+    "success_probability_range": [0.12, 0.28],
+    "should_include": {
+      "settlement_recommendation": true,
+      "procedural_steps": [
+        "negotiate restitution agreement",
+        "seek reduced charges through cooperation",
+        "document any possible salary/bonus disputes",
+        "prepare mitigation evidence",
+        "explore civil settlement to show good faith"
+      ],
+      "evidence_needed": [
+        "employment contract if exists",
+        "any email/communication about bonuses",
+        "client's financial ability for restitution",
+        "character references from community",
+        "evidence of restitution efforts"
+      ],
+      "argument_titles": [
+        "Dispute over compensation not criminal intent (weak)",
+        "Client willing to make full restitution",
+        "Civil matter more appropriate than criminal"
+      ]
+    },
+    "expected_argument_strengths": {
+      "average_range": [22, 40],
+      "strongest_argument_score_min": 35
+    }
+  },
+
+  "validation_notes": "Should generate 2-3 weak arguments (avg 22-40), strongly recommend plea with restitution, low success probability 12-28%, focus on civil vs criminal nature and restitution, practical damage control strategy."
+}

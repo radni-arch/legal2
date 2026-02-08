@@ -1,0 +1,539 @@
+{
+  "dashboard": {
+    "title": "Emerging Legal Entities",
+    "description": "Track new prosecutors, judges, keywords, and courts as they emerge in the system (Sprint 8.1)",
+    "tags": ["ai-legal", "entities", "neo4j", "tracking"],
+    "timezone": "browser",
+    "schemaVersion": 38,
+    "version": 1,
+    "refresh": "1h",
+    "time": {
+      "from": "now-30d",
+      "to": "now"
+    },
+    "panels": [
+      {
+        "id": 1,
+        "title": "New Entities (Last 7 Days)",
+        "description": "Total count of new entities detected in the last 7 days",
+        "type": "stat",
+        "datasource": {
+          "type": "postgres",
+          "uid": "ai-legal-postgres"
+        },
+        "targets": [
+          {
+            "format": "table",
+            "rawSql": "SELECT COUNT(*) as value FROM emerging_entities WHERE detected_at >= NOW() - INTERVAL '7 days'",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": 0, "color": "green"},
+                {"value": 10, "color": "yellow"},
+                {"value": 50, "color": "red"}
+              ]
+            },
+            "mappings": []
+          }
+        },
+        "gridPos": {"h": 6, "w": 6, "x": 0, "y": 0},
+        "options": {
+          "graphMode": "area",
+          "colorMode": "value",
+          "justifyMode": "auto",
+          "textMode": "auto",
+          "reduceOptions": {
+            "values": false,
+            "calcs": ["lastNotNull"]
+          }
+        }
+      },
+      {
+        "id": 2,
+        "title": "Entities by Type",
+        "description": "Distribution of new entities by type (last 7 days)",
+        "type": "piechart",
+        "datasource": {
+          "type": "postgres",
+          "uid": "ai-legal-postgres"
+        },
+        "targets": [
+          {
+            "format": "table",
+            "rawSql": "SELECT entity_type as metric, COUNT(*) as value FROM emerging_entities WHERE detected_at >= NOW() - INTERVAL '7 days' GROUP BY entity_type ORDER BY value DESC",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "custom": {
+              "hideFrom": {
+                "tooltip": false,
+                "viz": false,
+                "legend": false
+              }
+            },
+            "mappings": []
+          },
+          "overrides": [
+            {
+              "matcher": {"id": "byName", "options": "prosecutor"},
+              "properties": [{"id": "color", "value": {"mode": "fixed", "fixedColor": "red"}}]
+            },
+            {
+              "matcher": {"id": "byName", "options": "judge"},
+              "properties": [{"id": "color", "value": {"mode": "fixed", "fixedColor": "orange"}}]
+            },
+            {
+              "matcher": {"id": "byName", "options": "court"},
+              "properties": [{"id": "color", "value": {"mode": "fixed", "fixedColor": "blue"}}]
+            },
+            {
+              "matcher": {"id": "byName", "options": "keyword"},
+              "properties": [{"id": "color", "value": {"mode": "fixed", "fixedColor": "green"}}]
+            }
+          ]
+        },
+        "gridPos": {"h": 6, "w": 6, "x": 6, "y": 0},
+        "options": {
+          "pieType": "pie",
+          "displayLabels": ["name", "percent"],
+          "legend": {
+            "displayMode": "table",
+            "placement": "right",
+            "values": ["value", "percent"]
+          }
+        }
+      },
+      {
+        "id": 3,
+        "title": "High Priority Entities (Last 7 Days)",
+        "description": "Entities with relevance score >= 0.75",
+        "type": "stat",
+        "datasource": {
+          "type": "postgres",
+          "uid": "ai-legal-postgres"
+        },
+        "targets": [
+          {
+            "format": "table",
+            "rawSql": "SELECT COUNT(*) as value FROM emerging_entities WHERE detected_at >= NOW() - INTERVAL '7 days' AND relevance_score >= 0.75",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": 0, "color": "green"},
+                {"value": 5, "color": "yellow"},
+                {"value": 10, "color": "red"}
+              ]
+            }
+          }
+        },
+        "gridPos": {"h": 6, "w": 6, "x": 12, "y": 0},
+        "options": {
+          "graphMode": "none",
+          "colorMode": "background",
+          "textMode": "auto"
+        }
+      },
+      {
+        "id": 4,
+        "title": "New Prosecutors Alert",
+        "description": "Count of new prosecutors (highest priority)",
+        "type": "stat",
+        "datasource": {
+          "type": "postgres",
+          "uid": "ai-legal-postgres"
+        },
+        "targets": [
+          {
+            "format": "table",
+            "rawSql": "SELECT COUNT(*) as value FROM emerging_entities WHERE entity_type = 'prosecutor' AND detected_at >= NOW() - INTERVAL '7 days'",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": 0, "color": "green"},
+                {"value": 1, "color": "yellow"},
+                {"value": 5, "color": "red"}
+              ]
+            }
+          }
+        },
+        "gridPos": {"h": 6, "w": 6, "x": 18, "y": 0},
+        "options": {
+          "graphMode": "none",
+          "colorMode": "background",
+          "textMode": "value_and_name"
+        }
+      },
+      {
+        "id": 5,
+        "title": "4-Week Emerging Entity Trend",
+        "description": "Rolling trend of new entities detected per week over last 4 weeks",
+        "type": "timeseries",
+        "datasource": {
+          "type": "postgres",
+          "uid": "ai-legal-postgres"
+        },
+        "targets": [
+          {
+            "format": "time_series",
+            "rawSql": "SELECT DATE_TRUNC('week', detected_at) as time, entity_type, COUNT(*) as value FROM emerging_entities WHERE detected_at >= NOW() - INTERVAL '28 days' GROUP BY DATE_TRUNC('week', detected_at), entity_type ORDER BY time",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "lineWidth": 2,
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "lineInterpolation": "smooth",
+              "spanNulls": false,
+              "showPoints": "always",
+              "pointSize": 5,
+              "stacking": {
+                "mode": "none",
+                "group": "A"
+              },
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": 0, "color": "green"},
+                {"value": 10, "color": "yellow"},
+                {"value": 50, "color": "red"}
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {"id": "byName", "options": "prosecutor"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "red"}},
+                {"id": "custom.lineWidth", "value": 3}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "judge"},
+              "properties": [{"id": "color", "value": {"mode": "fixed", "fixedColor": "orange"}}]
+            },
+            {
+              "matcher": {"id": "byName", "options": "court"},
+              "properties": [{"id": "color", "value": {"mode": "fixed", "fixedColor": "blue"}}]
+            },
+            {
+              "matcher": {"id": "byName", "options": "keyword"},
+              "properties": [{"id": "color", "value": {"mode": "fixed", "fixedColor": "green"}}]
+            }
+          ]
+        },
+        "gridPos": {"h": 8, "w": 24, "x": 0, "y": 6},
+        "options": {
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          },
+          "legend": {
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true,
+            "values": ["value", "min", "max"]
+          }
+        }
+      },
+      {
+        "id": 6,
+        "title": "Top 10 Entities by Relevance (Last 7 Days)",
+        "description": "Highest impact entities ranked by relevance score",
+        "type": "table",
+        "datasource": {
+          "type": "postgres",
+          "uid": "ai-legal-postgres"
+        },
+        "targets": [
+          {
+            "format": "table",
+            "rawSql": "SELECT entity_name as \"Entity\", entity_type as \"Type\", decision_count as \"Decisions\", ROUND(relevance_score::numeric, 2) as \"Relevance\", TO_CHAR(first_seen_at, 'YYYY-MM-DD') as \"First Seen\" FROM emerging_entities WHERE detected_at >= NOW() - INTERVAL '7 days' ORDER BY relevance_score DESC, decision_count DESC LIMIT 10",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "align": "auto",
+              "displayMode": "auto"
+            },
+            "mappings": []
+          },
+          "overrides": [
+            {
+              "matcher": {"id": "byName", "options": "Relevance"},
+              "properties": [
+                {
+                  "id": "custom.displayMode",
+                  "value": "gradient-gauge"
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "mode": "thresholds"
+                  }
+                },
+                {
+                  "id": "thresholds",
+                  "value": {
+                    "mode": "absolute",
+                    "steps": [
+                      {"value": 0, "color": "green"},
+                      {"value": 0.5, "color": "yellow"},
+                      {"value": 0.75, "color": "orange"},
+                      {"value": 0.9, "color": "red"}
+                    ]
+                  }
+                },
+                {
+                  "id": "min",
+                  "value": 0
+                },
+                {
+                  "id": "max",
+                  "value": 1
+                }
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Type"},
+              "properties": [
+                {
+                  "id": "custom.displayMode",
+                  "value": "color-background"
+                },
+                {
+                  "id": "mappings",
+                  "value": [
+                    {"type": "value", "value": "prosecutor", "text": "Prosecutor", "color": "red"},
+                    {"type": "value", "value": "judge", "text": "Judge", "color": "orange"},
+                    {"type": "value", "value": "court", "text": "Court", "color": "blue"},
+                    {"type": "value", "value": "keyword", "text": "Keyword", "color": "green"}
+                  ]
+                }
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Decisions"},
+              "properties": [
+                {
+                  "id": "custom.displayMode",
+                  "value": "lcd-gauge"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {"h": 10, "w": 24, "x": 0, "y": 14},
+        "options": {
+          "showHeader": true,
+          "sortBy": [
+            {
+              "displayName": "Relevance",
+              "desc": true
+            }
+          ]
+        }
+      },
+      {
+        "id": 7,
+        "title": "Entities by Week (Stacked)",
+        "description": "Stacked area chart showing entity emergence over time",
+        "type": "timeseries",
+        "datasource": {
+          "type": "postgres",
+          "uid": "ai-legal-postgres"
+        },
+        "targets": [
+          {
+            "format": "time_series",
+            "rawSql": "SELECT DATE_TRUNC('week', detected_at) as time, entity_type, COUNT(*) as value FROM emerging_entities WHERE detected_at >= NOW() - INTERVAL '28 days' GROUP BY DATE_TRUNC('week', detected_at), entity_type ORDER BY time",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "lineWidth": 0,
+              "fillOpacity": 80,
+              "gradientMode": "opacity",
+              "lineInterpolation": "smooth",
+              "spanNulls": true,
+              "stacking": {
+                "mode": "normal",
+                "group": "A"
+              },
+              "drawStyle": "line"
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {"id": "byName", "options": "prosecutor"},
+              "properties": [{"id": "color", "value": {"mode": "fixed", "fixedColor": "red"}}]
+            },
+            {
+              "matcher": {"id": "byName", "options": "judge"},
+              "properties": [{"id": "color", "value": {"mode": "fixed", "fixedColor": "orange"}}]
+            },
+            {
+              "matcher": {"id": "byName", "options": "court"},
+              "properties": [{"id": "color", "value": {"mode": "fixed", "fixedColor": "blue"}}]
+            },
+            {
+              "matcher": {"id": "byName", "options": "keyword"},
+              "properties": [{"id": "color", "value": {"mode": "fixed", "fixedColor": "green"}}]
+            }
+          ]
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 24},
+        "options": {
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          },
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          }
+        }
+      },
+      {
+        "id": 8,
+        "title": "Average Relevance Score by Type",
+        "description": "Average relevance scores for each entity type",
+        "type": "bargauge",
+        "datasource": {
+          "type": "postgres",
+          "uid": "ai-legal-postgres"
+        },
+        "targets": [
+          {
+            "format": "table",
+            "rawSql": "SELECT entity_type as metric, ROUND(AVG(relevance_score)::numeric, 2) as value FROM emerging_entities WHERE detected_at >= NOW() - INTERVAL '7 days' GROUP BY entity_type ORDER BY value DESC",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percentunit",
+            "min": 0,
+            "max": 1,
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": 0, "color": "green"},
+                {"value": 0.5, "color": "yellow"},
+                {"value": 0.75, "color": "orange"},
+                {"value": 0.9, "color": "red"}
+              ]
+            }
+          }
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 24},
+        "options": {
+          "orientation": "horizontal",
+          "displayMode": "gradient",
+          "showUnfilled": true
+        }
+      }
+    ],
+    "annotations": {
+      "list": [
+        {
+          "name": "Detection Runs",
+          "datasource": {
+            "type": "postgres",
+            "uid": "ai-legal-postgres"
+          },
+          "enable": true,
+          "iconColor": "blue",
+          "rawQuery": "SELECT detected_at as time, 'Detection Run' as text, 'Emerging entity detection executed' as tags FROM emerging_entities GROUP BY detected_at ORDER BY detected_at DESC"
+        }
+      ]
+    },
+    "templating": {
+      "list": [
+        {
+          "name": "entity_type",
+          "type": "query",
+          "label": "Entity Type",
+          "datasource": {
+            "type": "postgres",
+            "uid": "ai-legal-postgres"
+          },
+          "query": "SELECT DISTINCT entity_type FROM emerging_entities ORDER BY entity_type",
+          "multi": true,
+          "includeAll": true,
+          "allValue": ".*"
+        },
+        {
+          "name": "time_range",
+          "type": "interval",
+          "label": "Time Range",
+          "auto": true,
+          "auto_count": 30,
+          "auto_min": "1d",
+          "options": [
+            {"text": "7 days", "value": "7d"},
+            {"text": "14 days", "value": "14d"},
+            {"text": "30 days", "value": "30d"},
+            {"text": "90 days", "value": "90d"}
+          ],
+          "current": {
+            "text": "7 days",
+            "value": "7d"
+          }
+        }
+      ]
+    }
+  }
+}

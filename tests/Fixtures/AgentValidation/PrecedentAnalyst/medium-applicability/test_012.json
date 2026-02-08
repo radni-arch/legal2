@@ -1,0 +1,44 @@
+{
+  "test_id": "precedent_medium_002",
+  "category": "medium-applicability",
+  "expected_score_range": [55, 70],
+  "description": "Appellate court search warrant case with different factual context",
+
+  "input": {
+    "problem_statement": "Client's home searched based on anonymous tip about drug dealing. No drugs found but illegal firearm discovered. Question: Should firearm evidence be excluded?",
+    "researched_decisions": [
+      {
+        "ecli": "HR:VSZG:2018:Kž-234",
+        "court": "Županijski sud u Zagrebu",
+        "case_number": "Kž-234/2018",
+        "decision_date": "2018-12-10",
+        "title": "Nalog za pretres temeljen na anonimnoj dojavi",
+        "summary": "Županijski sud utvrdio da je nalog za pretres bio valjan jer je policija provela dodatnu istragu prije traženja naloga. Međutim, pretres je bio vezan uz opojne droge, a pronađeno oružje. Sud prihvatio dokaze pod doktrinom 'plain view' jer je oružje bilo vidljivo tijekom zakonitog pretresa."
+      }
+    ],
+    "researched_laws": [
+      {
+        "law_number": "ZKP Članak 199",
+        "title": "Slučajni nalaz",
+        "content": "Predmeti pronađeni tijekom zakonitog pretresa mogu se oduzeti i ako se odnose na drugo kazneno djelo.",
+        "similarity": 0.72
+      }
+    ]
+  },
+
+  "expected_output": {
+    "applicability_score": 62,
+    "binding_authority": "persuasive",
+    "key_factors": [
+      "anonimna dojava",
+      "slučajni nalaz",
+      "plain view doktrina",
+      "različit tip dokaza",
+      "persuasive authority"
+    ],
+    "favorable": false,
+    "reasoning": "Županijski sud (persuasive). Slične okolnosti (anonimna dojava) ali različit ishod (sud prihvatio dokaze). Starija presuda (2018). Primjena 'plain view' doktrine koja može biti relevantna."
+  },
+
+  "validation_notes": "Should score 55-70 due to persuasive authority, partial similarity (anonymous tip), older precedent (2018), unfavorable outcome but distinguishable on plain view doctrine."
+}

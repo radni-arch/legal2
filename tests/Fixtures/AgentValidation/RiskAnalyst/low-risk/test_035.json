@@ -1,0 +1,79 @@
+{
+  "test_id": "risk_low_005",
+  "category": "low-risk",
+  "expected_risk_level": "low",
+  "expected_score_range": [25, 48],
+  "description": "Strong alibi evidence with weak prosecution case",
+
+  "input": {
+    "problem_statement": "Client charged with robbery at 10pm. Client has timestamped security footage showing him at restaurant 15km away at 9:45pm and 10:15pm. Traffic camera shows his car on route back at 10:20pm. Prosecution has single eyewitness with poor lighting conditions.",
+    "legal_arguments": [
+      {
+        "title": "Alibi - physically impossible to commit crime",
+        "argument": "Security footage + traffic camera prove client could not have been at robbery location",
+        "strength_score": 92,
+        "legal_basis": [
+          "Timestamped video evidence",
+          "Traffic camera GPS data",
+          "Physical impossibility (distance/time)"
+        ],
+        "potential_counterarguments": [
+          "Prosecution eyewitness claims saw client",
+          "Poor lighting undermines witness reliability"
+        ]
+      },
+      {
+        "title": "Eyewitness unreliable",
+        "argument": "Single witness in poor lighting vs objective camera evidence",
+        "strength_score": 84,
+        "legal_basis": ["Eyewitness reliability research", "Poor conditions documented"],
+        "potential_counterarguments": [
+          "Witness seemed certain in identification"
+        ]
+      }
+    ],
+    "strongest_precedents": [
+      {
+        "court": "Vrhovni sud RH",
+        "applicability_score": 78,
+        "binding_authority": "binding",
+        "favorable": true,
+        "summary": "Objective evidence (video) outweighs eyewitness in poor conditions"
+      }
+    ],
+    "strategic_recommendations": {
+      "procedural_steps": [
+        "Present security footage with timestamps",
+        "Present traffic camera data",
+        "Expert testimony on travel time impossibility",
+        "Challenge eyewitness on cross (lighting, distance, stress)"
+      ]
+    }
+  },
+
+  "expected_output": {
+    "overall_risk_score": {
+      "score": 35,
+      "level": "low"
+    },
+    "argument_risks": [
+      {
+        "argument_index": 0,
+        "risk_level": "low",
+        "impact_if_fails": "critical",
+        "weaknesses": [],
+        "mitigation_suggestions": []
+      },
+      {
+        "argument_index": 1,
+        "risk_level": "low",
+        "impact_if_fails": "low",
+        "weaknesses": []
+      }
+    ],
+    "adverse_precedents": [],
+    "procedural_risks": []
+  },
+
+  "validation_notes": "Should score 25-48 (low risk) due to strong objective alibi evidence (timestamped video + traffic camera), physical impossibility, weak prosecution case (single eyewitness in poor conditions), favorable precedent valuing objective over subjective evidence."
+}

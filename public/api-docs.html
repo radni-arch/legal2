@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Croatian Legal AI API Documentation</title>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/swagger-ui-dist@5.10.0/swagger-ui.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .topbar {
+            background-color: #1a1a2e;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .topbar-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1460px;
+            margin: 0 auto;
+        }
+
+        .topbar-title {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .topbar-subtitle {
+            color: #a0a0b0;
+            font-size: 14px;
+            margin: 5px 0 0 0;
+        }
+
+        .topbar-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .topbar-link {
+            color: #a0a0b0;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .topbar-link:hover {
+            color: #ffffff;
+        }
+
+        .swagger-ui .topbar {
+            display: none;
+        }
+
+        .info-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 0;
+        }
+
+        .info-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .info-section h1 {
+            margin: 0 0 10px 0;
+            font-size: 32px;
+        }
+
+        .info-section p {
+            margin: 0 0 20px 0;
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .feature-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .feature-tag {
+            background: rgba(255,255,255,0.2);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stats-section {
+            background: #f8f9fa;
+            padding: 30px 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .stats-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 0;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+            margin: 5px 0 0 0;
+        }
+
+        #swagger-ui {
+            max-width: 1460px;
+            margin: 0 auto;
+        }
+
+        /* Custom theme overrides */
+        .swagger-ui .scheme-container {
+            background: #f8f9fa;
+            box-shadow: none;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .swagger-ui .opblock-tag {
+            border-bottom: 2px solid #667eea;
+            font-size: 18px;
+        }
+
+        .swagger-ui .opblock.opblock-post {
+            border-color: #49cc90;
+        }
+
+        .swagger-ui .opblock.opblock-get {
+            border-color: #61affe;
+        }
+
+        .swagger-ui .opblock.opblock-delete {
+            border-color: #f93e3e;
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <div class="topbar-wrapper">
+            <div>
+                <h1 class="topbar-title">⚖️ Croatian Legal AI War Machine API</h1>
+                <p class="topbar-subtitle">Comprehensive Legal Analysis & Prosecutorial Misconduct Detection</p>
+            </div>
+            <div class="topbar-links">
+                <a href="/" class="topbar-link">Home</a>
+                <a href="/api-docs.html" class="topbar-link">API Docs</a>
+                <a href="/openapi.yaml" class="topbar-link" download>Download OpenAPI Spec</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-section">
+        <div class="info-content">
+            <h1>Croatian Legal AI API v1.0</h1>
+            <p>Advanced AI-powered legal research, analysis, and prosecutorial misconduct detection for the Croatian legal system.</p>
+
+            <div class="feature-tags">
+                <span class="feature-tag">🔍 Legal Document Search</span>
+                <span class="feature-tag">🤖 Multi-Agent Collaboration</span>
+                <span class="feature-tag">⚠️ Misconduct Detection</span>
+                <span class="feature-tag">📊 Predictive Analytics</span>
+                <span class="feature-tag">🧠 Legal Reasoning Engine</span>
+                <span class="feature-tag">🌐 Graph Analysis</span>
+                <span class="feature-tag">🔐 MCP Protocol Support</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-section">
+        <div class="stats-content">
+            <div class="stat-card">
+                <div class="stat-number">122+</div>
+                <div class="stat-label">API Endpoints</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">17</div>
+                <div class="stat-label">API Categories</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">6</div>
+                <div class="stat-label">Misconduct Types</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Specialist Agents</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="swagger-ui"></div>
+
+    <script src="https://unpkg.com/swagger-ui-dist@5.10.0/swagger-ui-bundle.js"></script>
+    <script src="https://unpkg.com/swagger-ui-dist@5.10.0/swagger-ui-standalone-preset.js"></script>
+    <script>
+        window.onload = function() {
+            const ui = SwaggerUIBundle({
+                url: "/openapi.yaml",
+                dom_id: '#swagger-ui',
+                deepLinking: true,
+                presets: [
+                    SwaggerUIBundle.presets.apis,
+                    SwaggerUIStandalonePreset
+                ],
+                plugins: [
+                    SwaggerUIBundle.plugins.DownloadUrl
+                ],
+                layout: "StandaloneLayout",
+                defaultModelsExpandDepth: 1,
+                defaultModelExpandDepth: 1,
+                docExpansion: "list",
+                filter: true,
+                showExtensions: true,
+                showCommonExtensions: true,
+                tryItOutEnabled: true,
+                persistAuthorization: true,
+                syntaxHighlight: {
+                    activate: true,
+                    theme: "monokai"
+                },
+                // Customize the display
+                displayRequestDuration: true,
+                requestSnippetsEnabled: true,
+                requestSnippets: {
+                    generators: {
+                        curl_bash: {
+                            title: "cURL (bash)",
+                            syntax: "bash"
+                        },
+                        curl_powershell: {
+                            title: "cURL (PowerShell)",
+                            syntax: "powershell"
+                        },
+                        curl_cmd: {
+                            title: "cURL (CMD)",
+                            syntax: "bash"
+                        }
+                    },
+                    defaultExpanded: true,
+                    languages: null
+                }
+            });
+
+            window.ui = ui;
+        }
+    </script>
+
+    <footer style="background: #1a1a2e; color: #a0a0b0; padding: 40px 20px; margin-top: 60px;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px;">
+                <div>
+                    <h3 style="color: white; margin-top: 0;">About This API</h3>
+                    <p style="font-size: 14px; line-height: 1.6;">
+                        The Croatian Legal AI War Machine provides comprehensive tools for legal research,
+                        case analysis, and prosecutorial misconduct detection within the Croatian legal system.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 style="color: white; margin-top: 0;">Key Features</h3>
+                    <ul style="list-style: none; padding: 0; font-size: 14px; line-height: 2;">
+                        <li>✓ Vector & Hybrid Search</li>
+                        <li>✓ OpenAI Integration</li>
+                        <li>✓ Multi-Agent System</li>
+                        <li>✓ Neo4j Graph Analysis</li>
+                        <li>✓ Predictive Analytics</li>
+                        <li>✓ MCP Protocol</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 style="color: white; margin-top: 0;">Authentication</h3>
+                    <p style="font-size: 14px; line-height: 1.6;">
+                        Most endpoints require API token authentication via the <code style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 3px;">Authorization: Bearer &lt;token&gt;</code> header.
+                        MCP endpoints use <code style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 3px;">X-MCP-Token</code> header.
+                    </p>
+                </div>
+            </div>
+
+            <div style="border-top: 1px solid #333; margin-top: 40px; padding-top: 20px; text-align: center; font-size: 13px;">
+                <p>Croatian Legal AI War Machine API v1.0 | OpenAPI 3.0.3 Specification</p>
+                <p style="margin-top: 10px;">
+                    <a href="/openapi.yaml" download style="color: #667eea; text-decoration: none;">Download OpenAPI Spec</a> |
+                    <a href="https://github.com" style="color: #667eea; text-decoration: none; margin-left: 20px;">GitHub</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

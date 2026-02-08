@@ -1,0 +1,44 @@
+{
+  "test_id": "precedent_medium_004",
+  "category": "medium-applicability",
+  "expected_score_range": [50, 65],
+  "description": "County court procedural violation with mixed outcome",
+
+  "input": {
+    "problem_statement": "Client's trial held without proper notification to defense attorney about hearing date change. Conviction obtained. Question: Should conviction be overturned?",
+    "researched_decisions": [
+      {
+        "ecli": "HR:ŽSST:2020:K-912",
+        "court": "Županijski sud u Splitu",
+        "case_number": "K-912/2020",
+        "decision_date": "2020-06-18",
+        "title": "Suđenje bez obavijesti branitelju",
+        "summary": "Županijski sud utvrdio povredu postupka zbog propusta obavijesti branitelju. Međutim, sud odlučio da povreda nije bila toliko teška da bi trebala dovesti do ukidanja presude jer je branitelj bio obaviješten 2 dana prije (iako kasno). Sud smanjio kaznu za 20% kao kompenzaciju za povredu."
+      }
+    ],
+    "researched_laws": [
+      {
+        "law_number": "ZKP Članak 368",
+        "title": "Obavijest o ročištu",
+        "content": "Stranke moraju biti obaviještene o ročištu najmanje 8 dana unaprijed. Nepoštivanje roka predstavlja povredu postupka.",
+        "similarity": 0.75
+      }
+    ]
+  },
+
+  "expected_output": {
+    "applicability_score": 57,
+    "binding_authority": "persuasive",
+    "key_factors": [
+      "kasna obavijest",
+      "proceduralna povreda",
+      "mješovit ishod",
+      "presuda održana, kazna smanjena",
+      "persuasive authority"
+    ],
+    "favorable": null,
+    "reasoning": "Županijski sud (persuasive). Slična proceduralna povreda ali sud nije ukinuo presudu. Mješovit ishod - priznata povreda ali samo smanjenje kazne. Djelomično primjenjiva, zahtijeva razlikovanje ovisno o težini povrede u našem slučaju."
+  },
+
+  "validation_notes": "Should score 50-65 due to persuasive authority, similar procedural violation, mixed outcome (conviction upheld but sentence reduced), requires fact-specific analysis to distinguish."
+}

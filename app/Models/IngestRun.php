@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 /**
@@ -75,5 +77,61 @@ class IngestRun extends Model
     public function legalCase(): BelongsTo
     {
         return $this->belongsTo(LegalCase::class, 'case_id');
+    }
+
+    /**
+     * Step logs for this ingest run (observability).
+     */
+    public function stepLogs(): HasMany
+    {
+        return $this->hasMany(IngestStepLog::class);
+    }
+
+    /**
+     * Total duration across all pipeline steps in milliseconds.
+     */
+    public function totalDurationMs(): int
+    {
+        return (int) $this->stepLogs()->sum('duration_ms');
+    }
+
+    /**
+     * Get all steps that failed.
+     */
+    public function failedSteps(): Collection
+    {
+        return $this->stepLogs()->where('status', 'failed')->get();
+    }
+
+    /**
+     * Check if this run is stale (started > 30 min ago and not completed/failed).
+     */
+    public function isStale(): bool
+    {
+        if ($this->started_at === null) {
+            return false;
+        }
+
+        if (in_array($this->status, ['completed', 'failed'])) {
+            return false;
+        }
+
+        return $this->started_at->diffInMinutes(now()) > 30;
+    }
+
+    /**
+     * Pipeline progress as a percentage (completed steps / total steps * 100).
+     */
+    public function pipelineProgress(): float
+    {
+        $total = $this->stepLogs()->count();
+
+        if ($total === 0) {
+            return 0.0;
+        }
+
+        $completed = $this->stepLogs()->where('status', 'completed')->count();
+
+        return round(($completed / $total) * 100, 2);
     }
 }

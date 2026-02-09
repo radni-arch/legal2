@@ -120,17 +120,17 @@ class PersistReconstructedStep
         $blocks = $payload['blocks'] ?? [];
 
         // Prepare ingest options
-        $chunkCfg = config('vizra-adk.vector_memory.chunking', []);
+        $chunkCfg = config('ocr.chunking', []);
         $ingestOptions = [
             'chunk_size' => (int) ($chunkCfg['chunk_size'] ?? 1200),
             'overlap' => (int) ($chunkCfg['overlap'] ?? 150),
             'language' => 'hr',  // Croatian by default
-            'min_confidence' => (float) config('vizra-adk.ocr.min_confidence', 0.82),
-            'min_coverage' => (float) config('vizra-adk.ocr.min_coverage', 0.75),
-            'skip_embedding_on_low_quality' => (bool) config('vizra-adk.ocr.skip_embedding_on_low_quality', false),
+            'min_confidence' => (float) config('ocr.quality.min_confidence', 0.82),
+            'min_coverage' => (float) config('ocr.quality.min_coverage', 0.75),
+            'skip_embedding_on_low_quality' => (bool) config('ocr.quality.skip_embedding_on_low_quality', false),
             'upload_id' => $upload->id,
-            'model' => config('vizra-adk.vector_memory.embedding_models.openai', 'text-embedding-3-small'),
-            'provider' => config('vizra-adk.vector_memory.embedding_provider', 'openai'),
+            'model' => config('ocr.embedding.model', 'text-embedding-3-small'),
+            'provider' => config('ocr.embedding.provider', 'openai'),
             'metadata' => [
                 'drive_file_id' => $driveFileId,
                 'drive_file_name' => $fileName,

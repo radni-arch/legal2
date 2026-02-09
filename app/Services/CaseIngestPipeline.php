@@ -108,9 +108,9 @@ class CaseIngestPipeline implements CaseIngestPipelineInterface
             }
 
             // Extract and validate thresholds
-            $minConfidence = (float) ($options['min_confidence'] ?? config('vizra-adk.ocr.min_confidence', 0.82));
-            $minCoverage = (float) ($options['min_coverage'] ?? config('vizra-adk.ocr.min_coverage', 0.75));
-            $maxLowConfPages = (int) ($options['max_low_confidence_pages'] ?? config('vizra-adk.ocr.max_low_confidence_pages', 3));
+            $minConfidence = (float) ($options['min_confidence'] ?? config('ocr.quality.min_confidence', 0.82));
+            $minCoverage = (float) ($options['min_coverage'] ?? config('ocr.quality.min_coverage', 0.75));
+            $maxLowConfPages = (int) ($options['max_low_confidence_pages'] ?? config('ocr.quality.max_low_confidence_pages', 3));
 
             $failedChecks = [];
             if ($qualityResult['confidence'] < $minConfidence) {
@@ -157,7 +157,7 @@ class CaseIngestPipeline implements CaseIngestPipelineInterface
                 $result['review_reasons'] = $failedChecks;
 
                 // Block embedding if skip_embedding_on_low_quality is true
-                if ($options['skip_embedding_on_low_quality'] ?? config('vizra-adk.ocr.skip_embedding_on_low_quality', false)) {
+                if ($options['skip_embedding_on_low_quality'] ?? config('ocr.quality.skip_embedding_on_low_quality', false)) {
                     Log::info('Skipping embedding due to low OCR quality', [
                         'case_id' => $caseId,
                         'doc_id' => $docId,
@@ -530,9 +530,9 @@ class CaseIngestPipeline implements CaseIngestPipelineInterface
      */
     public function needsReOcr(array $qualityMetrics, array $options = []): bool
     {
-        $minConfidence = (float) ($options['min_confidence'] ?? config('vizra-adk.ocr.min_confidence', 0.82));
-        $minCoverage = (float) ($options['min_coverage'] ?? config('vizra-adk.ocr.min_coverage', 0.75));
-        $maxLowConfPages = (int) ($options['max_low_confidence_pages'] ?? config('vizra-adk.ocr.max_low_confidence_pages', 3));
+        $minConfidence = (float) ($options['min_confidence'] ?? config('ocr.quality.min_confidence', 0.82));
+        $minCoverage = (float) ($options['min_coverage'] ?? config('ocr.quality.min_coverage', 0.75));
+        $maxLowConfPages = (int) ($options['max_low_confidence_pages'] ?? config('ocr.quality.max_low_confidence_pages', 3));
 
         if ($qualityMetrics['confidence'] < $minConfidence) {
             return true;

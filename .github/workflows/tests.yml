@@ -29,6 +29,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Check for unresolved merge conflict markers
+        run: bash scripts/ci/check-conflict-markers.sh
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:

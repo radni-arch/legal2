@@ -39,6 +39,7 @@ class CaseFileCompletenessCommand extends Command
 
         if ($this->option('json')) {
             $this->line(json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
             return Command::SUCCESS;
         }
 
@@ -58,8 +59,11 @@ class CaseFileCompletenessCommand extends Command
         $this->info("   Present: {$result['present']}  |  Missing: {$result['missing']}  |  Total: {$result['total_identities']}");
         $this->newLine();
 
-        foreach ($result['by_case_number'] as $caseNumber => $group) {
-            $this->renderCaseNumberRow($caseNumber, $group);
+        // Group flat entries by base case number for display
+        $groups = $this->groupByBaseCaseNumber($result['by_case_number']);
+
+        foreach ($groups as $baseCaseNumber => $group) {
+            $this->renderCaseNumberGroup($baseCaseNumber, $group);
         }
 
         $this->newLine();
@@ -67,26 +71,70 @@ class CaseFileCompletenessCommand extends Command
     }
 
     /**
-     * Render a single case number row with status indicators.
+     * Group flat by_case_number entries by their base_case_number for display.
+     *
+     * @param array $byCaseNumber Flat map of case number entries
+     * @return array Grouped entries keyed by base case number
      */
-    private function renderCaseNumberRow(string $caseNumber, array $group): void
+    private function groupByBaseCaseNumber(array $byCaseNumber): array
     {
-        // Build status bar
-        $bar = '';
-        foreach ($group['suffixes'] as $suffix => $info) {
-            $bar .= $info['status'] === 'present' ? "\u{1F7E9}" : "\u{1F7E5}"; // Green/Red squares
+        $groups = [];
+
+        foreach ($byCaseNumber as $caseNumber => $entry) {
+            $base = $entry['base_case_number'] ?? $caseNumber;
+
+            if (! isset($groups[$base])) {
+                $groups[$base] = [
+                    'role' => null,
+                    'institution' => null,
+                    'entries' => [],
+                ];
+            }
+
+            $groups[$base]['entries'][$caseNumber] = $entry;
+
+            // Use first non-null role and institution
+            if (($entry['role'] ?? null) && ! $groups[$base]['role']) {
+                $groups[$base]['role'] = $entry['role'];
+            }
+            if (($entry['institution'] ?? null) && ! $groups[$base]['institution']) {
+                $groups[$base]['institution'] = $entry['institution'];
+            }
         }
 
-        $completeness = $group['present'] . '/' . $group['total_documents'];
-        $paddedCaseNumber = str_pad($caseNumber, 25);
+        return $groups;
+    }
+
+    /**
+     * Render a grouped case number with status indicators.
+     */
+    private function renderCaseNumberGroup(string $baseCaseNumber, array $group): void
+    {
+        $entries = $group['entries'];
+        $presentCount = count(array_filter($entries, fn ($e) => $e['status'] === 'present'));
+        $totalCount = count($entries);
+
+        // Sort entries by suffix for display
+        $sorted = $entries;
+        uasort($sorted, fn ($a, $b) => ($a['suffix'] ?? 0) <=> ($b['suffix'] ?? 0));
+
+        // Build status bar
+        $bar = '';
+        foreach ($sorted as $entry) {
+            $bar .= $entry['status'] === 'present' ? "\u{1F7E9}" : "\u{1F7E5}"; // Green/Red squares
+        }
+
+        $completeness = $presentCount . '/' . $totalCount;
+        $paddedCaseNumber = str_pad($baseCaseNumber, 25);
         $paddedRole = str_pad($group['role'] ?? '', 20);
 
         $this->line("  {$paddedCaseNumber} {$paddedRole} {$bar}  ({$completeness})");
 
         // Show missing document warnings
-        foreach ($group['suffixes'] as $suffix => $info) {
-            if ($info['status'] === 'missing') {
-                $docType = $info['type'] ?? 'nepoznato';
+        foreach ($sorted as $caseNumber => $entry) {
+            if ($entry['status'] === 'missing') {
+                $suffix = $entry['suffix'] ?? '?';
+                $docType = 'nepoznato';
                 $this->warn("    -{$suffix} nedostaje - moguci tip: {$docType}");
             }
         }

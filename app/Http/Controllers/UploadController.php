@@ -21,7 +21,11 @@ class UploadController extends Controller
             $validated = $request->validated();
             /** @var UploadedFile $file */
             $file = $validated['file'];
-            $res = $this->uploads->directStore($file);
+            $res = $this->uploads->directStore(
+                $file,
+                $request->user()?->id,
+                $request->input('case_id'),
+            );
         } catch (\Exception $e) {
             Log::error('Upload direct failed', [
                 'operation' => 'direct',
@@ -75,7 +79,11 @@ class UploadController extends Controller
     public function complete(string $uploadId)
     {
         try {
-            $res = $this->uploads->complete($uploadId);
+            $res = $this->uploads->complete(
+                $uploadId,
+                request()->user()?->id,
+                request()->input('case_id'),
+            );
         } catch (\Exception $e) {
             Log::error('Upload complete failed', [
                 'operation' => 'complete',

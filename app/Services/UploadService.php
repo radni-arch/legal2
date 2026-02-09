@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Contracts\Services\UploadServiceInterface;
+use App\Services\Ingest\IngestOrchestrator;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -16,6 +17,10 @@ class UploadService implements UploadServiceInterface
     protected string $finalRoot = 'uploads';
 
     protected string $finalDisk = 'public';
+
+    public function __construct(
+        protected IngestOrchestrator $ingestOrchestrator,
+    ) {}
 
     public function start(string $filename, int $totalSize, int $chunkSize, ?string $mime = null): array
     {
@@ -56,7 +61,7 @@ class UploadService implements UploadServiceInterface
         ];
     }
 
-    public function complete(string $uploadId): array
+    public function complete(string $uploadId, ?int $userId = null, ?string $caseId = null): array
     {
         $manifest = $this->getManifest($uploadId);
         if (! $manifest) {
@@ -110,13 +115,28 @@ class UploadService implements UploadServiceInterface
         $manifest['url'] = Storage::disk($this->finalDisk)->url($finalRel);
         Storage::put($this->manifestPath($uploadId), json_encode($manifest, JSON_UNESCAPED_UNICODE));
 
-        return [
+        $result = [
             'status' => 'completed',
             'id' => $manifest['id'],
             'filename' => $manifest['filename'],
             'path' => $finalRel,
             'url' => $manifest['url'],
         ];
+
+        // Trigger ingest pipeline if we have a user
+        if ($userId) {
+            $ingestRun = $this->ingestOrchestrator->ingest(
+                storedPath: $finalRel,
+                disk: $this->finalDisk,
+                originalFilename: $manifest['filename'],
+                userId: $userId,
+                caseId: $caseId,
+                source: 'uploader',
+            );
+            $result['ingest_run_id'] = $ingestRun->id;
+        }
+
+        return $result;
     }
 
     public function cancel(string $uploadId): bool
@@ -127,17 +147,32 @@ class UploadService implements UploadServiceInterface
         return true;
     }
 
-    public function directStore(UploadedFile $file): array
+    public function directStore(UploadedFile $file, ?int $userId = null, ?string $caseId = null): array
     {
         $path = $file->store($this->finalRoot, $this->finalDisk);
 
-        return [
+        $result = [
             'path' => $path,
             'url' => Storage::disk($this->finalDisk)->url($path),
             'size' => $file->getSize(),
             'mime' => $file->getMimeType(),
             'name' => $file->getClientOriginalName(),
         ];
+
+        // Trigger ingest pipeline if we have a user
+        if ($userId) {
+            $ingestRun = $this->ingestOrchestrator->ingest(
+                storedPath: $path,
+                disk: $this->finalDisk,
+                originalFilename: $file->getClientOriginalName(),
+                userId: $userId,
+                caseId: $caseId,
+                source: 'uploader',
+            );
+            $result['ingest_run_id'] = $ingestRun->id;
+        }
+
+        return $result;
     }
 
     protected function chunkDir(string $uploadId): string

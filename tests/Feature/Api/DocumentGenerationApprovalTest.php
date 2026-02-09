@@ -57,7 +57,12 @@ class DocumentGenerationApprovalTest extends TestCase
         $mock = Mockery::mock(LegalArtilleryAgentContract::class);
         $mock->shouldReceive('approveRun')
             ->once()
-            ->with($run->id, $this->user->id, 'Looks good')
+            ->withArgs(function ($runId, $approverId, $notes, $sendOptions) use ($run) {
+                return $runId === $run->id
+                    && $approverId === $this->user->id
+                    && $notes === 'Looks good'
+                    && is_array($sendOptions);
+            })
             ->andReturn($run->fresh());
         $this->app->instance(LegalArtilleryAgentContract::class, $mock);
 

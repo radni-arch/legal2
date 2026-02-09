@@ -67,11 +67,12 @@ interface LegalArtilleryAgentContract
      * @param  string  $runId  The generation run ID
      * @param  int  $approverId  The user ID of the approver
      * @param  string|null  $notes  Optional approval notes
+     * @param  array  $sendOptions  Optional send options (send_email, as_draft, to_email) persisted to DB columns
      * @return DocumentGenerationRun The updated run
      *
      * @throws \InvalidArgumentException If run cannot be approved
      */
-    public function approveRun(string $runId, int $approverId, ?string $notes = null): DocumentGenerationRun;
+    public function approveRun(string $runId, int $approverId, ?string $notes = null, array $sendOptions = []): DocumentGenerationRun;
 
     /**
      * Dispatch an approved run (send email/eKom)

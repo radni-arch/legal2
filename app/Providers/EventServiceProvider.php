@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Events\CaseReadyForReview;
 use App\Events\CircuitBreaker\CircuitBreakerOpened;
+use App\Events\DocumentAnalysisCompleted;
 use App\Events\JobCompleted;
 use App\Events\JobFailed;
 use App\Events\NewInsightDiscovered;
@@ -15,6 +16,7 @@ use App\Listeners\CircuitBreaker\RecordCircuitBreakerMetrics;
 use App\Listeners\LogNewInsight;
 use App\Listeners\NotifyCaseReadyForReview;
 use App\Listeners\PersistJobNotification;
+use App\Listeners\TriggerCaseLevelAnalysis;
 use App\Listeners\TriggerDocumentAnalysis;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -51,6 +53,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         CaseReadyForReview::class => [
             NotifyCaseReadyForReview::class,
+        ],
+        DocumentAnalysisCompleted::class => [
+            TriggerCaseLevelAnalysis::class,
         ],
     ];
 

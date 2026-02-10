@@ -35,6 +35,7 @@ class GenerateLegalDocumentJob implements ShouldQueue
         public readonly ?string $caseId = null,
         public readonly array $evidenceIds = [],
         public readonly bool $confirmEscalation = false,
+        public readonly ?array $sendOptions = null,
     ) {
         $this->onAgentsQueue();
     }
@@ -47,6 +48,14 @@ class GenerateLegalDocumentJob implements ShouldQueue
     public function handle(LegalArtilleryOrchestrator $orchestrator): void
     {
         $run = DocumentGenerationRun::findOrFail($this->runId);
+
+        // Persist send options to canonical DB columns (SOT-006)
+        if ($this->sendOptions !== null) {
+            $run->setSendOptions($this->sendOptions);
+            if (! empty($this->sendOptions['send_email'])) {
+                $run->update(['dispatch_status' => 'pending_dispatch']);
+            }
+        }
 
         $this->broadcastStarted($this->userId, $this->runId, [
             'profile' => $this->profileKey,

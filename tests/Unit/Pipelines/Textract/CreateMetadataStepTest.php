@@ -8,6 +8,7 @@ use App\Services\Ocr\LegalDocumentMetadata;
 use App\Services\Ocr\LegalMetadataExtractor;
 use App\Services\Ocr\OcrDocument;
 use App\Services\Ocr\OcrPage;
+use Illuminate\Support\Facades\Log;
 use Mockery;
 use Tests\TestCase;
 use Tests\UsesTestDatabase;
@@ -30,8 +31,11 @@ class CreateMetadataStepTest extends TestCase
 
     protected function tearDown(): void
     {
-        Mockery::close();
-        parent::tearDown();
+        try {
+            Mockery::close();
+        } finally {
+            parent::tearDown();
+        }
     }
 
     protected function createOcrDocument(array $pages = []): OcrDocument
@@ -81,21 +85,31 @@ class CreateMetadataStepTest extends TestCase
     }
 
     /** @test */
-    public function it_throws_exception_if_ocr_document_not_in_payload()
+    public function it_gracefully_skips_when_ocr_document_not_in_payload()
     {
         $job = TextractJob::factory()->create();
+
+        Log::spy();
 
         $payload = [
             'job' => $job,
             'driveFileId' => 'file-123',
             'driveFileName' => 'document.pdf',
-            // No ocrDocument
+            // No ocrDocument, no textractText
         ];
 
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('OcrDocument not found in payload');
+        // Should NOT throw - gracefully skip metadata extraction
+        $result = $this->step->handle($payload, fn ($p) => $p);
 
-        $this->step->handle($payload, fn ($p) => $p);
+        $this->assertIsArray($result);
+        $this->assertArrayNotHasKey('legalMetadata', $result);
+
+        Log::shouldHaveReceived('warning')
+            ->once()
+            ->withArgs(function ($message) {
+                return str_contains($message, 'CreateMetadataStep')
+                    && str_contains($message, 'skipping metadata extraction');
+            });
     }
 
     /** @test */

@@ -109,6 +109,27 @@ class LegalMetadataExtractor
     }
 
     /**
+     * Extract metadata from plain text by converting it to an OcrDocument first.
+     *
+     * Used as a fallback when Textract is skipped and only raw text is available
+     * from local OCR (e.g., ocrmypdf/pdftotext). Creates a minimal OcrDocument
+     * from the text and delegates to the standard extract() method.
+     *
+     * @param  string  $text  Plain text content from local OCR
+     * @param  string|null  $driveFileId  Optional Drive file ID
+     * @param  string|null  $driveFileName  Optional Drive file name
+     */
+    public function extractFromText(
+        string $text,
+        ?string $driveFileId = null,
+        ?string $driveFileName = null
+    ): LegalDocumentMetadata {
+        $document = OcrDocument::fromPlainText($text);
+
+        return $this->extract($document, $driveFileId, $driveFileName);
+    }
+
+    /**
      * Extract metadata from a JSON file containing Textract results.
      *
      * @param  string  $jsonPath  Path to the Textract JSON results file

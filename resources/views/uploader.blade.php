@@ -24,11 +24,24 @@
 @include('components.dark-theme')
 
 <x-page-header
-    title="Chunked File Uploader"
-    subtitle="Drop files below to upload in 5MB chunks. On completion, a public URL will be shown."
+    title="Document Uploader"
+    subtitle="Upload documents to start the ingest pipeline: OCR extraction, metadata analysis, and embedding."
     route-name="uploader"
     :show-nav="true"
 />
+
+<div class="container" style="margin-bottom: 1rem;">
+    <div style="background: var(--surface, #0f172a); border: 1px solid var(--border, #1f2937); border-radius: 0.5rem; padding: 1rem; font-size: 0.875rem; color: var(--muted, #94a3b8);">
+        <strong style="color: var(--fg, #e5e7eb);">What happens after upload:</strong>
+        <ol style="margin: 0.5rem 0 0 1.25rem; padding: 0; list-style: decimal;">
+            <li>File is stored and an <strong>IngestRun</strong> is created</li>
+            <li>OCR extraction runs (Textract or local tesseract depending on document quality)</li>
+            <li>Metadata extraction: dates, case references, legal entities</li>
+            <li>Case-level analysis: contradiction detection, gap analysis, strategy suggestions</li>
+        </ol>
+        <p style="margin: 0.5rem 0 0;">Supported formats: PDF, DOCX, images (PNG/JPG). Max 5MB per chunk.</p>
+    </div>
+</div>
 
 <div class="container">
     <div id="dropzone" class="dropzone">Drop files here or click to select</div>

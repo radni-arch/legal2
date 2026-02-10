@@ -2,6 +2,7 @@
 
 namespace App\Jobs\Analysis;
 
+use App\Events\DocumentAnalysisCompleted;
 use App\Models\CaseDocument;
 use App\Models\DocumentAnalysis;
 use App\Services\Analysis\DocumentAnalysisPipeline;
@@ -50,6 +51,13 @@ class RunDocumentExtractionJob implements ShouldQueue
             ->count();
 
         Log::info("Layer 1 complete for document {$this->caseDocument->id}: {$completedCount}/" . count($results) . " analyzers succeeded");
+
+        // Fire event to trigger downstream processing (case-level AI analysis)
+        DocumentAnalysisCompleted::dispatch(
+            $this->caseId,
+            (string) $this->caseDocument->id,
+            DocumentAnalysis::LAYER_EXTRACTION,
+        );
 
         // Chain: dispatch Layer 2 (pattern matching) after Layer 1 completes
         // Uncomment when Sprint 2 is ready:

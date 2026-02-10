@@ -2,15 +2,22 @@
 
 namespace App\Services\LegalArtillery;
 
+use App\Contracts\LegalArtillery\EscalationSuggesterInterface;
 use App\DTOs\CaseContext;
 use App\DTOs\DocumentProfile;
 
-class EscalationLadderSuggester
+class EscalationLadderSuggester implements EscalationSuggesterInterface
 {
+    /** @var array<int, string> Linear hierarchy from config */
+    protected array $hierarchyList;
+
     public function __construct(
         protected AttachmentCollector $attachmentCollector = new AttachmentCollector(),
         protected DocumentInventory $documentInventory = new DocumentInventory(),
-    ) {}
+        ?array $hierarchy = null,
+    ) {
+        $this->hierarchyList = $hierarchy ?? config('escalation-ladders.hierarchy', []);
+    }
 
     /**
      * Suggest the next escalation rung.
@@ -174,6 +181,48 @@ class EscalationLadderSuggester
         ]);
 
         return $this->attachmentCollector->collect($profile, $caseContext);
+    }
+
+    /**
+     * Get the linear hierarchy of escalation steps.
+     *
+     * @return array<int, string>
+     */
+    public function hierarchy(): array
+    {
+        return $this->hierarchyList;
+    }
+
+    /**
+     * Suggest the next step in the linear hierarchy.
+     */
+    public function suggestNext(?string $current): ?string
+    {
+        if ($current === null) {
+            return $this->hierarchyList[0] ?? null;
+        }
+
+        $index = array_search($current, $this->hierarchyList, true);
+
+        if ($index === false) {
+            return $this->hierarchyList[0] ?? null;
+        }
+
+        return $this->hierarchyList[$index + 1] ?? null;
+    }
+
+    /**
+     * Check if the current step is the terminal (last) step.
+     */
+    public function isTerminal(?string $current): bool
+    {
+        if ($current === null) {
+            return false;
+        }
+
+        $index = array_search($current, $this->hierarchyList, true);
+
+        return $index !== false && $index === count($this->hierarchyList) - 1;
     }
 
     /**

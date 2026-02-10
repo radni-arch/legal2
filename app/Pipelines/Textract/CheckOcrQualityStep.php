@@ -65,9 +65,9 @@ class CheckOcrQualityStep
         $payload['qualityMetrics'] = $qualityMetrics;
 
         // Determine if needs review
-        $minConfidence = (float) config('vizra-adk.ocr.min_confidence', 0.82);
-        $minCoverage = (float) config('vizra-adk.ocr.min_coverage', 0.75);
-        $maxLowConfPages = (int) config('vizra-adk.ocr.max_low_confidence_pages', 3);
+        $minConfidence = (float) config('ocr.quality.min_confidence', 0.82);
+        $minCoverage = (float) config('ocr.quality.min_coverage', 0.75);
+        $maxLowConfPages = (int) config('ocr.quality.max_low_confidence_pages', 3);
 
         $needsReview = false;
         $reviewReasons = [];

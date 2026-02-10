@@ -70,12 +70,20 @@ class NewGeneration extends Component
 
     public function startGeneration()
     {
-        $this->validate([
+        $rules = [
             'selectedProfile' => 'required|string',
             'maxIterations' => 'required|integer|min:1|max:10',
             'caseId' => 'nullable|string',
             'evidenceIds' => 'nullable|string',
-        ]);
+            'sendEmail' => 'boolean',
+            'asDraft' => 'boolean',
+        ];
+
+        if ($this->sendEmail && ! $this->asDraft) {
+            $rules['toEmail'] = 'required|email';
+        }
+
+        $this->validate($rules);
 
         $parsedEvidenceIds = $this->parseEvidenceIds($this->evidenceIds);
 
@@ -116,6 +124,12 @@ class NewGeneration extends Component
                 ],
             ]);
 
+            $sendOptions = $this->sendEmail ? [
+                'send_email' => true,
+                'as_draft' => $this->asDraft,
+                'to_email' => $this->toEmail ?: null,
+            ] : null;
+
             GenerateLegalDocumentJob::dispatch(
                 runId: $run->id,
                 profileKey: $this->selectedProfile,
@@ -127,6 +141,7 @@ class NewGeneration extends Component
                 caseId: $this->caseId,
                 evidenceIds: $evidenceIds,
                 confirmEscalation: $this->confirmEscalation,
+                sendOptions: $sendOptions,
             );
 
             $this->currentRunId = $run->id;

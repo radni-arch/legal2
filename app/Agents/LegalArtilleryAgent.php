@@ -202,17 +202,15 @@ class LegalArtilleryAgent implements LegalArtilleryAgentContract
             'dispatch_requested' => ['email' => $sendEmail, 'ekom' => $submitEkom],
         ]);
 
-        // Store dispatch preferences for when approval comes
+        // Store dispatch preferences to canonical DB columns (SOT-005)
         if ($sendEmail || $submitEkom) {
+            $run->setSendOptions([
+                'send_email' => $sendEmail,
+                'as_draft' => $asDraft,
+                'to_email' => $toEmail,
+            ]);
             $run->update([
-                'model_config' => array_merge($run->model_config ?? [], [
-                    'pending_dispatch' => [
-                        'send_email' => $sendEmail,
-                        'as_draft' => $asDraft,
-                        'to_email' => $toEmail,
-                        'submit_ekom' => $submitEkom,
-                    ],
-                ]),
+                'dispatch_status' => 'pending_dispatch',
             ]);
         }
 
@@ -239,56 +237,46 @@ class LegalArtilleryAgent implements LegalArtilleryAgentContract
 
         $profile = DocumentProfile::fromConfig($run->document_type);
         $caseContext = CaseContext::fromConfig();
-        $pendingDispatch = $run->model_config['pending_dispatch'] ?? [];
+        // Read send options from canonical DB columns (SOT-005)
+        $sendOptions = $run->getSendOptions();
         $dispatchPath = $this->resolveDispatchDocumentPath($run);
 
         $channels = [];
-        if (! empty($pendingDispatch['send_email'])) {
+        if (! empty($sendOptions['send_email'])) {
             $channels[] = 'email';
-        }
-        if (! empty($pendingDispatch['submit_ekom'])) {
-            $channels[] = 'ekom';
         }
 
         $this->assertDispatchGate($run, $channels);
 
-        // Mark as approved (legacy metadata stored in model_config)
+        // Mark as approved using canonical DB columns (SOT-005)
         $run->update([
-            'model_config' => array_merge($run->model_config ?? [], [
-                'approved_at' => now()->toIso8601String(),
-                'approved_by' => $approvedBy,
-            ]),
+            'approved_at' => now(),
+            'approved_by' => $approvedBy,
         ]);
 
-        // Send email if requested
-        $sendEmail = (bool) ($pendingDispatch['send_email'] ?? false);
+        // Send email if requested (reading from DB columns)
+        $sendEmail = (bool) ($sendOptions['send_email'] ?? false);
         if ($sendEmail && $this->gmail && config('legal-artillery.gmail.enabled')) {
             $sendResult = $this->gmail->send(
                 $profile,
                 $caseContext,
                 $dispatchPath,
-                $pendingDispatch['to_email'] ?? null,
-                $pendingDispatch['as_draft'] ?? true,
+                $sendOptions['to_email'] ?? null,
+                $sendOptions['as_draft'] ?? true,
             );
             $run->update([
                 'model_config' => array_merge($run->model_config ?? [], ['email_result' => $sendResult]),
             ]);
         }
 
-        // Submit to e-komunikacija if requested
-        $submitEkom = (bool) ($pendingDispatch['submit_ekom'] ?? false);
-        if ($submitEkom && $this->eKom) {
-            $ekomResult = $this->eKom->submit($profile, $caseContext, $dispatchPath);
-            $run->update([
-                'model_config' => array_merge($run->model_config ?? [], ['ekom_result' => $ekomResult]),
-            ]);
-        }
+        // Mark dispatch status
+        $run->markDispatched();
 
         Log::info('LegalArtilleryAgent: Approved and dispatched (combined helper)', [
             'run_id' => $run->id,
             'approved_by' => $approvedBy,
             'email_sent' => $sendEmail,
-            'ekom_submitted' => $submitEkom,
+            'send_options' => $sendOptions,
         ]);
 
         return $run->fresh(['iterations', 'context']);
@@ -330,26 +318,50 @@ class LegalArtilleryAgent implements LegalArtilleryAgentContract
 
         $this->assertDispatchGate($run, $channels);
 
+        // Persist the send options to canonical DB columns before dispatch (SOT-005)
+        $run->setSendOptions([
+            'send_email' => $sendEmail,
+            'as_draft' => $asDraft,
+            'to_email' => $toEmail,
+        ]);
+
         $dispatchResult = [];
+        $errors = [];
 
         if ($sendEmail && $this->gmail && config('legal-artillery.gmail.enabled')) {
-            $dispatchResult['email'] = $this->gmail->send($profile, $caseContext, $dispatchPath, $toEmail, $asDraft);
+            try {
+                $dispatchResult['email'] = $this->gmail->send($profile, $caseContext, $dispatchPath, $toEmail, $asDraft);
+            } catch (\Throwable $e) {
+                $errors['email'] = $e->getMessage();
+            }
         }
 
         if ($submitEkom && $this->eKom) {
-            $dispatchResult['ekom'] = $this->eKom->submit($profile, $caseContext, $dispatchPath);
+            try {
+                $dispatchResult['ekom'] = $this->eKom->submit($profile, $caseContext, $dispatchPath);
+            } catch (\Throwable $e) {
+                $errors['ekom'] = $e->getMessage();
+            }
         }
 
+        // Store dispatch result in model_config for audit trail
         $run->update([
             'model_config' => array_merge($run->model_config ?? [], [
                 'dispatch_result' => $dispatchResult,
-                'dispatched_at' => now()->toIso8601String(),
             ]),
         ]);
+
+        // Update canonical dispatch status on DB columns (SOT-005)
+        if (! empty($errors)) {
+            $run->markDispatchFailed(implode('; ', $errors));
+        } else {
+            $run->markDispatched();
+        }
 
         Log::info('LegalArtilleryAgent: Dispatched approved run', [
             'run_id' => $runId,
             'channels' => array_keys($dispatchResult),
+            'errors' => $errors,
         ]);
 
         return $run->fresh();
@@ -503,7 +515,7 @@ class LegalArtilleryAgent implements LegalArtilleryAgentContract
      *
      * @throws \InvalidArgumentException If run is not completed, has no document, or citation coverage is below threshold
      */
-    public function approveRun(string $runId, int $approverId, ?string $notes = null): DocumentGenerationRun
+    public function approveRun(string $runId, int $approverId, ?string $notes = null, array $sendOptions = []): DocumentGenerationRun
     {
         $run = DocumentGenerationRun::findOrFail($runId);
 
@@ -698,10 +710,16 @@ class LegalArtilleryAgent implements LegalArtilleryAgentContract
             'docx_verified' => $docxVerified,
         ]);
 
+        // Persist send options to canonical DB columns (SOT-005)
+        if (! empty($sendOptions)) {
+            $run->setSendOptions($sendOptions);
+        }
+
         Log::info('LegalArtilleryAgent: Run approved', [
             'run_id' => $runId,
             'approver' => $approverId,
             'docx_verified' => $docxVerified,
+            'send_options' => $run->getSendOptions(),
         ]);
 
         return $run->fresh();
@@ -763,14 +781,21 @@ class LegalArtilleryAgent implements LegalArtilleryAgentContract
             }
         }
 
+        // Store dispatch result in model_config for audit trail
         $run->update([
             'model_config' => array_merge($run->model_config ?? [], [
                 'dispatch_result' => $dispatchResult,
                 'dispatch_errors' => $errors ?: null,
-                'dispatched_at' => now()->toIso8601String(),
                 'dispatch_retry_count' => ($run->model_config['dispatch_retry_count'] ?? 0) + 1,
             ]),
         ]);
+
+        // Update canonical dispatch status on DB columns (SOT-005)
+        if (! empty($errors)) {
+            $run->markDispatchFailed(implode('; ', $errors));
+        } else {
+            $run->markDispatched();
+        }
 
         Log::info('LegalArtilleryAgent: Retry dispatch', [
             'run_id' => $runId,

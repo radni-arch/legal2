@@ -40,7 +40,6 @@ abstract class GraphSyncServiceContractTest extends TestCase
     abstract protected function createService(): GraphSyncServiceInterface;
 
     /**
-<<<<<<< HEAD
      * Create a valid test document ID for the service
      */
     abstract protected function createValidDocumentId(): string;

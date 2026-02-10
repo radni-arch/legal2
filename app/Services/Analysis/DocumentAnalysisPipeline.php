@@ -58,6 +58,16 @@ class DocumentAnalysisPipeline
             $analyzers[] = new \App\Services\Analysis\Analyzers\EntityExtractor();
         }
 
+        // Add DateContextExtractor if it exists (rich context around dates, after DateExtractor)
+        if (class_exists(\App\Services\Analysis\Analyzers\DateContextExtractor::class)) {
+            $analyzers[] = new \App\Services\Analysis\Analyzers\DateContextExtractor();
+        }
+
+        // Add CaseReferenceExtractor if it exists (KLASA/URBROJ/BROJ/case number extraction)
+        if (class_exists(\App\Services\Analysis\Analyzers\CaseReferenceExtractor::class)) {
+            $analyzers[] = new \App\Services\Analysis\Analyzers\CaseReferenceExtractor();
+        }
+
         return $analyzers;
     }
 

@@ -70,5 +70,11 @@ class LegalArtilleryServiceProvider extends ServiceProvider
             \App\Agents\Contracts\LegalArtilleryAgentContract::class,
             LegalArtilleryAgent::class
         );
+
+        // SOT-010: Canonical escalation suggester binding
+        $this->app->bind(
+            \App\Contracts\LegalArtillery\EscalationSuggesterInterface::class,
+            \App\Services\LegalArtillery\EscalationLadderSuggester::class
+        );
     }
 }

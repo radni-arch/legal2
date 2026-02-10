@@ -32,6 +32,7 @@ return [
         'min_coverage' => (float) env('OCR_MIN_COVERAGE', 0.75),
         'max_low_confidence_pages' => (int) env('OCR_MAX_LOW_CONF_PAGES', 3),
         'min_improvement_percent' => (float) env('OCR_MIN_IMPROVEMENT', 5.0),
+        'skip_embedding_on_low_quality' => (bool) env('OCR_SKIP_EMBEDDING_ON_LOW_QUALITY', false),
         'croatian_diacritics' => ['č', 'ć', 'ž', 'š', 'đ', 'Č', 'Ć', 'Ž', 'Š', 'Đ'],
     ],
 
@@ -90,4 +91,26 @@ return [
     | through the Tesseract/ocrmypdf path regardless of routing score.
     */
     'force_reocr_on_review' => (bool) env('OCR_FORCE_REOCR_ON_REVIEW', true),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Chunking Configuration (PersistReconstructedStep)
+    |--------------------------------------------------------------------------
+    | Controls text chunking for embedding after OCR extraction.
+    */
+    'chunking' => [
+        'chunk_size' => (int) env('OCR_CHUNK_SIZE', 1200),
+        'overlap' => (int) env('OCR_CHUNK_OVERLAP', 150),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Embedding Configuration (PersistReconstructedStep)
+    |--------------------------------------------------------------------------
+    | Model and provider used for embedding OCR-extracted text.
+    */
+    'embedding' => [
+        'model' => env('OCR_EMBEDDING_MODEL', 'text-embedding-3-small'),
+        'provider' => env('OCR_EMBEDDING_PROVIDER', 'openai'),
+    ],
 ];

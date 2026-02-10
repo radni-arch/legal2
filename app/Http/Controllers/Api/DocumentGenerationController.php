@@ -161,7 +161,13 @@ class DocumentGenerationController extends Controller
         }
 
         try {
-            $run = $this->agent->approveRun($id, $user->id, $request->input('notes'));
+            $sendOptions = array_filter([
+                'send_email' => $request->boolean('send_email', false),
+                'as_draft' => $request->boolean('as_draft', false),
+                'to_email' => $request->input('to_email'),
+            ], fn ($value) => $value !== null);
+
+            $run = $this->agent->approveRun($id, $user->id, $request->input('notes'), $sendOptions);
 
             return response()->json([
                 'data' => new DocumentGenerationRunResource($run),
@@ -310,7 +316,9 @@ class DocumentGenerationController extends Controller
             ])->toArray(),
             'dispatch' => [
                 'result' => $run->model_config['dispatch_result'] ?? null,
-                'dispatched_at' => $run->model_config['dispatched_at'] ?? null,
+                'dispatched_at' => $run->dispatched_at?->toIso8601String(),
+                'dispatch_status' => $run->dispatch_status,
+                'send_options' => $run->getSendOptions(),
             ],
             'document_hash' => $run->final_document ? hash('sha256', $run->final_document) : null,
             'exported_at' => now()->toIso8601String(),

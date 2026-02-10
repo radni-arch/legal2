@@ -2,11 +2,13 @@
 
 namespace Tests\Unit\Jobs\Analysis;
 
+use App\Events\DocumentAnalysisCompleted;
 use App\Jobs\Analysis\RunDocumentExtractionJob;
 use App\Models\CaseDocument;
 use App\Models\DocumentAnalysis;
 use App\Services\Analysis\DocumentAnalysisPipeline;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Queue;
 use Mockery;
 use Tests\TestCase;
@@ -60,6 +62,9 @@ class RunDocumentExtractionJobTest extends TestCase
 
     public function test_it_calls_pipeline_run_layer(): void
     {
+        // Fake downstream event to prevent unresolvable listener dependencies
+        Event::fake([DocumentAnalysisCompleted::class]);
+
         $document = CaseDocument::factory()->create([
             'content' => 'Test document content for analysis.',
         ]);
@@ -76,12 +81,15 @@ class RunDocumentExtractionJobTest extends TestCase
         $job = new RunDocumentExtractionJob($document, $document->case_id);
         $job->handle($mockPipeline);
 
-        // If we get here without exception, the test passes
-        $this->assertTrue(true);
+        // Verify the DocumentAnalysisCompleted event was dispatched
+        Event::assertDispatched(DocumentAnalysisCompleted::class);
     }
 
     public function test_it_runs_layer_extraction_on_document(): void
     {
+        // Fake downstream event to prevent unresolvable listener dependencies
+        Event::fake([DocumentAnalysisCompleted::class]);
+
         $document = CaseDocument::factory()->create([
             'content' => 'Dokument sadrzi kljucne rijeci i dokaze koji su bitni za ovaj slucaj.',
         ]);

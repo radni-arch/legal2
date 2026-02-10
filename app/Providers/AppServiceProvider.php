@@ -41,7 +41,6 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
-use App\Services\LegalArtillery\PiiRedactor;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -51,30 +50,7 @@ class AppServiceProvider extends ServiceProvider
             return new OpenAIService;
         });
 
-        // Register LegalArtillery LlmClient singleton
-        $this->app->singleton(\App\Services\LegalArtillery\LlmClient::class, function () {
-            return \App\Services\LegalArtillery\LlmClient::fromConfig();
-        });
-
-        // Register LegalArtilleryOrchestrator (unified Worker/Critic with profile context)
-        $this->app->singleton(\App\Agents\LegalArtilleryOrchestrator::class, function ($app) {
-            return new \App\Agents\LegalArtilleryOrchestrator(
-                $app->make(\App\Services\LegalArtillery\LlmClient::class),
-                new \App\Services\LegalArtillery\ProfileContextBuilder(),
-                $app->make(PiiRedactor::class),
-            );
-        });
-
-        // Register LegalArtilleryAgent (main facade for document generation)
-        $this->app->singleton(\App\Agents\LegalArtilleryAgent::class, function ($app) {
-            return new \App\Agents\LegalArtilleryAgent(
-                $app->make(\App\Agents\LegalArtilleryOrchestrator::class),
-                new \App\Services\LegalArtillery\DocxRenderer(),
-                config('legal-artillery.gmail.enabled')
-                    ? new \App\Services\LegalArtillery\GmailDispatcher($app->make(PiiRedactor::class))
-                    : null,
-            );
-        });
+        // Legal Artillery bindings are in LegalArtilleryServiceProvider (canonical source)
 
         $this->app->singleton(OdlukeClient::class, function () {
             return OdlukeClient::fromConfig();

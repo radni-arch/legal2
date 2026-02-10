@@ -29,6 +29,12 @@ class DocumentGenerationRun extends Model
         'approved_by',
         'approval_notes',
         'docx_verified',
+        'send_email',
+        'as_draft',
+        'to_email',
+        'dispatch_status',
+        'dispatched_at',
+        'dispatch_error',
     ];
 
     protected $appends = [
@@ -40,6 +46,9 @@ class DocumentGenerationRun extends Model
         'final_score' => 'decimal:2',
         'approved_at' => 'datetime',
         'docx_verified' => 'boolean',
+        'send_email' => 'boolean',
+        'as_draft' => 'boolean',
+        'dispatched_at' => 'datetime',
     ];
 
     /**
@@ -121,6 +130,58 @@ class DocumentGenerationRun extends Model
 
         $this->update([
             'model_config' => $modelConfig,
+        ]);
+    }
+
+    /**
+     * Set canonical send options on DB columns.
+     *
+     * Only recognized keys (send_email, as_draft, to_email) are persisted.
+     * Unknown keys are silently ignored.
+     */
+    public function setSendOptions(array $options): void
+    {
+        $allowed = ['send_email', 'as_draft', 'to_email'];
+        $filtered = array_intersect_key($options, array_flip($allowed));
+
+        $this->update($filtered);
+    }
+
+    /**
+     * Read canonical send options from DB columns.
+     *
+     * @return array{send_email: bool, as_draft: bool, to_email: string|null}
+     */
+    public function getSendOptions(): array
+    {
+        return [
+            'send_email' => (bool) $this->send_email,
+            'as_draft' => (bool) $this->as_draft,
+            'to_email' => $this->to_email,
+        ];
+    }
+
+    /**
+     * Mark the run as successfully dispatched.
+     */
+    public function markDispatched(): void
+    {
+        $this->update([
+            'dispatch_status' => 'dispatched',
+            'dispatched_at' => now(),
+            'dispatch_error' => null,
+        ]);
+    }
+
+    /**
+     * Mark the run as dispatch-failed with a reason.
+     */
+    public function markDispatchFailed(string $reason): void
+    {
+        $this->update([
+            'dispatch_status' => 'dispatch_failed',
+            'dispatched_at' => now(),
+            'dispatch_error' => $reason,
         ]);
     }
 }

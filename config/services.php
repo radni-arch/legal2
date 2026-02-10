@@ -56,6 +56,10 @@ return [
         'url' => env('EPREDMET_API_URL', 'https://e-predmet.pravosudje.hr/api'),
     ],
 
+    'informator' => [
+        'enrichment_enabled' => env('INFORMATOR_ENRICHMENT_ENABLED', false),
+    ],
+
     'slack' => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),

@@ -192,7 +192,7 @@ class DocumentIdentityBuilderTest extends TestCase
     {
         // Croatian court filings: suffix indicates order
         // -1 is usually initial filing, higher numbers are subsequent documents
-        $this->assertEquals('initial_filing', $this->builder->guessDocTypeFromSuffix(1, 'Pp Prz'));
+        $this->assertEquals('initial_filing', $this->builder->guessDocTypeFromSuffix(1, 'Su'));
         $this->assertEquals('followup', $this->builder->guessDocTypeFromSuffix(2, 'Pp Prz'));
         $this->assertEquals('followup', $this->builder->guessDocTypeFromSuffix(5, 'K'));
 

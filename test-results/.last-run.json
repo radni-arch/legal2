@@ -1,10 +1,10 @@
 {
   "suite": "focused",
-  "target": "VectorStoreManagementIntegrationTest",
-  "last_run": "2026-02-08T03:11:44Z",
+  "target": "DocumentGenerationRunApprovalTest",
+  "last_run": "2026-02-09T01:31:14Z",
   "status": "failed",
-  "exit_code": 255,
-  "log_file": "test-logs/VectorStoreManagementIntegrationTest-results.txt",
+  "exit_code": 1,
+  "log_file": "test-logs/DocumentGenerationRunApprovalTest-results.txt",
   "stats": {
     "tests": 0,
     "failures": 0,

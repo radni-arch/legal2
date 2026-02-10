@@ -29,12 +29,47 @@ class ProcessIngestRunJob implements ShouldQueue
 
     public array $backoff = [60, 300, 900];
 
+    public int $maxExceptions = 2;
+
     public string $ingestRunId;
 
     public function __construct(string $ingestRunId)
     {
         $this->ingestRunId = $ingestRunId;
         $this->onQueue('ingest');
+        $this->applyRetryPolicy();
+    }
+
+    /**
+     * Apply source-specific retry policy from config.
+     */
+    protected function applyRetryPolicy(): void
+    {
+        $ingestRun = IngestRun::find($this->ingestRunId);
+        if (! $ingestRun) {
+            return;
+        }
+
+        $source = $ingestRun->source ?? 'uploader';
+        $policy = config("ingest-queues.retry_policies.{$source}");
+
+        if ($policy) {
+            $this->tries = $policy['max_tries'] ?? $this->tries;
+            $this->backoff = $policy['backoff'] ?? $this->backoff;
+            $this->maxExceptions = $policy['max_exceptions'] ?? $this->maxExceptions;
+        }
+    }
+
+    /**
+     * Determine the time at which the job should timeout.
+     */
+    public function retryUntil(): \DateTimeInterface
+    {
+        $ingestRun = IngestRun::find($this->ingestRunId);
+        $source = $ingestRun?->source ?? 'uploader';
+        $minutes = config("ingest-queues.retry_policies.{$source}.retry_until_minutes", 30);
+
+        return now()->addMinutes($minutes);
     }
 
     public function handle(): void

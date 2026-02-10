@@ -14,11 +14,17 @@ use Illuminate\Support\Facades\Log;
  */
 class IngestOrchestrator
 {
+    public function __construct(
+        protected ?BackpressureMonitor $backpressureMonitor = null,
+    ) {
+        $this->backpressureMonitor ??= new BackpressureMonitor();
+    }
+
     /**
      * Ingest a stored file into the processing pipeline.
      *
      * Creates an IngestRun record and dispatches ProcessIngestRunJob
-     * to handle OCR/embedding/analysis asynchronously.
+     * to the appropriate source-specific queue with backpressure awareness.
      *
      * @param string $storedPath Path where file is stored on disk
      * @param string $disk Storage disk name (e.g. 'public')
@@ -46,16 +52,39 @@ class IngestOrchestrator
             'status' => 'pending',
         ]);
 
+        $queueName = $this->resolveQueueName($source);
+
         Log::info('IngestOrchestrator: Created IngestRun', [
             'ingest_run_id' => $ingestRun->id,
             'correlation_id' => $ingestRun->correlation_id,
             'file' => $originalFilename,
             'source' => $source,
             'case_id' => $caseId,
+            'queue' => $queueName,
         ]);
 
-        ProcessIngestRunJob::dispatch($ingestRun->id)->onQueue('ingest');
+        $job = ProcessIngestRunJob::dispatch($ingestRun->id)->onQueue($queueName);
+
+        // Apply backpressure delay if queue is congested
+        if ($this->backpressureMonitor->shouldThrottle($queueName)) {
+            $delay = $this->backpressureMonitor->getThrottleDelay();
+            $job->delay(now()->addSeconds($delay));
+
+            Log::warning('IngestOrchestrator: Backpressure applied', [
+                'ingest_run_id' => $ingestRun->id,
+                'queue' => $queueName,
+                'delay_seconds' => $delay,
+            ]);
+        }
 
         return $ingestRun;
+    }
+
+    /**
+     * Resolve the queue name for a given source type.
+     */
+    public function resolveQueueName(string $sourceType): string
+    {
+        return $this->backpressureMonitor->resolveQueueName($sourceType);
     }
 }

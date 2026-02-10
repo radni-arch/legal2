@@ -128,7 +128,7 @@ class IngestOrchestratorTest extends TestCase
     }
 
     /** @test */
-    public function it_dispatches_job_on_ingest_queue(): void
+    public function it_dispatches_job_on_source_specific_queue(): void
     {
         Queue::fake();
         $user = User::factory()->create();
@@ -138,10 +138,11 @@ class IngestOrchestratorTest extends TestCase
             disk: 'public',
             originalFilename: 'test.pdf',
             userId: $user->id,
+            source: 'uploader',
         );
 
         Queue::assertPushed(ProcessIngestRunJob::class, function ($job) {
-            return $job->queue === 'ingest';
+            return $job->queue === 'ingest-upload';
         });
     }
 }

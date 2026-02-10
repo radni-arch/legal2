@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-02-08T03:11:44+00:00",
-  "total_iterations": 207,
+  "last_updated": "2026-02-09T01:31:14+00:00",
+  "total_iterations": 208,
   "total_passes": 1,
   "total_failures": 1,
   "components": {
@@ -378,12 +378,17 @@
       "last_outcome": "failed",
       "last_exit_code": 255,
       "last_timestamp": "2026-02-08T03:11:44+00:00"
+    },
+    "focused:DocumentGenerationRunApprovalTest": {
+      "last_outcome": "failed",
+      "last_exit_code": 1,
+      "last_timestamp": "2026-02-09T01:31:14+00:00"
     }
   },
   "last_run": {
-    "component_id": "focused:VectorStoreManagementIntegrationTest",
+    "component_id": "focused:DocumentGenerationRunApprovalTest",
     "outcome": "failed",
-    "exit_code": 255,
-    "timestamp": "2026-02-08T03:11:44+00:00"
+    "exit_code": 1,
+    "timestamp": "2026-02-09T01:31:14+00:00"
   }
 }
